@@ -8,6 +8,7 @@
 	import Main from './Main.svelte';
 	import Nutzer from './pages/Nutzer.svelte';
 	import Projekt from './pages/Projekt.svelte';
+	import Aufgabe from './pages/Aufgabe.svelte';
 	import Uhrzeit from './pages/Uhrzeit.svelte';
 	let open = false;
 </script>
@@ -18,6 +19,7 @@
 	<Route path="/" component="{Main}" />
 	<Route path="/nutzer" component="{Nutzer}" />
 	<Route path="/projekt" component="{Projekt}" />
+	<Route path="/aufgabe" component="{Aufgabe}" />
 	<Route path="/uhrzeit" component="{Uhrzeit}" />
 	<RouteNotFound>
 		<h1>Sorry. Page not found.</h1>
