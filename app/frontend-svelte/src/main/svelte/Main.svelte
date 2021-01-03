@@ -1,7 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Button, Snackbar } from "smelte";
+	import { Chip, Snackbar } from "smelte";
 	import { fetchHtml } from './utils/rest.js';
+	import { createTestSet, removeTestSet } from './utils/data.js';
 	
 	let alertSnackbarDialog = false;
 	let alertSnackbarText = 'ok';
@@ -37,6 +38,16 @@
 		<a href="{homeUrl}/api" target="_blank">
 			{homeUrl}
 		</a>
+	</div>
+	<div>
+		<Chip on:click={createTestSet} icon="create">
+			Testdatensätze anlegen
+		</Chip>
+	</div>
+	<div>
+		<Chip on:click={removeTestSet} icon="delete">
+			Testdatensätze löschen
+		</Chip>
 	</div>
 	<h2>Hilfe</h2>
 	<div class="text-2xl underline text-blue-600">
