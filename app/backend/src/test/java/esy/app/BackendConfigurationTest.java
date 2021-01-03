@@ -1,5 +1,7 @@
 package esy.app;
 
+import esy.app.info.VersionRepository;
+import esy.app.info.VersionRestController;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,8 @@ public class BackendConfigurationTest {
 		assertNotNull(resourceLoader);
 		assertNotNull(context.getBean(DatabaseConfiguration.class));
 		assertNotNull(context.getBean(EndpointConfiguration.class));
+		assertBeanExists(context.getBean(VersionRepository.class));
+		assertBeanExists(context.getBean(VersionRestController.class));
 	}
 
 	private <T> void assertBeanExists(final T bean) {
