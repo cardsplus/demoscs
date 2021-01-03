@@ -1,1 +1,101 @@
-= BOOTSCS
+:icons: font
+:experimental: true
+= Self-Contained System mit Spring-Boot
+
+== Subprojekte
+
+=== app/backend-api
+
+Datenmodell für das Backend.
+
+https://projectlombok.org/
+
+https://github.com/FasterXML/jackson-docs
+
+=== app/backend
+
+REST-API für das Backend.
+
+https://spring.io/projects/spring-framework
+
+https://spring.io/projects/spring-restdocs
+
+https://spring.io/projects/spring-data-jpa
+
+https://spring.io/projects/spring-data-rest
+
+https://docs.liquibase.com/home.html
+
+=== app/backend-hsql
+
+Spring-Boot-App mit einer HSQL-Datenbank.
+
+https://spring.io/projects/spring-boot
+
+=== app/frontend-svelte
+
+Svelte-App für das Backend.
+
+https://svelte.dev/
+
+https://smeltejs.com/
+
+https://tailwindcss.com/docs
+
+https://visionmedia.github.io/page.js/
+
+
+== Häufig gestellte Fragen
+
+[[_f1]]
+=== Code bauen und testen
+
+----
+./gradlew clean build
+----
+
+[[_f2]]
+=== Code formatieren
+
+----
+./gradlew spotlessApply
+----
+
+[[_f3]]
+=== Spring-Boot-Backend lokal starten
+
+----
+./gradlew app:backend-hsql:bootRun
+----
+
+Mit der Umgebungsvariable 'LOGGING_LEVEL_ORG_HIBERNATE_TYPE' kann die Ausgabe von Typinformationen gesteuert werden.
+Mit dem Wert `TRACE` werden bspw. die aktuellen Parameter von Statements ausgegeben.
+
+Mit der Umgebungsvariable 'LOGGING_LEVEL_ORG_HIBERNATE_STAT' kann die Ausgabe von Statistiken gesteuert werden.
+Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
+
+[[_f4]]
+=== Spring-Boot-Backend lokal bauen
+
+----
+./gradlew app:backend-hsql:bootBuildImage
+----
+
+Die Umgebungsvariable `CI_REGISTRY_IMAGE` muss gesetzt sein.
+Sie bestimmt den Namen des Docker-Images, welches hier gebaut wird.
+Das Docker-Image wird mit
+https://buildpacks.io[`buildpacks`]
+gebaut.
+Bitte auch die 
+https://buildpacks.io/docs/reference/reproducibility/[Hinweise zum Zeitstempel]
+beachten.
+
+[[_f5]]
+=== Svelte-Frontend lokal starten
+
+----
+cd app
+cd frontend-svelte
+npm install
+npm run dev
+----
