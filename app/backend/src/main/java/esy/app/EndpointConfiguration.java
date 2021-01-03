@@ -1,6 +1,7 @@
 package esy.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import esy.api.nutzer.NutzerValue;
 import esy.json.JsonMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -74,6 +75,8 @@ public class EndpointConfiguration {
                 configuration.setRepositoryDetectionStrategy(RepositoryDetectionStrategies.ANNOTATED);
                 configuration.setDefaultMediaType(MediaType.APPLICATION_JSON);
                 configuration.setBasePath(BASE);
+                // expose value objects
+                configuration.exposeIdsFor(NutzerValue.class);
                 // add CORS settings
                 registry.addMapping("/**")
                         .allowCredentials(CORS.getAllowCredentials())
