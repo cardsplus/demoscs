@@ -89,11 +89,14 @@ subprojects {
     }
 }
 
+// https://semver.org/ 
 ext.VERSION = new File("VERSION").text
 task versionCheck() {
     build.dependsOn it
     doLast {
         assert new File("VERSION.md").text
             .startsWith("# Version " + VERSION)
+        assert new File("app/frontend-svelte/package.json").text
+            .contains('"version": "' + VERSION + '"')
     }
 }
