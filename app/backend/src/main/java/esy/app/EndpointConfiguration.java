@@ -1,5 +1,7 @@
 package esy.app;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import esy.json.JsonMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -79,6 +81,12 @@ public class EndpointConfiguration {
                         .allowedMethods(CORS.getAllowedMethods().toArray(String[]::new))
                         .allowedOrigins(CORS.getAllowedOrigins().toArray(String[]::new))
                         .maxAge(CORS.getMaxAge());
+            }
+
+            @Override
+            public void configureJacksonObjectMapper(final ObjectMapper mapper) {
+                // apply defaults
+                JsonMapper.configure(mapper);
             }
         };
     }
