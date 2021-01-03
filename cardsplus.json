@@ -33,12 +33,12 @@
         },   
         {
             "name": "entity",
-            "titleStrategy": "SCOPE",
+            "titleStrategy": "PATH",
             "script": "@cards/entity.ctml"
         },
         {
             "name": "tagged",
-            "titleStrategy": "SCOPE",
+            "titleStrategy": "PATH",
             "script": "@cards/tagged.ctml"
         } 
     ]
