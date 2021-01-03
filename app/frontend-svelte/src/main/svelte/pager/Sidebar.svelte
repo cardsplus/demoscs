@@ -15,6 +15,13 @@
 					</div>
 				</div>
 			</div>
+			<div class="flex items-center justify-between my-4">
+				<div class="flex-1 pl-2">
+					<div class="text-gray-600 font-thin">
+						<a on:click={() => open = false} href="/projekt">Projekt</a>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="w-1/2 rounded px-6">
 			<div class="border-l-4 border-red-400 -ml-6 pl-6 flex items-center justify-between my-4">
