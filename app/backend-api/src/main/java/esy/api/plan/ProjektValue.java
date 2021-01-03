@@ -64,6 +64,19 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     private Set<NutzerValueRef> allMitglied;
 
     /**
+     * Projektbezogene Aufgaben.
+     */
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "projekt",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @Getter
+    @JsonProperty
+    private Set<AufgabeValue> allAufgabe;
+
+    /**
      * Erzeugt eine Instanz mit Standardwerten. Die
      * Instanz ist nicht gültig, d.h. der Aufruf von
      * {@link #verify()} ist nicht erfolgreich.
@@ -74,6 +87,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         this.aktiv = true;
         this.besitzer = null;
         this.allMitglied = new LinkedHashSet<>();
+        this.allAufgabe = new LinkedHashSet<>();
     }
 
     /**
@@ -87,6 +101,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         this.aktiv = true;
         this.besitzer = null;
         this.allMitglied = new LinkedHashSet<>();
+        this.allAufgabe = new LinkedHashSet<>();
     }
 
     @Override
@@ -103,9 +118,10 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
             return false;
         }
         return this.name.equals(that.name) &&
-                this.aktiv == that.aktiv  &&
+                this.aktiv == that.aktiv &&
                 Objects.equals(this.besitzer, that.besitzer) &&
-                this.allMitglied.equals(that.allMitglied);
+                this.allMitglied.equals(that.allMitglied) &&
+                this.allAufgabe.equals(that.allAufgabe);
     }
 
     @Override
@@ -124,6 +140,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         final ProjektValue value = new ProjektValue(getVersion(), dataId);
         value.name = this.name;
         value.aktiv = this.aktiv;
+        value.allAufgabe = this.allAufgabe;
         value.besitzer = this.besitzer;
         value.allMitglied = this.allMitglied;
         return value;
@@ -148,6 +165,12 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     @JsonIgnore
     public ProjektValue addMitglied(@NonNull final NutzerValue mitglied) {
         allMitglied.add(new NutzerValueRef(mitglied.getDataId()));
+        return this;
+    }
+
+    @JsonIgnore
+    public ProjektValue addAufgabe(@NonNull final AufgabeValue aufgabe) {
+        allAufgabe.add(aufgabe);
         return this;
     }
 

@@ -1,0 +1,79 @@
+:restdocDir: ../../../../../../build/generated-snippets
+= AufgabeValueRestApi
+
+REST-API für die Verwaltung von _Aufgabe_-Objekten.
+
+== `POST /api/aufgabe`
+
+Die Operation speichert ein neues _Aufgabe_-Objekt.
+
+****
+
+.CURL
+include::{restdocDir}/post-api-aufgabe/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/post-api-aufgabe/http-request.adoc[]
+
+.Response
+include::{restdocDir}/post-api-aufgabe/response-body.adoc[]
+
+****
+
+Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
+
+Die Operation meldet `Conflict` bzw. den Code 409, wenn die Daten bereits existieren.
+
+== `GET /api/aufgabe`
+
+Die Operation gibt alle gespeicherten _Aufgabe_-Objekte zurück.
+
+****
+
+.CURL
+include::{restdocDir}/get-api-aufgabe/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/get-api-aufgabe/http-request.adoc[]
+
+.Response
+include::{restdocDir}/get-api-aufgabe/response-body.adoc[]
+
+****
+
+== `GET /api/aufgabe/{id}`
+
+Die Operation zeigt ein gespeichertes _Aufgabe_-Objekt an.
+
+****
+
+.CURL
+include::{restdocDir}/get-api-aufgabe-by-id/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/get-api-aufgabe-by-id/http-request.adoc[]
+
+.Response
+include::{restdocDir}/get-api-aufgabe-by-id/response-body.adoc[]
+
+****
+
+Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.
+
+== `DELETE /api/aufgabe/{id}`
+
+Die Operation löscht ein gespeichertes _Aufgabe_-Objekt.
+
+****
+
+.CURL
+include::{restdocDir}/delete-api-aufgabe/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/delete-api-aufgabe/http-request.adoc[]
+
+****
+
+Die Operation liefert keinen Daten zurück.
+
+Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.
