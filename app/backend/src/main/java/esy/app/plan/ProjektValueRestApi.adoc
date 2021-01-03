@@ -1,0 +1,98 @@
+:restdocDir: ../../../../../../build/generated-snippets
+= ProjektValueRestApi
+
+REST-API für die Verwaltung von _Projekt_-Objekten.
+
+== `POST /api/projekt`
+
+Die Operation speichert ein neues _Projekt_-Objekt.
+
+****
+
+.CURL
+include::{restdocDir}/post-api-projekt/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/post-api-projekt/http-request.adoc[]
+
+.Response
+include::{restdocDir}/post-api-projekt/response-body.adoc[]
+
+****
+
+Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
+
+Die Operation meldet `Conflict` bzw. den Code 409, wenn die Daten bereits existieren.
+
+== `GET /api/projekt`
+
+Die Operation gibt alle gespeicherten _Projekt_-Objekte zurück.
+
+****
+
+.CURL
+include::{restdocDir}/get-api-projekt/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/get-api-projekt/http-request.adoc[]
+
+.Response
+include::{restdocDir}/get-api-projekt/response-body.adoc[]
+
+****
+
+== `GET /api/projekt/{id}`
+
+Die Operation zeigt ein gespeichertes _Projekt_-Objekt an.
+
+****
+
+.CURL
+include::{restdocDir}/get-api-projekt-by-id/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/get-api-projekt-by-id/http-request.adoc[]
+
+.Response
+include::{restdocDir}/get-api-projekt-by-id/response-body.adoc[]
+
+****
+
+Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.
+
+== `GET /api/projekt/search/findByName`
+
+Die Operation sucht ein gespeichertes _Projekt_-Objekt mit dem angegebenen endeutigen Namen.
+
+****
+
+.CURL
+include::{restdocDir}/get-api-projekt-by-name/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/get-api-projekt-by-name/http-request.adoc[]
+
+.Response
+include::{restdocDir}/get-api-projekt-by-name/response-body.adoc[]
+
+****
+
+Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.
+
+== `DELETE /api/projekt/{id}`
+
+Die Operation löscht ein gespeichertes _Projekt_-Objekt.
+
+****
+
+.CURL
+include::{restdocDir}/delete-api-projekt/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/delete-api-projekt/http-request.adoc[]
+
+****
+
+Die Operation liefert keinen Daten zurück.
+
+Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.

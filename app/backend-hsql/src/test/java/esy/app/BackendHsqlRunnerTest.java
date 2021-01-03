@@ -2,6 +2,7 @@ package esy.app;
 
 import esy.api.nutzer.NutzerRolle;
 import esy.api.nutzer.NutzerValue;
+import esy.api.plan.ProjektValue;
 import esy.http.RestApiConnection;
 import esy.http.RestApiResult;
 import org.junit.jupiter.api.*;
@@ -385,5 +386,224 @@ public class BackendHsqlRunnerTest {
 				.delete();
 		assertThat(result5.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
+	}
+
+	@Test
+	@Order(120)
+	void getApiProjektNoElement() throws Exception {
+		final RestApiResult result = RestApiConnection.with(
+				toBackendUrl("/api/projekt")).get();
+		assertThat(result.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		assertEquals(0, result.toCollection(ProjektValue.class).size());
+	}
+
+	@Test
+	@Order(121)
+	void postApiProjekt() throws Exception {
+		final String name = "Projekt A";
+
+		final NutzerValue nutzer = RestApiConnection.with(
+				toBackendUrl("/api/nutzer"))
+				.post("{" +
+						"\"mail\":\"nutzer.a@a.de\"," +
+						"\"name\":\"Nutzer A.\"," +
+						"\"aktiv\": \"true\"" +
+						"}")
+				.toObject(NutzerValue.class);
+
+		final RestApiResult result0 = RestApiConnection.with(
+				toBackendUrl("/api/projekt"))
+				.post("{" +
+						"\"name\":\"" + name + "\"," +
+						"\"aktiv\": \"false\"," +
+						"\"besitzer\": {\"refId\": \"" + nutzer.getDataId() + "\"}," +
+						"\"allMitglied\": [{\"refId\": \"" + nutzer.getDataId() + "\"}]" +
+						"}");
+		assertThat(result0.getCode(),
+				equalTo(HttpStatus.CREATED.value()));
+		final ProjektValue value0 = result0.toObject(ProjektValue.class);
+		assertEquals(1L, value0.getVersion());
+		assertNotNull(value0.getDataId());
+		assertEquals(name, value0.getName());
+		assertNotNull(value0.getBesitzer());
+		assertFalse(value0.isAktiv());
+		assertEquals(1, value0.getAllMitglied().size());
+
+		final RestApiResult result1 = RestApiConnection.with(
+				toBackendUrl("/api/projekt"))
+				.post("{" +
+						"\"name\":\"" + name + "\"," +
+						"\"aktiv\": \"true\"," +
+						"\"besitzer\": {\"refId\": \"" + nutzer.getDataId() + "\"}," +
+						"\"allMitglied\": [{\"refId\": \"" + nutzer.getDataId() + "\"}]" +
+						"}");
+		assertThat(result1.getCode(),
+				equalTo(HttpStatus.CONFLICT.value()));
+
+		final RestApiResult result2a = RestApiConnection.with(
+				toBackendUrl("/api/projekt?size=99"))
+				.get();
+		assertThat(result2a.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		final List<ProjektValue> allValue2a = result2a.toCollection(ProjektValue.class);
+		assertEquals(1, allValue2a.size());
+		assertEquals(1, allValue2a.stream()
+				.filter(e -> e.getDataId().equals(value0.getDataId()))
+				.count());
+
+		final RestApiResult result2b = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + value0.getDataId()))
+				.get();
+		assertThat(result2b.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		assertTrue(value0.isEqual(result2b.toObject(ProjektValue.class)));
+
+		final RestApiResult result2c = RestApiConnection.with(
+				toBackendUrl("/api/projekt/search/findByName?name=" + URLEncoder.encode(name, UTF_8)))
+				.get();
+		assertThat(result2c.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		assertTrue(value0.isEqual(result2c.toObject(ProjektValue.class)));
+
+		final RestApiResult result3a = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + value0.getDataId()))
+				.delete();
+		assertThat(result3a.getCode(),
+				equalTo(HttpStatus.NO_CONTENT.value()));
+
+		final RestApiResult result3b = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + value0.getDataId()))
+				.delete();
+		assertThat(result3b.getCode(),
+				equalTo(HttpStatus.NOT_FOUND.value()));
+
+		final RestApiResult result4a = RestApiConnection.with(
+				toBackendUrl("/api/projekt?size=99"))
+				.get();
+		assertThat(result4a.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		final List<ProjektValue> allValue4a = result4a.toCollection(ProjektValue.class);
+		assertEquals(0, allValue4a.size());
+
+		final RestApiResult result4b = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + value0.getDataId()))
+				.get();
+		assertThat(result4b.getCode(),
+				equalTo(HttpStatus.NOT_FOUND.value()));
+
+		final RestApiResult result4c = RestApiConnection.with(
+				toBackendUrl("/api/projekt/search/findByName?name=" + URLEncoder.encode(name, UTF_8)))
+				.get();
+		assertThat(result4c.getCode(),
+				equalTo(HttpStatus.NOT_FOUND.value()));
+	}
+
+	@Test
+	@Order(122)
+	void putApiProjekt() throws Exception {
+		final String name = "Projekt B";
+
+		final NutzerValue nutzer = RestApiConnection.with(
+				toBackendUrl("/api/nutzer"))
+				.post("{" +
+						"\"mail\":\"nutzer.b@b.de\"," +
+						"\"name\":\"Nutzer B.\"," +
+						"\"aktiv\": \"true\"" +
+						"}")
+				.toObject(NutzerValue.class);
+
+		final UUID uuid = UUID.randomUUID();
+		final RestApiResult result0 = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + uuid))
+				.put("{" +
+						"\"name\":\"" + name + "\"," +
+						"\"aktiv\": \"false\"" +
+						"}");
+		assertThat(result0.getCode(),
+				equalTo(HttpStatus.CREATED.value()));
+		final ProjektValue value0 = result0.toObject(ProjektValue.class);
+		assertEquals(0L, value0.getVersion());
+		assertEquals(uuid, value0.getDataId());
+		assertEquals(name, value0.getName());
+		assertFalse(value0.isAktiv());
+		assertNull(value0.getBesitzer());
+		assertEquals(0, value0.getAllMitglied().size());
+
+		final RestApiResult result1 = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + uuid))
+				.put("{" +
+						"\"name\":\"" + name + "\"," +
+						"\"aktiv\": \"true\"," +
+						"\"besitzer\": {\"refId\": \"" + nutzer.getDataId() + "\"}," +
+						"\"allMitglied\": [{\"refId\": \"" + nutzer.getDataId() + "\"}]" +
+						"}");
+		assertThat(result1.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		final ProjektValue value1 = result1.toObject(ProjektValue.class);
+		assertEquals(1L, value1.getVersion());
+		assertEquals(uuid, value1.getDataId());
+		assertEquals(name, value1.getName());
+		assertTrue(value1.isAktiv());
+		assertNotNull(value1.getBesitzer());
+		assertEquals(1, value1.getAllMitglied().size());
+		assertFalse(value0.isEqual(value1));
+
+		final RestApiResult result2a = RestApiConnection.with(
+				toBackendUrl("/api/projekt?size=99"))
+				.get();
+		assertThat(result2a.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		final List<ProjektValue> allValue2a = result2a.toCollection(ProjektValue.class);
+		assertEquals(1, allValue2a.size());
+		assertEquals(1, allValue2a.stream()
+				.filter(e -> e.getDataId().equals(uuid))
+				.count());
+
+		final RestApiResult result2b = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + uuid))
+				.get();
+		assertThat(result2b.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		assertTrue(value1.isEqual(result2b.toObject(ProjektValue.class)));
+
+		final RestApiResult result2c = RestApiConnection.with(
+				toBackendUrl("/api/projekt/search/findByName?name=" + URLEncoder.encode(name, UTF_8)))
+				.get();
+		assertThat(result2c.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		assertTrue(value1.isEqual(result2c.toObject(ProjektValue.class)));
+
+		final RestApiResult result3a = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + uuid))
+				.delete();
+		assertThat(result3a.getCode(),
+				equalTo(HttpStatus.NO_CONTENT.value()));
+
+		final RestApiResult result3b = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + uuid))
+				.delete();
+		assertThat(result3b.getCode(),
+				equalTo(HttpStatus.NOT_FOUND.value()));
+
+		final RestApiResult result4a = RestApiConnection.with(
+				toBackendUrl("/api/projekt?size=99"))
+				.get();
+		assertThat(result4a.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		final List<ProjektValue> allValue4a = result4a.toCollection(ProjektValue.class);
+		assertEquals(0, allValue4a.size());
+
+		final RestApiResult result4b = RestApiConnection.with(
+				toBackendUrl("/api/projekt/" + uuid))
+				.get();
+		assertThat(result4b.getCode(),
+				equalTo(HttpStatus.NOT_FOUND.value()));
+
+		final RestApiResult result4c = RestApiConnection.with(
+				toBackendUrl("/api/projekt/search/findByName?name=" + URLEncoder.encode(name, UTF_8)))
+				.get();
+		assertThat(result4c.getCode(),
+				equalTo(HttpStatus.NOT_FOUND.value()));
 	}
 }

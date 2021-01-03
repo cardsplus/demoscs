@@ -2,6 +2,7 @@ package esy.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import esy.api.nutzer.NutzerValue;
+import esy.api.plan.ProjektValue;
 import esy.json.JsonMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -77,6 +78,7 @@ public class EndpointConfiguration {
                 configuration.setBasePath(BASE);
                 // expose value objects
                 configuration.exposeIdsFor(NutzerValue.class);
+                configuration.exposeIdsFor(ProjektValue.class);
                 // add CORS settings
                 registry.addMapping("/**")
                         .allowCredentials(CORS.getAllowCredentials())
