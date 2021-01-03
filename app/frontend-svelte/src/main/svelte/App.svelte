@@ -6,6 +6,7 @@
   	import Route from './pager/Route.svelte';
   	import RouteNotFound from './pager/RouteNotFound.svelte';	
 	import Main from './Main.svelte';
+	import Nutzer from './pages/Nutzer.svelte';
 	import Uhrzeit from './pages/Uhrzeit.svelte';
 	let open = false;
 </script>
@@ -14,6 +15,7 @@
 <Sidebar bind:open={open}/>
 <Router>
 	<Route path="/" component="{Main}" />
+	<Route path="/nutzer" component="{Nutzer}" />
 	<Route path="/uhrzeit" component="{Uhrzeit}" />
 	<RouteNotFound>
 		<h1>Sorry. Page not found.</h1>
