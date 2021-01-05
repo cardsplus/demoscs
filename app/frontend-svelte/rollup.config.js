@@ -45,8 +45,8 @@ export default {
 				? JSON.stringify(process.env.BACKEND_URL)
 				: '"http://localhost:8080"',				
 			BACKEND_USER: () => process.env.BACKEND_USER
-			? JSON.stringify(process.env.BACKEND_USER)
-			: '"user:password"'
+				? JSON.stringify(process.env.BACKEND_USER)
+				: '"user:password"'
         }),	  
 
 		svelte({
@@ -61,7 +61,7 @@ export default {
 
 		smelte({ 
 			purge: production,
-			output: "public/index.css", 
+			output: "public/build/smelte.css", 
 			postcss: [],
 			whitelist: [],
 			whitelistPatterns: [],
