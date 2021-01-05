@@ -7,30 +7,30 @@
         <comment>add projekt to nutzer mapping table</comment>
         <createTable tableName="projekt_mitglied">
             <!-- EventValueRef -->
-            <column name="id" type="UUID">
+            <column name="projekt_id" type="UUID">
                 <constraints nullable="false"/>
             </column>
-            <column name="ref_id" type="UUID">
+            <column name="nutzer_id" type="UUID">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet id="2" author="robert">
         <addForeignKeyConstraint
-                baseColumnNames="id"
+                constraintName="fk_projekt_mitglied_projekt_id"
                 baseTableName="projekt_mitglied"
-                constraintName="fk_projekt_mitglied_id"
-                referencedColumnNames="id"
+                baseColumnNames="projekt_id"
                 referencedTableName="projekt"
+                referencedColumnNames="id"
         />
     </changeSet>
     <changeSet id="3" author="robert">
         <addForeignKeyConstraint
-                baseColumnNames="ref_id"
+                constraintName="fk_projekt_mitglied_nutzer_id"
                 baseTableName="projekt_mitglied"
-                constraintName="fk_projekt_mitglied_ref_id"
-                referencedColumnNames="id"
+                baseColumnNames="nutzer_id"
                 referencedTableName="nutzer"
+                referencedColumnNames="id"
         />
     </changeSet>
 </databaseChangeLog>

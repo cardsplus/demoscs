@@ -1,10 +1,7 @@
 package esy.api.plan;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.api.nutzer.NutzerValue;
-import esy.api.nutzer.NutzerValueRef;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
 import lombok.Getter;
@@ -26,7 +23,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     /**
      * Eindeutiger Name des Projekts.
      */
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     @Getter
     @JsonProperty
     private String name;
@@ -34,7 +31,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     /**
      * Projekt ist aktiv.
      */
-    @Column(name = "aktiv", nullable = false)
+    @Column(name = "aktiv")
     @Getter
     @JsonProperty
     private boolean aktiv;
@@ -42,35 +39,36 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     /**
      * Projektbesitzer.
      */
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "refId", column = @Column(name = "besitzer_id"))
-    })
+    @ManyToOne(
+            fetch = FetchType.EAGER,
+            optional = true)
+    @JoinColumn(name = "besitzer_id", referencedColumnName = "id")
     @Getter
     @JsonProperty
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private NutzerValueRef besitzer;
+    private NutzerValue besitzer;
 
     /**
      * Projektmitglieder.
      */
-    @ElementCollection(
-            fetch = FetchType.EAGER)
-    @CollectionTable(
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JoinTable(
             name = "projekt_mitglied",
-            joinColumns = @JoinColumn(name = "id"))
+            joinColumns = @JoinColumn(name = "projekt_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "nutzer_id", referencedColumnName = "id"))
     @Getter
     @JsonProperty
-    private Set<NutzerValueRef> allMitglied;
+    private Set<NutzerValue> allMitglied;
 
     /**
      * Projektbezogene Aufgaben.
      */
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "projekt",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            mappedBy = "projekt"
     )
     @Getter
     @JsonProperty
@@ -140,9 +138,9 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         final ProjektValue value = new ProjektValue(getVersion(), dataId);
         value.name = this.name;
         value.aktiv = this.aktiv;
-        value.allAufgabe = this.allAufgabe;
         value.besitzer = this.besitzer;
         value.allMitglied = this.allMitglied;
+        value.allAufgabe = this.allAufgabe;
         return value;
     }
 
@@ -156,19 +154,16 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         return this;
     }
 
-    @JsonIgnore
-    public ProjektValue setBesitzer(@NonNull final NutzerValue besitzer) {
-        this.besitzer = new NutzerValueRef(besitzer.getDataId());
+    public ProjektValue setBesitzer(final NutzerValue besitzer) {
+        this.besitzer = besitzer;
         return this;
     }
 
-    @JsonIgnore
     public ProjektValue addMitglied(@NonNull final NutzerValue mitglied) {
-        allMitglied.add(new NutzerValueRef(mitglied.getDataId()));
+        allMitglied.add(mitglied);
         return this;
     }
 
-    @JsonIgnore
     public ProjektValue addAufgabe(@NonNull final AufgabeValue aufgabe) {
         allAufgabe.add(aufgabe);
         return this;

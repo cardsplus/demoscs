@@ -162,22 +162,17 @@ public class ProjektValueTest {
 		final String name = "Projekt A";
 		final String json = "{" +
 				"\"name\": \"" + name + "\"," +
-				"\"besitzer\": {" +
-				"\"refId\": \"" + uuid + "\"" +
-				"}" +
+				"\"besitzer\": null" +
 				"}";
 		final ProjektValue value = ProjektValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
-		assertNotNull(value.getBesitzer());
-		assertEquals(uuid, value.getBesitzer().getRefId());
+		assertNull(value.getBesitzer());
+		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
 
-		assertThrows(NullPointerException.class, () -> value.setBesitzer(null));
-
-		value.setBesitzer(new NutzerValue(0L, UUID.randomUUID()));
-		assertNotEquals(uuid, value.getBesitzer().getRefId());
-
-		value.setBesitzer(new NutzerValue(0L, uuid));
-		assertEquals(uuid, value.getBesitzer().getRefId());
+		final NutzerValue nutzer = new NutzerValue(0L, uuid);
+		value.setBesitzer(nutzer);
+		assertSame(nutzer, value.getBesitzer());
+		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
 	}
 
 	@Test
@@ -186,16 +181,19 @@ public class ProjektValueTest {
 		final String name = "Projekt A";
 		final String json = "{" +
 				"\"name\": \"" + name + "\"," +
-				"\"allMitglied\": [" +
-				"{\"refId\": \"" + uuid + "\"}" +
-				"]" +
+				"\"allMitglied\": []" +
 				"}";
 		final ProjektValue value = ProjektValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name, value.getName());
+		assertEquals(0, value.getAllMitglied().size());
+		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
+
+		final NutzerValue nutzer = new NutzerValue(0L, uuid);
+		value.addMitglied(nutzer);
 		assertEquals(1, value.getAllMitglied().size());
 		assertEquals(1, value.getAllMitglied().stream()
-				.filter(e -> e.getRefId().equals(uuid))
+				.filter(e -> e.getDataId().equals(uuid))
 				.count());
 		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
 	}

@@ -147,6 +147,7 @@ public class NutzerValueRestApiTest {
                         .value("BEARBEITER"))
                 .andExpect(jsonPath("$.allRolle[2]")
                         .doesNotExist());
+        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
     }
 
     @ParameterizedTest
@@ -205,6 +206,7 @@ public class NutzerValueRestApiTest {
                         .value("BESUCHER"))
                 .andExpect(jsonPath("$.allRolle[1]")
                         .doesNotExist());
+        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
     }
 
     @Test
@@ -250,6 +252,7 @@ public class NutzerValueRestApiTest {
                         .value("BEARBEITER"))
                 .andExpect(jsonPath("$.allRolle[2]")
                         .doesNotExist());
+        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
     }
 
     @RepeatedTest(5)

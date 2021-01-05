@@ -59,19 +59,29 @@ const allProjekt = [
         dataId: '00000001-3333-3333-3333-333333333333',
         name: 'Projekt Alpha',
         aktiv: true,
-        besitzer: {refId: '00000001-2222-2222-2222-222222222222'}
+        besitzer: '/api/nutzer/00000001-2222-2222-2222-222222222222',
+        allMitglied: [
+            '/api/nutzer/00000001-2222-2222-2222-222222222222'
+        ]
     },
     {
         dataId: '00000002-3333-3333-3333-333333333333',
         name: 'Projekt Beta',
         aktiv: true,
-        besitzer: {refId: '00000001-2222-2222-2222-222222222222'}
+        besitzer: '/api/nutzer/00000001-2222-2222-2222-222222222222',
+        allMitglied: [
+            '/api/nutzer/00000001-2222-2222-2222-222222222222',
+            '/api/nutzer/00000002-2222-2222-2222-222222222222',
+            '/api/nutzer/00000003-2222-2222-2222-222222222222'
+        ]
     },
     {
         dataId: '00000003-3333-3333-3333-333333333333',
         name: 'Projekt Gamma',
         aktiv: false,
-        besitzer: {refId: '00000001-2222-2222-2222-222222222222'}
+        besitzer: null,
+        allMitglied: [
+        ]
     }
 ];
 

@@ -1,6 +1,5 @@
 package esy.api.plan;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
@@ -21,7 +20,7 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     /**
      * Beschreibung der Aufgabe.
      */
-    @Column(name = "text", nullable = false)
+    @Column(name = "text")
     @Getter
     @JsonProperty
     private String text;
@@ -29,7 +28,7 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     /**
      * Aufgabe ist aktiv bzw. in Arbeit.
      */
-    @Column(name = "aktiv", nullable = false)
+    @Column(name = "aktiv")
     @Getter
     @JsonProperty
     private boolean aktiv;
@@ -41,7 +40,7 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
             fetch = FetchType.EAGER,
             optional = false
     )
-    @JoinColumn(name = "projekt_id", nullable = false)
+    @JoinColumn(name = "projekt_id", referencedColumnName = "id")
     @Getter
     @JsonProperty
     private ProjektValue projekt;
@@ -118,7 +117,6 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         return this;
     }
 
-    @JsonIgnore
     public AufgabeValue setProjekt(@NonNull final ProjektValue projekt) {
         this.projekt = projekt;
         return this;

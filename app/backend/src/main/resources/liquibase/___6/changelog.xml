@@ -13,11 +13,11 @@
     </changeSet>
     <changeSet id="2" author="robert">
         <addForeignKeyConstraint
-                baseColumnNames="projekt_id"
-                baseTableName="aufgabe"
                 constraintName="fk_aufgabe_projekt_id"
-                referencedColumnNames="id"
+                baseTableName="aufgabe"
+                baseColumnNames="projekt_id"
                 referencedTableName="projekt"
+                referencedColumnNames="id"
         />
     </changeSet>
 </databaseChangeLog>

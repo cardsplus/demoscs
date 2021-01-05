@@ -22,7 +22,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     /**
      * Eindeutige E-Mail-Adresse des Nutzers.
      */
-    @Column(name = "mail", nullable = false, unique = true)
+    @Column(name = "mail")
     @Getter
     @JsonProperty
     private String mail;
@@ -30,7 +30,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     /**
      * Name des Nutzers.
      */
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     @Getter
     @JsonProperty
     private String name;
@@ -38,7 +38,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     /**
      * Nutzer ist aktiv.
      */
-    @Column(name = "aktiv", nullable = false)
+    @Column(name = "aktiv")
     @Getter
     @JsonProperty
     private boolean aktiv;

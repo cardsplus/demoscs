@@ -17,11 +17,11 @@
     </changeSet>
     <changeSet id="2" author="robert">
         <addForeignKeyConstraint
-                baseColumnNames="id"
+                constraintName="fk_nutzer_rolle_nutzer_id"
                 baseTableName="nutzer_rolle"
-                constraintName="fk_nutzer_rolle_id"
-                referencedColumnNames="id"
+                baseColumnNames="id"
                 referencedTableName="nutzer"
+                referencedColumnNames="id"
         />
     </changeSet>
 </databaseChangeLog>
