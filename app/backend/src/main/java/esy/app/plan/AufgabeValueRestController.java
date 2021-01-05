@@ -31,16 +31,66 @@ public class AufgabeValueRestController {
     }
 
     @HandleBeforeCreate
-    @HandleBeforeSave
-    public void onHandleBefore(@NonNull final AufgabeValue value) {
+    public void beforeCreate(@NonNull final AufgabeValue value) {
         LOG.info("RECEIVED [{}]", value);
         value.verify();
         LOG.info("ACCEPTED [{}]", value);
     }
 
     @HandleAfterCreate
+    public void afterCreate(@NonNull final AufgabeValue value) {
+        publisher.publishEvent(value);
+        LOG.info("RELEASED [{}]", value);
+    }
+
+    @HandleBeforeSave
+    public void beforeSave(@NonNull final AufgabeValue value) {
+        LOG.info("RECEIVED [{}]", value);
+        value.verify();
+        LOG.info("ACCEPTED [{}]", value);
+    }
+
     @HandleAfterSave
-    public void onHandleAfter(@NonNull final AufgabeValue value) {
+    public void afterSave(@NonNull final AufgabeValue value) {
+        publisher.publishEvent(value);
+        LOG.info("RELEASED [{}]", value);
+    }
+
+    @HandleBeforeLinkSave
+    public void beforeLinkSave(@NonNull final AufgabeValue value, final Object rel) {
+        LOG.info("RECEIVED [{}]", value);
+        value.verify();
+        LOG.info("ACCEPTED [{}]", value);
+    }
+
+    @HandleAfterLinkSave
+    public void afterLinkSave(@NonNull final AufgabeValue value, final Object rel) {
+        publisher.publishEvent(value);
+        LOG.info("RELEASED [{}]", value);
+    }
+
+    @HandleBeforeDelete
+    public void beforeDelete(@NonNull final AufgabeValue value) {
+        LOG.info("RECEIVED [{}]", value);
+        value.verify();
+        LOG.info("ACCEPTED [{}]", value);
+    }
+
+    @HandleAfterDelete
+    public void afterDelete(@NonNull final AufgabeValue value) {
+        publisher.publishEvent(value);
+        LOG.info("RELEASED [{}]", value);
+    }
+
+    @HandleBeforeLinkDelete
+    public void beforeLinkDelete(@NonNull final AufgabeValue value, final Object rel) {
+        LOG.info("RECEIVED [{}]", value);
+        value.verify();
+        LOG.info("ACCEPTED [{}]", value);
+    }
+
+    @HandleAfterLinkDelete
+    public void afterLinkDelete(@NonNull final AufgabeValue value, final Object rel) {
         publisher.publishEvent(value);
         LOG.info("RELEASED [{}]", value);
     }

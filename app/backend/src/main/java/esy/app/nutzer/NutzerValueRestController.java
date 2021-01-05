@@ -31,16 +31,66 @@ public class NutzerValueRestController {
     }
 
     @HandleBeforeCreate
-    @HandleBeforeSave
-    public void onHandleBefore(@NonNull final NutzerValue value) {
+    public void beforeCreate(@NonNull final NutzerValue value) {
         LOG.info("RECEIVED [{}]", value);
         value.verify();
         LOG.info("ACCEPTED [{}]", value);
     }
 
     @HandleAfterCreate
+    public void afterCreate(@NonNull final NutzerValue value) {
+        publisher.publishEvent(value);
+        LOG.info("RELEASED [{}]", value);
+    }
+
+    @HandleBeforeSave
+    public void beforeSave(@NonNull final NutzerValue value) {
+        LOG.info("RECEIVED [{}]", value);
+        value.verify();
+        LOG.info("ACCEPTED [{}]", value);
+    }
+
     @HandleAfterSave
-    public void onHandleAfter(@NonNull final NutzerValue value) {
+    public void afterSave(@NonNull final NutzerValue value) {
+        publisher.publishEvent(value);
+        LOG.info("RELEASED [{}]", value);
+    }
+
+    @HandleBeforeLinkSave
+    public void beforeLinkSave(@NonNull final NutzerValue value, final Object rel) {
+        LOG.info("RECEIVED [{}]", value);
+        value.verify();
+        LOG.info("ACCEPTED [{}]", value);
+    }
+
+    @HandleAfterLinkSave
+    public void afterLinkSave(@NonNull final NutzerValue value, final Object rel) {
+        publisher.publishEvent(value);
+        LOG.info("RELEASED [{}]", value);
+    }
+
+    @HandleBeforeDelete
+    public void beforeDelete(@NonNull final NutzerValue value) {
+        LOG.info("RECEIVED [{}]", value);
+        value.verify();
+        LOG.info("ACCEPTED [{}]", value);
+    }
+
+    @HandleAfterDelete
+    public void afterDelete(@NonNull final NutzerValue value) {
+        publisher.publishEvent(value);
+        LOG.info("RELEASED [{}]", value);
+    }
+
+    @HandleBeforeLinkDelete
+    public void beforeLinkDelete(@NonNull final NutzerValue value, final Object rel) {
+        LOG.info("RECEIVED [{}]", value);
+        value.verify();
+        LOG.info("ACCEPTED [{}]", value);
+    }
+
+    @HandleAfterLinkDelete
+    public void afterLinkDelete(@NonNull final NutzerValue value, final Object rel) {
         publisher.publishEvent(value);
         LOG.info("RELEASED [{}]", value);
     }
