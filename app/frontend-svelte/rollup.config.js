@@ -1,5 +1,5 @@
 import svelte from 'rollup-plugin-svelte';
-const smelte=require("smelte/rollup-plugin-smelte");
+import smelte from 'smelte/rollup-plugin-smelte';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -40,6 +40,7 @@ export default {
 	},
 	plugins: [
 		config(),
+
 		replace({
 			BACKEND_URL: () => process.env.BACKEND_URL
 				? JSON.stringify(process.env.BACKEND_URL)
@@ -47,21 +48,18 @@ export default {
 			BACKEND_USER: () => process.env.BACKEND_USER
 				? JSON.stringify(process.env.BACKEND_USER)
 				: '"user:password"'
-        }),	  
-
+		}),
+		
 		svelte({
-			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('bundle.css');
+			compilerOptions: {
+				// enable run-time checks when not in production
+				dev: !production
 			}
 		}),
 
-		smelte({ 
-			purge: production,
+		smelte({
 			output: "public/build/smelte.css", 
+			purge: production,
 			postcss: [],
 			whitelist: [],
 			whitelistPatterns: [],
@@ -87,7 +85,7 @@ export default {
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
-		}),
+		}),		
 		commonjs(),
 
 		// In dev mode, call `npm run start` once
