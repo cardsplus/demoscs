@@ -44,10 +44,7 @@ export default {
 		replace({
 			BACKEND_URL: () => process.env.BACKEND_URL
 				? JSON.stringify(process.env.BACKEND_URL)
-				: '"http://localhost:8080"',				
-			BACKEND_USER: () => process.env.BACKEND_USER
-				? JSON.stringify(process.env.BACKEND_USER)
-				: '"user:password"'
+				: '"http://localhost:8080"'
 		}),
 		
 		svelte({

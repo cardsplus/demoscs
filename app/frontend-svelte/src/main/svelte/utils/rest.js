@@ -2,7 +2,6 @@ export async function loadAllValue(restUrl) {
     return fetch(BACKEND_URL + restUrl, {
         method: 'GET',
         headers: {
-            'Authorization': 'Basic ' + btoa(BACKEND_USER),
             'Accept': 'application/json'
         }
     })
@@ -21,7 +20,6 @@ export async function createValue(restUrl, value) {
     return fetch(BACKEND_URL + restUrl, {
         method: 'POST',
         headers: {
-            'Authorization': 'Basic ' + btoa(BACKEND_USER),
             'Accept': 'application/json',
             'Content-type': 'application/json'
         },
@@ -42,7 +40,6 @@ export async function updateValue(restUrl, value) {
     return fetch(BACKEND_URL + restUrl, {
         method: 'PUT',
         headers: {
-            'Authorization': 'Basic ' + btoa(BACKEND_USER),
             'Accept': 'application/json',
             'Content-type': 'application/json'
         },
@@ -63,7 +60,6 @@ export async function removeValue(restUrl) {
     return fetch(BACKEND_URL + restUrl, {
         method: 'DELETE',
         headers: {
-            'Authorization': 'Basic ' + btoa(BACKEND_USER),
             'Accept': 'application/json'
         }
     })
@@ -82,7 +78,6 @@ export async function fetchHtml(htmlUrl) {
     return fetch(BACKEND_URL + htmlUrl, {
         method: 'GET',
         headers: {
-            'Authorization': 'Basic ' + btoa(BACKEND_USER),
             'Accept': 'text/html'
         }
     })

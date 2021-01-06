@@ -7,27 +7,26 @@ created.subscribe(value => {
 
 import { updateValue, removeValue } from './rest.js';
 export async function createTestSet() {
-    const allNutzerRes = await Promise.all(allNutzer.map(value => {
+    const allPromise = await Promise.all(allNutzer.map(value => {
 		return updateValue("/api/nutzer/" + value.dataId, value);
-    }));
-    const allProjektRes = await Promise.all(allProjekt.map(value => {
+    })) + await Promise.all(allProjekt.map(value => {
 		return updateValue("/api/projekt/" + value.dataId, value);
-    }));    
-    const allAufgabeRes = await Promise.all(allAufgabe.map(value => {
+    })) + await Promise.all(allAufgabe.map(value => {
 		return updateValue("/api/aufgabe/" + value.dataId, value);
     }));
     created.set(true);
-    return allNutzerRes + allProjektRes + allAufgabeRes;
+    return allPromise;
 }
 export async function removeTestSet() {
-    const allProjektRes = await Promise.all(allProjekt.map(value => {
+    const allPromise = await Promise.all(allAufgabe.map(value => {
+		return removeValue("/api/aufgabe/" + value.dataId);
+    })) + await Promise.all(allProjekt.map(value => {
 		return removeValue("/api/projekt/" + value.dataId);
-    }));
-    const allNutzerRes = await Promise.all(allNutzer.map(value => {
-		 return removeValue("/api/nutzer/" + value.dataId);
+    })) + await Promise.all(allNutzer.map(value => {
+		return removeValue("/api/nutzer/" + value.dataId);
     }));
     created.set(false);
-    return allNutzerRes + allProjektRes;
+    return allPromise;
 }
 
 const allNutzer = [

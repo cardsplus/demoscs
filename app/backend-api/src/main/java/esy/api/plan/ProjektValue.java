@@ -51,8 +51,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
      * Projektmitglieder.
      */
     @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+            fetch = FetchType.LAZY)
     @JoinTable(
             name = "projekt_mitglied",
             joinColumns = @JoinColumn(name = "projekt_id", referencedColumnName = "id"),
