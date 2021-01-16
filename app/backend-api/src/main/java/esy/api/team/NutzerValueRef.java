@@ -1,4 +1,4 @@
-package esy.api.nutzer;
+package esy.api.team;
 
 import esy.json.JsonJpaValueRef;
 import esy.json.JsonMapper;

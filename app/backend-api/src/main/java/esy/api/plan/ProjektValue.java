@@ -1,7 +1,7 @@
 package esy.api.plan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import esy.api.nutzer.NutzerValue;
+import esy.api.team.NutzerValue;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package esy.app.nutzer;
+package esy.app.team;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

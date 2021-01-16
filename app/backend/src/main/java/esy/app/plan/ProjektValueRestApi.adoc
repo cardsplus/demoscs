@@ -20,9 +20,72 @@ include::{restdocDir}/post-api-projekt/response-body.adoc[]
 
 ****
 
+Die Operation meldet `Created` bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.
+
 Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
 
 Die Operation meldet `Conflict` bzw. den Code 409, wenn die Daten bereits existieren.
+
+== `PUT /api/projekt/{id}`
+
+Die Operation aktualisiert ein existierendes _Projekt_-Objekt oder erzeugt ein Neues.
+
+****
+
+.CURL
+include::{restdocDir}/put-api-projekt/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/put-api-projekt/http-request.adoc[]
+
+.Response
+include::{restdocDir}/put-api-projekt/response-body.adoc[]
+
+****
+
+Die Operation meldet `Ok` bzw. den Code 200, wenn das Objekt erfolgreich aktualisiert wurde.
+
+Die Operation meldet `Created` bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.
+
+Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
+
+== `PUT /api/projekt/{id}/besitzer`
+
+Die Operation ändert den Besitzer im _Projekt_-Objekt.
+
+****
+
+.CURL
+include::{restdocDir}/put-api-projekt-besitzer/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/put-api-projekt-besitzer/http-request.adoc[]
+
+.Response
+ Keine
+
+****
+
+Die Operation meldet `No content` bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.
+
+== `PUT /api/projekt/{id}/allMitglied`
+
+Die Operation ändert die Mitglieder im _Projekt_-Objekt.
+
+****
+
+.CURL
+include::{restdocDir}/put-api-projekt-mitglied/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/put-api-projekt-mitglied/http-request.adoc[]
+
+.Response
+ Keine
+
+****
+
+Die Operation meldet `No content` bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.
 
 == `GET /api/projekt`
 
@@ -41,6 +104,8 @@ include::{restdocDir}/get-api-projekt/response-body.adoc[]
 
 ****
 
+Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten geladen wurden.
+
 == `GET /api/projekt/{id}`
 
 Die Operation zeigt ein gespeichertes _Projekt_-Objekt an.
@@ -57,6 +122,8 @@ include::{restdocDir}/get-api-projekt-by-id/http-request.adoc[]
 include::{restdocDir}/get-api-projekt-by-id/response-body.adoc[]
 
 ****
+
+Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten geladen wurden.
 
 Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.
 
@@ -77,6 +144,8 @@ include::{restdocDir}/get-api-projekt-by-name/response-body.adoc[]
 
 ****
 
+Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten geladen wurden.
+
 Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.
 
 == `DELETE /api/projekt/{id}`
@@ -91,8 +160,11 @@ include::{restdocDir}/delete-api-projekt/curl-request.adoc[]
 .Request
 include::{restdocDir}/delete-api-projekt/http-request.adoc[]
 
+.Response
+ Keine
+
 ****
 
-Die Operation liefert keinen Daten zurück.
+Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten gelöscht wurden.
 
 Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.

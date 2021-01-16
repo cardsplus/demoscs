@@ -20,9 +20,34 @@ include::{restdocDir}/post-api-nutzer/response-body.adoc[]
 
 ****
 
+Die Operation meldet `Created` bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.
+
 Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
 
 Die Operation meldet `Conflict` bzw. den Code 409, wenn die Daten bereits existieren.
+
+== `PUT /api/nutzer/{id}`
+
+Die Operation aktualisiert ein existierendes _Nutzer_-Objekt oder erzeugt ein Neues.
+
+****
+
+.CURL
+include::{restdocDir}/put-api-nutzer/curl-request.adoc[]
+
+.Request
+include::{restdocDir}/put-api-nutzer/http-request.adoc[]
+
+.Response
+include::{restdocDir}/put-api-nutzer/response-body.adoc[]
+
+****
+
+Die Operation meldet `Ok` bzw. den Code 200, wenn das Objekt erfolgreich aktualisiert wurde.
+
+Die Operation meldet `Created` bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.
+
+Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
 
 == `GET /api/nutzer`
 
@@ -41,6 +66,8 @@ include::{restdocDir}/get-api-nutzer/response-body.adoc[]
 
 ****
 
+Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten geladen wurden.
+
 == `GET /api/nutzer/{id}`
 
 Die Operation zeigt ein gespeichertes _Nutzer_-Objekt an.
@@ -57,6 +84,8 @@ include::{restdocDir}/get-api-nutzer-by-id/http-request.adoc[]
 include::{restdocDir}/get-api-nutzer-by-id/response-body.adoc[]
 
 ****
+
+Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten geladen wurden.
 
 Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.
 
@@ -77,6 +106,8 @@ include::{restdocDir}/get-api-nutzer-by-mail/response-body.adoc[]
 
 ****
 
+Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten geladen wurden.
+
 Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.
 
 == `DELETE /api/nutzer/{id}`
@@ -91,8 +122,11 @@ include::{restdocDir}/delete-api-nutzer/curl-request.adoc[]
 .Request
 include::{restdocDir}/delete-api-nutzer/http-request.adoc[]
 
+.Response
+ Keine
+
 ****
 
-Die Operation liefert keinen Daten zurück.
+Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten gelöscht wurden.
 
 Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.

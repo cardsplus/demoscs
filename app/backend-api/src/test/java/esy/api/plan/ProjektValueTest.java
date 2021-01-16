@@ -1,6 +1,6 @@
 package esy.api.plan;
 
-import esy.api.nutzer.NutzerValue;
+import esy.api.team.NutzerValue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

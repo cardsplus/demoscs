@@ -1,6 +1,6 @@
-package esy.app.nutzer;
+package esy.app.team;
 
-import esy.api.nutzer.NutzerValue;
+import esy.api.team.NutzerValue;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

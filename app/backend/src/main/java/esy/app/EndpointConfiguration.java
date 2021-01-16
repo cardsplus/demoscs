@@ -1,7 +1,7 @@
 package esy.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import esy.api.nutzer.NutzerValue;
+import esy.api.team.NutzerValue;
 import esy.api.plan.AufgabeValue;
 import esy.api.plan.ProjektValue;
 import esy.json.JsonMapper;

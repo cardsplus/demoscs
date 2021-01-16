@@ -1,7 +1,7 @@
 package esy.app;
 
-import esy.api.nutzer.NutzerRolle;
-import esy.api.nutzer.NutzerValue;
+import esy.api.team.NutzerRolle;
+import esy.api.team.NutzerValue;
 import esy.api.plan.AufgabeValue;
 import esy.api.plan.ProjektValue;
 import esy.http.RestApiConnection;

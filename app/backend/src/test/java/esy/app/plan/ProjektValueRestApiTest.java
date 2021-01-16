@@ -1,8 +1,8 @@
 package esy.app.plan;
 
-import esy.api.nutzer.NutzerValue;
+import esy.api.team.NutzerValue;
 import esy.api.plan.ProjektValue;
-import esy.app.nutzer.NutzerValueRepository;
+import esy.app.team.NutzerValueRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;

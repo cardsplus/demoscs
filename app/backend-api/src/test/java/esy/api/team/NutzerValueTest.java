@@ -1,4 +1,4 @@
-package esy.api.nutzer;
+package esy.api.team;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,6 +1,6 @@
-package esy.app.nutzer;
+package esy.app.team;
 
-import esy.api.nutzer.NutzerValue;
+import esy.api.team.NutzerValue;
 import io.micrometer.core.lang.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

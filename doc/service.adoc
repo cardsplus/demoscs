@@ -22,7 +22,7 @@ für mehr Informationen.
 
 Die Anwendung zeigt an einem nicht trivialen Beispiel den effektiven Einsatz des _Spring_-Frameworks und weiterer Projekte aus den Spring-Universum.
 
-== Model
+== Modell
 
 Das Modell ist so gestaltet, dass die Daten in einer relationalen Datenbank dauerhaft gespeichert werden.
 Für die Speicherung in der Datenbank wird `spring-data-jpa` als Abstraktion eingesetzt.
@@ -31,21 +31,39 @@ Optional kann jeder gespeicherte Datensatz auch als Datensatz in einem REST-API 
 Für die Veröffentlichung der Daten in einem REST-API wird `spring-data-rest` als Abstraktion eingesetzt.
 
 Optional kann jeder gespeicherte Datensatz auch als Nachricht in einem Datenstrom veröffentlicht werden.
-Für die Veröffentlichung der Daten in einem Datenstrom wird `spring-cloud-stream` als Abstraktion eingesetzt.
+Für die Veröffentlichung der Daten in einem Datenstrom wird `spring-kafka` als Abstraktion eingesetzt.
 
 [plantuml,model,png]
 ----
 !pragma graphviz_dot jdot
 hide members
 show attributes
-Version : major:minor
-EventValueBase : id, version
-AufgabeValue <|-- EventValueBase
-AufgabeValue : text
-NutzerValue <|-- EventValueBase
-NutzerValue : mail
-ProjektValue <|-- EventValueBase
-ProjektValue : name
+package "info" {
+  class Version {
+    major:minor
+  }
+}
+package "ping" {
+  class Ping<EventValueBase> {
+    text
+  }
+}
+package "team" {
+  class NutzerValue<EventValueBase> {
+    mail
+  }
+}
+package "plan" {
+  class AufgabeValue<EventValueBase> {
+    text
+  }
+  class ProjektValue<EventValueBase> {
+    name
+  }
+  ProjektValue *-- "*" AufgabeValue
+  ProjektValue "1" --> NutzerValue : besitzer
+  ProjektValue "*" --> NutzerValue : mitglied
+}
 ----
 
 == UI
@@ -56,7 +74,7 @@ Die Anwendung hat eine reaktive browser-basierte Benutzeroberfläche.
 
 include::{projectDir}/app/backend/src/main/java/esy/app/info/VersionRestApi.adoc[leveloffset=+2]
 
-include::{projectDir}/app/backend/src/main/java/esy/app/nutzer/NutzerValueRestApi.adoc[leveloffset=+2]
+include::{projectDir}/app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc[leveloffset=+2]
 
 include::{projectDir}/app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc[leveloffset=+2]
 
