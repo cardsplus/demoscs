@@ -8,22 +8,22 @@ created.subscribe(value => {
 import { updateValue, removeValue } from './rest.js';
 export async function createTestSet() {
     const allPromise = await Promise.all(allNutzer.map(value => {
-		return updateValue("/api/nutzer/" + value.dataId, value);
+		  return updateValue("/api/nutzer/" + value.dataId, value);
     })) + await Promise.all(allProjekt.map(value => {
-		return updateValue("/api/projekt/" + value.dataId, value);
+		  return updateValue("/api/projekt/" + value.dataId, value);
     })) + await Promise.all(allAufgabe.map(value => {
-		return updateValue("/api/aufgabe/" + value.dataId, value);
+		  return updateValue("/api/aufgabe/" + value.dataId, value);
     }));
     created.set(true);
     return allPromise;
 }
 export async function removeTestSet() {
     const allPromise = await Promise.all(allAufgabe.map(value => {
-		return removeValue("/api/aufgabe/" + value.dataId);
+		  return removeValue("/api/aufgabe/" + value.dataId);
     })) + await Promise.all(allProjekt.map(value => {
-		return removeValue("/api/projekt/" + value.dataId);
+		  return removeValue("/api/projekt/" + value.dataId);
     })) + await Promise.all(allNutzer.map(value => {
-		return removeValue("/api/nutzer/" + value.dataId);
+		  return removeValue("/api/nutzer/" + value.dataId);
     }));
     created.set(false);
     return allPromise;
@@ -35,21 +35,21 @@ const allNutzer = [
         mail: 'robert.bruckbauer@e-mundo.de',
         name: 'Robert Bruckbauer',
         aktiv: true,
-        allRolle: ['VERWALTER']
+        allSprache: ['EN','IT']
     },
     {
         dataId: '00000002-2222-2222-2222-222222222222',
         mail: 'bruckbauer@gmx.at',
         name: 'Robert Bruckbauer',
         aktiv: true,
-        allRolle: ['BEARBEITER']
+        allSprache: ['EN']
     },
     {
         dataId: '00000003-2222-2222-2222-222222222222',
         mail: 'bromertje@gmail.com',
         name: 'Robert Bruckbauer',
         aktiv: true,
-        allRolle: ['BESUCHER']
+        allSprache: ['DE']
     }
 ];
 
@@ -58,6 +58,7 @@ const allProjekt = [
         dataId: '00000001-3333-3333-3333-333333333333',
         name: 'Projekt Alpha',
         aktiv: true,
+        sprache: 'DE',
         besitzer: '/api/nutzer/00000001-2222-2222-2222-222222222222',
         allMitglied: [
             '/api/nutzer/00000001-2222-2222-2222-222222222222'
@@ -67,6 +68,7 @@ const allProjekt = [
         dataId: '00000002-3333-3333-3333-333333333333',
         name: 'Projekt Beta',
         aktiv: true,
+        sprache: 'DE',
         besitzer: '/api/nutzer/00000001-2222-2222-2222-222222222222',
         allMitglied: [
             '/api/nutzer/00000001-2222-2222-2222-222222222222',
@@ -78,6 +80,7 @@ const allProjekt = [
         dataId: '00000003-3333-3333-3333-333333333333',
         name: 'Projekt Gamma',
         aktiv: false,
+        sprache: 'EN',
         besitzer: null,
         allMitglied: [
         ]

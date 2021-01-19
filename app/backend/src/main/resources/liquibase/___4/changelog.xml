@@ -4,9 +4,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="1" author="robert">
-        <comment>add projekt to nutzer mapping table</comment>
+        <comment>NutzerValueRef</comment>
         <createTable tableName="projekt_mitglied">
-            <!-- EventValueRef -->
             <column name="projekt_id" type="UUID">
                 <constraints nullable="false"/>
             </column>
@@ -14,8 +13,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="2" author="robert">
         <addForeignKeyConstraint
                 constraintName="fk_projekt_mitglied_projekt_id"
                 baseTableName="projekt_mitglied"
@@ -23,8 +20,6 @@
                 referencedTableName="projekt"
                 referencedColumnNames="id"
         />
-    </changeSet>
-    <changeSet id="3" author="robert">
         <addForeignKeyConstraint
                 constraintName="fk_projekt_mitglied_nutzer_id"
                 baseTableName="projekt_mitglied"

@@ -1,6 +1,6 @@
 package esy.app;
 
-import esy.api.team.NutzerRolle;
+import esy.api.team.Sprache;
 import esy.api.team.NutzerValue;
 import esy.api.plan.AufgabeValue;
 import esy.api.plan.ProjektValue;
@@ -310,12 +310,12 @@ public class BackendHsqlRunnerTest {
 
 	@Test
 	@Order(113)
-	void putApiNutzerRolle(final TestInfo info) throws Exception {
+	void putApiNutzerSprache(final TestInfo info) throws Exception {
 		final String name = info.getTestMethod().orElseThrow().getName();
 		final String json = "{" +
 				"\"mail\":\"" + name + "@a.de\"," +
 				"\"name\":\"" + name + "\"," +
-				"\"allRolle\": [%s]" +
+				"\"allSprache\": [%s]" +
 				"}";
 		final UUID uuid = UUID.randomUUID();
 
@@ -327,12 +327,12 @@ public class BackendHsqlRunnerTest {
 		final NutzerValue value0 = result0.toObject(NutzerValue.class);
 		assertEquals(uuid, value0.getDataId());
 		assertEquals(name, value0.getName());
-		assertEquals(1, value0.getAllRolle().size());
-		assertTrue(value0.getAllRolle().contains(NutzerRolle.BESUCHER));
+		assertEquals(1, value0.getAllSprache().size());
+		assertTrue(value0.getAllSprache().contains(Sprache.DE));
 		assertTrue(value0.isEqual(RestApiConnection.with(
 				toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
 
-		for (final NutzerRolle rolle: NutzerRolle.values()) {
+		for (final Sprache rolle: Sprache.values()) {
 			final RestApiResult result1 = RestApiConnection.with(
 					toBackendUrl("/api/nutzer/" + uuid))
 					.put(String.format(json, "\"" + rolle.name() + "\""));
@@ -341,24 +341,25 @@ public class BackendHsqlRunnerTest {
 			final NutzerValue value1 = result1.toObject(NutzerValue.class);
 			assertEquals(uuid, value1.getDataId());
 			assertEquals(name, value1.getName());
-			assertEquals(1, value0.getAllRolle().size());
-			assertTrue(value1.getAllRolle().contains(rolle));
+			assertEquals(1, value0.getAllSprache().size());
+			assertTrue(value1.getAllSprache().contains(rolle));
 			assertTrue(value1.isEqual(RestApiConnection.with(
 					toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
 		}
 
 		final RestApiResult result2 = RestApiConnection.with(
 				toBackendUrl("/api/nutzer/" + uuid))
-				.put(String.format(json, "\"BESUCHER\",\"BEARBEITER\",\"VERWALTER\""));
+				.put(String.format(json, "\"DE\",\"EN\",\"FR\",\"IT\""));
 		assertThat(result2.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final NutzerValue value2 = result2.toObject(NutzerValue.class);
 		assertEquals(uuid, value2.getDataId());
 		assertEquals(name, value2.getName());
-		assertEquals(3, value2.getAllRolle().size());
-		assertTrue(value2.getAllRolle().contains(NutzerRolle.BESUCHER));
-		assertTrue(value2.getAllRolle().contains(NutzerRolle.BEARBEITER));
-		assertTrue(value2.getAllRolle().contains(NutzerRolle.VERWALTER));
+		assertEquals(4, value2.getAllSprache().size());
+		assertTrue(value2.getAllSprache().contains(Sprache.DE));
+		assertTrue(value2.getAllSprache().contains(Sprache.EN));
+		assertTrue(value2.getAllSprache().contains(Sprache.FR));
+		assertTrue(value2.getAllSprache().contains(Sprache.IT));
 		assertTrue(value2.isEqual(RestApiConnection.with(
 				toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
 
@@ -370,8 +371,8 @@ public class BackendHsqlRunnerTest {
 		final NutzerValue value3 = result3.toObject(NutzerValue.class);
 		assertEquals(uuid, value3.getDataId());
 		assertEquals(name, value3.getName());
-		assertEquals(1, value3.getAllRolle().size());
-		assertTrue(value3.getAllRolle().contains(NutzerRolle.BESUCHER));
+		assertEquals(1, value3.getAllSprache().size());
+		assertTrue(value3.getAllSprache().contains(Sprache.DE));
 		assertTrue(value3.isEqual(RestApiConnection.with(
 				toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
 

@@ -4,16 +4,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="1" author="robert">
-        <comment>add aufgabe table</comment>
+        <comment>AufgabeValue</comment>
         <createTable tableName="aufgabe">
-            <!-- EventValueBase -->
             <column name="version" type="BIGINT" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <!-- AufgabeValue -->
             <column name="text" type="VARCHAR(512)">
                 <constraints nullable="false"/>
             </column>

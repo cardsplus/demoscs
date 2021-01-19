@@ -26,8 +26,8 @@
 	let nutzerMail = '';
 	let nutzerAktiv = true;
 	let nutzerName = '';
-	let nutzerAllRolle = [];
-	let nutzerAllRolleDialog = false;
+	let nutzerAllSprache = ["DE"];
+	let nutzerAllSpracheDialog = false;
 	let nutzerIndexOf = undefined;
 
 	// refresh after change in filter criteria
@@ -51,7 +51,7 @@
 			nutzerMail = nutzer.mail;
 			nutzerAktiv = nutzer.aktiv;
 			nutzerName = nutzer.name;
-			nutzerAllRolle = nutzer.allRolle;
+			nutzerAllSprache = nutzer.allSprache;
 			nutzerIndexOf = allNutzerFiltered.indexOf(nutzer);
 		} else {			
 			nutzerIndexOf = undefined;
@@ -66,12 +66,12 @@
 			nutzerMail = nutzer.mail;
 			nutzerAktiv = nutzer.aktiv;
 			nutzerName = nutzer.name;
-			nutzerAllRolle = nutzer.allRolle;
+			nutzerAllSprache = nutzer.allSprache;
 		} else {
 			// don't reset unique key value
 			nutzerAktiv = true;
 			nutzerName = '';
-			nutzerAllRolle = ["BESUCHER"];
+			nutzerAllSprache = ["DE"];
 		}
 		return nutzer;
 	}
@@ -82,7 +82,7 @@
 			mail: nutzerMail,
 			aktiv: nutzerAktiv,
 			name: nutzerName, 
-			allRolle: nutzerAllRolle
+			allSprache: nutzerAllSprache
 		})
         .then(res => res.json())
         .then(json => {
@@ -103,7 +103,7 @@
 			mail: nutzerMail,
 			aktiv: nutzerAktiv,
 			name: nutzerName, 
-			allRolle: nutzerAllRolle
+			allSprache: nutzerAllSprache
         })
         .then(res => res.json())
         .then(json => {
@@ -207,8 +207,8 @@
 			placeholder="Bitte den vollen Namen eingeben"/>
 		<Checkbox bind:checked={nutzerAktiv}
 			label="Bitte Haken setzen, wenn der Nutzer aktiv ist?"/>
-		<Button on:click={() => nutzerAllRolleDialog=true} outlined block>
-			Rollen <small>({nutzerAllRolle.length})</small>
+		<Button on:click={() => nutzerAllSpracheDialog=true} outlined block>
+			Sprachen <small>({nutzerAllSprache.length})</small>
 		</Button>
 		<div class="py-2">
 			<hr class="my-2"/>
@@ -227,30 +227,30 @@
 	</div>
 </div>
 
-<Dialog bind:value={nutzerAllRolleDialog} classes="z-50 bg-white p-4">
+<Dialog bind:value={nutzerAllSpracheDialog} classes="z-50 bg-white p-4">
 	<h5 slot="title">
-		Rollen
+		Sprachen
 	</h5>
 	<div class="flex flex-col space-y-2">
 		<label>
-			<input type=checkbox bind:group={nutzerAllRolle} value="BESUCHER"/>
-			Besucher
+			<input type=checkbox bind:group={nutzerAllSprache} value="DE"/>
+			Deutsch (DE)
 		</label>
 		<label>
-			<input type=checkbox bind:group={nutzerAllRolle} value="BEARBEITER"/>
-			Bearbeiter
+			<input type=checkbox bind:group={nutzerAllSprache} value="EN"/>
+			Englisch (EN)
 		</label>
 		<label>
-			<input type=checkbox bind:group={nutzerAllRolle} value="VERWALTER"/>
-			Verwalter
+			<input type=checkbox bind:group={nutzerAllSprache} value="FR"/>
+			Französisch (FR)
 		</label>
 		<label>
-			<input type=checkbox bind:group={nutzerAllRolle} value="ADMINISTRATOR"/>
-			Administrator
+			<input type=checkbox bind:group={nutzerAllSprache} value="IT"/>
+			Italienisch (IT)
 		</label>
 	</div>
 	<div slot="actions">
-		<Button text on:click={() => nutzerAllRolleDialog=false}>
+		<Button text on:click={() => nutzerAllSpracheDialog=false}>
 			Ok
 		</Button>
 	</div>

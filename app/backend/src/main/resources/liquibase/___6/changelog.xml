@@ -4,14 +4,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="1" author="robert">
-        <comment>add aufgabe to projekt mapping</comment>
+        <comment>AufgabeValue</comment>
         <addColumn tableName="aufgabe">
             <column name="projekt_id" type="UUID">
                 <constraints nullable="false"/>
             </column>
         </addColumn>
-    </changeSet>
-    <changeSet id="2" author="robert">
         <addForeignKeyConstraint
                 constraintName="fk_aufgabe_projekt_id"
                 baseTableName="aufgabe"

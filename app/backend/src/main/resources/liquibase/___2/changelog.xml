@@ -4,21 +4,18 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="1" author="robert">
-        <comment>add rolle collection table</comment>
-        <createTable tableName="nutzer_rolle">
-            <!-- NutzerRolle -->
+        <comment>NutzerValue</comment>
+        <createTable tableName="nutzer_sprache">
             <column name="id" type="UUID">
                 <constraints nullable="false"/>
             </column>
-            <column name="rolle" type="INT">
+            <column name="sprache" type="INT" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="2" author="robert">
         <addForeignKeyConstraint
-                constraintName="fk_nutzer_rolle_nutzer_id"
-                baseTableName="nutzer_rolle"
+                constraintName="fk_nutzer_sprache_nutzer_id"
+                baseTableName="nutzer_sprache"
                 baseColumnNames="id"
                 referencedTableName="nutzer"
                 referencedColumnNames="id"

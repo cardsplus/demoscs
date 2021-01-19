@@ -1,6 +1,7 @@
 package esy.api.plan;
 
 import esy.api.team.NutzerValue;
+import esy.api.team.Sprache;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -18,6 +19,7 @@ public class ProjektValueTest {
 				"\"dataId\": \"" + uuid + "\"," +
 				"\"name\": \"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
+				"\"sprache\": \"EN\"," +
 				"\"besitzer\": null," +
 				"\"allMitglied\": [" +
 				"]" +
@@ -101,6 +103,7 @@ public class ProjektValueTest {
 		assertNotNull(value.getDataId());
 		assertEquals(name, value.getName());
 		assertFalse(value.isAktiv());
+		assertEquals(Sprache.EN, value.getSprache());
 		assertNull(value.getBesitzer());
 		assertEquals(0, value.getAllMitglied().size());
 	}
@@ -136,23 +139,41 @@ public class ProjektValueTest {
 		assertTrue(value.isEqual(ProjektValue.parseJson(json)));
 	}
 
-	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
-	public void jsonAktiv(final boolean aktiv) {
+	@Test
+	public void jsonAktiv() {
 		final String name = "Projekt A";
 		final String json = "{" +
 				"\"name\": \"" + name + "\"," +
-				"\"aktiv\": \"" + aktiv + "\"" +
+				"\"aktiv\": \"false\"" +
 				"}";
 		final ProjektValue value = ProjektValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name, value.getName());
-		assertEquals(aktiv, value.isAktiv());
+		assertFalse(value.isAktiv());
 
-		value.setAktiv(!aktiv);
+		value.setAktiv(true);
 		assertFalse(value.isEqual(ProjektValue.parseJson(json)));
 
-		value.setAktiv(aktiv);
+		value.setAktiv(false);
+		assertTrue(value.isEqual(ProjektValue.parseJson(json)));
+	}
+
+	@Test
+	public void jsonSprache() {
+		final String name = "Projekt A";
+		final String json = "{" +
+				"\"name\": \"" + name + "\"," +
+				"\"sprache\": \"EN\"" +
+				"}";
+		final ProjektValue value = ProjektValue.parseJson(json);
+		assertDoesNotThrow(value::verify);
+		assertEquals(name, value.getName());
+		assertEquals(Sprache.EN, value.getSprache());
+
+		value.setSprache(Sprache.DE);
+		assertFalse(value.isEqual(ProjektValue.parseJson(json)));
+
+		value.setSprache(Sprache.EN);
 		assertTrue(value.isEqual(ProjektValue.parseJson(json)));
 	}
 

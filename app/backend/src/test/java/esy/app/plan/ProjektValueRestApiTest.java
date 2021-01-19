@@ -125,7 +125,8 @@ public class ProjektValueRestApiTest {
         mockMvc.perform(post("/api/projekt")
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
-                        "\"aktiv\": \"true\"" +
+                        "\"aktiv\": \"true\"," +
+                        "\"sprache\": \"EN\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -143,7 +144,9 @@ public class ProjektValueRestApiTest {
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.aktiv")
-                        .value("true"));
+                        .value("true"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("EN"));
         assertTrue(projektValueRepository.findByName(name).isPresent());
     }
 
@@ -156,7 +159,8 @@ public class ProjektValueRestApiTest {
         mockMvc.perform(post("/api/projekt")
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
-                        "\"aktiv\": \"" + aktiv + "\"" +
+                        "\"aktiv\": \"" + aktiv + "\"," +
+                        "\"sprache\": \"EN\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -190,7 +194,9 @@ public class ProjektValueRestApiTest {
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.aktiv")
-                        .value("true"));
+                        .value("true"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("DE"));
         assertTrue(projektValueRepository.findByName(name).isPresent());
     }
 
@@ -204,7 +210,8 @@ public class ProjektValueRestApiTest {
         mockMvc.perform(put("/api/projekt/" + uuid)
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
-                        "\"aktiv\": \"true\"" +
+                        "\"aktiv\": \"false\"," +
+                        "\"sprache\": \"EN\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -222,7 +229,9 @@ public class ProjektValueRestApiTest {
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.aktiv")
-                        .value("true"));
+                        .value("false"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("EN"));
         assertTrue(projektValueRepository.findByName(name).isPresent());
     }
 
@@ -236,7 +245,8 @@ public class ProjektValueRestApiTest {
         mockMvc.perform(put("/api/projekt/" + uuid)
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
-                        "\"aktiv\": \"true\"" +
+                        "\"aktiv\": \"false\"," +
+                        "\"sprache\": \"EN\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -254,7 +264,9 @@ public class ProjektValueRestApiTest {
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.aktiv")
-                        .value("true"));
+                        .value("false"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("EN"));
     }
 
     @Test
@@ -278,13 +290,15 @@ public class ProjektValueRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"0\""))
+                        .string("ETag", "\"1\""))
                 .andExpect(jsonPath("$.dataId")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.aktiv")
-                        .value("true"));
+                        .value("true"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("DE"));
     }
 
     @Test
@@ -297,7 +311,8 @@ public class ProjektValueRestApiTest {
         mockMvc.perform(put("/api/projekt/" + uuid)
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
-                        "\"aktiv\": \"false\"" +
+                        "\"aktiv\": \"true\"," +
+                        "\"sprache\": \"EN\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -309,17 +324,53 @@ public class ProjektValueRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"1\""))
+                        .string("ETag", "\"2\""))
                 .andExpect(jsonPath("$.dataId")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.aktiv")
-                        .value("false"));
+                        .value("true"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("EN"));
     }
 
     @Test
     @Order(34)
+    void putApiProjektSprache() throws Exception {
+        final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
+        final String name = "Projekt C";
+        assertTrue(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(projektValueRepository.findByName(name).isPresent());
+        mockMvc.perform(put("/api/projekt/" + uuid)
+                .content("{" +
+                        "\"name\":\"" + name + "\"," +
+                        "\"aktiv\": \"true\"," +
+                        "\"sprache\": \"DE\"" +
+                        "}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(header()
+                        .string("ETag", "\"3\""))
+                .andExpect(jsonPath("$.dataId")
+                        .value(uuid))
+                .andExpect(jsonPath("$.name")
+                        .value(name))
+                .andExpect(jsonPath("$.aktiv")
+                        .value("true"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("DE"));
+    }
+
+    @Test
+    @Order(35)
     void putApiProjektBesitzer() throws Exception {
         final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
@@ -341,7 +392,7 @@ public class ProjektValueRestApiTest {
     }
 
     @Test
-    @Order(35)
+    @Order(36)
     void deleteApiProjektBesitzer() throws Exception {
         final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
@@ -360,7 +411,7 @@ public class ProjektValueRestApiTest {
     }
 
     @Test
-    @Order(36)
+    @Order(37)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Rollback(false)
     void putApiProjektMitglied() throws Exception {
@@ -387,7 +438,7 @@ public class ProjektValueRestApiTest {
     }
 
     @Test
-    @Order(37)
+    @Order(38)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Rollback(false)
     void deleteApiProjektMitglied() throws Exception {
@@ -427,13 +478,15 @@ public class ProjektValueRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"5\""))
+                        .string("ETag", "\"7\""))
                 .andExpect(jsonPath("$.dataId")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.aktiv")
-                        .value("false"));
+                        .value("true"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("DE"));
     }
 
     @Test
@@ -464,13 +517,15 @@ public class ProjektValueRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"5\""))
+                        .string("ETag", "\"7\""))
                 .andExpect(jsonPath("$.dataId")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.aktiv")
-                        .value("false"));
+                        .value("true"))
+                .andExpect(jsonPath("$.sprache")
+                        .value("DE"));
     }
 
     @Test

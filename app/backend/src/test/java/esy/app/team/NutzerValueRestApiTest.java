@@ -118,7 +118,7 @@ public class NutzerValueRestApiTest {
                         "\"mail\":\"" + nutzerMail + "\"," +
                         "\"name\":\"" + nutzerName + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"allRolle\": [\"BEARBEITER\"]" +
+                        "\"allSprache\": [\"EN\"]" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -139,13 +139,13 @@ public class NutzerValueRestApiTest {
                         .value(nutzerName))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
-                .andExpect(jsonPath("$.allRolle")
+                .andExpect(jsonPath("$.allSprache")
                         .isArray())
-                .andExpect(jsonPath("$.allRolle[0]")
-                        .value("BESUCHER"))
-                .andExpect(jsonPath("$.allRolle[1]")
-                        .value("BEARBEITER"))
-                .andExpect(jsonPath("$.allRolle[2]")
+                .andExpect(jsonPath("$.allSprache[0]")
+                        .value("DE"))
+                .andExpect(jsonPath("$.allSprache[1]")
+                        .value("EN"))
+                .andExpect(jsonPath("$.allSprache[2]")
                         .doesNotExist());
         assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
     }
@@ -200,11 +200,11 @@ public class NutzerValueRestApiTest {
                         .value(nutzerName))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
-                .andExpect(jsonPath("$.allRolle")
+                .andExpect(jsonPath("$.allSprache")
                         .isArray())
-                .andExpect(jsonPath("$.allRolle[0]")
-                        .value("BESUCHER"))
-                .andExpect(jsonPath("$.allRolle[1]")
+                .andExpect(jsonPath("$.allSprache[0]")
+                        .value("DE"))
+                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
         assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
     }
@@ -223,7 +223,7 @@ public class NutzerValueRestApiTest {
                         "\"mail\":\"" + nutzerMail + "\"," +
                         "\"name\":\"" + nutzerName + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"allRolle\": [\"BEARBEITER\"]" +
+                        "\"allSprache\": [\"EN\"]" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -244,13 +244,13 @@ public class NutzerValueRestApiTest {
                         .value(nutzerName))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
-                .andExpect(jsonPath("$.allRolle")
+                .andExpect(jsonPath("$.allSprache")
                         .isArray())
-                .andExpect(jsonPath("$.allRolle[0]")
-                        .value("BESUCHER"))
-                .andExpect(jsonPath("$.allRolle[1]")
-                        .value("BEARBEITER"))
-                .andExpect(jsonPath("$.allRolle[2]")
+                .andExpect(jsonPath("$.allSprache[0]")
+                        .value("DE"))
+                .andExpect(jsonPath("$.allSprache[1]")
+                        .value("EN"))
+                .andExpect(jsonPath("$.allSprache[2]")
                         .doesNotExist());
         assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
     }
@@ -269,7 +269,7 @@ public class NutzerValueRestApiTest {
                         "\"mail\":\"" + nutzerMail + "\"," +
                         "\"name\":\"" + nutzerName + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"allRolle\": [\"BEARBEITER\"]" +
+                        "\"allSprache\": [\"EN\"]" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -290,13 +290,13 @@ public class NutzerValueRestApiTest {
                         .value(nutzerName))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
-                .andExpect(jsonPath("$.allRolle")
+                .andExpect(jsonPath("$.allSprache")
                         .isArray())
-                .andExpect(jsonPath("$.allRolle[0]")
-                        .value("BESUCHER"))
-                .andExpect(jsonPath("$.allRolle[1]")
-                        .value("BEARBEITER"))
-                .andExpect(jsonPath("$.allRolle[2]")
+                .andExpect(jsonPath("$.allSprache[0]")
+                        .value("DE"))
+                .andExpect(jsonPath("$.allSprache[1]")
+                        .value("EN"))
+                .andExpect(jsonPath("$.allSprache[2]")
                         .doesNotExist());
     }
 
@@ -332,11 +332,11 @@ public class NutzerValueRestApiTest {
                         .value(nutzerName))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
-                .andExpect(jsonPath("$.allRolle")
+                .andExpect(jsonPath("$.allSprache")
                         .isArray())
-                .andExpect(jsonPath("$.allRolle[0]")
-                        .value("BESUCHER"))
-                .andExpect(jsonPath("$.allRolle[1]")
+                .andExpect(jsonPath("$.allSprache[0]")
+                        .value("DE"))
+                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
     }
 
@@ -353,7 +353,7 @@ public class NutzerValueRestApiTest {
                         "\"mail\":\"" + nutzerMail + "\"," +
                         "\"name\":\"" + nutzerName + "\"," +
                         "\"aktiv\": \"false\"," +
-                        "\"allRolle\": []" +
+                        "\"allSprache\": []" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -374,11 +374,11 @@ public class NutzerValueRestApiTest {
                         .value(nutzerName))
                 .andExpect(jsonPath("$.aktiv")
                         .value("false"))
-                .andExpect(jsonPath("$.allRolle")
+                .andExpect(jsonPath("$.allSprache")
                         .isArray())
-                .andExpect(jsonPath("$.allRolle[0]")
-                        .value("BESUCHER"))
-                .andExpect(jsonPath("$.allRolle[1]")
+                .andExpect(jsonPath("$.allSprache[0]")
+                        .value("DE"))
+                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
     }
 
@@ -409,11 +409,11 @@ public class NutzerValueRestApiTest {
                         .value(nutzerName))
                 .andExpect(jsonPath("$.aktiv")
                         .value("false"))
-                .andExpect(jsonPath("$.allRolle")
+                .andExpect(jsonPath("$.allSprache")
                         .isArray())
-                .andExpect(jsonPath("$.allRolle[0]")
-                        .value("BESUCHER"))
-                .andExpect(jsonPath("$.allRolle[1]")
+                .andExpect(jsonPath("$.allSprache[0]")
+                        .value("DE"))
+                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
     }
 
@@ -455,11 +455,11 @@ public class NutzerValueRestApiTest {
                         .value(nutzerName))
                 .andExpect(jsonPath("$.aktiv")
                         .value("false"))
-                .andExpect(jsonPath("$.allRolle")
+                .andExpect(jsonPath("$.allSprache")
                         .isArray())
-                .andExpect(jsonPath("$.allRolle[0]")
-                        .value("BESUCHER"))
-                .andExpect(jsonPath("$.allRolle[1]")
+                .andExpect(jsonPath("$.allSprache[0]")
+                        .value("DE"))
+                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
     }
 

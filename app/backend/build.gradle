@@ -1,7 +1,3 @@
-/*
- * https://guides.gradle.org/creating-new-gradle-builds/
- * https://guides.gradle.org/building-spring-boot-2-projects-with-gradle/
- */
 plugins {
     id 'java-library'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
@@ -47,8 +43,6 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter')
     // https://site.mockito.org/
     testImplementation('org.mockito:mockito-junit-jupiter')
-    // https://www.testcontainers.org
-    testImplementation('org.testcontainers:junit-jupiter:1.14.3')
 }
 
 

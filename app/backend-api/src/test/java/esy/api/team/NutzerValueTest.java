@@ -19,7 +19,7 @@ public class NutzerValueTest {
 				"\"mail\": \"" + name + "@a.de\"," +
 				"\"name\":\"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
-				"\"allRolle\": [\"BEARBEITER\"]" +
+				"\"allSprache\": [\"EN\"]" +
 				"}";
 		return NutzerValue.parseJson(json);
 	}
@@ -89,8 +89,8 @@ public class NutzerValueTest {
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
 		assertTrue(value.isAktiv());
-		assertEquals(1, value.getAllRolle().size());
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BESUCHER));
+		assertEquals(1, value.getAllSprache().size());
+		assertTrue(value.getAllSprache().contains(Sprache.DE));
 	}
 
 	@Test
@@ -103,9 +103,9 @@ public class NutzerValueTest {
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
 		assertFalse(value.isAktiv());
-		assertEquals(2, value.getAllRolle().size());
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BESUCHER));
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BEARBEITER));
+		assertEquals(2, value.getAllSprache().size());
+		assertTrue(value.getAllSprache().contains(Sprache.DE));
+		assertTrue(value.getAllSprache().contains(Sprache.EN));
 	}
 
 	@ParameterizedTest
@@ -159,67 +159,66 @@ public class NutzerValueTest {
 		assertTrue(value.isEqual(NutzerValue.parseJson(json)));
 	}
 
-	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
-	public void jsonAktiv(final boolean aktiv) {
+	@Test
+	public void jsonAktiv() {
 		final String name = "Max.Mustermann";
 		final String json = "{" +
 				"\"mail\": \"" + name + "@a.de\"," +
 				"\"name\": \"" + name + "\"," +
-				"\"aktiv\": \"" + aktiv + "\"" +
+				"\"aktiv\": \"false\"" +
 				"}";
 		final NutzerValue value = NutzerValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
-		assertEquals(aktiv, value.isAktiv());
+		assertFalse(value.isAktiv());
 
-		value.setAktiv(!aktiv);
+		value.setAktiv(true);
 		assertFalse(value.isEqual(NutzerValue.parseJson(json)));
 
-		value.setAktiv(aktiv);
+		value.setAktiv(false);
 		assertTrue(value.isEqual(NutzerValue.parseJson(json)));
 	}
 
 	@Test
-	public void jsonRolle() {
+	public void jsonSprache() {
 		final String name = "Max.Mustermann";
 		final String json = "{" +
 				"\"mail\": \"" + name + "@a.de\"," +
 				"\"name\": \"" + name + "\"," +
-				"\"allRolle\": [" +
-				"\"BEARBEITER\"" +
+				"\"allSprache\": [" +
+				"\"EN\"" +
 				"]" +
 				"}";
 		final NutzerValue value = NutzerValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
-		assertEquals(2, value.getAllRolle().size());
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BESUCHER));
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BEARBEITER));
+		assertEquals(2, value.getAllSprache().size());
+		assertTrue(value.getAllSprache().contains(Sprache.DE));
+		assertTrue(value.getAllSprache().contains(Sprache.EN));
 
-		value.getAllRolle().addAll(List.of(NutzerRolle.values()));
-		assertEquals(4, value.getAllRolle().size());
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BESUCHER));
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BEARBEITER));
-		assertTrue(value.getAllRolle().contains(NutzerRolle.VERWALTER));
-		assertTrue(value.getAllRolle().contains(NutzerRolle.ADMINISTRATOR));
+		value.getAllSprache().addAll(List.of(Sprache.values()));
+		assertEquals(4, value.getAllSprache().size());
+		assertTrue(value.getAllSprache().contains(Sprache.DE));
+		assertTrue(value.getAllSprache().contains(Sprache.EN));
+		assertTrue(value.getAllSprache().contains(Sprache.FR));
+		assertTrue(value.getAllSprache().contains(Sprache.IT));
 		assertFalse(value.isEqual(NutzerValue.parseJson(json)));
 
-		value.getAllRolle().clear();
-		assertEquals(0, value.getAllRolle().size());
+		value.getAllSprache().clear();
+		assertEquals(0, value.getAllSprache().size());
 		assertFalse(value.isEqual(NutzerValue.parseJson(json)));
 
-		value.getAllRolle().add(NutzerRolle.BESUCHER);
-		assertEquals(1, value.getAllRolle().size());
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BESUCHER));
+		value.getAllSprache().add(Sprache.DE);
+		assertEquals(1, value.getAllSprache().size());
+		assertTrue(value.getAllSprache().contains(Sprache.DE));
 		assertFalse(value.isEqual(NutzerValue.parseJson(json)));
 
-		value.getAllRolle().add(NutzerRolle.BEARBEITER);
-		assertEquals(2, value.getAllRolle().size());
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BESUCHER));
-		assertTrue(value.getAllRolle().contains(NutzerRolle.BEARBEITER));
+		value.getAllSprache().add(Sprache.EN);
+		assertEquals(2, value.getAllSprache().size());
+		assertTrue(value.getAllSprache().contains(Sprache.DE));
+		assertTrue(value.getAllSprache().contains(Sprache.EN));
 		assertTrue(value.isEqual(NutzerValue.parseJson(json)));
 	}
 }

@@ -1,8 +1,8 @@
 package esy.app.plan;
 
 import esy.api.plan.ProjektValue;
-import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
@@ -26,5 +26,5 @@ public interface ProjektValueRepository extends JpaRepository<ProjektValue, UUID
      * @param name unique name
      * @return persisted value or nothing
      */
-    Optional<ProjektValue> findByName(@NonNull final String name);
+    Optional<ProjektValue> findByName(@Param("name") String name);
 }

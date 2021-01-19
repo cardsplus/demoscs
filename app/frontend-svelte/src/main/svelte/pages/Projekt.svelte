@@ -1,6 +1,6 @@
 <script>
    	import { onMount } from 'svelte';
-  	import { Button, Checkbox, Snackbar, TextField } from "smelte";
+  	import { Button, Checkbox, Dialog, Snackbar, TextField } from "smelte";
     import { loadAllValue, createValue, updateValue, removeValue } from '../utils/rest.js';
 
 	let alertSnackbarDialog = false;
@@ -25,6 +25,8 @@
 	
 	let projektName = '';
 	let projektAktiv = true;
+	let projektSprache = "DE";	
+	let projektSpracheDialog = false;
 	let projektIndexOf = undefined;
 
 	// refresh after change in filter criteria
@@ -44,6 +46,7 @@
 		if (projekt) {
 			projektName = projekt.name;
 			projektAktiv = projekt.aktiv;
+			projektSprache = projekt.sprache;
 			projektIndexOf = allProjektFiltered.indexOf(projekt);
 		} else {			
 			projektIndexOf = undefined;
@@ -57,9 +60,11 @@
 		if (projekt) {
 			projektName = projekt.name;
 			projektAktiv = projekt.aktiv;
+			projektSprache = projekt.sprache;
 		} else {
 			// don't reset unique key value
 			projektAktiv = true;
+			projektSprache = "DE";
 		}
 		return projekt;
 	}
@@ -68,7 +73,8 @@
 	function create() {
 		createValue(projektUrl, {
 			name: projektName, 
-			aktiv: projektAktiv
+			aktiv: projektAktiv,
+			sparche: projektSprache
 		})
         .then(res => res.json())
         .then(json => {
@@ -87,7 +93,8 @@
 	function update() {
 		updateValue(projektUrl + '/' + projektSelected.dataId, {
 			name: projektName, 
-			aktiv: projektAktiv
+			aktiv: projektAktiv,
+			sprache: projektSprache
 		})
         .then(res => res.json())
         .then(json => {
@@ -175,6 +182,11 @@
 			placeholder="Bitte den vollen Namen eingeben"/>
 		<Checkbox bind:checked={projektAktiv}
 			label="Bitte Haken setzen, wenn das Projekt aktiv ist?"/>
+		<Button on:click={() => projektSpracheDialog=true}
+			disabled={!projektName}
+			outlined block>
+			Sprache <small>({projektSprache})</small>
+		</Button>
 		<div class="py-2">
 			<hr class="my-2"/>
 		</div>
@@ -191,6 +203,31 @@
 		</div>
 	</div>
 </div>
+
+<Dialog bind:value={projektSpracheDialog} classes="z-50 bg-white p-4">
+	<h5 slot="title">
+		Projektsprache
+	</h5>
+	<div class="flex flex-col space-y-2">
+		<label>
+			<input type=radio bind:group={projektSprache} value="DE"/>
+			Deutsch (DE)
+		</label>
+		<label>
+			<input type=radio bind:group={projektSprache} value="EN"/>
+			Englisch (EN)
+		</label>
+		<label>
+			<input type=radio bind:group={projektSprache} value="IT"/>
+			Italienisch (IT)
+		</label>
+	</div>
+	<div slot="actions">
+		<Button text on:click={() => projektSpracheDialog=false}>
+			Ok
+		</Button>
+	</div>
+</Dialog>
 
 <style>
 	h2 {

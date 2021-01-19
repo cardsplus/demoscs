@@ -2,6 +2,7 @@ package esy.api.plan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.api.team.NutzerValue;
+import esy.api.team.Sprache;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
 import lombok.Getter;
@@ -35,6 +36,15 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     @Getter
     @JsonProperty
     private boolean aktiv;
+
+    /**
+     * Projektsprache.
+     */
+    @Column(name = "sprache")
+    @Enumerated(EnumType.ORDINAL)
+    @Getter
+    @JsonProperty
+    private Sprache sprache;
 
     /**
      * Projektbesitzer.
@@ -82,6 +92,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         super();
         this.name = "";
         this.aktiv = true;
+        this.sprache = Sprache.DE;
         this.besitzer = null;
         this.allMitglied = new LinkedHashSet<>();
         this.allAufgabe = new LinkedHashSet<>();
@@ -96,6 +107,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         super(version, dataId);
         this.name = "";
         this.aktiv = true;
+        this.sprache = Sprache.DE;
         this.besitzer = null;
         this.allMitglied = new LinkedHashSet<>();
         this.allAufgabe = new LinkedHashSet<>();
@@ -116,6 +128,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         }
         return this.name.equals(that.name) &&
                 this.aktiv == that.aktiv &&
+                this.sprache.equals(that.sprache) &&
                 Objects.equals(this.besitzer, that.besitzer) &&
                 this.allMitglied.equals(that.allMitglied) &&
                 this.allAufgabe.equals(that.allAufgabe);
@@ -137,6 +150,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         final ProjektValue value = new ProjektValue(getVersion(), dataId);
         value.name = this.name;
         value.aktiv = this.aktiv;
+        value.sprache = this.sprache;
         value.besitzer = this.besitzer;
         value.allMitglied = this.allMitglied;
         value.allAufgabe = this.allAufgabe;
@@ -150,6 +164,11 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
 
     public ProjektValue setAktiv(final boolean aktiv) {
         this.aktiv = aktiv;
+        return this;
+    }
+
+    public ProjektValue setSprache(@NonNull final Sprache sprache) {
+        this.sprache = sprache;
         return this;
     }
 

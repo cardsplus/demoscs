@@ -129,23 +129,22 @@ public class AufgabeValueTest {
 		assertTrue(value.isEqual(AufgabeValue.parseJson(json)));
 	}
 
-	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
-	public void jsonAktiv(final boolean aktiv) {
+	@Test
+	public void jsonAktiv() {
 		final String text = "Aufgabe A";
 		final String json = "{" +
 				"\"text\": \"" + text + "\"," +
-				"\"aktiv\": \"" + aktiv + "\"" +
+				"\"aktiv\": \"false\"" +
 				"}";
 		final AufgabeValue value = AufgabeValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(text, value.getText());
-		assertEquals(aktiv, value.isAktiv());
+		assertFalse(value.isAktiv());
 
-		value.setAktiv(!aktiv);
+		value.setAktiv(true);
 		assertFalse(value.isEqual(AufgabeValue.parseJson(json)));
 
-		value.setAktiv(aktiv);
+		value.setAktiv(false);
 		assertTrue(value.isEqual(AufgabeValue.parseJson(json)));
 	}
 }

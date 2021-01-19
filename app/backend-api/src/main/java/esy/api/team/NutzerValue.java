@@ -44,18 +44,19 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     private boolean aktiv;
 
     /**
-     * Rollen, die ein Nutzer hat.
+     * Sprachen, die ein Nutzer beherrscht.
      */
     @ElementCollection(
             fetch = FetchType.EAGER)
     @CollectionTable(
-            name = "nutzer_rolle",
+            name = "nutzer_sprache",
             joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "rolle")
+    @Column(name = "sprache")
+    @Enumerated(EnumType.ORDINAL)
     @OrderBy
     @Getter
     @JsonProperty
-    private Set<NutzerRolle> allRolle;
+    private Set<Sprache> allSprache;
 
     /**
      * Erzeugt eine Instanz mit Standardwerten. Die
@@ -67,7 +68,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         this.mail = "";
         this.name = "";
         this.aktiv = true;
-        this.allRolle = new TreeSet<>(Set.of(NutzerRolle.BESUCHER));
+        this.allSprache = new TreeSet<>(Set.of(Sprache.DE));
     }
 
     /**
@@ -80,7 +81,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         this.mail = "";
         this.name = "";
         this.aktiv = true;
-        this.allRolle = new TreeSet<>(Set.of(NutzerRolle.BESUCHER));
+        this.allSprache = new TreeSet<>(Set.of(Sprache.DE));
     }
 
     @Override
@@ -99,7 +100,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         return this.mail.equals(that.mail) &&
                 this.name.equals(that.name) &&
                 this.aktiv == that.aktiv &&
-                this.allRolle.equals(that.allRolle) ;
+                this.allSprache.equals(that.allSprache) ;
     }
 
     @Override
@@ -124,7 +125,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         value.mail = this.mail;
         value.name = this.name;
         value.aktiv = this.aktiv;
-        value.allRolle = this.allRolle;
+        value.allSprache = this.allSprache;
         return value;
     }
 

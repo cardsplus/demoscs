@@ -1,8 +1,8 @@
 package esy.app.team;
 
 import esy.api.team.NutzerValue;
-import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
@@ -26,5 +26,5 @@ public interface NutzerValueRepository extends JpaRepository<NutzerValue, UUID> 
      * @param mail unique e-mail address
      * @return persisted value or nothing
      */
-    Optional<NutzerValue> findByMail(@NonNull final String mail);
+    Optional<NutzerValue> findByMail(@Param("mail") String mail);
 }
