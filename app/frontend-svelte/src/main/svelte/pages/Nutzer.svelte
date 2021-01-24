@@ -164,28 +164,23 @@
 			</thead>
 			<tbody>
 				{#each allNutzerFiltered as nutzer, i}
-				<tr class:bg-gray-50={i === nutzerIndexOf}>
-					<td title={nutzer.dataId}
-						class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
+				<tr on:click|preventDefault={e => nutzerIndexOf = i}
+					title={nutzer.dataId}
+					class:bg-gray-50={i === nutzerIndexOf}>
+					<td class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
 						<span>{i + 1}</span>
 					</td>
 					<td title={nutzer.dataId}
 						class="px-6 py-3 border-b-2 border-gray-300 text-left w-1/3">
-						<span>
-							<a href on:click|preventDefault={e => nutzerIndexOf = i}>{nutzer.name}</a>							
-						</span>
+						<span>{nutzer.name}</span>
 					</td>
-					<td title={nutzer.dataId}
-						class="px-6 py-3 border-b-2 border-gray-300 text-left w-full text-sm">
-						<span>
-							<a href on:click|preventDefault={e => nutzerIndexOf = i}>{nutzer.mail}</a>							
-						</span>
+					<td class="px-6 py-3 border-b-2 border-gray-300 text-left w-full text-sm">
+						<span>{nutzer.mail}</span>
 					</td>
 				</tr>
 				{:else}
 				<tr>
-					<td colspan="3"
-						class="px-6 py-3 text-center w-1">
+					<td class="px-6 py-3 text-center w-1" colspan="3">
 						Keine Nutzer
 					</td>
 				</tr>

@@ -148,22 +148,19 @@
 			</thead>
 			<tbody>
 				{#each allProjektFiltered as projekt, i}
-				<tr class:bg-gray-50={i === projektIndexOf}>
-					<td title={projekt.dataId}
-						class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
+				<tr  on:click|preventDefault={e => projektIndexOf = i}
+					title={projekt.dataId}
+					class:bg-gray-50={i === projektIndexOf}>
+					<td class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
 						<span>{i + 1}</span>
 					</td>
-					<td title={projekt.dataId}
-						class="px-6 py-3 border-b-2 border-gray-300 text-left w-full">
-						<span>
-							<a href on:click|preventDefault={e => projektIndexOf = i}>{projekt.name}</a>							
-						</span>
+					<td class="px-6 py-3 border-b-2 border-gray-300 text-left w-full">
+						<span>{projekt.name}</span>
 					</td>
 				</tr>
 				{:else}
 				<tr>
-					<td colspan="2"
-						class="px-6 py-3 text-center w-1">
+					<td class="px-6 py-3 text-center w-1" colspan="2">
 						Keine Projekte
 					</td>
 				</tr>				
