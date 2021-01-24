@@ -35,7 +35,7 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird `spring-kafka` als
 
 [plantuml,model,png]
 ----
-!pragma graphviz_dot jdot
+!pragma graphviz_dot smetana
 hide members
 show attributes
 package "info" {
