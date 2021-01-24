@@ -1,7 +1,7 @@
 package esy.app.plan;
 
-import esy.api.team.NutzerValue;
 import esy.api.plan.ProjektValue;
+import esy.api.team.NutzerValue;
 import esy.app.team.NutzerValueRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -375,9 +374,9 @@ public class ProjektValueRestApiTest {
         final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final ProjektValue projekt0 = projektValueRepository.findById(UUID.fromString(uuid))
+        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
-        assertNull(projekt0.getBesitzer());
+        assertNull(projekt.getBesitzer());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
         mockMvc.perform(put("/api/projekt/" + uuid + "/besitzer")
                 .content("/api/nutzer/" + nutzer.getDataId())
@@ -386,41 +385,35 @@ public class ProjektValueRestApiTest {
                 .andDo(print())
                 .andExpect(status()
                         .isNoContent());
-        final ProjektValue projekt1 = projektValueRepository.findById(UUID.fromString(uuid))
-                .orElseThrow();
-        assertEquals(nutzer.getDataId(), projekt1.getBesitzer().getDataId());
     }
 
     @Test
     @Order(36)
-    void deleteApiProjektBesitzer() throws Exception {
+    void deleteApiProjektBesitzerConflict() throws Exception {
         final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final ProjektValue projekt0 = projektValueRepository.findById(UUID.fromString(uuid))
+        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
-        assertEquals(nutzer.getDataId(), projekt0.getBesitzer().getDataId());
+        assertTrue(nutzer.isEqual(projekt.getBesitzer()));
         // https://github.com/spring-projects/spring-data-rest/issues/1426
         mockMvc.perform(delete("/api/projekt/" + uuid + "/besitzer"))
                 .andDo(print())
                 .andExpect(status()
-                        .isNoContent());
-        final ProjektValue projekt1 = projektValueRepository.findById(UUID.fromString(uuid))
-                .orElseThrow();
-        assertNull(projekt1.getBesitzer());
+                        .isConflict());
     }
 
     @Test
     @Order(37)
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     @Rollback(false)
     void putApiProjektMitglied() throws Exception {
         final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final ProjektValue projekt0 = projektValueRepository.findById(UUID.fromString(uuid))
+        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
-        assertEquals(0, projekt0.getAllMitglied().size());
+        assertEquals(0, projekt.getAllMitglied().size());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
         mockMvc.perform(put("/api/projekt/" + uuid + "/allMitglied")
                 .content("/api/nutzer/" + nutzer.getDataId())
@@ -429,26 +422,20 @@ public class ProjektValueRestApiTest {
                 .andDo(print())
                 .andExpect(status()
                         .isNoContent());
-        final ProjektValue projekt1 = projektValueRepository.findById(UUID.fromString(uuid))
-                .orElseThrow();
-        assertEquals(1, projekt1.getAllMitglied().size());
-        assertEquals(1, projekt1.getAllMitglied().stream()
-                .filter(e -> nutzer.getDataId().equals(e.getDataId()))
-                .count());
     }
 
     @Test
     @Order(38)
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     @Rollback(false)
     void deleteApiProjektMitglied() throws Exception {
         final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final ProjektValue projekt0 = projektValueRepository.findById(UUID.fromString(uuid))
+        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
-        assertEquals(1, projekt0.getAllMitglied().size());
-        assertEquals(1, projekt0.getAllMitglied().stream()
+        assertEquals(1, projekt.getAllMitglied().size());
+        assertEquals(1, projekt.getAllMitglied().stream()
                 .filter(e -> nutzer.getDataId().equals(e.getDataId()))
                 .count());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
@@ -456,18 +443,19 @@ public class ProjektValueRestApiTest {
                 .andDo(print())
                 .andExpect(status()
                         .isNoContent());
-        final ProjektValue projekt1 = projektValueRepository.findById(UUID.fromString(uuid))
-                .orElseThrow();
-        assertEquals(0, projekt1.getAllMitglied().size());
     }
 
     @Test
     @Order(40)
+    @Transactional
+    @Rollback(false)
     void getApiProjektById() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String name = "Projekt C";
-        assertTrue(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
+                .orElseThrow();
+        assertNotNull(projekt.getBesitzer());
+        assertEquals(0, projekt.getAllMitglied().size());
         mockMvc.perform(get("/api/projekt/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -478,7 +466,7 @@ public class ProjektValueRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"7\""))
+                        .string("ETag", "\"6\""))
                 .andExpect(jsonPath("$.dataId")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
@@ -503,9 +491,14 @@ public class ProjektValueRestApiTest {
 
     @Test
     @Order(42)
+    @Transactional
+    @Rollback(false)
     void getApiProjektByName() throws Exception {
         final String name = "Projekt C";
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        final ProjektValue projekt = projektValueRepository.findByName(name)
+                .orElseThrow();
+        assertNotNull(projekt.getBesitzer());
+        assertEquals(0, projekt.getAllMitglied().size());
         mockMvc.perform(get("/api/projekt/search/findByName")
                 .param("name", name)
                 .accept(MediaType.APPLICATION_JSON))
@@ -517,7 +510,7 @@ public class ProjektValueRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"7\""))
+                        .string("ETag", "\"6\""))
                 .andExpect(jsonPath("$.dataId")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.name")
