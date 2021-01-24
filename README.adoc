@@ -99,3 +99,12 @@ cd frontend-svelte
 npm install
 npm run dev
 ----
+
+[[_f6]]
+=== Dokumentation lokal bauen
+
+----
+./gradlew asciidoctor
+----
+
+Die Dokumentation befindet sich im `pages`-Order.
