@@ -601,17 +601,29 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/info/VersionRestApi.adoc - include::../../../../../../build/generated-snippets/get-version/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/version'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/info/VersionRestApi.adoc - include::../../../../../../build/generated-snippets/get-version/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/version</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/info/VersionRestApi.adoc - include::../../../../../../build/generated-snippets/get-version/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "major" : 2,
+  "minor" : 1
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -635,17 +647,56 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-nutzer/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer'</span> <span class="nt">-i</span> <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "mail" : "Mia.Musterfrau@a.de",
+  "name" : "Mia Musterfrau",
+  "aktiv" : "true",
+  "allSprache" : [ "EN" ]
+}'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-nutzer/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">POST</span> <span class="nn">/api/nutzer</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">112</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"mail"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Mia.Musterfrau@a.de"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Mia Musterfrau"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allSprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"EN"</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-nutzer/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "c6e8095d-b8ce-4a6f-a5c4-31745427bdfc",
+  "mail" : "Mia.Musterfrau@a.de",
+  "name" : "Mia Musterfrau",
+  "aktiv" : true,
+  "allSprache" : [ "DE", "EN" ],
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/nutzer/c6e8095d-b8ce-4a6f-a5c4-31745427bdfc"
+  }, {
+    "rel" : "nutzerValue",
+    "href" : "http://localhost:8080/api/nutzer/c6e8095d-b8ce-4a6f-a5c4-31745427bdfc"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -666,17 +717,56 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-nutzer/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "mail" : "Max.Mustermann@a.de",
+  "name" : "Max Mustermann",
+  "aktiv" : "true",
+  "allSprache" : [ "EN" ]
+}'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-nutzer/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">112</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"mail"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Max.Mustermann@a.de"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Max Mustermann"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allSprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"EN"</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-nutzer/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "a1111111-6ee8-4335-b12a-ef84794bd27a",
+  "mail" : "Max.Mustermann@a.de",
+  "name" : "Max Mustermann",
+  "aktiv" : true,
+  "allSprache" : [ "DE", "EN" ],
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
+  }, {
+    "rel" : "nutzerValue",
+    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -697,17 +787,72 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/nutzer</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/nutzer"
+  }, {
+    "rel" : "profile",
+    "href" : "http://localhost:8080/api/profile/nutzer"
+  }, {
+    "rel" : "search",
+    "href" : "http://localhost:8080/api/nutzer/search"
+  } ],
+  "content" : [ {
+    "dataId" : "2cebf688-1d59-4469-9d49-b360f9f9c8fc",
+    "mail" : "Bea.Musterfrau@a.de",
+    "name" : "Bea Musterfrau",
+    "aktiv" : true,
+    "allSprache" : [ "DE" ],
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/nutzer/2cebf688-1d59-4469-9d49-b360f9f9c8fc"
+    }, {
+      "rel" : "nutzerValue",
+      "href" : "http://localhost:8080/api/nutzer/2cebf688-1d59-4469-9d49-b360f9f9c8fc"
+    } ]
+  }, {
+    "dataId" : "c6e8095d-b8ce-4a6f-a5c4-31745427bdfc",
+    "mail" : "Mia.Musterfrau@a.de",
+    "name" : "Mia Musterfrau",
+    "aktiv" : true,
+    "allSprache" : [ "DE", "EN" ],
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/nutzer/c6e8095d-b8ce-4a6f-a5c4-31745427bdfc"
+    }, {
+      "rel" : "nutzerValue",
+      "href" : "http://localhost:8080/api/nutzer/c6e8095d-b8ce-4a6f-a5c4-31745427bdfc"
+    } ]
+  } ],
+  "page" : {
+    "size" : 20,
+    "totalElements" : 2,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -722,17 +867,40 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer-by-id/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer-by-id/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer-by-id/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "a1111111-6ee8-4335-b12a-ef84794bd27a",
+  "mail" : "Max.Mustermann@a.de",
+  "name" : "Max Mustermann",
+  "aktiv" : false,
+  "allSprache" : [ "DE" ],
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
+  }, {
+    "rel" : "nutzerValue",
+    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -750,17 +918,40 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer-by-mail/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer/search/findByMail?mail=Max.Mustermann%40a.de'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer-by-mail/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/nutzer/search/findByMail?mail=Max.Mustermann%40a.de</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-nutzer-by-mail/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "a1111111-6ee8-4335-b12a-ef84794bd27a",
+  "mail" : "Max.Mustermann@a.de",
+  "name" : "Max Mustermann",
+  "aktiv" : false,
+  "allSprache" : [ "DE" ],
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
+  }, {
+    "rel" : "nutzerValue",
+    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -778,13 +969,20 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/delete-api-nutzer/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span> <span class="nt">-i</span> <span class="nt">-X</span> DELETE <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc - include::../../../../../../build/generated-snippets/delete-api-nutzer/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">DELETE</span> <span class="nn">/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
 </div>
 <div class="literalblock">
 <div class="title">Response</div>
@@ -814,17 +1012,62 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-projekt/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt'</span> <span class="nt">-i</span> <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "name" : "Projekt A",
+  "aktiv" : "true",
+  "sprache" : "EN"
+}'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-projekt/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">POST</span> <span class="nn">/api/projekt</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">66</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Projekt A"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"EN"</span><span class="w">
+</span><span class="p">}</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-projekt/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "d04d8054-d530-4af6-a26d-b87798c7b4ef",
+  "name" : "Projekt A",
+  "aktiv" : true,
+  "sprache" : "EN",
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef"
+  }, {
+    "rel" : "projektValue",
+    "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef/allAufgabe"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef/allMitglied"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -845,17 +1088,62 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-projekt/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "name" : "Projekt C",
+  "aktiv" : "false",
+  "sprache" : "EN"
+}'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-projekt/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">67</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Projekt C"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"EN"</span><span class="w">
+</span><span class="p">}</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-projekt/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "name" : "Projekt C",
+  "aktiv" : false,
+  "sprache" : "EN",
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projektValue",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -876,13 +1164,26 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-projekt-besitzer/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: text/uri-list'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-projekt-besitzer/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/uri-list</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">48</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</code></pre>
+</div>
 </div>
 <div class="literalblock">
 <div class="title">Response</div>
@@ -903,13 +1204,26 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-projekt-mitglied/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: text/uri-list'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-projekt-mitglied/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/uri-list</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">48</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</code></pre>
+</div>
 </div>
 <div class="literalblock">
 <div class="title">Response</div>
@@ -930,17 +1244,88 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/projekt</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt"
+  }, {
+    "rel" : "profile",
+    "href" : "http://localhost:8080/api/profile/projekt"
+  }, {
+    "rel" : "search",
+    "href" : "http://localhost:8080/api/projekt/search"
+  } ],
+  "content" : [ {
+    "dataId" : "aa76b8c5-9fe6-4a88-b1a9-5f2a81544d65",
+    "name" : "Projekt B",
+    "aktiv" : true,
+    "sprache" : "DE",
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/projekt/aa76b8c5-9fe6-4a88-b1a9-5f2a81544d65"
+    }, {
+      "rel" : "projektValue",
+      "href" : "http://localhost:8080/api/projekt/aa76b8c5-9fe6-4a88-b1a9-5f2a81544d65"
+    }, {
+      "rel" : "allAufgabe",
+      "href" : "http://localhost:8080/api/projekt/aa76b8c5-9fe6-4a88-b1a9-5f2a81544d65/allAufgabe"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/aa76b8c5-9fe6-4a88-b1a9-5f2a81544d65/besitzer"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/aa76b8c5-9fe6-4a88-b1a9-5f2a81544d65/allMitglied"
+    } ]
+  }, {
+    "dataId" : "d04d8054-d530-4af6-a26d-b87798c7b4ef",
+    "name" : "Projekt A",
+    "aktiv" : true,
+    "sprache" : "EN",
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef"
+    }, {
+      "rel" : "projektValue",
+      "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef"
+    }, {
+      "rel" : "allAufgabe",
+      "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef/allAufgabe"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef/besitzer"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/d04d8054-d530-4af6-a26d-b87798c7b4ef/allMitglied"
+    } ]
+  } ],
+  "page" : {
+    "size" : 20,
+    "totalElements" : 2,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -955,17 +1340,48 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt-by-id/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt-by-id/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt-by-id/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "name" : "Projekt C",
+  "aktiv" : true,
+  "sprache" : "DE",
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projektValue",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -983,17 +1399,48 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt-by-name/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/search/findByName?name=Projekt+C'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt-by-name/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/projekt/search/findByName?name=Projekt+C</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-projekt-by-name/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "name" : "Projekt C",
+  "aktiv" : true,
+  "sprache" : "DE",
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projektValue",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1011,13 +1458,20 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/delete-api-projekt/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> DELETE <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc - include::../../../../../../build/generated-snippets/delete-api-projekt/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">DELETE</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
 </div>
 <div class="literalblock">
 <div class="title">Response</div>
@@ -1047,17 +1501,55 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-aufgabe/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe'</span> <span class="nt">-i</span> <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "text" : "Aufgabe A",
+  "aktiv" : "true",
+  "projekt" : "/api/projekt/a1111111-5cc7-3115-a010-de73703ac17f"
+}'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-aufgabe/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">POST</span> <span class="nn">/api/aufgabe</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">113</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"text"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Aufgabe A"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"projekt"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/projekt/a1111111-5cc7-3115-a010-de73703ac17f"</span><span class="w">
+</span><span class="p">}</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/post-api-aufgabe/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "54a70858-59eb-4cd3-a368-ac1a12d83154",
+  "text" : "Aufgabe A",
+  "aktiv" : true,
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/aufgabe/54a70858-59eb-4cd3-a368-ac1a12d83154"
+  }, {
+    "rel" : "aufgabeValue",
+    "href" : "http://localhost:8080/api/aufgabe/54a70858-59eb-4cd3-a368-ac1a12d83154"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/aufgabe/54a70858-59eb-4cd3-a368-ac1a12d83154/projekt"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1078,17 +1570,55 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-aufgabe/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "text" : "Aufgabe C",
+  "aktiv" : "true",
+  "projekt" : "/api/projekt/a1111111-5cc7-3115-a010-de73703ac17f"
+}'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-aufgabe/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">113</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"text"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Aufgabe C"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"projekt"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/projekt/a1111111-5cc7-3115-a010-de73703ac17f"</span><span class="w">
+</span><span class="p">}</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-aufgabe/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "text" : "Aufgabe C",
+  "aktiv" : true,
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "aufgabeValue",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140/projekt"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1109,13 +1639,26 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-aufgabe-projekt/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140/projekt'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: text/uri-list'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'/api/projekt/b2222222-5cc7-3115-a010-de73703ac17f'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/put-api-aufgabe-projekt/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140/projekt</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/uri-list</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">49</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+/api/projekt/b2222222-5cc7-3115-a010-de73703ac17f</code></pre>
+</div>
 </div>
 <div class="literalblock">
 <div class="title">Response</div>
@@ -1136,17 +1679,89 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-aufgabe/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-aufgabe/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/aufgabe</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-aufgabe/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/aufgabe"
+  }, {
+    "rel" : "profile",
+    "href" : "http://localhost:8080/api/profile/aufgabe"
+  }, {
+    "rel" : "search",
+    "href" : "http://localhost:8080/api/aufgabe/search"
+  } ],
+  "content" : [ {
+    "dataId" : "1e50ab65-fddc-49a3-a68a-3222b1ce73a6",
+    "text" : "Aufgabe B",
+    "aktiv" : true,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/1e50ab65-fddc-49a3-a68a-3222b1ce73a6"
+    }, {
+      "rel" : "aufgabeValue",
+      "href" : "http://localhost:8080/api/aufgabe/1e50ab65-fddc-49a3-a68a-3222b1ce73a6"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/1e50ab65-fddc-49a3-a68a-3222b1ce73a6/projekt"
+    } ]
+  }, {
+    "dataId" : "54a70858-59eb-4cd3-a368-ac1a12d83154",
+    "text" : "Aufgabe A",
+    "aktiv" : true,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/54a70858-59eb-4cd3-a368-ac1a12d83154"
+    }, {
+      "rel" : "aufgabeValue",
+      "href" : "http://localhost:8080/api/aufgabe/54a70858-59eb-4cd3-a368-ac1a12d83154"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/54a70858-59eb-4cd3-a368-ac1a12d83154/projekt"
+    } ]
+  }, {
+    "dataId" : "821f4cac-fdda-42e4-bae2-464ed8030826",
+    "text" : "Aufgabe A",
+    "aktiv" : true,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/821f4cac-fdda-42e4-bae2-464ed8030826"
+    }, {
+      "rel" : "aufgabeValue",
+      "href" : "http://localhost:8080/api/aufgabe/821f4cac-fdda-42e4-bae2-464ed8030826"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/821f4cac-fdda-42e4-bae2-464ed8030826/projekt"
+    } ]
+  } ],
+  "page" : {
+    "size" : 20,
+    "totalElements" : 3,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1161,17 +1776,41 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-aufgabe-by-id/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-aufgabe-by-id/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Response</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/get-api-aufgabe-by-id/response-body.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "dataId" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "text" : "Aufgabe C",
+  "aktiv" : false,
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "aufgabeValue",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140/projekt"
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1189,13 +1828,18 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">CURL</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/delete-api-aufgabe/curl-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> DELETE</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">Request</div>
-<p>Unresolved directive in ../app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc - include::../../../../../../build/generated-snippets/delete-api-aufgabe/http-request.adoc[]</p>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">DELETE</span> <span class="nn">/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
 </div>
 <div class="literalblock">
 <div class="title">Response</div>
@@ -1262,7 +1906,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-01-24 13:11:02 UTC
+Last updated 2021-01-24 13:27:56 UTC
 </div>
 </div>
 <style>
