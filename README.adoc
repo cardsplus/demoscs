@@ -1,6 +1,6 @@
 :icons: font
 :experimental: true
-= Self-Contained System mit Spring-Boot
+= Self-Contained System mit Spring-Boot und Svelte-UI
 
 == Subprojekte
 
