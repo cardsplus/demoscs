@@ -147,7 +147,7 @@ asciidoctor {
   attributes 'imagesdir': 'images'
   sourceDir file('doc')
   sources {
-    include 'service.adoc'
+    include '*.adoc'
   }
   resources {
     from('doc') {

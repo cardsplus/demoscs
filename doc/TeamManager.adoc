@@ -1,0 +1,78 @@
+:projectDir: ..
+:icons: font
+= Service TeamManager
+
+== Überblick
+
+Der Dienst ist Teil eines _Self Contained Systems_.
+
+TIP: Siehe
+https://scs-architecture.org
+für mehr Informationen.
+
+Der Dienst basiert im Backend auf dem _Spring_-Framework.
+
+TIP: Siehe
+https://spring.io/projects
+für mehr Informationen.
+
+Der Dienst nutzt für das Frontend das _Svelte_-Framework.
+
+TIP: Siehe
+https://svelte.dev/
+für mehr Informationen.
+
+Der Dienst zeigt an einem nicht trivialen Beispiel den effektiven Einsatz des _Spring_-Frameworks und weiterer Projekte aus den Spring-Universum.
+
+== Modell
+
+Das Modell ist so gestaltet, dass die Daten in einer relationalen Datenbank dauerhaft gespeichert werden.
+Für die Speicherung in der Datenbank wird `spring-data-jpa` als Abstraktion eingesetzt.
+
+[plantuml,Team,png]
+----
+!pragma graphviz_dot smetana
+hide members
+show attributes
+package "team" {
+  class NutzerValue<EventValueBase> {
+    mail
+  }
+}
+----
+
+Optional kann jeder gespeicherte Datensatz auch als Datensatz in einem REST-API veröffentlicht werden.
+Für die Veröffentlichung der Daten in einem REST-API wird `spring-data-rest` als Abstraktion eingesetzt.
+
+Optional kann jeder gespeicherte Datensatz auch als Nachricht in einem Datenstrom veröffentlicht werden.
+Für die Veröffentlichung der Daten in einem Datenstrom wird `spring-kafka` als Abstraktion eingesetzt.
+
+== UI
+
+Der Dienst hat eine reaktive browser-basierte Benutzeroberfläche.
+
+== API
+
+include::{projectDir}/app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc[leveloffset=+2]
+
+== Konfiguration
+
+=== `endpoint.properties`
+
+Der Dienst hat eine zentrale Konfigurationsdatei für Endpunkte.
+Sie wird nur beim Start der Anwendung gelesen.
+
+[source,text]
+----
+include::{projectDir}/app/backend/src/main/resources/endpoint.properties[]
+----
+
+=== `database.properties`
+
+Der Dienst hat eine zentrale Konfigurationsdatei für die Datenbank.
+Sie wird nur beim Start der Anwendung gelesen.
+
+[source,text]
+----
+include::{projectDir}/app/backend/src/main/resources/database.properties[]
+----
