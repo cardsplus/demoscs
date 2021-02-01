@@ -5,11 +5,23 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="1" author="robert">
         <comment>AufgabeValue</comment>
-        <addColumn tableName="aufgabe">
+        <createTable tableName="aufgabe">
+            <column name="version" type="BIGINT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
             <column name="projekt_id" type="UUID">
                 <constraints nullable="false"/>
             </column>
-        </addColumn>
+            <column name="text" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="aktiv" type="BOOLEAN" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
         <addForeignKeyConstraint
                 constraintName="fk_aufgabe_projekt_id"
                 baseTableName="aufgabe"
