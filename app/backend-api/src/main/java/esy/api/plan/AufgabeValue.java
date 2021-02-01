@@ -40,7 +40,9 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
             fetch = FetchType.EAGER,
             optional = false
     )
-    @JoinColumn(name = "projekt_id", referencedColumnName = "id")
+    @JoinColumn(
+            name = "projekt_id",
+            referencedColumnName = "id")
     @Getter
     @JsonProperty
     private ProjektValue projekt;
@@ -62,8 +64,8 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
      * Instanz ist nicht gültig, d.h. der Aufruf von
      * {@link #verify()} ist nicht erfolgreich.
      */
-    public AufgabeValue(@NonNull final Long version, @NonNull final UUID dataId) {
-        super(version, dataId);
+    public AufgabeValue(@NonNull final Long version, @NonNull final UUID id) {
+        super(version, id);
         this.text = "";
         this.aktiv = true;
         this.projekt = null;
@@ -96,11 +98,11 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     }
 
     @Override
-    public AufgabeValue withDataId(@NonNull final UUID dataId) {
-        if (Objects.equals(getDataId(), dataId)) {
+    public AufgabeValue withId(@NonNull final UUID id) {
+        if (Objects.equals(getId(), id)) {
             return this;
         }
-        final AufgabeValue value = new AufgabeValue(getVersion(), dataId);
+        final AufgabeValue value = new AufgabeValue(getVersion(), id);
         value.text = this.text;
         value.aktiv = this.aktiv;
         value.projekt = this.projekt;

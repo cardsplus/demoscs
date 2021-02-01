@@ -31,5 +31,4 @@ public class ProjektValueRestController extends JsonJpaRestControllerBase<Projek
         }
         return Optional.empty();
     }
-
 }

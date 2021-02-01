@@ -74,7 +74,7 @@
 		createValue(projektUrl, {
 			name: projektName, 
 			aktiv: projektAktiv,
-			sparche: projektSprache
+			sprache: projektSprache
 		})
         .then(res => res.json())
         .then(json => {
@@ -91,7 +91,7 @@
 
 	$: disableUpdate = !projektName || projektIndexOf === undefined;
 	function update() {
-		updateValue(projektUrl + '/' + projektSelected.dataId, {
+		updateValue(projektUrl + '/' + projektSelected.id, {
 			name: projektName, 
 			aktiv: projektAktiv,
 			sprache: projektSprache
@@ -109,7 +109,7 @@
 	}
 	function remove() {
 		if (!confirm("Projekt '" + projektName + "' wirklich löschen?")) return;
-		removeValue(projektUrl + '/' + projektSelected.dataId)
+		removeValue(projektUrl + '/' + projektSelected.id)
         .then(res => {
 			filterPrefix = '';
 			const i = allProjekt.indexOf(projektSelected);
@@ -149,7 +149,7 @@
 			<tbody>
 				{#each allProjektFiltered as projekt, i}
 				<tr  on:click|preventDefault={e => projektIndexOf = i}
-					title={projekt.dataId}
+					title={projekt.id}
 					class:bg-gray-50={i === projektIndexOf}>
 					<td class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
 						<span>{i + 1}</span>

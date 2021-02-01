@@ -33,7 +33,7 @@
     $: if (projektSelected) reload();
 
     function reload() {
-        loadAllValue(projektUrl + "/" + projektSelected.dataId + "/allAufgabe")
+        loadAllValue(projektUrl + "/" + projektSelected.id + "/allAufgabe")
         .then(res => res.json())
         .then(json => {
 			console.log(json);
@@ -53,7 +53,7 @@
         if (!aufgabeText) return;
 		createValue(aufgabeUrl, {
             text: aufgabeText,
-            projekt: projektUrl + "/" + projektSelected.dataId
+            projekt: projektUrl + "/" + projektSelected.id
 		})
         .then(res => res.json())
         .then(json => {
@@ -68,7 +68,7 @@
     };
 
     function update(aufgabe) {
-        updateValue(aufgabeUrl + '/' + aufgabe.dataId, aufgabe)
+        updateValue(aufgabeUrl + '/' + aufgabe.id, aufgabe)
         .then(res => res.json())
         .then(json => {
             console.log(json);
@@ -83,7 +83,7 @@
 
     function remove(aufgabe) {
 		if (!confirm("Aufgabe '" + aufgabe.text + "' wirklich löschen?")) return;
-		removeValue(aufgabeUrl + '/' + aufgabe.dataId)
+		removeValue(aufgabeUrl + '/' + aufgabe.id)
         .then(res => {
 			const i = allAufgabe.indexOf(aufgabe);
 			allAufgabe = [...allAufgabe.slice(0, i), ...allAufgabe.slice(i + 1)];

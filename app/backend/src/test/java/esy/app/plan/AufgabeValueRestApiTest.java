@@ -126,7 +126,7 @@ public class AufgabeValueRestApiTest {
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+                        "\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -139,7 +139,7 @@ public class AufgabeValueRestApiTest {
                         .exists("Vary"))
                 .andExpect(header()
                         .string("ETag", "\"0\""))
-                .andExpect(jsonPath("$.dataId")
+                .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.text")
                         .value(text))
@@ -163,7 +163,7 @@ public class AufgabeValueRestApiTest {
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+                        "\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -176,7 +176,7 @@ public class AufgabeValueRestApiTest {
                         .exists("Vary"))
                 .andExpect(header()
                         .string("ETag", "\"0\""))
-                .andExpect(jsonPath("$.dataId")
+                .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.text")
                         .value(text))
@@ -199,7 +199,7 @@ public class AufgabeValueRestApiTest {
         mockMvc.perform(post("/api/aufgabe")
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
-                        "\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+                        "\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -212,7 +212,7 @@ public class AufgabeValueRestApiTest {
                         .exists("Vary"))
                 .andExpect(header()
                         .string("ETag", "\"0\""))
-                .andExpect(jsonPath("$.dataId")
+                .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.text")
                         .value(text))
@@ -235,7 +235,7 @@ public class AufgabeValueRestApiTest {
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+                        "\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -248,7 +248,7 @@ public class AufgabeValueRestApiTest {
                         .exists("Vary"))
                 .andExpect(header()
                         .string("ETag", "\"0\""))
-                .andExpect(jsonPath("$.dataId")
+                .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.text")
                         .value(text))
@@ -269,7 +269,7 @@ public class AufgabeValueRestApiTest {
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+                        "\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -282,7 +282,7 @@ public class AufgabeValueRestApiTest {
                         .exists("Vary"))
                 .andExpect(header()
                         .string("ETag", "\"0\""))
-                .andExpect(jsonPath("$.dataId")
+                .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.text")
                         .value(text))
@@ -301,7 +301,7 @@ public class AufgabeValueRestApiTest {
         mockMvc.perform(put("/api/aufgabe/" + uuid)
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
-                        "\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+                        "\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -314,7 +314,7 @@ public class AufgabeValueRestApiTest {
                         .exists("Vary"))
                 .andExpect(header()
                         .string("ETag", "\"0\""))
-                .andExpect(jsonPath("$.dataId")
+                .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.text")
                         .value(text))
@@ -334,7 +334,7 @@ public class AufgabeValueRestApiTest {
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
                         "\"aktiv\": \"false\"," +
-                        "\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+                        "\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -347,7 +347,7 @@ public class AufgabeValueRestApiTest {
                         .exists("Vary"))
                 .andExpect(header()
                         .string("ETag", "\"1\""))
-                .andExpect(jsonPath("$.dataId")
+                .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.text")
                         .value(text))
@@ -363,10 +363,10 @@ public class AufgabeValueRestApiTest {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final AufgabeValue aufgabe0 = aufgabeValueRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
-        assertNotEquals(projekt.getDataId(), aufgabe0.getProjekt().getDataId());
+        assertNotEquals(projekt.getId(), aufgabe0.getProjekt().getId());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
         mockMvc.perform(put("/api/aufgabe/" + uuid + "/projekt")
-                .content("/api/projekt/" + projekt.getDataId())
+                .content("/api/projekt/" + projekt.getId())
                 .contentType(MediaType.parseMediaType("text/uri-list"))
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -374,7 +374,7 @@ public class AufgabeValueRestApiTest {
                         .isNoContent());
         final AufgabeValue aufgabe1 = aufgabeValueRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
-        assertEquals(projekt.getDataId(), aufgabe1.getProjekt().getDataId());
+        assertEquals(projekt.getId(), aufgabe1.getProjekt().getId());
     }
 
     @Test
@@ -385,7 +385,7 @@ public class AufgabeValueRestApiTest {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final AufgabeValue aufgabe0 = aufgabeValueRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
-        assertEquals(projekt.getDataId(), aufgabe0.getProjekt().getDataId());
+        assertEquals(projekt.getId(), aufgabe0.getProjekt().getId());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
         mockMvc.perform(delete("/api/aufgabe/" + uuid + "/projekt"))
                 .andDo(print())
@@ -393,7 +393,7 @@ public class AufgabeValueRestApiTest {
                         .isConflict());
         final AufgabeValue aufgabe1 = aufgabeValueRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
-        assertEquals(projekt.getDataId(), aufgabe1.getProjekt().getDataId());
+        assertEquals(projekt.getId(), aufgabe1.getProjekt().getId());
     }
 
     @Test
@@ -413,7 +413,7 @@ public class AufgabeValueRestApiTest {
                         .exists("Vary"))
                 .andExpect(header()
                         .string("ETag", "\"2\""))
-                .andExpect(jsonPath("$.dataId")
+                .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.text")
                         .value(text))

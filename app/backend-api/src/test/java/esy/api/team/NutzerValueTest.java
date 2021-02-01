@@ -15,7 +15,7 @@ public class NutzerValueTest {
 		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"dataId\": \"" + uuid + "\"," +
+				"\"id\": \"" + uuid + "\"," +
 				"\"mail\": \"" + name + "@a.de\"," +
 				"\"name\":\"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
@@ -56,12 +56,12 @@ public class NutzerValueTest {
 	}
 
 	@Test
-	void withDataId() {
+	void withId() {
 		final String name = "Max.Mustermann";
 		final NutzerValue value0 = createWithName(name);
-		final NutzerValue value1 = value0.withDataId(value0.getDataId());
+		final NutzerValue value1 = value0.withId(value0.getId());
 		assertSame(value0, value1);
-		final NutzerValue value2 = value0.withDataId(UUID.randomUUID());
+		final NutzerValue value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
 	}
@@ -77,7 +77,7 @@ public class NutzerValueTest {
 		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"dataId\": \"" + uuid + "\"," +
+				"\"id\": \"" + uuid + "\"," +
 				"\"mail\": \"" + name + "@a.de\"," +
 				"\"name\": \"" + name + "\"," +
 				"\"" + key + "\": \"" + name + "\"" +
@@ -85,7 +85,7 @@ public class NutzerValueTest {
 		final NutzerValue value = NutzerValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
-		assertNotNull(value.getDataId());
+		assertNotNull(value.getId());
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
 		assertTrue(value.isAktiv());
@@ -99,7 +99,7 @@ public class NutzerValueTest {
 		final NutzerValue value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
-		assertNotNull(value.getDataId());
+		assertNotNull(value.getId());
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
 		assertFalse(value.isAktiv());

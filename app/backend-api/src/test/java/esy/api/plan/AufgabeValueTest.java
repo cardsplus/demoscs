@@ -14,7 +14,7 @@ public class AufgabeValueTest {
 		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"dataId\": \"" + uuid + "\"," +
+				"\"id\": \"" + uuid + "\"," +
 				"\"text\": \"" + name + "\"," +
 				"\"aktiv\": \"false\"" +
 				"}";
@@ -53,12 +53,12 @@ public class AufgabeValueTest {
 	}
 
 	@Test
-	void withDataId() {
+	void withId() {
 		final String name = "Team A";
 		final AufgabeValue value0 = createWithName(name);
-		final AufgabeValue value1 = value0.withDataId(value0.getDataId());
+		final AufgabeValue value1 = value0.withId(value0.getId());
 		assertSame(value0, value1);
-		final AufgabeValue value2 = value0.withDataId(UUID.randomUUID());
+		final AufgabeValue value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
 	}
@@ -74,14 +74,14 @@ public class AufgabeValueTest {
 		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"dataId\": \"" + uuid + "\"," +
+				"\"id\": \"" + uuid + "\"," +
 				"\"text\": \"" + text + "\"," +
 				"\"" + key + "\": \"" + text + "\"" +
 				"}";
 		final AufgabeValue value = AufgabeValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
-		assertNotNull(value.getDataId());
+		assertNotNull(value.getId());
 		assertEquals(text, value.getText());
 		assertTrue(value.isAktiv());
 	}
@@ -92,7 +92,7 @@ public class AufgabeValueTest {
 		final AufgabeValue value = createWithName(text);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
-		assertNotNull(value.getDataId());
+		assertNotNull(value.getId());
 		assertEquals(text, value.getText());
 		assertFalse(value.isAktiv());
 	}

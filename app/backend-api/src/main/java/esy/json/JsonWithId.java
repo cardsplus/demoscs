@@ -4,7 +4,7 @@ import lombok.NonNull;
 
 import java.util.UUID;
 
-public interface JsonWithDataId<S> {
+public interface JsonWithId<S> {
 
     /**
      * Erzeugt eine neues Instanz mit neuer UUID. Alle
@@ -13,8 +13,8 @@ public interface JsonWithDataId<S> {
      * d.h. keine neuen Collections mit den gleichen
      * Elementen!
      *
-     * @param dataId Neue UUID
+     * @param id Neue UUID
      * @return Neue Instanz
      */
-    S withDataId(@NonNull final UUID dataId);
+    S withId(@NonNull final UUID id);
 }

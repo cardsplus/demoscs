@@ -52,7 +52,9 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     @ManyToOne(
             fetch = FetchType.EAGER,
             optional = true)
-    @JoinColumn(name = "besitzer_id", referencedColumnName = "id")
+    @JoinColumn(
+            name = "besitzer_id",
+            referencedColumnName = "id")
     @Getter
     @JsonProperty
     private NutzerValue besitzer;
@@ -64,8 +66,12 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
             fetch = FetchType.LAZY)
     @JoinTable(
             name = "projekt_mitglied",
-            joinColumns = @JoinColumn(name = "projekt_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "nutzer_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(
+                    name = "projekt_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "nutzer_id",
+                    referencedColumnName = "id"))
     @Getter
     @JsonProperty
     private Set<NutzerValue> allMitglied;
@@ -103,8 +109,8 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
      * Instanz ist nicht gültig, d.h. der Aufruf von
      * {@link #verify()} ist nicht erfolgreich.
      */
-    public ProjektValue(@NonNull final Long version, @NonNull final UUID dataId) {
-        super(version, dataId);
+    public ProjektValue(@NonNull final Long version, @NonNull final UUID id) {
+        super(version, id);
         this.name = "";
         this.aktiv = true;
         this.sprache = Sprache.DE;
@@ -143,11 +149,11 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     }
 
     @Override
-    public ProjektValue withDataId(@NonNull final UUID dataId) {
-        if (Objects.equals(getDataId(), dataId)) {
+    public ProjektValue withId(@NonNull final UUID id) {
+        if (Objects.equals(getId(), id)) {
             return this;
         }
-        final ProjektValue value = new ProjektValue(getVersion(), dataId);
+        final ProjektValue value = new ProjektValue(getVersion(), id);
         value.name = this.name;
         value.aktiv = this.aktiv;
         value.sprache = this.sprache;

@@ -12,14 +12,14 @@ import java.util.Objects;
 import java.util.UUID;
 
 @MappedSuperclass
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "dataId")
-public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> implements JsonWithDataId<SELF> {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> implements JsonWithId<SELF> {
 
     /**
      * Aktuelle Version der Daten.
      */
     @Version
-    @Column(name = "version", nullable = false)
+    @Column(name = "version")
     @Getter
     @JsonProperty
     private final Long version;
@@ -28,15 +28,15 @@ public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> impleme
      * Eindeutige ID der Daten.
      */
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     @Getter
     @JsonProperty
-    private final UUID dataId;
+    private final UUID id;
 
     /**
      * {@code TRUE} zeigt an, dass die Daten in einer Datenbank
-     * dauerhaft gespeichert wurden. Das bedeutet, dass #dataId
-     * eine gültige ID und primärer Schlüssel des Datensatzes ist.
+     * dauerhaft gespeichert wurden. Das bedeutet, dass ein
+     * gültiger primärer Schlüssel existiert.
      */
     @Transient
     @JsonIgnore
@@ -44,13 +44,13 @@ public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> impleme
 
     protected JsonJpaValueBase() {
         this.version = 0L;
-        this.dataId = UUID.randomUUID();
+        this.id = UUID.randomUUID();
     }
 
     protected JsonJpaValueBase(@NonNull final Long version,
-                               @NonNull final UUID dataId) {
+                               @NonNull final UUID id) {
         this.version = version;
-        this.dataId = dataId;
+        this.id = id;
     }
 
     /**
@@ -66,7 +66,7 @@ public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> impleme
     public final int hashCode() {
         return Objects.hash(
                 this.version,
-                this.dataId);
+                this.id);
     }
 
     @Override
@@ -82,7 +82,7 @@ public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> impleme
         }
         final SELF that = (SELF) any;
         return Objects.equals(this.version, that.getVersion()) &&
-                Objects.equals(this.dataId, that.getDataId()) &&
+                Objects.equals(this.id, that.getId()) &&
                 this.isEqual(that);
     }
 
@@ -108,7 +108,7 @@ public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> impleme
      */
     @Override
     public String toString() {
-        return "version:" + version + ",id:" + dataId;
+        return "version:" + version + ",id:" + id;
     }
 
     @PrePersist

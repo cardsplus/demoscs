@@ -76,8 +76,8 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
      * Instanz ist nicht gültig, d.h. der Aufruf von
      * {@link #verify()} ist nicht erfolgreich.
      */
-    public NutzerValue(@NonNull final Long version, @NonNull final UUID dataId) {
-        super(version, dataId);
+    public NutzerValue(@NonNull final Long version, @NonNull final UUID id) {
+        super(version, id);
         this.mail = "";
         this.name = "";
         this.aktiv = true;
@@ -117,11 +117,11 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     }
 
     @Override
-    public NutzerValue withDataId(@NonNull final UUID dataId) {
-        if (Objects.equals(getDataId(), dataId)) {
+    public NutzerValue withId(@NonNull final UUID id) {
+        if (Objects.equals(getId(), id)) {
             return this;
         }
-        final NutzerValue value = new NutzerValue(getVersion(), dataId);
+        final NutzerValue value = new NutzerValue(getVersion(), id);
         value.mail = this.mail;
         value.name = this.name;
         value.aktiv = this.aktiv;

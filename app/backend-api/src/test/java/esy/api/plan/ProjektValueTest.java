@@ -16,7 +16,7 @@ public class ProjektValueTest {
 		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"dataId\": \"" + uuid + "\"," +
+				"\"id\": \"" + uuid + "\"," +
 				"\"name\": \"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
 				"\"sprache\": \"EN\"," +
@@ -59,12 +59,12 @@ public class ProjektValueTest {
 	}
 
 	@Test
-	void withDataId() {
+	void withId() {
 		final String name = "Projekt A";
 		final ProjektValue value0 = createWithName(name);
-		final ProjektValue value1 = value0.withDataId(value0.getDataId());
+		final ProjektValue value1 = value0.withId(value0.getId());
 		assertSame(value0, value1);
-		final ProjektValue value2 = value0.withDataId(UUID.randomUUID());
+		final ProjektValue value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
 	}
@@ -80,14 +80,14 @@ public class ProjektValueTest {
 		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"dataId\": \"" + uuid + "\"," +
+				"\"id\": \"" + uuid + "\"," +
 				"\"name\": \"" + name + "\"," +
 				"\"" + key + "\": \"" + name + "\"" +
 				"}";
 		final ProjektValue value = ProjektValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
-		assertNotNull(value.getDataId());
+		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
 		assertTrue(value.isAktiv());
 		assertNull(value.getBesitzer());
@@ -100,7 +100,7 @@ public class ProjektValueTest {
 		final ProjektValue value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
-		assertNotNull(value.getDataId());
+		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
 		assertFalse(value.isAktiv());
 		assertEquals(Sprache.EN, value.getSprache());
@@ -214,7 +214,7 @@ public class ProjektValueTest {
 		value.addMitglied(nutzer);
 		assertEquals(1, value.getAllMitglied().size());
 		assertEquals(1, value.getAllMitglied().stream()
-				.filter(e -> e.getDataId().equals(uuid))
+				.filter(e -> e.getId().equals(uuid))
 				.count());
 		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
 	}

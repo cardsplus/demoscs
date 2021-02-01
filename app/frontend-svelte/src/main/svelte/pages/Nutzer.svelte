@@ -99,7 +99,7 @@
 
 	$: disableUpdate = !nutzerMail || !nutzerName || nutzerIndexOf === undefined;
 	function update() {
-		updateValue(nutzerUrl + '/' + nutzerSelected.dataId, {
+		updateValue(nutzerUrl + '/' + nutzerSelected.id, {
 			mail: nutzerMail,
 			aktiv: nutzerAktiv,
 			name: nutzerName, 
@@ -118,7 +118,7 @@
 	}
 	function remove() {
 		if (!confirm("Nutzer '" + nutzerMail + "' wirklich löschen?")) return;
-		removeValue(nutzerUrl + '/' + nutzerSelected.dataId)
+		removeValue(nutzerUrl + '/' + nutzerSelected.id)
         .then(res => {
 			filterPrefix = '';
 			const i = allNutzer.indexOf(nutzerSelected);
@@ -165,12 +165,12 @@
 			<tbody>
 				{#each allNutzerFiltered as nutzer, i}
 				<tr on:click|preventDefault={e => nutzerIndexOf = i}
-					title={nutzer.dataId}
+					title={nutzer.id}
 					class:bg-gray-50={i === nutzerIndexOf}>
 					<td class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
 						<span>{i + 1}</span>
 					</td>
-					<td title={nutzer.dataId}
+					<td title={nutzer.id}
 						class="px-6 py-3 border-b-2 border-gray-300 text-left w-1/3">
 						<span>{nutzer.name}</span>
 					</td>

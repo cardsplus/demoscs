@@ -1,9 +1,9 @@
 package esy.app;
 
-import esy.api.team.Sprache;
-import esy.api.team.NutzerValue;
 import esy.api.plan.AufgabeValue;
 import esy.api.plan.ProjektValue;
+import esy.api.team.NutzerValue;
+import esy.api.team.Sprache;
 import esy.http.RestApiConnection;
 import esy.http.RestApiResult;
 import org.junit.jupiter.api.*;
@@ -138,7 +138,7 @@ public class BackendHsqlRunnerTest {
 				equalTo(HttpStatus.CREATED.value()));
 		final NutzerValue value0 = result0.toObject(NutzerValue.class);
 		assertEquals(1L, value0.getVersion());
-		assertNotNull(value0.getDataId());
+		assertNotNull(value0.getId());
 		assertEquals(mail, value0.getMail());
 		assertEquals(name, value0.getName());
 		assertFalse(value0.isAktiv());
@@ -160,11 +160,11 @@ public class BackendHsqlRunnerTest {
 		final List<NutzerValue> allValue2a = result2a.toCollection(NutzerValue.class);
 		assertEquals(1, allValue2a.size());
 		assertEquals(1, allValue2a.stream()
-				.filter(e -> e.getDataId().equals(value0.getDataId()))
+				.filter(e -> e.getId().equals(value0.getId()))
 				.count());
 
 		final RestApiResult result2b = RestApiConnection.with(
-				toBackendUrl("/api/nutzer/" + value0.getDataId()))
+				toBackendUrl("/api/nutzer/" + value0.getId()))
 				.get();
 		assertThat(result2b.getCode(),
 				equalTo(HttpStatus.OK.value()));
@@ -178,13 +178,13 @@ public class BackendHsqlRunnerTest {
 		assertTrue(value0.isEqual(result2c.toObject(NutzerValue.class)));
 
 		final RestApiResult result3a = RestApiConnection.with(
-				toBackendUrl("/api/nutzer/" + value0.getDataId()))
+				toBackendUrl("/api/nutzer/" + value0.getId()))
 				.delete();
 		assertThat(result3a.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
 		final RestApiResult result3b = RestApiConnection.with(
-				toBackendUrl("/api/nutzer/" + value0.getDataId()))
+				toBackendUrl("/api/nutzer/" + value0.getId()))
 				.delete();
 		assertThat(result3b.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
@@ -198,7 +198,7 @@ public class BackendHsqlRunnerTest {
 		assertEquals(0, allValue4a.size());
 
 		final RestApiResult result4b = RestApiConnection.with(
-				toBackendUrl("/api/nutzer/" + value0.getDataId()))
+				toBackendUrl("/api/nutzer/" + value0.getId()))
 				.get();
 		assertThat(result4b.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
@@ -228,7 +228,7 @@ public class BackendHsqlRunnerTest {
 				equalTo(HttpStatus.CREATED.value()));
 		final NutzerValue value0 = result0.toObject(NutzerValue.class);
 		assertEquals(1L, value0.getVersion());
-		assertEquals(uuid, value0.getDataId());
+		assertEquals(uuid, value0.getId());
 		assertEquals(mail, value0.getMail());
 		assertEquals(name, value0.getName());
 		assertFalse(value0.isAktiv());
@@ -245,7 +245,7 @@ public class BackendHsqlRunnerTest {
 				equalTo(HttpStatus.OK.value()));
 		final NutzerValue value1 = result1.toObject(NutzerValue.class);
 		assertEquals(2L, value1.getVersion());
-		assertEquals(uuid, value1.getDataId());
+		assertEquals(uuid, value1.getId());
 		assertEquals(mail, value1.getMail());
 		assertEquals(name, value1.getName());
 		assertTrue(value1.isAktiv());
@@ -258,7 +258,7 @@ public class BackendHsqlRunnerTest {
 		final List<NutzerValue> allValue2a = result2a.toCollection(NutzerValue.class);
 		assertEquals(1, allValue2a.size());
 		assertEquals(1, allValue2a.stream()
-				.filter(e -> e.getDataId().equals(uuid))
+				.filter(e -> e.getId().equals(uuid))
 				.count());
 
 		final RestApiResult result2b = RestApiConnection.with(
@@ -325,7 +325,7 @@ public class BackendHsqlRunnerTest {
 		assertThat(result0.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
 		final NutzerValue value0 = result0.toObject(NutzerValue.class);
-		assertEquals(uuid, value0.getDataId());
+		assertEquals(uuid, value0.getId());
 		assertEquals(name, value0.getName());
 		assertEquals(1, value0.getAllSprache().size());
 		assertTrue(value0.getAllSprache().contains(Sprache.DE));
@@ -339,7 +339,7 @@ public class BackendHsqlRunnerTest {
 			assertThat(result1.getCode(),
 					equalTo(HttpStatus.OK.value()));
 			final NutzerValue value1 = result1.toObject(NutzerValue.class);
-			assertEquals(uuid, value1.getDataId());
+			assertEquals(uuid, value1.getId());
 			assertEquals(name, value1.getName());
 			assertEquals(1, value0.getAllSprache().size());
 			assertTrue(value1.getAllSprache().contains(rolle));
@@ -353,7 +353,7 @@ public class BackendHsqlRunnerTest {
 		assertThat(result2.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final NutzerValue value2 = result2.toObject(NutzerValue.class);
-		assertEquals(uuid, value2.getDataId());
+		assertEquals(uuid, value2.getId());
 		assertEquals(name, value2.getName());
 		assertEquals(4, value2.getAllSprache().size());
 		assertTrue(value2.getAllSprache().contains(Sprache.DE));
@@ -369,7 +369,7 @@ public class BackendHsqlRunnerTest {
 		assertThat(result3.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final NutzerValue value3 = result3.toObject(NutzerValue.class);
-		assertEquals(uuid, value3.getDataId());
+		assertEquals(uuid, value3.getId());
 		assertEquals(name, value3.getName());
 		assertEquals(1, value3.getAllSprache().size());
 		assertTrue(value3.getAllSprache().contains(Sprache.DE));
@@ -420,14 +420,14 @@ public class BackendHsqlRunnerTest {
 				.post("{" +
 						"\"name\":\"" + name + "\"," +
 						"\"aktiv\": \"false\"," +
-						"\"besitzer\": \"/api/nutzer/" + nutzer.getDataId() + "\"," +
-						"\"allMitglied\": [\"/api/nutzer/" + nutzer.getDataId() + "\"]" +
+						"\"besitzer\": \"/api/nutzer/" + nutzer.getId() + "\"," +
+						"\"allMitglied\": [\"/api/nutzer/" + nutzer.getId() + "\"]" +
 						"}");
 		assertThat(result0.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
 		final ProjektValue value0 = result0.toObject(ProjektValue.class);
 		assertEquals(1L, value0.getVersion());
-		assertNotNull(value0.getDataId());
+		assertNotNull(value0.getId());
 		assertEquals(name, value0.getName());
 		assertFalse(value0.isAktiv());
 
@@ -447,11 +447,11 @@ public class BackendHsqlRunnerTest {
 		final List<ProjektValue> allValue2a = result2a.toCollection(ProjektValue.class);
 		assertEquals(1, allValue2a.size());
 		assertEquals(1, allValue2a.stream()
-				.filter(e -> value0.getDataId().equals(e.getDataId()))
+				.filter(e -> value0.getId().equals(e.getId()))
 				.count());
 
 		final RestApiResult result2b = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + value0.getDataId()))
+				toBackendUrl("/api/projekt/" + value0.getId()))
 				.get();
 		assertThat(result2b.getCode(),
 				equalTo(HttpStatus.OK.value()));
@@ -465,31 +465,31 @@ public class BackendHsqlRunnerTest {
 		assertTrue(value0.isEqual(result2c.toObject(ProjektValue.class)));
 
 		final RestApiResult result2d = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + value0.getDataId() + "/besitzer"))
+				toBackendUrl("/api/projekt/" + value0.getId() + "/besitzer"))
 				.get();
 		assertThat(result2d.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		assertTrue(nutzer.isEqual(result2d.toObject(NutzerValue.class)));
 
 		final RestApiResult result2e = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + value0.getDataId()) + "/allMitglied")
+				toBackendUrl("/api/projekt/" + value0.getId()) + "/allMitglied")
 				.get();
 		assertThat(result2e.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final List<NutzerValue> allValue2e = result2e.toCollection(NutzerValue.class);
 		assertEquals(1, allValue2e.size());
 		assertEquals(1, allValue2e.stream()
-				.filter(e -> nutzer.getDataId().equals(e.getDataId()))
+				.filter(e -> nutzer.getId().equals(e.getId()))
 				.count());
 
 		final RestApiResult result3a = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + value0.getDataId()))
+				toBackendUrl("/api/projekt/" + value0.getId()))
 				.delete();
 		assertThat(result3a.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
 		final RestApiResult result3b = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + value0.getDataId()))
+				toBackendUrl("/api/projekt/" + value0.getId()))
 				.delete();
 		assertThat(result3b.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
@@ -503,7 +503,7 @@ public class BackendHsqlRunnerTest {
 		assertEquals(0, allValue4a.size());
 
 		final RestApiResult result4b = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + value0.getDataId()))
+				toBackendUrl("/api/projekt/" + value0.getId()))
 				.get();
 		assertThat(result4b.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
@@ -540,7 +540,7 @@ public class BackendHsqlRunnerTest {
 				equalTo(HttpStatus.CREATED.value()));
 		final ProjektValue value0 = result0.toObject(ProjektValue.class);
 		assertEquals(0L, value0.getVersion());
-		assertEquals(uuid, value0.getDataId());
+		assertEquals(uuid, value0.getId());
 		assertEquals(name, value0.getName());
 		assertFalse(value0.isAktiv());
 
@@ -558,13 +558,13 @@ public class BackendHsqlRunnerTest {
 
 		final RestApiResult result1b = RestApiConnection.with(
 				toBackendUrl("/api/projekt/" + uuid + "/besitzer"))
-				.put(URI.create("/api/nutzer/" + nutzer.getDataId()));
+				.put(URI.create("/api/nutzer/" + nutzer.getId()));
 		assertThat(result1b.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
 		final RestApiResult result1c = RestApiConnection.with(
 				toBackendUrl("/api/projekt/" + uuid + "/allMitglied"))
-				.put(URI.create("/api/nutzer/" + nutzer.getDataId()));
+				.put(URI.create("/api/nutzer/" + nutzer.getId()));
 		assertThat(result1c.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
@@ -576,7 +576,7 @@ public class BackendHsqlRunnerTest {
 		final List<ProjektValue> allValue2a = result2a.toCollection(ProjektValue.class);
 		assertEquals(1, allValue2a.size());
 		assertEquals(1, allValue2a.stream()
-				.filter(e -> uuid.equals(e.getDataId()))
+				.filter(e -> uuid.equals(e.getId()))
 				.count());
 
 		final RestApiResult result2b = RestApiConnection.with(
@@ -608,7 +608,7 @@ public class BackendHsqlRunnerTest {
 		final List<NutzerValue> allValue2e = result2e.toCollection(NutzerValue.class);
 		assertEquals(1, allValue2e.size());
 		assertEquals(1, allValue2e.stream()
-				.filter(e -> nutzer.getDataId().equals(e.getDataId()))
+				.filter(e -> nutzer.getId().equals(e.getId()))
 				.count());
 
 		final RestApiResult result3a = RestApiConnection.with(
@@ -672,13 +672,13 @@ public class BackendHsqlRunnerTest {
 				.post("{" +
 						"\"text\":\"" + text + "\"," +
 						"\"aktiv\": \"false\"," +
-						"\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+						"\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
 						"}");
 		assertThat(result0.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
 		final AufgabeValue value0 = result0.toObject(AufgabeValue.class);
 		assertEquals(0L, value0.getVersion());
-		assertNotNull(value0.getDataId());
+		assertNotNull(value0.getId());
 		assertEquals(text, value0.getText());
 		assertFalse(value0.isAktiv());
 		assertNull(value0.getProjekt());
@@ -691,32 +691,32 @@ public class BackendHsqlRunnerTest {
 		final List<AufgabeValue> allValue1a = result1a.toCollection(AufgabeValue.class);
 		assertEquals(1, allValue1a.size());
 		assertEquals(1, allValue1a.stream()
-				.filter(e -> e.getDataId().equals(value0.getDataId()))
+				.filter(e -> e.getId().equals(value0.getId()))
 				.count());
 
 		final RestApiResult result1b = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value0.getDataId()))
+				toBackendUrl("/api/aufgabe/" + value0.getId()))
 				.get();
 		assertThat(result1b.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		assertTrue(value0.isEqual(result1b.toObject(AufgabeValue.class)));
 
 		final RestApiResult result1c = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value0.getDataId()) + "/projekt")
+				toBackendUrl("/api/aufgabe/" + value0.getId()) + "/projekt")
 				.get();
 		assertThat(result1c.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		assertTrue(projekt.isEqual(result1c.toObject(ProjektValue.class)));
 
 		final RestApiResult result1d = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId() + "/allAufgabe"))
+				toBackendUrl("/api/projekt/" + projekt.getId() + "/allAufgabe"))
 				.get();
 		assertThat(result1d.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final List<AufgabeValue> allValue1d = result1d.toCollection(AufgabeValue.class);
 		assertEquals(1, allValue1d.size());
 		assertEquals(1, allValue1d.stream()
-				.filter(e -> e.getDataId().equals(value0.getDataId()))
+				.filter(e -> e.getId().equals(value0.getId()))
 				.count());
 
 		final RestApiResult result2 = RestApiConnection.with(
@@ -724,13 +724,13 @@ public class BackendHsqlRunnerTest {
 				.post("{" +
 						"\"text\":\"" + text + "\"," +
 						"\"aktiv\": \"true\"," +
-						"\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+						"\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
 						"}");
 		assertThat(result2.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
 		final AufgabeValue value2 = result2.toObject(AufgabeValue.class);
 		assertEquals(0L, value2.getVersion());
-		assertNotNull(value2.getDataId());
+		assertNotNull(value2.getId());
 		assertEquals(text, value2.getText());
 		assertTrue(value2.isAktiv());
 		assertNull(value2.getProjekt());
@@ -743,48 +743,48 @@ public class BackendHsqlRunnerTest {
 		final List<AufgabeValue> allValue3a = result3a.toCollection(AufgabeValue.class);
 		assertEquals(2, allValue3a.size());
 		assertEquals(1, allValue3a.stream()
-				.filter(e -> e.getDataId().equals(value0.getDataId()))
+				.filter(e -> e.getId().equals(value0.getId()))
 				.count());
 		assertEquals(1, allValue3a.stream()
-				.filter(e -> e.getDataId().equals(value2.getDataId()))
+				.filter(e -> e.getId().equals(value2.getId()))
 				.count());
 
 		final RestApiResult result3b = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value2.getDataId()))
+				toBackendUrl("/api/aufgabe/" + value2.getId()))
 				.get();
 		assertThat(result3b.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		assertTrue(value2.isEqual(result3b.toObject(AufgabeValue.class)));
 
 		final RestApiResult result3c = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value2.getDataId()) + "/projekt")
+				toBackendUrl("/api/aufgabe/" + value2.getId()) + "/projekt")
 				.get();
 		assertThat(result3c.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		assertTrue(projekt.isEqual(result3c.toObject(ProjektValue.class)));
 
 		final RestApiResult result3d = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId() + "/allAufgabe"))
+				toBackendUrl("/api/projekt/" + projekt.getId() + "/allAufgabe"))
 				.get();
 		assertThat(result3d.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final List<AufgabeValue> allValue3d = result3d.toCollection(AufgabeValue.class);
 		assertEquals(2, allValue3d.size());
 		assertEquals(1, allValue3d.stream()
-				.filter(e -> e.getDataId().equals(value0.getDataId()))
+				.filter(e -> e.getId().equals(value0.getId()))
 				.count());
 		assertEquals(1, allValue3d.stream()
-				.filter(e -> e.getDataId().equals(value2.getDataId()))
+				.filter(e -> e.getId().equals(value2.getId()))
 				.count());
 
 		final RestApiResult result4a = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value0.getDataId()))
+				toBackendUrl("/api/aufgabe/" + value0.getId()))
 				.delete();
 		assertThat(result4a.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
 		final RestApiResult result4b = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value0.getDataId()))
+				toBackendUrl("/api/aufgabe/" + value0.getId()))
 				.delete();
 		assertThat(result4b.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
@@ -797,40 +797,40 @@ public class BackendHsqlRunnerTest {
 		final List<AufgabeValue> allValue5a = result5a.toCollection(AufgabeValue.class);
 		assertEquals(1, allValue5a.size());
 		assertEquals(0, allValue5a.stream()
-				.filter(e -> e.getDataId().equals(value0.getDataId()))
+				.filter(e -> e.getId().equals(value0.getId()))
 				.count());
 
 		final RestApiResult result5b = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value0.getDataId()))
+				toBackendUrl("/api/aufgabe/" + value0.getId()))
 				.get();
 		assertThat(result5b.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
 
 		final RestApiResult result5c = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value0.getDataId()) + "/projekt")
+				toBackendUrl("/api/aufgabe/" + value0.getId()) + "/projekt")
 				.get();
 		assertThat(result5c.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
 
 		final RestApiResult result5d = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId() + "/allAufgabe"))
+				toBackendUrl("/api/projekt/" + projekt.getId() + "/allAufgabe"))
 				.get();
 		assertThat(result5d.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final List<AufgabeValue> allValue5d = result5d.toCollection(AufgabeValue.class);
 		assertEquals(1, allValue5d.size());
 		assertEquals(0, allValue5d.stream()
-				.filter(e -> e.getDataId().equals(value0.getDataId()))
+				.filter(e -> e.getId().equals(value0.getId()))
 				.count());
 
 		final RestApiResult result6a = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId()))
+				toBackendUrl("/api/projekt/" + projekt.getId()))
 				.delete();
 		assertThat(result6a.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
 		final RestApiResult result6b = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId()))
+				toBackendUrl("/api/projekt/" + projekt.getId()))
 				.delete();
 		assertThat(result6b.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
@@ -844,19 +844,19 @@ public class BackendHsqlRunnerTest {
 		assertEquals(0, allValue7a.size());
 
 		final RestApiResult result7b = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value2.getDataId()))
+				toBackendUrl("/api/aufgabe/" + value2.getId()))
 				.get();
 		assertThat(result7b.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
 
 		final RestApiResult result7c = RestApiConnection.with(
-				toBackendUrl("/api/aufgabe/" + value2.getDataId()) + "/projekt")
+				toBackendUrl("/api/aufgabe/" + value2.getId()) + "/projekt")
 				.get();
 		assertThat(result7c.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
 
 		final RestApiResult result7d = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId() + "/allAufgabe"))
+				toBackendUrl("/api/projekt/" + projekt.getId() + "/allAufgabe"))
 				.get();
 		assertThat(result7d.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
@@ -880,13 +880,13 @@ public class BackendHsqlRunnerTest {
 				.put("{" +
 						"\"text\":\"" + text + "\"," +
 						"\"aktiv\": \"false\"," +
-						"\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+						"\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
 						"}");
 		assertThat(result0.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
 		final AufgabeValue value0 = result0.toObject(AufgabeValue.class);
 		assertEquals(0L, value0.getVersion());
-		assertEquals(uuid, value0.getDataId());
+		assertEquals(uuid, value0.getId());
 		assertEquals(text, value0.getText());
 		assertFalse(value0.isAktiv());
 		assertNull(value0.getProjekt());
@@ -899,7 +899,7 @@ public class BackendHsqlRunnerTest {
 		final List<AufgabeValue> allValue1a = result1a.toCollection(AufgabeValue.class);
 		assertEquals(1, allValue1a.size());
 		assertEquals(1, allValue1a.stream()
-				.filter(e -> uuid.equals(e.getDataId()))
+				.filter(e -> uuid.equals(e.getId()))
 				.count());
 
 		final RestApiResult result1b = RestApiConnection.with(
@@ -917,14 +917,14 @@ public class BackendHsqlRunnerTest {
 		assertTrue(projekt.isEqual(result1c.toObject(ProjektValue.class)));
 
 		final RestApiResult result1d = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId() + "/allAufgabe"))
+				toBackendUrl("/api/projekt/" + projekt.getId() + "/allAufgabe"))
 				.get();
 		assertThat(result1d.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final List<AufgabeValue> allValue1d = result1d.toCollection(AufgabeValue.class);
 		assertEquals(1, allValue1d.size());
 		assertEquals(1, allValue1d.stream()
-				.filter(e -> uuid.equals(e.getDataId()))
+				.filter(e -> uuid.equals(e.getId()))
 				.count());
 
 		final RestApiResult result2 = RestApiConnection.with(
@@ -932,13 +932,13 @@ public class BackendHsqlRunnerTest {
 				.put("{" +
 						"\"text\":\"" + text + "\"," +
 						"\"aktiv\": \"true\"," +
-						"\"projekt\": \"/api/projekt/" + projekt.getDataId() + "\"" +
+						"\"projekt\": \"/api/projekt/" + projekt.getId() + "\"" +
 						"}");
 		assertThat(result2.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final AufgabeValue value2 = result2.toObject(AufgabeValue.class);
 		assertEquals(1L, value2.getVersion());
-		assertEquals(uuid, value2.getDataId());
+		assertEquals(uuid, value2.getId());
 		assertEquals(text, value2.getText());
 		assertTrue(value2.isAktiv());
 		assertNull(value2.getProjekt());
@@ -951,7 +951,7 @@ public class BackendHsqlRunnerTest {
 		final List<AufgabeValue> allValue3a = result3a.toCollection(AufgabeValue.class);
 		assertEquals(1, allValue3a.size());
 		assertEquals(1, allValue3a.stream()
-				.filter(e -> uuid.equals(e.getDataId()))
+				.filter(e -> uuid.equals(e.getId()))
 				.count());
 
 		final RestApiResult result3b = RestApiConnection.with(
@@ -969,14 +969,14 @@ public class BackendHsqlRunnerTest {
 		assertTrue(projekt.isEqual(result3c.toObject(ProjektValue.class)));
 
 		final RestApiResult result3d = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId() + "/allAufgabe"))
+				toBackendUrl("/api/projekt/" + projekt.getId() + "/allAufgabe"))
 				.get();
 		assertThat(result3d.getCode(),
 				equalTo(HttpStatus.OK.value()));
 		final List<AufgabeValue> allValue3d = result3d.toCollection(AufgabeValue.class);
 		assertEquals(1, allValue3d.size());
 		assertEquals(1, allValue3d.stream()
-				.filter(e -> e.getDataId().equals(uuid))
+				.filter(e -> e.getId().equals(uuid))
 				.count());
 
 		final RestApiResult result4a = RestApiConnection.with(
@@ -992,7 +992,7 @@ public class BackendHsqlRunnerTest {
 				equalTo(HttpStatus.NOT_FOUND.value()));
 
 		final RestApiResult result4c = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId()))
+				toBackendUrl("/api/projekt/" + projekt.getId()))
 				.delete();
 		assertThat(result4c.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
@@ -1018,7 +1018,7 @@ public class BackendHsqlRunnerTest {
 				equalTo(HttpStatus.NOT_FOUND.value()));
 
 		final RestApiResult result5d = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt.getDataId() + "/allAufgabe"))
+				toBackendUrl("/api/projekt/" + projekt.getId() + "/allAufgabe"))
 				.get();
 		assertThat(result5d.getCode(),
 				equalTo(HttpStatus.NOT_FOUND.value()));
@@ -1049,13 +1049,13 @@ public class BackendHsqlRunnerTest {
 				.put("{" +
 						"\"text\":\"" + text + "\"," +
 						"\"aktiv\": \"false\"," +
-						"\"projekt\": \"/api/projekt/" + projekt1.getDataId() + "\"" +
+						"\"projekt\": \"/api/projekt/" + projekt1.getId() + "\"" +
 						"}");
 		assertThat(result0.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
 		final AufgabeValue value0 = result0.toObject(AufgabeValue.class);
 		assertEquals(0L, value0.getVersion());
-		assertEquals(uuid, value0.getDataId());
+		assertEquals(uuid, value0.getId());
 		assertEquals(text, value0.getText());
 		assertFalse(value0.isAktiv());
 		assertNull(value0.getProjekt());
@@ -1069,7 +1069,7 @@ public class BackendHsqlRunnerTest {
 
 		final RestApiResult result2 = RestApiConnection.with(
 				toBackendUrl("/api/aufgabe/" + uuid + "/projekt"))
-				.put(URI.create("/api/projekt/" + projekt2.getDataId()));
+				.put(URI.create("/api/projekt/" + projekt2.getId()));
 		assertThat(result2.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
@@ -1099,13 +1099,13 @@ public class BackendHsqlRunnerTest {
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
 		final RestApiResult result6b = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt1.getDataId()))
+				toBackendUrl("/api/projekt/" + projekt1.getId()))
 				.delete();
 		assertThat(result6b.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));
 
 		final RestApiResult result6c = RestApiConnection.with(
-				toBackendUrl("/api/projekt/" + projekt2.getDataId()))
+				toBackendUrl("/api/projekt/" + projekt2.getId()))
 				.delete();
 		assertThat(result6c.getCode(),
 				equalTo(HttpStatus.NO_CONTENT.value()));

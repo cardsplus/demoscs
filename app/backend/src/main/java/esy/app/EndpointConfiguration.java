@@ -1,9 +1,9 @@
 package esy.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import esy.api.team.NutzerValue;
 import esy.api.plan.AufgabeValue;
 import esy.api.plan.ProjektValue;
+import esy.api.team.NutzerValue;
 import esy.json.JsonMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,18 +48,21 @@ public class EndpointConfiguration {
         CORS.setMaxAge(3600L);
     }
 
+    static void applyCORS(final CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowCredentials(CORS.getAllowCredentials())
+                .allowedHeaders(CORS.getAllowedHeaders().toArray(String[]::new))
+                .allowedMethods(CORS.getAllowedMethods().toArray(String[]::new))
+                .allowedOrigins(CORS.getAllowedOrigins().toArray(String[]::new))
+                .maxAge(CORS.getMaxAge());
+    }
+
     @Bean
     public WebMvcConfigurer webMvcConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(final CorsRegistry registry) {
-                // add CORS settings
-                registry.addMapping("/**")
-                        .allowCredentials(CORS.getAllowCredentials())
-                        .allowedHeaders(CORS.getAllowedHeaders().toArray(String[]::new))
-                        .allowedMethods(CORS.getAllowedMethods().toArray(String[]::new))
-                        .allowedOrigins(CORS.getAllowedOrigins().toArray(String[]::new))
-                        .maxAge(CORS.getMaxAge());
+                applyCORS(registry);
             }
         };
     }
@@ -71,6 +74,13 @@ public class EndpointConfiguration {
     @Bean
     public RepositoryRestConfigurer repositoryRestConfigurer() {
         return new RepositoryRestConfigurer() {
+
+            @Override
+            public void configureJacksonObjectMapper(final ObjectMapper mapper) {
+                // apply defaults
+                JsonMapper.configure(mapper);
+            }
+
             @Override
             public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration configuration, final CorsRegistry registry) {
                 // apply defaults
@@ -82,18 +92,7 @@ public class EndpointConfiguration {
                 configuration.exposeIdsFor(NutzerValue.class);
                 configuration.exposeIdsFor(ProjektValue.class);
                 // add CORS settings
-                registry.addMapping("/**")
-                        .allowCredentials(CORS.getAllowCredentials())
-                        .allowedHeaders(CORS.getAllowedHeaders().toArray(String[]::new))
-                        .allowedMethods(CORS.getAllowedMethods().toArray(String[]::new))
-                        .allowedOrigins(CORS.getAllowedOrigins().toArray(String[]::new))
-                        .maxAge(CORS.getMaxAge());
-            }
-
-            @Override
-            public void configureJacksonObjectMapper(final ObjectMapper mapper) {
-                // apply defaults
-                JsonMapper.configure(mapper);
+                applyCORS(registry);
             }
         };
     }
