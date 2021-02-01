@@ -1,0 +1,32 @@
+plugins {
+    id 'base'
+}
+
+import org.apache.tools.ant.taskdefs.condition.Os
+ext.NPM = Os.isFamily(Os.FAMILY_WINDOWS) ? "npm.cmd" : "npm";
+
+task npmInstall(type: Exec) {
+    enabled = System.getenv().containsKey('CI')
+    commandLine NPM, 'install'
+}
+build.dependsOn npmInstall
+
+task npmBuild(type: Exec) {
+    enabled = System.getenv().containsKey('CI')
+    mustRunAfter npmInstall
+    commandLine NPM, 'run', 'build'
+}
+build.dependsOn npmBuild
+
+task npmRun(type: Exec) {
+    mustRunAfter npmInstall
+    commandLine NPM, 'run', 'dev'
+}
+
+task versionCheck() {
+    build.dependsOn it
+    doLast {
+        assert new File("${projectDir}/package.json").text
+                .contains('"version": "' + VERSION + '"')
+    }
+}
