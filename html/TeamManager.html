@@ -453,7 +453,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#überblick">Überblick</a></li>
 <li><a href="#modell">Modell</a></li>
 <li><a href="#anwendung">Anwendung</a></li>
-<li><a href="#nutzervaluerestapi">NutzerValueRestApi</a>
+<li><a href="#nutzer-api">Nutzer-API</a>
 <ul class="sectlevel2">
 <li><a href="#post-apinutzer"><code>POST /api/nutzer</code></a></li>
 <li><a href="#put-apinutzerid"><code>PUT /api/nutzer/{id}</code></a></li>
@@ -563,7 +563,7 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 </div>
 <div class="sect1">
-<h2 id="nutzervaluerestapi"><a class="anchor" href="#nutzervaluerestapi"></a>NutzerValueRestApi</h2>
+<h2 id="nutzer-api"><a class="anchor" href="#nutzer-api"></a>Nutzer-API</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>REST-API für die Verwaltung von <em>Nutzer</em>-Objekten.</p>
@@ -610,7 +610,7 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "4ed5e8a7-3314-420d-b70f-c75e53ecd542",
+  "id" : "974d45d5-066d-4e99-8b80-cc5daaf1a900",
   "mail" : "Mia.Musterfrau@a.de",
   "name" : "Mia Musterfrau",
   "aktiv" : true,
@@ -618,10 +618,10 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/4ed5e8a7-3314-420d-b70f-c75e53ecd542"
+    "href" : "http://localhost:8080/api/nutzer/974d45d5-066d-4e99-8b80-cc5daaf1a900"
   }, {
     "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/4ed5e8a7-3314-420d-b70f-c75e53ecd542"
+    "href" : "http://localhost:8080/api/nutzer/974d45d5-066d-4e99-8b80-cc5daaf1a900"
   } ]
 }</code></pre>
 </div>
@@ -745,7 +745,7 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "href" : "http://localhost:8080/api/nutzer/search"
   } ],
   "content" : [ {
-    "id" : "4ed5e8a7-3314-420d-b70f-c75e53ecd542",
+    "id" : "974d45d5-066d-4e99-8b80-cc5daaf1a900",
     "mail" : "Mia.Musterfrau@a.de",
     "name" : "Mia Musterfrau",
     "aktiv" : true,
@@ -753,13 +753,13 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/4ed5e8a7-3314-420d-b70f-c75e53ecd542"
+      "href" : "http://localhost:8080/api/nutzer/974d45d5-066d-4e99-8b80-cc5daaf1a900"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/4ed5e8a7-3314-420d-b70f-c75e53ecd542"
+      "href" : "http://localhost:8080/api/nutzer/974d45d5-066d-4e99-8b80-cc5daaf1a900"
     } ]
   }, {
-    "id" : "a8f7f7a9-d880-4379-9038-42fa34342051",
+    "id" : "c85077d9-abd7-4df7-9a64-24b81326325e",
     "mail" : "Bea.Musterfrau@a.de",
     "name" : "Bea Musterfrau",
     "aktiv" : true,
@@ -767,10 +767,10 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/a8f7f7a9-d880-4379-9038-42fa34342051"
+      "href" : "http://localhost:8080/api/nutzer/c85077d9-abd7-4df7-9a64-24b81326325e"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/a8f7f7a9-d880-4379-9038-42fa34342051"
+      "href" : "http://localhost:8080/api/nutzer/c85077d9-abd7-4df7-9a64-24b81326325e"
     } ]
   } ],
   "page" : {
@@ -980,7 +980,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:24:51 UTC
+Last updated 2021-02-07 18:37:07 UTC
 </div>
 </div>
 <style>
