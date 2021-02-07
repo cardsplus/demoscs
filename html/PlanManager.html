@@ -575,7 +575,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <h2 id="anwendung"><a class="anchor" href="#anwendung"></a>Anwendung</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Der Dienst hat eine reaktive browser-basierte Benutzeroberfläche.</p>
+<p>Der Dienst hat eine reaktive browser-basierte Benutzeroberfläche.
+Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
 </div>
 </div>
 </div>
@@ -625,26 +626,26 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "1aefc397-d6ad-4edb-80f0-3ee265b03e5c",
+  "id" : "77a4bfbc-1e2b-4eef-8fae-028d8ac732b4",
   "name" : "Projekt A",
   "aktiv" : true,
   "sprache" : "EN",
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c"
+    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4"
   }, {
     "rel" : "projektValue",
-    "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c"
-  }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c/allMitglied"
+    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4"
   }, {
     "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c/allAufgabe"
+    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/allAufgabe"
   }, {
     "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c/besitzer"
+    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -713,14 +714,14 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
-  }, {
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -854,48 +855,48 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "href" : "http://localhost:8080/api/projekt/search"
   } ],
   "content" : [ {
-    "id" : "1aefc397-d6ad-4edb-80f0-3ee265b03e5c",
+    "id" : "77a4bfbc-1e2b-4eef-8fae-028d8ac732b4",
     "name" : "Projekt A",
     "aktiv" : true,
     "sprache" : "EN",
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c"
+      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c"
-    }, {
-      "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4"
     }, {
       "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c/allAufgabe"
+      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/allAufgabe"
     }, {
       "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/1aefc397-d6ad-4edb-80f0-3ee265b03e5c/besitzer"
+      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/besitzer"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/allMitglied"
     } ]
   }, {
-    "id" : "a26c4de4-9da1-4d3e-ab50-ee843dfd83df",
+    "id" : "fc7c7011-3d30-42f9-98c9-94ad94a535bb",
     "name" : "Projekt B",
     "aktiv" : true,
     "sprache" : "DE",
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/a26c4de4-9da1-4d3e-ab50-ee843dfd83df"
+      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/a26c4de4-9da1-4d3e-ab50-ee843dfd83df"
-    }, {
-      "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/a26c4de4-9da1-4d3e-ab50-ee843dfd83df/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb"
     }, {
       "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/a26c4de4-9da1-4d3e-ab50-ee843dfd83df/allAufgabe"
+      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb/allAufgabe"
     }, {
       "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/a26c4de4-9da1-4d3e-ab50-ee843dfd83df/besitzer"
+      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb/besitzer"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb/allMitglied"
     } ]
   } ],
   "page" : {
@@ -951,14 +952,14 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
-  }, {
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -1010,14 +1011,14 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
-  }, {
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -1116,19 +1117,19 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "bde1d8ed-f1a2-42cc-ab8a-51cad5fbf327",
+  "id" : "41b82706-e7af-476e-ba8a-d1eed3930c03",
   "text" : "Aufgabe A",
   "aktiv" : true,
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/aufgabe/bde1d8ed-f1a2-42cc-ab8a-51cad5fbf327"
+    "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03"
   }, {
     "rel" : "aufgabeValue",
-    "href" : "http://localhost:8080/api/aufgabe/bde1d8ed-f1a2-42cc-ab8a-51cad5fbf327"
+    "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03"
   }, {
     "rel" : "projekt",
-    "href" : "http://localhost:8080/api/aufgabe/bde1d8ed-f1a2-42cc-ab8a-51cad5fbf327/projekt"
+    "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03/projekt"
   } ]
 }</code></pre>
 </div>
@@ -1291,49 +1292,49 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "href" : "http://localhost:8080/api/aufgabe/search"
   } ],
   "content" : [ {
-    "id" : "a14ed771-99b4-499a-904b-a9060956267d",
+    "id" : "41b82706-e7af-476e-ba8a-d1eed3930c03",
     "text" : "Aufgabe A",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/a14ed771-99b4-499a-904b-a9060956267d"
+      "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/a14ed771-99b4-499a-904b-a9060956267d"
+      "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/a14ed771-99b4-499a-904b-a9060956267d/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03/projekt"
     } ]
   }, {
-    "id" : "bde1d8ed-f1a2-42cc-ab8a-51cad5fbf327",
-    "text" : "Aufgabe A",
-    "aktiv" : true,
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/bde1d8ed-f1a2-42cc-ab8a-51cad5fbf327"
-    }, {
-      "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/bde1d8ed-f1a2-42cc-ab8a-51cad5fbf327"
-    }, {
-      "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/bde1d8ed-f1a2-42cc-ab8a-51cad5fbf327/projekt"
-    } ]
-  }, {
-    "id" : "f86460f0-1b1e-4ac4-bde0-ed662a9d1d9f",
+    "id" : "b05a6337-dd16-43f3-b894-464756485e0f",
     "text" : "Aufgabe B",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/f86460f0-1b1e-4ac4-bde0-ed662a9d1d9f"
+      "href" : "http://localhost:8080/api/aufgabe/b05a6337-dd16-43f3-b894-464756485e0f"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/f86460f0-1b1e-4ac4-bde0-ed662a9d1d9f"
+      "href" : "http://localhost:8080/api/aufgabe/b05a6337-dd16-43f3-b894-464756485e0f"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/f86460f0-1b1e-4ac4-bde0-ed662a9d1d9f/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/b05a6337-dd16-43f3-b894-464756485e0f/projekt"
+    } ]
+  }, {
+    "id" : "eff6ad6a-9745-442d-84ac-598d152c2d2e",
+    "text" : "Aufgabe A",
+    "aktiv" : true,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/eff6ad6a-9745-442d-84ac-598d152c2d2e"
+    }, {
+      "rel" : "aufgabeValue",
+      "href" : "http://localhost:8080/api/aufgabe/eff6ad6a-9745-442d-84ac-598d152c2d2e"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/eff6ad6a-9745-442d-84ac-598d152c2d2e/projekt"
     } ]
   } ],
   "page" : {
@@ -1491,7 +1492,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:37:07 UTC
+Last updated 2021-02-07 18:44:45 UTC
 </div>
 </div>
 <style>
