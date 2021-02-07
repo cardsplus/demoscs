@@ -544,13 +544,55 @@ Für die Speicherung in der Datenbank wird <code>spring-data-jpa</code> als Abst
 <img src="images/Team.png" alt="Team" width="246" height="100">
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Siehe
+<a href="https://spring.io/projects/spring-data-jpa" class="bare">https://spring.io/projects/spring-data-jpa</a>
+für mehr Informationen.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Optional kann jeder gespeicherte Datensatz auch als Datensatz in einem REST-API veröffentlicht werden.
 Für die Veröffentlichung der Daten in einem REST-API wird <code>spring-data-rest</code> als Abstraktion eingesetzt.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Siehe
+<a href="https://spring.io/projects/spring-data-rest" class="bare">https://spring.io/projects/spring-data-rest</a>
+für mehr Informationen.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Optional kann jeder gespeicherte Datensatz auch als Nachricht in einem Datenstrom veröffentlicht werden.
 Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka</code> als Abstraktion eingesetzt.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Siehe
+<a href="https://spring.io/projects/spring-kafka" class="bare">https://spring.io/projects/spring-kafka</a>
+für mehr Informationen.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -625,7 +667,7 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "a342d9e0-8620-42cb-8c56-2aa25dbbecbc",
+  "id" : "bf4167cf-e7f3-4891-b922-ec17418e205b",
   "mail" : "Mia.Musterfrau@a.de",
   "name" : "Mia Musterfrau",
   "aktiv" : true,
@@ -633,10 +675,10 @@ für mehr Informationen.
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/a342d9e0-8620-42cb-8c56-2aa25dbbecbc"
+    "href" : "http://localhost:8080/api/nutzer/bf4167cf-e7f3-4891-b922-ec17418e205b"
   }, {
     "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/a342d9e0-8620-42cb-8c56-2aa25dbbecbc"
+    "href" : "http://localhost:8080/api/nutzer/bf4167cf-e7f3-4891-b922-ec17418e205b"
   } ]
 }</code></pre>
 </div>
@@ -760,7 +802,7 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/nutzer/search"
   } ],
   "content" : [ {
-    "id" : "5a3b9b33-e429-4c72-a0ee-a31745abd8b0",
+    "id" : "53c8c462-608b-42aa-9d5d-b6f9389b92ec",
     "mail" : "Bea.Musterfrau@a.de",
     "name" : "Bea Musterfrau",
     "aktiv" : true,
@@ -768,13 +810,13 @@ für mehr Informationen.
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/5a3b9b33-e429-4c72-a0ee-a31745abd8b0"
+      "href" : "http://localhost:8080/api/nutzer/53c8c462-608b-42aa-9d5d-b6f9389b92ec"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/5a3b9b33-e429-4c72-a0ee-a31745abd8b0"
+      "href" : "http://localhost:8080/api/nutzer/53c8c462-608b-42aa-9d5d-b6f9389b92ec"
     } ]
   }, {
-    "id" : "a342d9e0-8620-42cb-8c56-2aa25dbbecbc",
+    "id" : "bf4167cf-e7f3-4891-b922-ec17418e205b",
     "mail" : "Mia.Musterfrau@a.de",
     "name" : "Mia Musterfrau",
     "aktiv" : true,
@@ -782,10 +824,10 @@ für mehr Informationen.
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/a342d9e0-8620-42cb-8c56-2aa25dbbecbc"
+      "href" : "http://localhost:8080/api/nutzer/bf4167cf-e7f3-4891-b922-ec17418e205b"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/a342d9e0-8620-42cb-8c56-2aa25dbbecbc"
+      "href" : "http://localhost:8080/api/nutzer/bf4167cf-e7f3-4891-b922-ec17418e205b"
     } ]
   } ],
   "page" : {
@@ -995,7 +1037,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:49:55 UTC
+Last updated 2021-02-07 18:52:59 UTC
 </div>
 </div>
 <style>
