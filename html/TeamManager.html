@@ -536,13 +536,34 @@ für mehr Informationen.
 <h2 id="modell"><a class="anchor" href="#modell"></a>Modell</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Das Modell ist so gestaltet, dass die Daten in einer relationalen Datenbank dauerhaft gespeichert werden.
-Für die Speicherung in der Datenbank wird <code>spring-data-jpa</code> als Abstraktion eingesetzt.</p>
+<p>Das Datenmodell wird nach den Prinzipien des <em>Domain Driven Design</em> entwickelt.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Siehe
+<a href="https://cardsplus.info/de/cards-und-ddd" class="bare">https://cardsplus.info/de/cards-und-ddd</a>
+für mehr Informationen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Das Modell ist Teil der gemeinsamen Sprache.
+Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Team.png" alt="Team" width="246" height="100">
 </div>
+</div>
+<div class="paragraph">
+<p>Das Modell ist so gestaltet, dass die Daten in einer relationalen Datenbank dauerhaft gespeichert werden.
+Für die Speicherung in der Datenbank wird <code>spring-data-jpa</code> als Abstraktion eingesetzt.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -667,7 +688,7 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "bf4167cf-e7f3-4891-b922-ec17418e205b",
+  "id" : "424508f3-ab4b-485d-825f-7e995664a815",
   "mail" : "Mia.Musterfrau@a.de",
   "name" : "Mia Musterfrau",
   "aktiv" : true,
@@ -675,10 +696,10 @@ für mehr Informationen.
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/bf4167cf-e7f3-4891-b922-ec17418e205b"
+    "href" : "http://localhost:8080/api/nutzer/424508f3-ab4b-485d-825f-7e995664a815"
   }, {
     "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/bf4167cf-e7f3-4891-b922-ec17418e205b"
+    "href" : "http://localhost:8080/api/nutzer/424508f3-ab4b-485d-825f-7e995664a815"
   } ]
 }</code></pre>
 </div>
@@ -802,21 +823,7 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/nutzer/search"
   } ],
   "content" : [ {
-    "id" : "53c8c462-608b-42aa-9d5d-b6f9389b92ec",
-    "mail" : "Bea.Musterfrau@a.de",
-    "name" : "Bea Musterfrau",
-    "aktiv" : true,
-    "allSprache" : [ "DE" ],
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/53c8c462-608b-42aa-9d5d-b6f9389b92ec"
-    }, {
-      "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/53c8c462-608b-42aa-9d5d-b6f9389b92ec"
-    } ]
-  }, {
-    "id" : "bf4167cf-e7f3-4891-b922-ec17418e205b",
+    "id" : "424508f3-ab4b-485d-825f-7e995664a815",
     "mail" : "Mia.Musterfrau@a.de",
     "name" : "Mia Musterfrau",
     "aktiv" : true,
@@ -824,10 +831,24 @@ für mehr Informationen.
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/bf4167cf-e7f3-4891-b922-ec17418e205b"
+      "href" : "http://localhost:8080/api/nutzer/424508f3-ab4b-485d-825f-7e995664a815"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/bf4167cf-e7f3-4891-b922-ec17418e205b"
+      "href" : "http://localhost:8080/api/nutzer/424508f3-ab4b-485d-825f-7e995664a815"
+    } ]
+  }, {
+    "id" : "cc1c6004-9b3a-4b55-aea1-18c7f7739880",
+    "mail" : "Bea.Musterfrau@a.de",
+    "name" : "Bea Musterfrau",
+    "aktiv" : true,
+    "allSprache" : [ "DE" ],
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/nutzer/cc1c6004-9b3a-4b55-aea1-18c7f7739880"
+    }, {
+      "rel" : "nutzerValue",
+      "href" : "http://localhost:8080/api/nutzer/cc1c6004-9b3a-4b55-aea1-18c7f7739880"
     } ]
   } ],
   "page" : {
@@ -1037,7 +1058,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:52:59 UTC
+Last updated 2021-02-07 19:04:33 UTC
 </div>
 </div>
 <style>

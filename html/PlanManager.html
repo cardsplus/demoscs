@@ -553,13 +553,34 @@ für mehr Informationen.
 <h2 id="modell"><a class="anchor" href="#modell"></a>Modell</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Das Modell ist so gestaltet, dass die Daten in einer relationalen Datenbank dauerhaft gespeichert werden.
-Für die Speicherung in der Datenbank wird <code>spring-data-jpa</code> als Abstraktion eingesetzt.</p>
+<p>Das Datenmodell wird nach den Prinzipien des <em>Domain Driven Design</em> entwickelt.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Siehe
+<a href="https://cardsplus.info/de/cards-und-ddd" class="bare">https://cardsplus.info/de/cards-und-ddd</a>
+für mehr Informationen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Das Modell ist Teil der gemeinsamen Sprache.
+Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Plan.png" alt="Plan" width="379" height="206">
 </div>
+</div>
+<div class="paragraph">
+<p>Das Modell ist so gestaltet, dass die Daten in einer relationalen Datenbank dauerhaft gespeichert werden.
+Für die Speicherung in der Datenbank wird <code>spring-data-jpa</code> als Abstraktion eingesetzt.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -682,26 +703,26 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "53e794cf-d79a-4274-b6bd-aea305f2078c",
+  "id" : "d9e39010-ee85-4ae3-a6a7-2d63347ee222",
   "name" : "Projekt A",
   "aktiv" : true,
   "sprache" : "EN",
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c"
+    "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222"
   }, {
     "rel" : "projektValue",
-    "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c"
+    "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222"
   }, {
     "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c/allMitglied"
+    "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222/allMitglied"
   }, {
     "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c/besitzer"
+    "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222/besitzer"
   }, {
     "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c/allAufgabe"
+    "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222/allAufgabe"
   } ]
 }</code></pre>
 </div>
@@ -911,48 +932,48 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/projekt/search"
   } ],
   "content" : [ {
-    "id" : "53e794cf-d79a-4274-b6bd-aea305f2078c",
-    "name" : "Projekt A",
-    "aktiv" : true,
-    "sprache" : "EN",
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c"
-    }, {
-      "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c"
-    }, {
-      "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c/allMitglied"
-    }, {
-      "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c/besitzer"
-    }, {
-      "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/53e794cf-d79a-4274-b6bd-aea305f2078c/allAufgabe"
-    } ]
-  }, {
-    "id" : "a0930220-836b-4d09-9de9-5126c7016413",
+    "id" : "0e0429f7-f736-454d-87dd-4fbdc7c488f6",
     "name" : "Projekt B",
     "aktiv" : true,
     "sprache" : "DE",
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/a0930220-836b-4d09-9de9-5126c7016413"
+      "href" : "http://localhost:8080/api/projekt/0e0429f7-f736-454d-87dd-4fbdc7c488f6"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/a0930220-836b-4d09-9de9-5126c7016413"
+      "href" : "http://localhost:8080/api/projekt/0e0429f7-f736-454d-87dd-4fbdc7c488f6"
     }, {
       "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/a0930220-836b-4d09-9de9-5126c7016413/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/0e0429f7-f736-454d-87dd-4fbdc7c488f6/allMitglied"
     }, {
       "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/a0930220-836b-4d09-9de9-5126c7016413/besitzer"
+      "href" : "http://localhost:8080/api/projekt/0e0429f7-f736-454d-87dd-4fbdc7c488f6/besitzer"
     }, {
       "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/a0930220-836b-4d09-9de9-5126c7016413/allAufgabe"
+      "href" : "http://localhost:8080/api/projekt/0e0429f7-f736-454d-87dd-4fbdc7c488f6/allAufgabe"
+    } ]
+  }, {
+    "id" : "d9e39010-ee85-4ae3-a6a7-2d63347ee222",
+    "name" : "Projekt A",
+    "aktiv" : true,
+    "sprache" : "EN",
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222"
+    }, {
+      "rel" : "projektValue",
+      "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222/allMitglied"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222/besitzer"
+    }, {
+      "rel" : "allAufgabe",
+      "href" : "http://localhost:8080/api/projekt/d9e39010-ee85-4ae3-a6a7-2d63347ee222/allAufgabe"
     } ]
   } ],
   "page" : {
@@ -1173,19 +1194,19 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "79bd46be-51c7-4145-a09a-a7c7479bc1b5",
+  "id" : "8cf2c893-ba30-4717-a21d-88e576d33946",
   "text" : "Aufgabe A",
   "aktiv" : true,
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/aufgabe/79bd46be-51c7-4145-a09a-a7c7479bc1b5"
+    "href" : "http://localhost:8080/api/aufgabe/8cf2c893-ba30-4717-a21d-88e576d33946"
   }, {
     "rel" : "aufgabeValue",
-    "href" : "http://localhost:8080/api/aufgabe/79bd46be-51c7-4145-a09a-a7c7479bc1b5"
+    "href" : "http://localhost:8080/api/aufgabe/8cf2c893-ba30-4717-a21d-88e576d33946"
   }, {
     "rel" : "projekt",
-    "href" : "http://localhost:8080/api/aufgabe/79bd46be-51c7-4145-a09a-a7c7479bc1b5/projekt"
+    "href" : "http://localhost:8080/api/aufgabe/8cf2c893-ba30-4717-a21d-88e576d33946/projekt"
   } ]
 }</code></pre>
 </div>
@@ -1348,49 +1369,49 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/aufgabe/search"
   } ],
   "content" : [ {
-    "id" : "1db84551-791f-41f2-af34-b03dfc6cad62",
-    "text" : "Aufgabe A",
-    "aktiv" : true,
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/1db84551-791f-41f2-af34-b03dfc6cad62"
-    }, {
-      "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/1db84551-791f-41f2-af34-b03dfc6cad62"
-    }, {
-      "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/1db84551-791f-41f2-af34-b03dfc6cad62/projekt"
-    } ]
-  }, {
-    "id" : "6c7d8721-f99c-477f-88d0-7cc98e42f230",
+    "id" : "0f43c472-bedc-4099-94dc-037671aa9a36",
     "text" : "Aufgabe B",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/6c7d8721-f99c-477f-88d0-7cc98e42f230"
+      "href" : "http://localhost:8080/api/aufgabe/0f43c472-bedc-4099-94dc-037671aa9a36"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/6c7d8721-f99c-477f-88d0-7cc98e42f230"
+      "href" : "http://localhost:8080/api/aufgabe/0f43c472-bedc-4099-94dc-037671aa9a36"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/6c7d8721-f99c-477f-88d0-7cc98e42f230/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/0f43c472-bedc-4099-94dc-037671aa9a36/projekt"
     } ]
   }, {
-    "id" : "79bd46be-51c7-4145-a09a-a7c7479bc1b5",
+    "id" : "8cf2c893-ba30-4717-a21d-88e576d33946",
     "text" : "Aufgabe A",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/79bd46be-51c7-4145-a09a-a7c7479bc1b5"
+      "href" : "http://localhost:8080/api/aufgabe/8cf2c893-ba30-4717-a21d-88e576d33946"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/79bd46be-51c7-4145-a09a-a7c7479bc1b5"
+      "href" : "http://localhost:8080/api/aufgabe/8cf2c893-ba30-4717-a21d-88e576d33946"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/79bd46be-51c7-4145-a09a-a7c7479bc1b5/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/8cf2c893-ba30-4717-a21d-88e576d33946/projekt"
+    } ]
+  }, {
+    "id" : "ded9a19c-ead2-4dcf-954d-94ab8e2e284e",
+    "text" : "Aufgabe A",
+    "aktiv" : true,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/ded9a19c-ead2-4dcf-954d-94ab8e2e284e"
+    }, {
+      "rel" : "aufgabeValue",
+      "href" : "http://localhost:8080/api/aufgabe/ded9a19c-ead2-4dcf-954d-94ab8e2e284e"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/ded9a19c-ead2-4dcf-954d-94ab8e2e284e/projekt"
     } ]
   } ],
   "page" : {
@@ -1548,7 +1569,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:52:59 UTC
+Last updated 2021-02-07 19:04:33 UTC
 </div>
 </div>
 <style>
