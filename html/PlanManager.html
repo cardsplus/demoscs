@@ -578,6 +578,20 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Der Dienst hat eine reaktive browser-basierte Benutzeroberfläche.
 Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Siehe
+<a href="https://spring.io/projects/spring-hateoas" class="bare">https://spring.io/projects/spring-hateoas</a>
+für mehr Informationen.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -626,26 +640,26 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "77a4bfbc-1e2b-4eef-8fae-028d8ac732b4",
+  "id" : "63d064c2-1059-4c13-bf40-875e0642aeb3",
   "name" : "Projekt A",
   "aktiv" : true,
   "sprache" : "EN",
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4"
+    "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3"
   }, {
     "rel" : "projektValue",
-    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4"
+    "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3"
   }, {
     "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/allAufgabe"
+    "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3/allAufgabe"
   }, {
     "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/besitzer"
+    "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3/besitzer"
   }, {
     "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/allMitglied"
+    "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -855,48 +869,48 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
     "href" : "http://localhost:8080/api/projekt/search"
   } ],
   "content" : [ {
-    "id" : "77a4bfbc-1e2b-4eef-8fae-028d8ac732b4",
+    "id" : "63d064c2-1059-4c13-bf40-875e0642aeb3",
     "name" : "Projekt A",
     "aktiv" : true,
     "sprache" : "EN",
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4"
+      "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4"
+      "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3"
     }, {
       "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/allAufgabe"
+      "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3/allAufgabe"
     }, {
       "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/besitzer"
+      "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3/besitzer"
     }, {
       "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/77a4bfbc-1e2b-4eef-8fae-028d8ac732b4/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/63d064c2-1059-4c13-bf40-875e0642aeb3/allMitglied"
     } ]
   }, {
-    "id" : "fc7c7011-3d30-42f9-98c9-94ad94a535bb",
+    "id" : "ceed1bcf-34fb-47c4-a687-d05ea4edc307",
     "name" : "Projekt B",
     "aktiv" : true,
     "sprache" : "DE",
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb"
+      "href" : "http://localhost:8080/api/projekt/ceed1bcf-34fb-47c4-a687-d05ea4edc307"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb"
+      "href" : "http://localhost:8080/api/projekt/ceed1bcf-34fb-47c4-a687-d05ea4edc307"
     }, {
       "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb/allAufgabe"
+      "href" : "http://localhost:8080/api/projekt/ceed1bcf-34fb-47c4-a687-d05ea4edc307/allAufgabe"
     }, {
       "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb/besitzer"
+      "href" : "http://localhost:8080/api/projekt/ceed1bcf-34fb-47c4-a687-d05ea4edc307/besitzer"
     }, {
       "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/fc7c7011-3d30-42f9-98c9-94ad94a535bb/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/ceed1bcf-34fb-47c4-a687-d05ea4edc307/allMitglied"
     } ]
   } ],
   "page" : {
@@ -1117,19 +1131,19 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "41b82706-e7af-476e-ba8a-d1eed3930c03",
+  "id" : "1fbf4d48-237b-4c91-8efe-17cd0b3f7003",
   "text" : "Aufgabe A",
   "aktiv" : true,
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03"
+    "href" : "http://localhost:8080/api/aufgabe/1fbf4d48-237b-4c91-8efe-17cd0b3f7003"
   }, {
     "rel" : "aufgabeValue",
-    "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03"
+    "href" : "http://localhost:8080/api/aufgabe/1fbf4d48-237b-4c91-8efe-17cd0b3f7003"
   }, {
     "rel" : "projekt",
-    "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03/projekt"
+    "href" : "http://localhost:8080/api/aufgabe/1fbf4d48-237b-4c91-8efe-17cd0b3f7003/projekt"
   } ]
 }</code></pre>
 </div>
@@ -1292,49 +1306,49 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
     "href" : "http://localhost:8080/api/aufgabe/search"
   } ],
   "content" : [ {
-    "id" : "41b82706-e7af-476e-ba8a-d1eed3930c03",
+    "id" : "1fbf4d48-237b-4c91-8efe-17cd0b3f7003",
     "text" : "Aufgabe A",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03"
+      "href" : "http://localhost:8080/api/aufgabe/1fbf4d48-237b-4c91-8efe-17cd0b3f7003"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03"
+      "href" : "http://localhost:8080/api/aufgabe/1fbf4d48-237b-4c91-8efe-17cd0b3f7003"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/41b82706-e7af-476e-ba8a-d1eed3930c03/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/1fbf4d48-237b-4c91-8efe-17cd0b3f7003/projekt"
     } ]
   }, {
-    "id" : "b05a6337-dd16-43f3-b894-464756485e0f",
+    "id" : "742e351d-c502-4e2d-ba54-0312494fe4b0",
     "text" : "Aufgabe B",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/b05a6337-dd16-43f3-b894-464756485e0f"
+      "href" : "http://localhost:8080/api/aufgabe/742e351d-c502-4e2d-ba54-0312494fe4b0"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/b05a6337-dd16-43f3-b894-464756485e0f"
+      "href" : "http://localhost:8080/api/aufgabe/742e351d-c502-4e2d-ba54-0312494fe4b0"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/b05a6337-dd16-43f3-b894-464756485e0f/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/742e351d-c502-4e2d-ba54-0312494fe4b0/projekt"
     } ]
   }, {
-    "id" : "eff6ad6a-9745-442d-84ac-598d152c2d2e",
+    "id" : "aa623a56-cb55-47c4-9609-e38b938c5df5",
     "text" : "Aufgabe A",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/eff6ad6a-9745-442d-84ac-598d152c2d2e"
+      "href" : "http://localhost:8080/api/aufgabe/aa623a56-cb55-47c4-9609-e38b938c5df5"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/eff6ad6a-9745-442d-84ac-598d152c2d2e"
+      "href" : "http://localhost:8080/api/aufgabe/aa623a56-cb55-47c4-9609-e38b938c5df5"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/eff6ad6a-9745-442d-84ac-598d152c2d2e/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/aa623a56-cb55-47c4-9609-e38b938c5df5/projekt"
     } ]
   } ],
   "page" : {
@@ -1492,7 +1506,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:44:45 UTC
+Last updated 2021-02-07 18:49:55 UTC
 </div>
 </div>
 <style>

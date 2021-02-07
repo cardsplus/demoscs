@@ -561,6 +561,20 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Der Dienst hat eine reaktive browser-basierte Benutzeroberfläche.
 Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Siehe
+<a href="https://spring.io/projects/spring-hateoas" class="bare">https://spring.io/projects/spring-hateoas</a>
+für mehr Informationen.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -611,7 +625,7 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "2bba9184-3c02-4091-b886-f059bbd4f437",
+  "id" : "a342d9e0-8620-42cb-8c56-2aa25dbbecbc",
   "mail" : "Mia.Musterfrau@a.de",
   "name" : "Mia Musterfrau",
   "aktiv" : true,
@@ -619,10 +633,10 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/2bba9184-3c02-4091-b886-f059bbd4f437"
+    "href" : "http://localhost:8080/api/nutzer/a342d9e0-8620-42cb-8c56-2aa25dbbecbc"
   }, {
     "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/2bba9184-3c02-4091-b886-f059bbd4f437"
+    "href" : "http://localhost:8080/api/nutzer/a342d9e0-8620-42cb-8c56-2aa25dbbecbc"
   } ]
 }</code></pre>
 </div>
@@ -746,21 +760,7 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
     "href" : "http://localhost:8080/api/nutzer/search"
   } ],
   "content" : [ {
-    "id" : "2bba9184-3c02-4091-b886-f059bbd4f437",
-    "mail" : "Mia.Musterfrau@a.de",
-    "name" : "Mia Musterfrau",
-    "aktiv" : true,
-    "allSprache" : [ "DE", "EN" ],
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/2bba9184-3c02-4091-b886-f059bbd4f437"
-    }, {
-      "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/2bba9184-3c02-4091-b886-f059bbd4f437"
-    } ]
-  }, {
-    "id" : "68565556-164f-468e-beb2-b6cddb44b935",
+    "id" : "5a3b9b33-e429-4c72-a0ee-a31745abd8b0",
     "mail" : "Bea.Musterfrau@a.de",
     "name" : "Bea Musterfrau",
     "aktiv" : true,
@@ -768,10 +768,24 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.</p>
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/68565556-164f-468e-beb2-b6cddb44b935"
+      "href" : "http://localhost:8080/api/nutzer/5a3b9b33-e429-4c72-a0ee-a31745abd8b0"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/68565556-164f-468e-beb2-b6cddb44b935"
+      "href" : "http://localhost:8080/api/nutzer/5a3b9b33-e429-4c72-a0ee-a31745abd8b0"
+    } ]
+  }, {
+    "id" : "a342d9e0-8620-42cb-8c56-2aa25dbbecbc",
+    "mail" : "Mia.Musterfrau@a.de",
+    "name" : "Mia Musterfrau",
+    "aktiv" : true,
+    "allSprache" : [ "DE", "EN" ],
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/nutzer/a342d9e0-8620-42cb-8c56-2aa25dbbecbc"
+    }, {
+      "rel" : "nutzerValue",
+      "href" : "http://localhost:8080/api/nutzer/a342d9e0-8620-42cb-8c56-2aa25dbbecbc"
     } ]
   } ],
   "page" : {
@@ -981,7 +995,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:44:45 UTC
+Last updated 2021-02-07 18:49:55 UTC
 </div>
 </div>
 <style>
