@@ -452,11 +452,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#überblick">Überblick</a></li>
 <li><a href="#modell">Modell</a></li>
-<li><a href="#ui">UI</a></li>
-<li><a href="#api">API</a>
-<ul class="sectlevel2">
+<li><a href="#anwendung">Anwendung</a></li>
 <li><a href="#projektvaluerestapi">ProjektValueRestApi</a>
-<ul class="sectlevel3">
+<ul class="sectlevel2">
 <li><a href="#post-apiprojekt"><code>POST /api/projekt</code></a></li>
 <li><a href="#put-apiprojektid"><code>PUT /api/projekt/{id}</code></a></li>
 <li><a href="#put-apiprojektidbesitzer"><code>PUT /api/projekt/{id}/besitzer</code></a></li>
@@ -468,15 +466,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#aufgabevaluerestapi">AufgabeValueRestApi</a>
-<ul class="sectlevel3">
+<ul class="sectlevel2">
 <li><a href="#post-apiaufgabe"><code>POST /api/aufgabe</code></a></li>
 <li><a href="#put-apiaufgabeid"><code>PUT /api/aufgabe/{id}</code></a></li>
 <li><a href="#put-apiaufgabeidprojekt"><code>PUT /api/aufgabe/{id}/projekt</code></a></li>
 <li><a href="#get-apiaufgabe"><code>GET /api/aufgabe</code></a></li>
 <li><a href="#get-apiaufgabeid"><code>GET /api/aufgabe/{id}</code></a></li>
 <li><a href="#delete-apiaufgabeid"><code>DELETE /api/aufgabe/{id}</code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="#konfiguration">Konfiguration</a>
@@ -576,7 +572,7 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 </div>
 <div class="sect1">
-<h2 id="ui"><a class="anchor" href="#ui"></a>UI</h2>
+<h2 id="anwendung"><a class="anchor" href="#anwendung"></a>Anwendung</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Der Dienst hat eine reaktive browser-basierte Benutzeroberfläche.</p>
@@ -584,15 +580,13 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 </div>
 <div class="sect1">
-<h2 id="api"><a class="anchor" href="#api"></a>API</h2>
+<h2 id="projektvaluerestapi"><a class="anchor" href="#projektvaluerestapi"></a>ProjektValueRestApi</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="projektvaluerestapi"><a class="anchor" href="#projektvaluerestapi"></a>ProjektValueRestApi</h3>
 <div class="paragraph">
 <p>REST-API für die Verwaltung von <em>Projekt</em>-Objekten.</p>
 </div>
-<div class="sect3">
-<h4 id="post-apiprojekt"><a class="anchor" href="#post-apiprojekt"></a><code>POST /api/projekt</code></h4>
+<div class="sect2">
+<h3 id="post-apiprojekt"><a class="anchor" href="#post-apiprojekt"></a><code>POST /api/projekt</code></h3>
 <div class="paragraph">
 <p>Die Operation speichert ein neues <em>Projekt</em>-Objekt.</p>
 </div>
@@ -631,26 +625,26 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "51906799-7edc-43c2-aa3d-592b5ae18b97",
+  "id" : "79d3cb37-0578-4902-90bc-125a1818340c",
   "name" : "Projekt A",
   "aktiv" : true,
   "sprache" : "EN",
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97"
+    "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c"
   }, {
     "rel" : "projektValue",
-    "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97"
+    "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c"
   }, {
     "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97/allAufgabe"
-  }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97/allMitglied"
+    "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c/allAufgabe"
   }, {
     "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97/besitzer"
+    "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -667,8 +661,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn die Daten bereits existieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="put-apiprojektid"><a class="anchor" href="#put-apiprojektid"></a><code>PUT /api/projekt/{id}</code></h4>
+<div class="sect2">
+<h3 id="put-apiprojektid"><a class="anchor" href="#put-apiprojektid"></a><code>PUT /api/projekt/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation aktualisiert ein existierendes <em>Projekt</em>-Objekt oder erzeugt ein Neues.</p>
 </div>
@@ -722,11 +716,11 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
-  }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -743,8 +737,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="put-apiprojektidbesitzer"><a class="anchor" href="#put-apiprojektidbesitzer"></a><code>PUT /api/projekt/{id}/besitzer</code></h4>
+<div class="sect2">
+<h3 id="put-apiprojektidbesitzer"><a class="anchor" href="#put-apiprojektidbesitzer"></a><code>PUT /api/projekt/{id}/besitzer</code></h3>
 <div class="paragraph">
 <p>Die Operation ändert den Besitzer im <em>Projekt</em>-Objekt.</p>
 </div>
@@ -783,8 +777,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>No content</code> bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="put-apiprojektidallmitglied"><a class="anchor" href="#put-apiprojektidallmitglied"></a><code>PUT /api/projekt/{id}/allMitglied</code></h4>
+<div class="sect2">
+<h3 id="put-apiprojektidallmitglied"><a class="anchor" href="#put-apiprojektidallmitglied"></a><code>PUT /api/projekt/{id}/allMitglied</code></h3>
 <div class="paragraph">
 <p>Die Operation ändert die Mitglieder im <em>Projekt</em>-Objekt.</p>
 </div>
@@ -823,8 +817,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>No content</code> bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-apiprojekt"><a class="anchor" href="#get-apiprojekt"></a><code>GET /api/projekt</code></h4>
+<div class="sect2">
+<h3 id="get-apiprojekt"><a class="anchor" href="#get-apiprojekt"></a><code>GET /api/projekt</code></h3>
 <div class="paragraph">
 <p>Die Operation gibt alle gespeicherten <em>Projekt</em>-Objekte zurück.</p>
 </div>
@@ -860,48 +854,48 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "href" : "http://localhost:8080/api/projekt/search"
   } ],
   "content" : [ {
-    "id" : "51906799-7edc-43c2-aa3d-592b5ae18b97",
-    "name" : "Projekt A",
-    "aktiv" : true,
-    "sprache" : "EN",
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97"
-    }, {
-      "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97"
-    }, {
-      "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97/allAufgabe"
-    }, {
-      "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97/allMitglied"
-    }, {
-      "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/51906799-7edc-43c2-aa3d-592b5ae18b97/besitzer"
-    } ]
-  }, {
-    "id" : "d9416b96-c1b7-401a-9e80-87fd5b6ac351",
+    "id" : "4e8d86c2-011f-4a1d-a374-9c89a117f44b",
     "name" : "Projekt B",
     "aktiv" : true,
     "sprache" : "DE",
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/d9416b96-c1b7-401a-9e80-87fd5b6ac351"
+      "href" : "http://localhost:8080/api/projekt/4e8d86c2-011f-4a1d-a374-9c89a117f44b"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/d9416b96-c1b7-401a-9e80-87fd5b6ac351"
+      "href" : "http://localhost:8080/api/projekt/4e8d86c2-011f-4a1d-a374-9c89a117f44b"
     }, {
       "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/d9416b96-c1b7-401a-9e80-87fd5b6ac351/allAufgabe"
-    }, {
-      "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/d9416b96-c1b7-401a-9e80-87fd5b6ac351/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/4e8d86c2-011f-4a1d-a374-9c89a117f44b/allAufgabe"
     }, {
       "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/d9416b96-c1b7-401a-9e80-87fd5b6ac351/besitzer"
+      "href" : "http://localhost:8080/api/projekt/4e8d86c2-011f-4a1d-a374-9c89a117f44b/besitzer"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/4e8d86c2-011f-4a1d-a374-9c89a117f44b/allMitglied"
+    } ]
+  }, {
+    "id" : "79d3cb37-0578-4902-90bc-125a1818340c",
+    "name" : "Projekt A",
+    "aktiv" : true,
+    "sprache" : "EN",
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c"
+    }, {
+      "rel" : "projektValue",
+      "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c"
+    }, {
+      "rel" : "allAufgabe",
+      "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c/allAufgabe"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c/besitzer"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/79d3cb37-0578-4902-90bc-125a1818340c/allMitglied"
     } ]
   } ],
   "page" : {
@@ -919,8 +913,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-apiprojektid"><a class="anchor" href="#get-apiprojektid"></a><code>GET /api/projekt/{id}</code></h4>
+<div class="sect2">
+<h3 id="get-apiprojektid"><a class="anchor" href="#get-apiprojektid"></a><code>GET /api/projekt/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation zeigt ein gespeichertes <em>Projekt</em>-Objekt an.</p>
 </div>
@@ -960,11 +954,11 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
-  }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -978,8 +972,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-apiprojektsearchfindbyname"><a class="anchor" href="#get-apiprojektsearchfindbyname"></a><code>GET /api/projekt/search/findByName</code></h4>
+<div class="sect2">
+<h3 id="get-apiprojektsearchfindbyname"><a class="anchor" href="#get-apiprojektsearchfindbyname"></a><code>GET /api/projekt/search/findByName</code></h3>
 <div class="paragraph">
 <p>Die Operation sucht ein gespeichertes <em>Projekt</em>-Objekt mit dem angegebenen endeutigen Namen.</p>
 </div>
@@ -1019,11 +1013,11 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
-  }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   } ]
 }</code></pre>
 </div>
@@ -1037,8 +1031,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="delete-apiprojektid"><a class="anchor" href="#delete-apiprojektid"></a><code>DELETE /api/projekt/{id}</code></h4>
+<div class="sect2">
+<h3 id="delete-apiprojektid"><a class="anchor" href="#delete-apiprojektid"></a><code>DELETE /api/projekt/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation löscht ein gespeichertes <em>Projekt</em>-Objekt.</p>
 </div>
@@ -1075,13 +1069,15 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="aufgabevaluerestapi"><a class="anchor" href="#aufgabevaluerestapi"></a>AufgabeValueRestApi</h3>
+</div>
+<div class="sect1">
+<h2 id="aufgabevaluerestapi"><a class="anchor" href="#aufgabevaluerestapi"></a>AufgabeValueRestApi</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>REST-API für die Verwaltung von <em>Aufgabe</em>-Objekten.</p>
 </div>
-<div class="sect3">
-<h4 id="post-apiaufgabe"><a class="anchor" href="#post-apiaufgabe"></a><code>POST /api/aufgabe</code></h4>
+<div class="sect2">
+<h3 id="post-apiaufgabe"><a class="anchor" href="#post-apiaufgabe"></a><code>POST /api/aufgabe</code></h3>
 <div class="paragraph">
 <p>Die Operation speichert ein neues <em>Aufgabe</em>-Objekt.</p>
 </div>
@@ -1120,19 +1116,19 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "b0043553-5fc3-43fd-916a-018cae5d874a",
+  "id" : "c90353d6-2618-4dec-9064-4014c30d51a1",
   "text" : "Aufgabe A",
   "aktiv" : true,
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/aufgabe/b0043553-5fc3-43fd-916a-018cae5d874a"
+    "href" : "http://localhost:8080/api/aufgabe/c90353d6-2618-4dec-9064-4014c30d51a1"
   }, {
     "rel" : "aufgabeValue",
-    "href" : "http://localhost:8080/api/aufgabe/b0043553-5fc3-43fd-916a-018cae5d874a"
+    "href" : "http://localhost:8080/api/aufgabe/c90353d6-2618-4dec-9064-4014c30d51a1"
   }, {
     "rel" : "projekt",
-    "href" : "http://localhost:8080/api/aufgabe/b0043553-5fc3-43fd-916a-018cae5d874a/projekt"
+    "href" : "http://localhost:8080/api/aufgabe/c90353d6-2618-4dec-9064-4014c30d51a1/projekt"
   } ]
 }</code></pre>
 </div>
@@ -1149,8 +1145,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn die Daten bereits existieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="put-apiaufgabeid"><a class="anchor" href="#put-apiaufgabeid"></a><code>PUT /api/aufgabe/{id}</code></h4>
+<div class="sect2">
+<h3 id="put-apiaufgabeid"><a class="anchor" href="#put-apiaufgabeid"></a><code>PUT /api/aufgabe/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation aktualisiert ein existierendes <em>Aufgabe</em>-Objekt oder erzeugt ein Neues.</p>
 </div>
@@ -1218,8 +1214,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="put-apiaufgabeidprojekt"><a class="anchor" href="#put-apiaufgabeidprojekt"></a><code>PUT /api/aufgabe/{id}/projekt</code></h4>
+<div class="sect2">
+<h3 id="put-apiaufgabeidprojekt"><a class="anchor" href="#put-apiaufgabeidprojekt"></a><code>PUT /api/aufgabe/{id}/projekt</code></h3>
 <div class="paragraph">
 <p>Die Operation ändert das Projekt im <em>Aufgabe</em>-Objekt.</p>
 </div>
@@ -1258,8 +1254,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>No content</code> bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-apiaufgabe"><a class="anchor" href="#get-apiaufgabe"></a><code>GET /api/aufgabe</code></h4>
+<div class="sect2">
+<h3 id="get-apiaufgabe"><a class="anchor" href="#get-apiaufgabe"></a><code>GET /api/aufgabe</code></h3>
 <div class="paragraph">
 <p>Die Operation gibt alle gespeicherten <em>Aufgabe</em>-Objekte zurück.</p>
 </div>
@@ -1295,49 +1291,49 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "href" : "http://localhost:8080/api/aufgabe/search"
   } ],
   "content" : [ {
-    "id" : "9c5b52aa-95a5-4005-a550-c670845adfe3",
+    "id" : "489cfa84-c4f6-49de-9079-5d12b5e01893",
     "text" : "Aufgabe B",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/9c5b52aa-95a5-4005-a550-c670845adfe3"
+      "href" : "http://localhost:8080/api/aufgabe/489cfa84-c4f6-49de-9079-5d12b5e01893"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/9c5b52aa-95a5-4005-a550-c670845adfe3"
+      "href" : "http://localhost:8080/api/aufgabe/489cfa84-c4f6-49de-9079-5d12b5e01893"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/9c5b52aa-95a5-4005-a550-c670845adfe3/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/489cfa84-c4f6-49de-9079-5d12b5e01893/projekt"
     } ]
   }, {
-    "id" : "b0043553-5fc3-43fd-916a-018cae5d874a",
+    "id" : "6bea96f2-bd7e-4e89-a444-34071f8f86b8",
     "text" : "Aufgabe A",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/b0043553-5fc3-43fd-916a-018cae5d874a"
+      "href" : "http://localhost:8080/api/aufgabe/6bea96f2-bd7e-4e89-a444-34071f8f86b8"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/b0043553-5fc3-43fd-916a-018cae5d874a"
+      "href" : "http://localhost:8080/api/aufgabe/6bea96f2-bd7e-4e89-a444-34071f8f86b8"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/b0043553-5fc3-43fd-916a-018cae5d874a/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/6bea96f2-bd7e-4e89-a444-34071f8f86b8/projekt"
     } ]
   }, {
-    "id" : "e1e8ce0d-ea2c-4d7d-a929-17e4b1d2fd6f",
+    "id" : "c90353d6-2618-4dec-9064-4014c30d51a1",
     "text" : "Aufgabe A",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/e1e8ce0d-ea2c-4d7d-a929-17e4b1d2fd6f"
+      "href" : "http://localhost:8080/api/aufgabe/c90353d6-2618-4dec-9064-4014c30d51a1"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/e1e8ce0d-ea2c-4d7d-a929-17e4b1d2fd6f"
+      "href" : "http://localhost:8080/api/aufgabe/c90353d6-2618-4dec-9064-4014c30d51a1"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/e1e8ce0d-ea2c-4d7d-a929-17e4b1d2fd6f/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/c90353d6-2618-4dec-9064-4014c30d51a1/projekt"
     } ]
   } ],
   "page" : {
@@ -1355,8 +1351,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-apiaufgabeid"><a class="anchor" href="#get-apiaufgabeid"></a><code>GET /api/aufgabe/{id}</code></h4>
+<div class="sect2">
+<h3 id="get-apiaufgabeid"><a class="anchor" href="#get-apiaufgabeid"></a><code>GET /api/aufgabe/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation zeigt ein gespeichertes <em>Aufgabe</em>-Objekt an.</p>
 </div>
@@ -1407,8 +1403,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="delete-apiaufgabeid"><a class="anchor" href="#delete-apiaufgabeid"></a><code>DELETE /api/aufgabe/{id}</code></h4>
+<div class="sect2">
+<h3 id="delete-apiaufgabeid"><a class="anchor" href="#delete-apiaufgabeid"></a><code>DELETE /api/aufgabe/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation löscht ein gespeichertes <em>Aufgabe</em>-Objekt.</p>
 </div>
@@ -1440,7 +1436,6 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="paragraph">
 <p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1496,7 +1491,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:17:56 UTC
+Last updated 2021-02-07 18:24:51 UTC
 </div>
 </div>
 <style>

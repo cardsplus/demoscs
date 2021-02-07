@@ -452,19 +452,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#überblick">Überblick</a></li>
 <li><a href="#modell">Modell</a></li>
-<li><a href="#ui">UI</a></li>
-<li><a href="#api">API</a>
-<ul class="sectlevel2">
+<li><a href="#anwendung">Anwendung</a></li>
 <li><a href="#nutzervaluerestapi">NutzerValueRestApi</a>
-<ul class="sectlevel3">
+<ul class="sectlevel2">
 <li><a href="#post-apinutzer"><code>POST /api/nutzer</code></a></li>
 <li><a href="#put-apinutzerid"><code>PUT /api/nutzer/{id}</code></a></li>
 <li><a href="#get-apinutzer"><code>GET /api/nutzer</code></a></li>
 <li><a href="#get-apinutzerid"><code>GET /api/nutzer/{id}</code></a></li>
 <li><a href="#get-apinutzersearchfindbymail"><code>GET /api/nutzer/search/findByMail</code></a></li>
 <li><a href="#delete-apinutzerid"><code>DELETE /api/nutzer/{id}</code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="#konfiguration">Konfiguration</a>
@@ -559,7 +555,7 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 </div>
 <div class="sect1">
-<h2 id="ui"><a class="anchor" href="#ui"></a>UI</h2>
+<h2 id="anwendung"><a class="anchor" href="#anwendung"></a>Anwendung</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Der Dienst hat eine reaktive browser-basierte Benutzeroberfläche.</p>
@@ -567,15 +563,13 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 </div>
 <div class="sect1">
-<h2 id="api"><a class="anchor" href="#api"></a>API</h2>
+<h2 id="nutzervaluerestapi"><a class="anchor" href="#nutzervaluerestapi"></a>NutzerValueRestApi</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="nutzervaluerestapi"><a class="anchor" href="#nutzervaluerestapi"></a>NutzerValueRestApi</h3>
 <div class="paragraph">
 <p>REST-API für die Verwaltung von <em>Nutzer</em>-Objekten.</p>
 </div>
-<div class="sect3">
-<h4 id="post-apinutzer"><a class="anchor" href="#post-apinutzer"></a><code>POST /api/nutzer</code></h4>
+<div class="sect2">
+<h3 id="post-apinutzer"><a class="anchor" href="#post-apinutzer"></a><code>POST /api/nutzer</code></h3>
 <div class="paragraph">
 <p>Die Operation speichert ein neues <em>Nutzer</em>-Objekt.</p>
 </div>
@@ -616,7 +610,7 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "007bd91d-25f6-4436-a0fa-7c9047bf1847",
+  "id" : "4ed5e8a7-3314-420d-b70f-c75e53ecd542",
   "mail" : "Mia.Musterfrau@a.de",
   "name" : "Mia Musterfrau",
   "aktiv" : true,
@@ -624,10 +618,10 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/007bd91d-25f6-4436-a0fa-7c9047bf1847"
+    "href" : "http://localhost:8080/api/nutzer/4ed5e8a7-3314-420d-b70f-c75e53ecd542"
   }, {
     "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/007bd91d-25f6-4436-a0fa-7c9047bf1847"
+    "href" : "http://localhost:8080/api/nutzer/4ed5e8a7-3314-420d-b70f-c75e53ecd542"
   } ]
 }</code></pre>
 </div>
@@ -644,8 +638,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn die Daten bereits existieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="put-apinutzerid"><a class="anchor" href="#put-apinutzerid"></a><code>PUT /api/nutzer/{id}</code></h4>
+<div class="sect2">
+<h3 id="put-apinutzerid"><a class="anchor" href="#put-apinutzerid"></a><code>PUT /api/nutzer/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation aktualisiert ein existierendes <em>Nutzer</em>-Objekt oder erzeugt ein Neues.</p>
 </div>
@@ -714,8 +708,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-apinutzer"><a class="anchor" href="#get-apinutzer"></a><code>GET /api/nutzer</code></h4>
+<div class="sect2">
+<h3 id="get-apinutzer"><a class="anchor" href="#get-apinutzer"></a><code>GET /api/nutzer</code></h3>
 <div class="paragraph">
 <p>Die Operation gibt alle gespeicherten <em>Nutzer</em>-Objekte zurück.</p>
 </div>
@@ -751,7 +745,7 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "href" : "http://localhost:8080/api/nutzer/search"
   } ],
   "content" : [ {
-    "id" : "007bd91d-25f6-4436-a0fa-7c9047bf1847",
+    "id" : "4ed5e8a7-3314-420d-b70f-c75e53ecd542",
     "mail" : "Mia.Musterfrau@a.de",
     "name" : "Mia Musterfrau",
     "aktiv" : true,
@@ -759,13 +753,13 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/007bd91d-25f6-4436-a0fa-7c9047bf1847"
+      "href" : "http://localhost:8080/api/nutzer/4ed5e8a7-3314-420d-b70f-c75e53ecd542"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/007bd91d-25f6-4436-a0fa-7c9047bf1847"
+      "href" : "http://localhost:8080/api/nutzer/4ed5e8a7-3314-420d-b70f-c75e53ecd542"
     } ]
   }, {
-    "id" : "91dd75e4-398e-4975-8a1c-f25a0618beb8",
+    "id" : "a8f7f7a9-d880-4379-9038-42fa34342051",
     "mail" : "Bea.Musterfrau@a.de",
     "name" : "Bea Musterfrau",
     "aktiv" : true,
@@ -773,10 +767,10 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/91dd75e4-398e-4975-8a1c-f25a0618beb8"
+      "href" : "http://localhost:8080/api/nutzer/a8f7f7a9-d880-4379-9038-42fa34342051"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/91dd75e4-398e-4975-8a1c-f25a0618beb8"
+      "href" : "http://localhost:8080/api/nutzer/a8f7f7a9-d880-4379-9038-42fa34342051"
     } ]
   } ],
   "page" : {
@@ -794,8 +788,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-apinutzerid"><a class="anchor" href="#get-apinutzerid"></a><code>GET /api/nutzer/{id}</code></h4>
+<div class="sect2">
+<h3 id="get-apinutzerid"><a class="anchor" href="#get-apinutzerid"></a><code>GET /api/nutzer/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation zeigt ein gespeichertes <em>Nutzer</em>-Objekt an.</p>
 </div>
@@ -845,8 +839,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-apinutzersearchfindbymail"><a class="anchor" href="#get-apinutzersearchfindbymail"></a><code>GET /api/nutzer/search/findByMail</code></h4>
+<div class="sect2">
+<h3 id="get-apinutzersearchfindbymail"><a class="anchor" href="#get-apinutzersearchfindbymail"></a><code>GET /api/nutzer/search/findByMail</code></h3>
 <div class="paragraph">
 <p>Die Operation sucht ein gespeichertes <em>Nutzer</em>-Objekt mit der angegebenen endeutigen E-Mail-Adresse.</p>
 </div>
@@ -896,8 +890,8 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="delete-apinutzerid"><a class="anchor" href="#delete-apinutzerid"></a><code>DELETE /api/nutzer/{id}</code></h4>
+<div class="sect2">
+<h3 id="delete-apinutzerid"><a class="anchor" href="#delete-apinutzerid"></a><code>DELETE /api/nutzer/{id}</code></h3>
 <div class="paragraph">
 <p>Die Operation löscht ein gespeichertes <em>Nutzer</em>-Objekt.</p>
 </div>
@@ -931,7 +925,6 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 </div>
 <div class="paragraph">
 <p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
-</div>
 </div>
 </div>
 </div>
@@ -987,7 +980,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:17:56 UTC
+Last updated 2021-02-07 18:24:51 UTC
 </div>
 </div>
 <style>
