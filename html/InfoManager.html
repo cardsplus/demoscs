@@ -461,7 +461,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#konfiguration">Konfiguration</a></li>
+<li><a href="#konfiguration">Konfiguration</a>
+<ul class="sectlevel2">
+<li><a href="#endpoint-properties"><code>endpoint.properties</code></a></li>
+<li><a href="#database-properties"><code>database.properties</code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -611,12 +616,13 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="sect1">
 <h2 id="konfiguration"><a class="anchor" href="#konfiguration"></a>Konfiguration</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="endpoint-properties"><a class="anchor" href="#endpoint-properties"></a><code>endpoint.properties</code></h3>
 <div class="paragraph">
 <p>Der Dienst nutzt eine zentrale Konfigurationsdatei für Endpunkte.
 Sie wird nur beim Start der Anwendung gelesen.</p>
 </div>
 <div class="listingblock">
-<div class="title">endpoint.properties</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="text"># Konfiguration für HTTP
 server.port=8080
@@ -628,12 +634,14 @@ management.endpoint.health.probes.enabled=true
 management.endpoints.web.exposure.include=*</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="database-properties"><a class="anchor" href="#database-properties"></a><code>database.properties</code></h3>
 <div class="paragraph">
 <p>Der Dienst nutzt eine zentrale Konfigurationsdatei für die Datenbank.
 Sie wird nur beim Start der Anwendung gelesen.</p>
 </div>
 <div class="listingblock">
-<div class="title">database.properties</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="text"># Konfiguration für Liquibase
 spring.liquibase.enabled=true
@@ -649,9 +657,6 @@ spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Der Dienst nutzt eine zentrale Konfigurationsdatei für die Zeitsteuerung.
-Sie wird nur beim Start der Anwendung gelesen.</p>
 </div>
 </div>
 </div>
@@ -659,7 +664,7 @@ Sie wird nur beim Start der Anwendung gelesen.</p>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-07 18:03:20 UTC
+Last updated 2021-02-07 18:17:56 UTC
 </div>
 </div>
 <style>
