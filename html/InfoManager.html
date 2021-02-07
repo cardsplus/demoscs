@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
 <meta name="author" content="Robert Bruckbauer">
-<title>Service TeamManager</title>
+<title>Service InfoManager</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,7 +440,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Service TeamManager</h1>
+<h1>Service InfoManager</h1>
 <div class="details">
 <span id="author" class="author">Robert Bruckbauer</span><br>
 <span id="email" class="email"><a href="mailto:bruckbauer@gmx.at">bruckbauer@gmx.at</a></span><br>
@@ -450,38 +450,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#überblick">Überblick</a></li>
 <li><a href="#modell">Modell</a></li>
 <li><a href="#ui">UI</a></li>
 <li><a href="#api">API</a>
 <ul class="sectlevel2">
-<li><a href="#nutzervaluerestapi">NutzerValueRestApi</a>
+<li><a href="#versionrestapi">VersionRestApi</a>
 <ul class="sectlevel3">
-<li><a href="#post-apinutzer"><code>POST /api/nutzer</code></a></li>
-<li><a href="#put-apinutzerid"><code>PUT /api/nutzer/{id}</code></a></li>
-<li><a href="#get-apinutzer"><code>GET /api/nutzer</code></a></li>
-<li><a href="#get-apinutzerid"><code>GET /api/nutzer/{id}</code></a></li>
-<li><a href="#get-apinutzersearchfindbymail"><code>GET /api/nutzer/search/findByMail</code></a></li>
-<li><a href="#delete-apinutzerid"><code>DELETE /api/nutzer/{id}</code></a></li>
+<li><a href="#get-version"><code>GET /version</code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#konfiguration">Konfiguration</a>
-<ul class="sectlevel2">
-<li><a href="#endpoint-properties"><code>endpoint.properties</code></a></li>
-<li><a href="#database-properties"><code>database.properties</code></a></li>
-</ul>
-</li>
+<li><a href="#konfiguration">Konfiguration</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="überblick"><a class="anchor" href="#überblick"></a>Überblick</h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Der Dienst ist Teil eines <em>Self Contained Systems</em>.</p>
+<p>Der Dienst hat die Aufgabe, die Informationen über die Anwendung bereitzustellen.</p>
+</div>
+<div class="paragraph">
+<p>Der Dienst ist Teil eines <em>Self Contained System</em>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -531,9 +522,6 @@ für mehr Informationen.
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Der Dienst zeigt an einem nicht trivialen Beispiel den effektiven Einsatz des <em>Spring</em>-Frameworks und weiterer Projekte aus den Spring-Universum.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -545,7 +533,7 @@ Für die Speicherung in der Datenbank wird <code>spring-data-jpa</code> als Abst
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Team.png" alt="Team" width="246" height="100">
+<img src="images/model.png" alt="model" width="122" height="100">
 </div>
 </div>
 <div class="paragraph">
@@ -569,368 +557,52 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="sect1">
 <h2 id="api"><a class="anchor" href="#api"></a>API</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Der Dienst bietet eine REST-Schnittstelle mit HATEOAS an.</p>
+</div>
 <div class="sect2">
-<h3 id="nutzervaluerestapi"><a class="anchor" href="#nutzervaluerestapi"></a>NutzerValueRestApi</h3>
+<h3 id="versionrestapi"><a class="anchor" href="#versionrestapi"></a>VersionRestApi</h3>
 <div class="paragraph">
-<p>REST-API für die Verwaltung von <em>Nutzer</em>-Objekten.</p>
+<p>REST-API für die Abfrage des <em>Version</em>-Objektes.</p>
 </div>
 <div class="sect3">
-<h4 id="post-apinutzer"><a class="anchor" href="#post-apinutzer"></a><code>POST /api/nutzer</code></h4>
+<h4 id="get-version"><a class="anchor" href="#get-version"></a><code>GET /version</code></h4>
 <div class="paragraph">
-<p>Die Operation speichert ein neues <em>Nutzer</em>-Objekt.</p>
+<p>Die Operation lädt die aktuelle Version der Anwendung aus der <code>VERSION</code>-Datei im <em>Classpath</em>.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="listingblock">
 <div class="title">CURL</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer'</span> <span class="nt">-i</span> <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-  "mail" : "Mia.Musterfrau@a.de",
-  "name" : "Mia Musterfrau",
-  "aktiv" : "true",
-  "allSprache" : [ "EN" ]
-}'</span></code></pre>
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/version'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Request</div>
 <div class="content">
-<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">POST</span> <span class="nn">/api/nutzer</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/version</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Content-Length</span><span class="p">:</span> <span class="s">112</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
-
-<span class="p">{</span><span class="w">
-  </span><span class="nl">"mail"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Mia.Musterfrau@a.de"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Mia Musterfrau"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"allSprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"EN"</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span></code></pre>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "157933d2-dd76-45f7-a3c3-147b5a82c13d",
-  "mail" : "Mia.Musterfrau@a.de",
-  "name" : "Mia Musterfrau",
-  "aktiv" : true,
-  "allSprache" : [ "DE", "EN" ],
-  "content" : [ ],
-  "links" : [ {
-    "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/157933d2-dd76-45f7-a3c3-147b5a82c13d"
-  }, {
-    "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/157933d2-dd76-45f7-a3c3-147b5a82c13d"
-  } ]
+  "major" : 2,
+  "minor" : 1
 }</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Die Operation meldet <code>Created</code> bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.</p>
+<p>Die Operation meldet <code>No Content</code> bzw. den Code 204, wenn die Daten nicht zulässig sind.</p>
 </div>
 <div class="paragraph">
 <p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn die Daten bereits existieren.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="put-apinutzerid"><a class="anchor" href="#put-apinutzerid"></a><code>PUT /api/nutzer/{id}</code></h4>
-<div class="paragraph">
-<p>Die Operation aktualisiert ein existierendes <em>Nutzer</em>-Objekt oder erzeugt ein Neues.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="listingblock">
-<div class="title">CURL</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-  "mail" : "Max.Mustermann@a.de",
-  "name" : "Max Mustermann",
-  "aktiv" : "true",
-  "allSprache" : [ "EN" ]
-}'</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Request</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Content-Length</span><span class="p">:</span> <span class="s">112</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
-
-<span class="p">{</span><span class="w">
-  </span><span class="nl">"mail"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Max.Mustermann@a.de"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Max Mustermann"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"allSprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"EN"</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Response</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code>{
-  "id" : "a1111111-6ee8-4335-b12a-ef84794bd27a",
-  "mail" : "Max.Mustermann@a.de",
-  "name" : "Max Mustermann",
-  "aktiv" : true,
-  "allSprache" : [ "DE", "EN" ],
-  "content" : [ ],
-  "links" : [ {
-    "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
-  }, {
-    "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
-  } ]
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn das Objekt erfolgreich aktualisiert wurde.</p>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Created</code> bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.</p>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="get-apinutzer"><a class="anchor" href="#get-apinutzer"></a><code>GET /api/nutzer</code></h4>
-<div class="paragraph">
-<p>Die Operation gibt alle gespeicherten <em>Nutzer</em>-Objekte zurück.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="listingblock">
-<div class="title">CURL</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Request</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/nutzer</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Response</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code>{
-  "links" : [ {
-    "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer"
-  }, {
-    "rel" : "profile",
-    "href" : "http://localhost:8080/api/profile/nutzer"
-  }, {
-    "rel" : "search",
-    "href" : "http://localhost:8080/api/nutzer/search"
-  } ],
-  "content" : [ {
-    "id" : "157933d2-dd76-45f7-a3c3-147b5a82c13d",
-    "mail" : "Mia.Musterfrau@a.de",
-    "name" : "Mia Musterfrau",
-    "aktiv" : true,
-    "allSprache" : [ "DE", "EN" ],
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/157933d2-dd76-45f7-a3c3-147b5a82c13d"
-    }, {
-      "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/157933d2-dd76-45f7-a3c3-147b5a82c13d"
-    } ]
-  }, {
-    "id" : "fea25421-adc5-476b-9ab8-9ca18e27b235",
-    "mail" : "Bea.Musterfrau@a.de",
-    "name" : "Bea Musterfrau",
-    "aktiv" : true,
-    "allSprache" : [ "DE" ],
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/fea25421-adc5-476b-9ab8-9ca18e27b235"
-    }, {
-      "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/fea25421-adc5-476b-9ab8-9ca18e27b235"
-    } ]
-  } ],
-  "page" : {
-    "size" : 20,
-    "totalElements" : 2,
-    "totalPages" : 1,
-    "number" : 0
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="get-apinutzerid"><a class="anchor" href="#get-apinutzerid"></a><code>GET /api/nutzer/{id}</code></h4>
-<div class="paragraph">
-<p>Die Operation zeigt ein gespeichertes <em>Nutzer</em>-Objekt an.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="listingblock">
-<div class="title">CURL</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Request</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Response</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code>{
-  "id" : "a1111111-6ee8-4335-b12a-ef84794bd27a",
-  "mail" : "Max.Mustermann@a.de",
-  "name" : "Max Mustermann",
-  "aktiv" : false,
-  "allSprache" : [ "DE" ],
-  "content" : [ ],
-  "links" : [ {
-    "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
-  }, {
-    "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
-  } ]
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="get-apinutzersearchfindbymail"><a class="anchor" href="#get-apinutzersearchfindbymail"></a><code>GET /api/nutzer/search/findByMail</code></h4>
-<div class="paragraph">
-<p>Die Operation sucht ein gespeichertes <em>Nutzer</em>-Objekt mit der angegebenen endeutigen E-Mail-Adresse.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="listingblock">
-<div class="title">CURL</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer/search/findByMail?mail=Max.Mustermann%40a.de'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Request</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/nutzer/search/findByMail?mail=Max.Mustermann%40a.de</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Response</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code>{
-  "id" : "a1111111-6ee8-4335-b12a-ef84794bd27a",
-  "mail" : "Max.Mustermann@a.de",
-  "name" : "Max Mustermann",
-  "aktiv" : false,
-  "allSprache" : [ "DE" ],
-  "content" : [ ],
-  "links" : [ {
-    "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
-  }, {
-    "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a"
-  } ]
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="delete-apinutzerid"><a class="anchor" href="#delete-apinutzerid"></a><code>DELETE /api/nutzer/{id}</code></h4>
-<div class="paragraph">
-<p>Die Operation löscht ein gespeichertes <em>Nutzer</em>-Objekt.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="listingblock">
-<div class="title">CURL</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span> <span class="nt">-i</span> <span class="nt">-X</span> DELETE <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Request</div>
-<div class="content">
-<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">DELETE</span> <span class="nn">/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="title">Response</div>
-<div class="content">
-<pre>Keine</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten gelöscht wurden.</p>
-</div>
-<div class="paragraph">
-<p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
 </div>
 </div>
 </div>
@@ -939,13 +611,12 @@ Für die Veröffentlichung der Daten in einem Datenstrom wird <code>spring-kafka
 <div class="sect1">
 <h2 id="konfiguration"><a class="anchor" href="#konfiguration"></a>Konfiguration</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="endpoint-properties"><a class="anchor" href="#endpoint-properties"></a><code>endpoint.properties</code></h3>
 <div class="paragraph">
-<p>Der Dienst hat eine zentrale Konfigurationsdatei für Endpunkte.
+<p>Der Dienst nutzt eine zentrale Konfigurationsdatei für Endpunkte.
 Sie wird nur beim Start der Anwendung gelesen.</p>
 </div>
 <div class="listingblock">
+<div class="title">endpoint.properties</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="text"># Konfiguration für HTTP
 server.port=8080
@@ -957,14 +628,12 @@ management.endpoint.health.probes.enabled=true
 management.endpoints.web.exposure.include=*</code></pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="database-properties"><a class="anchor" href="#database-properties"></a><code>database.properties</code></h3>
 <div class="paragraph">
-<p>Der Dienst hat eine zentrale Konfigurationsdatei für die Datenbank.
+<p>Der Dienst nutzt eine zentrale Konfigurationsdatei für die Datenbank.
 Sie wird nur beim Start der Anwendung gelesen.</p>
 </div>
 <div class="listingblock">
+<div class="title">database.properties</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="text"># Konfiguration für Liquibase
 spring.liquibase.enabled=true
@@ -980,6 +649,9 @@ spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Der Dienst nutzt eine zentrale Konfigurationsdatei für die Zeitsteuerung.
+Sie wird nur beim Start der Anwendung gelesen.</p>
 </div>
 </div>
 </div>
