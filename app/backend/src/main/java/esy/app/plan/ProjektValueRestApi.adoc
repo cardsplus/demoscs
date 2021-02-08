@@ -1,5 +1,5 @@
 :restdocDir: ../../../../../../build/generated-snippets
-= ProjektValueRestApi
+= Projekt-API
 
 REST-API für die Verwaltung von _Projekt_-Objekten.
 
@@ -165,6 +165,6 @@ include::{restdocDir}/delete-api-projekt/http-request.adoc[]
 
 ****
 
-Die Operation meldet `Ok` bzw. den Code 200, wenn die Daten gelöscht wurden.
+Die Operation meldet `No Content` bzw. den Code 204, wenn die Daten gelöscht wurden.
 
 Die Operation meldet `Not found` bzw. den Code 404, wenn die Daten nicht existieren.

@@ -9,7 +9,15 @@
     },
     "allAdocElement": [
         {
-            "filename": "doc/service.adoc",
+            "filename": "doc/InfoManager.adoc",
+            "leveloffset": 1
+        },
+        {
+            "filename": "doc/PlanManager.adoc",
+            "leveloffset": 1
+        },
+        {
+            "filename": "doc/TeamManager.adoc",
             "leveloffset": 1
         }
     ],
@@ -18,11 +26,6 @@
             "module": "app/backend-api",
             "directory": "src/main/java/esy/api",
             "style": "entity"
-        },
-        {
-            "module": "app/backend",
-            "directory": "src/main/java/esy/app",
-            "style": "tagged"
         }
     ],
     "allPageStyler": [
