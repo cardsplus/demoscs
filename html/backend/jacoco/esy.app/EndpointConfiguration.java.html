@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EndpointConfiguration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">backend</a> &gt; <a href="index.source.html" class="el_package">esy.app</a> &gt; <span class="el_source">EndpointConfiguration.java</span></div><h1>EndpointConfiguration.java</h1><pre class="source lang-java linenums">package esy.app;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import esy.api.plan.AufgabeValue;
+import esy.api.plan.ProjektValue;
+import esy.api.team.NutzerValue;
+import esy.json.JsonMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
+import org.springframework.http.MediaType;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import static org.springframework.data.rest.core.mapping.RepositoryDetectionStrategy.RepositoryDetectionStrategies;
+
+@Configuration
+@PropertySource(
+        ignoreResourceNotFound = false,
+        value = &quot;classpath:endpoint.properties&quot;)
+<span class="fc" id="L24">public class EndpointConfiguration {</span>
+
+    /**
+     * Base path of the REST API requests.
+     */
+    static final String BASE = &quot;/api&quot;;
+
+    /**
+     * CORS configuration for all REST API requests.
+     * Same values must apply to Spring Security,
+     * Spring Web AND Spring Data.
+     */
+<span class="fc" id="L36">    static final CorsConfiguration CORS = new CorsConfiguration();</span>
+
+    static {
+<span class="fc" id="L39">        CORS.setAllowCredentials(true);</span>
+<span class="fc" id="L40">        CORS.addAllowedHeader(&quot;Authorization&quot;);</span>
+<span class="fc" id="L41">        CORS.addAllowedHeader(&quot;Content-Type&quot;);</span>
+<span class="fc" id="L42">        CORS.addAllowedHeader(&quot;Content-Length&quot;);</span>
+<span class="fc" id="L43">        CORS.addAllowedMethod(&quot;GET&quot;);</span>
+<span class="fc" id="L44">        CORS.addAllowedMethod(&quot;POST&quot;);</span>
+<span class="fc" id="L45">        CORS.addAllowedMethod(&quot;PUT&quot;);</span>
+<span class="fc" id="L46">        CORS.addAllowedMethod(&quot;DELETE&quot;);</span>
+<span class="fc" id="L47">        CORS.addAllowedOrigin(&quot;http://localhost:5000&quot;);</span>
+<span class="fc" id="L48">        CORS.setMaxAge(3600L);</span>
+<span class="fc" id="L49">    }</span>
+
+    static void applyCORS(final CorsRegistry registry) {
+<span class="fc" id="L52">        registry.addMapping(&quot;/**&quot;)</span>
+<span class="fc" id="L53">                .allowCredentials(CORS.getAllowCredentials())</span>
+<span class="fc" id="L54">                .allowedHeaders(CORS.getAllowedHeaders().toArray(String[]::new))</span>
+<span class="fc" id="L55">                .allowedMethods(CORS.getAllowedMethods().toArray(String[]::new))</span>
+<span class="fc" id="L56">                .allowedOrigins(CORS.getAllowedOrigins().toArray(String[]::new))</span>
+<span class="fc" id="L57">                .maxAge(CORS.getMaxAge());</span>
+<span class="fc" id="L58">    }</span>
+
+    @Bean
+    public WebMvcConfigurer webMvcConfigurer() {
+<span class="fc" id="L62">        return new WebMvcConfigurer() {</span>
+            @Override
+            public void addCorsMappings(final CorsRegistry registry) {
+<span class="fc" id="L65">                applyCORS(registry);</span>
+<span class="fc" id="L66">            }</span>
+        };
+    }
+
+    /**
+     * {@see &lt;a href=&quot;https://spring.io/projects/spring-data-rest&quot; /&gt;}
+     * {@see &lt;a href=&quot;https://stackoverflow.com/questions/44295231/how-to-set-default-value-of-exported-as-false-in-rest-resource-spring-data-rest&quot; /&gt;}
+     */
+    @Bean
+    public RepositoryRestConfigurer repositoryRestConfigurer() {
+<span class="fc" id="L76">        return new RepositoryRestConfigurer() {</span>
+
+            @Override
+            public void configureJacksonObjectMapper(final ObjectMapper mapper) {
+                // apply defaults
+<span class="fc" id="L81">                JsonMapper.configure(mapper);</span>
+<span class="fc" id="L82">            }</span>
+
+            @Override
+            public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration configuration, final CorsRegistry registry) {
+                // apply defaults
+<span class="fc" id="L87">                configuration.setRepositoryDetectionStrategy(RepositoryDetectionStrategies.ANNOTATED);</span>
+<span class="fc" id="L88">                configuration.setDefaultMediaType(MediaType.APPLICATION_JSON);</span>
+<span class="fc" id="L89">                configuration.setBasePath(BASE);</span>
+                // expose value objects
+<span class="fc" id="L91">                configuration.exposeIdsFor(AufgabeValue.class);</span>
+<span class="fc" id="L92">                configuration.exposeIdsFor(NutzerValue.class);</span>
+<span class="fc" id="L93">                configuration.exposeIdsFor(ProjektValue.class);</span>
+                // add CORS settings
+<span class="fc" id="L95">                applyCORS(registry);</span>
+<span class="fc" id="L96">            }</span>
+        };
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonJpaRestControllerBase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">backend</a> &gt; <a href="index.source.html" class="el_package">esy.rest</a> &gt; <span class="el_source">JsonJpaRestControllerBase.java</span></div><h1>JsonJpaRestControllerBase.java</h1><pre class="source lang-java linenums">package esy.rest;
+
+import esy.json.JsonJpaValueBase;
+import io.micrometer.core.lang.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.rest.core.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Optional;
+
+<span class="fc" id="L19">@RequiredArgsConstructor</span>
+public abstract class JsonJpaRestControllerBase&lt;V extends JsonJpaValueBase&lt;V&gt;&gt; {
+
+<span class="fc" id="L22">    private static final Logger LOG = LoggerFactory.getLogger(JsonJpaRestControllerBase.class);</span>
+
+    private final ApplicationEventPublisher eventPublisher;
+
+    private final TransactionTemplate transactionTemplate;
+
+    @ExceptionHandler
+    void onIllegalArgumentException(final IllegalArgumentException cause, final HttpServletResponse response) throws IOException {
+<span class="nc" id="L30">        LOG.error(cause.getMessage());</span>
+<span class="nc" id="L31">        LOG.trace(cause.getMessage(), cause);</span>
+<span class="nc" id="L32">        response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), cause.getMessage());</span>
+<span class="nc" id="L33">    }</span>
+
+    @HandleBeforeCreate
+    public final void beforeCreate(@NonNull final V value) {
+<span class="fc" id="L37">        LOG.info(&quot;RECEIVED [{}]; creating ...&quot;, value);</span>
+<span class="fc" id="L38">        beforeCreateTransaction(value.verify()).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L39">        LOG.info(&quot;ACCEPTED [{}]&quot;, value);</span>
+<span class="fc" id="L40">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; beforeCreateTransaction(@NonNull final V value) {
+<span class="fc" id="L43">        return Optional.empty();</span>
+    }
+
+    @HandleAfterCreate
+    public final void afterCreate(@NonNull final V value) {
+<span class="fc" id="L48">        afterCreateTransaction(value).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L49">        eventPublisher.publishEvent(value);</span>
+<span class="fc" id="L50">        LOG.info(&quot;RELEASED [{}]&quot;, value);</span>
+<span class="fc" id="L51">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; afterCreateTransaction(@NonNull final V value) {
+<span class="fc" id="L54">        return Optional.empty();</span>
+    }
+
+    @HandleBeforeSave
+    public final void beforeSave(@NonNull final V value) {
+<span class="fc" id="L59">        LOG.info(&quot;RECEIVED [{}]; updating ...&quot;, value);</span>
+<span class="fc" id="L60">        beforeSaveTransaction(value.verify()).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L61">        LOG.info(&quot;ACCEPTED [{}]&quot;, value);</span>
+<span class="fc" id="L62">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; beforeSaveTransaction(@NonNull final V value) {
+<span class="fc" id="L65">        return Optional.empty();</span>
+    }
+
+    @HandleAfterSave
+    public final void afterSave(@NonNull final V value) {
+<span class="fc" id="L70">        afterSaveTransaction(value).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L71">        eventPublisher.publishEvent(value);</span>
+<span class="fc" id="L72">        LOG.info(&quot;RELEASED [{}]&quot;, value);</span>
+<span class="fc" id="L73">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; afterSaveTransaction(@NonNull final V value) {
+<span class="fc" id="L76">        return Optional.empty();</span>
+    }
+
+    @HandleBeforeLinkSave
+    public final void beforeLinkSave(@NonNull final V value, final Object rel) {
+<span class="fc" id="L81">        LOG.info(&quot;RECEIVED [{}]; linking with [{}] ...&quot;, value, rel);</span>
+<span class="fc" id="L82">        beforeLinkSaveTransaction(value.verify()).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L83">        LOG.info(&quot;ACCEPTED [{}]&quot;, value);</span>
+<span class="fc" id="L84">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; beforeLinkSaveTransaction(@NonNull final V value) {
+<span class="fc" id="L87">        return Optional.empty();</span>
+    }
+
+    @HandleAfterLinkSave
+    public final void afterLinkSave(@NonNull final V value, final Object rel) {
+<span class="fc" id="L92">        afterLinkSaveTransaction(value).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L93">        eventPublisher.publishEvent(value);</span>
+<span class="fc" id="L94">        LOG.info(&quot;RELEASED [{}]&quot;, value);</span>
+<span class="fc" id="L95">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; afterLinkSaveTransaction(@NonNull final V value) {
+<span class="fc" id="L98">        return Optional.empty();</span>
+    }
+
+    @HandleBeforeDelete
+    public final void beforeDelete(@NonNull final V value) {
+<span class="fc" id="L103">        LOG.info(&quot;RECEIVED [{}]; deleting ...&quot;, value);</span>
+<span class="fc" id="L104">        beforeDeleteTransaction(value.verify()).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L105">        LOG.info(&quot;ACCEPTED [{}]&quot;, value);</span>
+<span class="fc" id="L106">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; beforeDeleteTransaction(@NonNull final V value) {
+<span class="fc" id="L109">        return Optional.empty();</span>
+    }
+
+    @HandleAfterDelete
+    public final void afterDelete(@NonNull final V value) {
+<span class="fc" id="L114">        afterDeleteTransaction(value).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L115">        eventPublisher.publishEvent(value);</span>
+<span class="fc" id="L116">        LOG.info(&quot;RELEASED [{}]&quot;, value);</span>
+<span class="fc" id="L117">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; afterDeleteTransaction(@NonNull final V value) {
+<span class="fc" id="L120">        return Optional.empty();</span>
+    }
+
+    @HandleBeforeLinkDelete
+    public final void beforeLinkDelete(@NonNull final V value, final Object rel) {
+<span class="fc" id="L125">        LOG.info(&quot;RECEIVED [{}]; unlinking [{}] ...&quot;, value, rel);</span>
+<span class="fc" id="L126">        beforeLinkDeleteTransaction(value.verify()).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L127">        LOG.info(&quot;ACCEPTED [{}]&quot;, value);</span>
+<span class="fc" id="L128">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; beforeLinkDeleteTransaction(@NonNull final V value) {
+<span class="fc" id="L131">        return Optional.empty();</span>
+    }
+
+    @HandleAfterLinkDelete
+    public final void afterLinkDelete(@NonNull final V value, final Object rel) {
+<span class="fc" id="L136">        afterLinkDeleteTransaction(value).ifPresent(transactionTemplate::execute);</span>
+<span class="fc" id="L137">        eventPublisher.publishEvent(value);</span>
+<span class="fc" id="L138">        LOG.info(&quot;RELEASED [{}]&quot;, value);</span>
+<span class="fc" id="L139">    }</span>
+
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; afterLinkDeleteTransaction(@NonNull final V value) {
+<span class="fc" id="L142">        return Optional.empty();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
