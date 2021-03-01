@@ -445,13 +445,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Robert Bruckbauer</span><br>
 <span id="email" class="email"><a href="mailto:bruckbauer@gmx.at">bruckbauer@gmx.at</a></span><br>
 <span id="revnumber">version 2.4.1,</span>
-<span id="revdate">2021/02/28</span>
+<span id="revdate">2021/03/01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#modell">Modell</a></li>
 <li><a href="#anwendung">Anwendung</a></li>
+<li><a href="#health-api">Health-API</a>
+<ul class="sectlevel2">
+<li><a href="#get-actuatorhealth"><code>GET /actuator/health</code></a></li>
+<li><a href="#get-actuatorhealthliveness"><code>GET /actuator/health/liveness</code></a></li>
+<li><a href="#get-actuatorhealthreadyness"><code>GET /actuator/health/readyness</code></a></li>
+</ul>
+</li>
 <li><a href="#version-api">Version-API</a>
 <ul class="sectlevel2">
 <li><a href="#get-version"><code>GET /version</code></a></li>
@@ -470,7 +477,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Der Dienst hat die Aufgabe, die Informationen über die Anwendung bereitzustellen.</p>
+<p>Der Dienst hat die Aufgabe, Informationen über die Anwendung bereitzustellen.</p>
 </div>
 <div class="paragraph">
 <p>Der Dienst ist Teil eines <em>Self Contained System</em>.</p>
@@ -634,6 +641,111 @@ für mehr Informationen.
 </div>
 </div>
 <div class="sect1">
+<h2 id="health-api"><a class="anchor" href="#health-api"></a>Health-API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>REST-API für die Abfrage der Gesundheit der Anwendung.</p>
+</div>
+<div class="sect2">
+<h3 id="get-actuatorhealth"><a class="anchor" href="#get-actuatorhealth"></a><code>GET /actuator/health</code></h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/actuator/health'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/actuator/health</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "status" : "UP",
+  "groups" : [ "liveness", "readiness" ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-actuatorhealthliveness"><a class="anchor" href="#get-actuatorhealthliveness"></a><code>GET /actuator/health/liveness</code></h3>
+<div class="paragraph">
+<p>Die sogenannte <em>Liveness Probe</em> zeigt an, ob die Anwendung ausgeführt wird.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/actuator/health/liveness'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/actuator/health/liveness</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "status" : "UP"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-actuatorhealthreadyness"><a class="anchor" href="#get-actuatorhealthreadyness"></a><code>GET /actuator/health/readyness</code></h3>
+<div class="paragraph">
+<p>Die sogenannte <em>Readiness Probe</em> zeigt an, ob die Anwendung bereit ist, auf Anfragen zu antworten.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/actuator/health/readiness'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/actuator/health/readiness</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "status" : "UP"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="version-api"><a class="anchor" href="#version-api"></a>Version-API</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -699,7 +811,7 @@ server.compression.mime-types=application/json,application/hal+json
 # Konfiguration für REST
 management.health.binders.enabled=true
 management.endpoint.health.probes.enabled=true
-management.endpoints.web.exposure.include=*</code></pre>
+management.endpoints.web.exposure.include=health</code></pre>
 </div>
 </div>
 </div>
@@ -732,7 +844,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-02-28 12:23:01 UTC
+Last updated 2021-03-01 16:29:22 UTC
 </div>
 </div>
 <style>
