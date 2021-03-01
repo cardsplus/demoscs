@@ -3,7 +3,7 @@
 :icons: font
 = Service InfoManager
 
-Der Dienst hat die Aufgabe, die Informationen über die Anwendung bereitzustellen.
+Der Dienst hat die Aufgabe, Informationen über die Anwendung bereitzustellen.
 
 Der Dienst ist Teil eines _Self Contained System_.
 
@@ -75,6 +75,8 @@ Der Datenzugriff wird über eine REST-Schnittstelle mit HATEOAS realisiert.
 TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
+
+include::{projectDir}/app/backend/src/main/java/esy/app/info/HealthRestApi.adoc[leveloffset=+1]
 
 include::{projectDir}/app/backend/src/main/java/esy/app/info/VersionRestApi.adoc[leveloffset=+1]
 

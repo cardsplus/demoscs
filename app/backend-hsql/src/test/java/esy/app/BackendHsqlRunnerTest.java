@@ -49,55 +49,6 @@ public class BackendHsqlRunnerTest {
 	}
 
 	@Test
-	@Order(2)
-	void getLiveness() throws Exception {
-		final RestApiResult result = RestApiConnection.with(
-				toBackendUrl("/actuator/health/liveness")).get();
-		assertThat(result.getCode(),
-				equalTo(HttpStatus.OK.value()));
-		assertThat(result.toString(),
-				equalTo("{\"status\":\"UP\"}"));
-	}
-
-	@Test
-	@Order(3)
-	void getReadiness() throws Exception {
-		final RestApiResult result = RestApiConnection.with(
-				toBackendUrl("/actuator/health/readiness")).get();
-		assertThat(result.getCode(),
-				equalTo(HttpStatus.OK.value()));
-		assertThat(result.toString(),
-				equalTo("{\"status\":\"UP\"}"));
-	}
-
-	@Test
-	@Order(4)
-	void getMappings() throws Exception {
-		final RestApiResult result = RestApiConnection.with(
-				toBackendUrl("/actuator/mappings")).get();
-		assertThat(result.getCode(),
-				equalTo(HttpStatus.OK.value()));
-	}
-
-	@Test
-	@Order(5)
-	void getMetrics() throws Exception {
-		final RestApiResult result = RestApiConnection.with(
-				toBackendUrl("/actuator/metrics")).get();
-		assertThat(result.getCode(),
-				equalTo(HttpStatus.OK.value()));
-	}
-
-	@Test
-	@Order(6)
-	void getLiquibase() throws Exception {
-		final RestApiResult result = RestApiConnection.with(
-				toBackendUrl("/actuator/liquibase")).get();
-		assertThat(result.getCode(),
-				equalTo(HttpStatus.OK.value()));
-	}
-
-	@Test
 	@Order(10)
 	void getVersion() throws Exception {
 		final RestApiResult result = RestApiConnection.with(
