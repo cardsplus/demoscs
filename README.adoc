@@ -2,7 +2,7 @@
 :experimental: true
 = Self-Contained System mit Spring-Boot und Svelte-UI
 
-== Subprojekte
+== Projekte
 
 === app/backend-api
 
@@ -44,7 +44,6 @@ https://tailwindcss.com/docs
 
 https://visionmedia.github.io/page.js/
 
-
 == Häufig gestellte Fragen
 
 [[_f1]]
@@ -82,7 +81,6 @@ Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
 ----
 
 Die Umgebungsvariable `CI_REGISTRY_IMAGE` muss gesetzt sein.
-Sie bestimmt den Namen des Docker-Images, welches hier gebaut wird.
 Das Docker-Image wird mit
 https://buildpacks.io[`buildpacks`]
 gebaut.
@@ -107,4 +105,4 @@ npm run dev
 ./gradlew asciidoctor
 ----
 
-Die Dokumentation befindet sich im `pages`-Order.
+Die Dokumentation befindet sich im `pages`-Ordner.
