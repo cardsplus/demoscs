@@ -74,21 +74,20 @@ export async function removeValue(restUrl) {
     });
 }
 
-export async function fetchHtml(htmlUrl) {
-    return fetch(BACKEND_URL + htmlUrl, {
+export async function fetchDoc(adocUrl,accept) {
+    return fetch(BACKEND_URL + adocUrl, {
         method: 'GET',
         headers: {
-            'Accept': 'text/html'
+            'Accept': accept
         }
     })
     .then(res => {
         console.log(res.status);
         if (res.ok) return res;
-        throw Error(htmlUrl + ' failed with ' + res.status);        
+        throw Error(adocUrl + ' failed with ' + res.status);        
     })
     .catch(err => {
         console.log(err);
         throw err;
     });
 }
-

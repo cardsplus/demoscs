@@ -31,7 +31,7 @@ function serve() {
 }
 
 export default {
-	input: 'src/main/svelte/main.js',
+	input: 'src/main/svelte/app.js',
 	output: {
 		sourcemap: true,
 		format: 'iife',
