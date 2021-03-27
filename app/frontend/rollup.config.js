@@ -49,14 +49,13 @@ export default {
 		
 		svelte({
 			compilerOptions: {
-				// enable run-time checks when not in production
-				dev: true
+				dev: !production
 			}
 		}),
 
 		smelte({
 			output: "public/build/smelte.css", 
-			purge: production,
+			purge: false /*production*/,
 			postcss: [],
 			whitelist: [],
 			whitelistPatterns: [],
@@ -74,15 +73,11 @@ export default {
 			}
 		}),
 
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
-		}),		
+		}),
+
 		commonjs(),
 
 		// In dev mode, call `npm run start` once
