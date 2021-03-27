@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Robert Bruckbauer</span><br>
 <span id="email" class="email"><a href="mailto:bruckbauer@gmx.at">bruckbauer@gmx.at</a></span><br>
 <span id="revnumber">version 2.4.1,</span>
-<span id="revdate">2021/03/06</span>
+<span id="revdate">2021/03/27</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -688,18 +688,18 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "7d1a4c2c-c44f-4cd7-9b63-a02cdd0a930d",
+  "id" : "8f0e3879-bac3-4581-82ee-7141ede15f5d",
   "mail" : "Mia.Musterfrau@a.de",
   "name" : "Mia Musterfrau",
   "aktiv" : true,
-  "allSprache" : [ "DE", "EN" ],
+  "allSprache" : [ "EN" ],
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/nutzer/7d1a4c2c-c44f-4cd7-9b63-a02cdd0a930d"
+    "href" : "http://localhost:8080/api/nutzer/8f0e3879-bac3-4581-82ee-7141ede15f5d"
   }, {
     "rel" : "nutzerValue",
-    "href" : "http://localhost:8080/api/nutzer/7d1a4c2c-c44f-4cd7-9b63-a02cdd0a930d"
+    "href" : "http://localhost:8080/api/nutzer/8f0e3879-bac3-4581-82ee-7141ede15f5d"
   } ]
 }</code></pre>
 </div>
@@ -733,7 +733,7 @@ für mehr Informationen.
   "mail" : "Max.Mustermann@a.de",
   "name" : "Max Mustermann",
   "aktiv" : "true",
-  "allSprache" : [ "EN" ]
+  "allSprache" : [ "DE", "EN" ]
 }'</span></code></pre>
 </div>
 </div>
@@ -743,14 +743,14 @@ für mehr Informationen.
 <pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Content-Length</span><span class="p">:</span> <span class="s">112</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">118</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
 
 <span class="p">{</span><span class="w">
   </span><span class="nl">"mail"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Max.Mustermann@a.de"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Max Mustermann"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"allSprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"EN"</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"allSprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"DE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"EN"</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre>
 </div>
 </div>
@@ -823,7 +823,7 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/nutzer/search"
   } ],
   "content" : [ {
-    "id" : "4e299b7d-6620-4bb0-9d64-c7136b7cbd19",
+    "id" : "3913492f-c5b9-4f38-b2e2-5b8652f3fe46",
     "mail" : "Bea.Musterfrau@a.de",
     "name" : "Bea Musterfrau",
     "aktiv" : true,
@@ -831,24 +831,24 @@ für mehr Informationen.
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/4e299b7d-6620-4bb0-9d64-c7136b7cbd19"
+      "href" : "http://localhost:8080/api/nutzer/3913492f-c5b9-4f38-b2e2-5b8652f3fe46"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/4e299b7d-6620-4bb0-9d64-c7136b7cbd19"
+      "href" : "http://localhost:8080/api/nutzer/3913492f-c5b9-4f38-b2e2-5b8652f3fe46"
     } ]
   }, {
-    "id" : "7d1a4c2c-c44f-4cd7-9b63-a02cdd0a930d",
+    "id" : "8f0e3879-bac3-4581-82ee-7141ede15f5d",
     "mail" : "Mia.Musterfrau@a.de",
     "name" : "Mia Musterfrau",
     "aktiv" : true,
-    "allSprache" : [ "DE", "EN" ],
+    "allSprache" : [ "EN" ],
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/nutzer/7d1a4c2c-c44f-4cd7-9b63-a02cdd0a930d"
+      "href" : "http://localhost:8080/api/nutzer/8f0e3879-bac3-4581-82ee-7141ede15f5d"
     }, {
       "rel" : "nutzerValue",
-      "href" : "http://localhost:8080/api/nutzer/7d1a4c2c-c44f-4cd7-9b63-a02cdd0a930d"
+      "href" : "http://localhost:8080/api/nutzer/8f0e3879-bac3-4581-82ee-7141ede15f5d"
     } ]
   } ],
   "page" : {
@@ -1058,7 +1058,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-03-06 11:58:27 UTC
+Last updated 2021-03-27 13:29:46 UTC
 </div>
 </div>
 <style>
