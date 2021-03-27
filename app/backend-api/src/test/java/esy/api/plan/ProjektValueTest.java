@@ -133,10 +133,12 @@ public class ProjektValueTest {
 		assertThrows(NullPointerException.class, () -> value.setName(null));
 
 		value.setName("X" + name);
-		assertFalse(value.isEqual(ProjektValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		value.setName(name);
-		assertTrue(value.isEqual(ProjektValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 	}
 
 	@Test
@@ -152,10 +154,12 @@ public class ProjektValueTest {
 		assertFalse(value.isAktiv());
 
 		value.setAktiv(true);
-		assertFalse(value.isEqual(ProjektValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		value.setAktiv(false);
-		assertTrue(value.isEqual(ProjektValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 	}
 
 	@Test
@@ -171,10 +175,12 @@ public class ProjektValueTest {
 		assertEquals(Sprache.EN, value.getSprache());
 
 		value.setSprache(Sprache.DE);
-		assertFalse(value.isEqual(ProjektValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		value.setSprache(Sprache.EN);
-		assertTrue(value.isEqual(ProjektValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 	}
 
 	@Test
@@ -188,12 +194,18 @@ public class ProjektValueTest {
 		final ProjektValue value = ProjektValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertNull(value.getBesitzer());
-		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
+		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		final NutzerValue nutzer = new NutzerValue(0L, uuid);
 		value.setBesitzer(nutzer);
+		assertDoesNotThrow(value::verify);
 		assertSame(nutzer, value.getBesitzer());
-		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
+		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
+
+		value.setBesitzer(null);
+		assertDoesNotThrow(value::verify);
+		assertNull(value.getBesitzer());
+		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 	}
 
 	@Test
@@ -208,14 +220,19 @@ public class ProjektValueTest {
 		assertDoesNotThrow(value::verify);
 		assertEquals(name, value.getName());
 		assertEquals(0, value.getAllMitglied().size());
-		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
+		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		final NutzerValue nutzer = new NutzerValue(0L, uuid);
 		value.addMitglied(nutzer);
+		assertDoesNotThrow(value::verify);
 		assertEquals(1, value.getAllMitglied().size());
 		assertEquals(1, value.getAllMitglied().stream()
 				.filter(e -> e.getId().equals(uuid))
 				.count());
-		assertTrue(value.isEqual(ProjektValue.parseJson(value.writeJson())));
+		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
+
+		value.getAllMitglied().clear();
+		assertDoesNotThrow(value::verify);
+		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 	}
 }

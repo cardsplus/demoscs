@@ -142,10 +142,8 @@ public class NutzerValueRestApiTest {
                 .andExpect(jsonPath("$.allSprache")
                         .isArray())
                 .andExpect(jsonPath("$.allSprache[0]")
-                        .value("DE"))
-                .andExpect(jsonPath("$.allSprache[1]")
                         .value("EN"))
-                .andExpect(jsonPath("$.allSprache[2]")
+                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
         assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
     }
@@ -223,7 +221,7 @@ public class NutzerValueRestApiTest {
                         "\"mail\":\"" + nutzerMail + "\"," +
                         "\"name\":\"" + nutzerName + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"allSprache\": [\"EN\"]" +
+                        "\"allSprache\": [\"DE\", \"EN\"]" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -259,7 +257,6 @@ public class NutzerValueRestApiTest {
     @Order(31)
     void putApiNutzerAgain(final RepetitionInfo info) throws Exception {
         final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
-        final String profilName = "Max";
         final String nutzerName = "Max Mustermann";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
         assertTrue(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
@@ -269,7 +266,7 @@ public class NutzerValueRestApiTest {
                         "\"mail\":\"" + nutzerMail + "\"," +
                         "\"name\":\"" + nutzerName + "\"," +
                         "\"aktiv\": \"true\"," +
-                        "\"allSprache\": [\"EN\"]" +
+                        "\"allSprache\": [\"DE\", \"EN\"]" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -352,8 +349,7 @@ public class NutzerValueRestApiTest {
                 .content("{" +
                         "\"mail\":\"" + nutzerMail + "\"," +
                         "\"name\":\"" + nutzerName + "\"," +
-                        "\"aktiv\": \"false\"," +
-                        "\"allSprache\": []" +
+                        "\"aktiv\": \"false\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))

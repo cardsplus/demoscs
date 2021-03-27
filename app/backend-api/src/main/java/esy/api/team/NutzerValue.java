@@ -68,7 +68,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         this.mail = "";
         this.name = "";
         this.aktiv = true;
-        this.allSprache = new TreeSet<>(Set.of(Sprache.DE));
+        this.allSprache = new TreeSet<>();
     }
 
     /**
@@ -81,7 +81,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         this.mail = "";
         this.name = "";
         this.aktiv = true;
-        this.allSprache = new TreeSet<>(Set.of(Sprache.DE));
+        this.allSprache = new TreeSet<>();
     }
 
     @Override
@@ -108,11 +108,12 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         if (mail.isBlank()) {
             throw new IllegalArgumentException("mail is blank");
         }
-        // TODO check format
         if (name.isBlank()) {
             throw new IllegalArgumentException("name is blank");
         }
-        // TODO check format
+        if (allSprache.isEmpty()) {
+            allSprache.add(Sprache.DE);
+        }
         return this;
     }
 

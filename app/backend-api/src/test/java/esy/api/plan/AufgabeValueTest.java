@@ -123,10 +123,12 @@ public class AufgabeValueTest {
 		assertThrows(NullPointerException.class, () -> value.setText(null));
 
 		value.setText("X" + text);
-		assertFalse(value.isEqual(AufgabeValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertFalse(value.isEqual(AufgabeValue.parseJson(json).verify()));
 
 		value.setText(text);
-		assertTrue(value.isEqual(AufgabeValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertTrue(value.isEqual(AufgabeValue.parseJson(json).verify()));
 	}
 
 	@Test
@@ -142,9 +144,11 @@ public class AufgabeValueTest {
 		assertFalse(value.isAktiv());
 
 		value.setAktiv(true);
-		assertFalse(value.isEqual(AufgabeValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertFalse(value.isEqual(AufgabeValue.parseJson(json).verify()));
 
 		value.setAktiv(false);
-		assertTrue(value.isEqual(AufgabeValue.parseJson(json)));
+		assertDoesNotThrow(value::verify);
+		assertTrue(value.isEqual(AufgabeValue.parseJson(json).verify()));
 	}
 }
