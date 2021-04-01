@@ -1,8 +1,12 @@
 :projectDir: ..
 :icons: font
-= Service TeamManager
+= EsyPlanApi
 
 == Überblick
+
+Der Dienst hat die Aufgabe, Projekte zu verwalten.
+Projekte haben einen verantwortlichen Nutzer, den Besitzer.
+Beliebig viele Nutzer (inkl. des Besitzer) sind Projektmitglieder, die Aufgaben in diesem Projekt erledigen.
 
 Der Dienst ist Teil eines _Self Contained Systems_.
 
@@ -35,15 +39,23 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,Team,png]
+[plantuml,Plan,png]
 ----
 !pragma graphviz_dot smetana
 hide members
 show attributes
-package "team" {
-  class NutzerValue<JsonJpaValueBase> {
-    mail
+class NutzerValue<JsonJpaValueBase> {
+}
+package "plan" {
+  class AufgabeValue<JsonJpaValueBase> {
+    text
   }
+  class ProjektValue<JsonJpaValueBase> {
+    name
+  }
+  ProjektValue "1" *-- "*" AufgabeValue
+  ProjektValue "1" --> "1" NutzerValue : besitzer
+  ProjektValue "1" --> "*" NutzerValue : mitglied
 }
 ----
 
@@ -77,7 +89,9 @@ TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
 
-include::{projectDir}/app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc[leveloffset=+1]
+
+include::{projectDir}/app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 

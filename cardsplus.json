@@ -9,15 +9,7 @@
     },
     "allAdocElement": [
         {
-            "filename": "doc/InfoManager.adoc",
-            "leveloffset": 1
-        },
-        {
-            "filename": "doc/PlanManager.adoc",
-            "leveloffset": 1
-        },
-        {
-            "filename": "doc/TeamManager.adoc",
+            "filename": "glob:doc/Esy*Api.adoc",
             "leveloffset": 1
         }
     ],

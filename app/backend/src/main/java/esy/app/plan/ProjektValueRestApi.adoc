@@ -61,9 +61,6 @@ include::{restdocDir}/put-api-projekt-besitzer/curl-request.adoc[]
 .Request
 include::{restdocDir}/put-api-projekt-besitzer/http-request.adoc[]
 
-.Response
- Keine
-
 ****
 
 Die Operation meldet `No content` bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.
@@ -79,9 +76,6 @@ include::{restdocDir}/put-api-projekt-mitglied/curl-request.adoc[]
 
 .Request
 include::{restdocDir}/put-api-projekt-mitglied/http-request.adoc[]
-
-.Response
- Keine
 
 ****
 
@@ -159,9 +153,6 @@ include::{restdocDir}/delete-api-projekt/curl-request.adoc[]
 
 .Request
 include::{restdocDir}/delete-api-projekt/http-request.adoc[]
-
-.Response
- Keine
 
 ****
 

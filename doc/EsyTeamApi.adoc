@@ -1,11 +1,10 @@
 :projectDir: ..
-:imagesDir: images
 :icons: font
-= Service InfoManager
+= EsyTeamApi
 
-Der Dienst hat die Aufgabe, Informationen über die Anwendung bereitzustellen.
+== Überblick
 
-Der Dienst ist Teil eines _Self Contained System_.
+Der Dienst ist Teil eines _Self Contained Systems_.
 
 TIP: Siehe
 https://scs-architecture.org
@@ -23,6 +22,8 @@ TIP: Siehe
 https://svelte.dev/
 für mehr Informationen.
 
+Der Dienst zeigt an einem nicht trivialen Beispiel den effektiven Einsatz des _Spring_-Frameworks und weiterer Projekte aus den Spring-Universum.
+
 == Modell
 
 Das Datenmodell wird nach den Prinzipien des _Domain Driven Design_ entwickelt.
@@ -34,14 +35,14 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,model,png]
+[plantuml,Team,png]
 ----
 !pragma graphviz_dot smetana
 hide members
 show attributes
-package "info" {
-  class Version {
-    major:minor
+package "team" {
+  class NutzerValue<JsonJpaValueBase> {
+    mail
   }
 }
 ----
@@ -76,9 +77,7 @@ TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
 
-include::{projectDir}/app/backend/src/main/java/esy/app/info/HealthRestApi.adoc[leveloffset=+1]
-
-include::{projectDir}/app/backend/src/main/java/esy/app/info/VersionRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 

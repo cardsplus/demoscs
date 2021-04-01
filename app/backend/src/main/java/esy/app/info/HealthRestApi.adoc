@@ -35,7 +35,7 @@ include::{restdocDir}/get-health-liveness/response-body.adoc[]
 
 ****
 
-== `GET /actuator/health/readyness`
+== `GET /actuator/health/readiness`
 
 Die sogenannte _Readiness Probe_ zeigt an, ob die Anwendung bereit ist, auf Anfragen zu antworten.
 

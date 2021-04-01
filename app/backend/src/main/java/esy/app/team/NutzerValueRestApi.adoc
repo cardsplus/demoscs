@@ -122,9 +122,6 @@ include::{restdocDir}/delete-api-nutzer/curl-request.adoc[]
 .Request
 include::{restdocDir}/delete-api-nutzer/http-request.adoc[]
 
-.Response
- Keine
-
 ****
 
 Die Operation meldet `No Content` bzw. den Code 204, wenn die Daten gelöscht wurden.
