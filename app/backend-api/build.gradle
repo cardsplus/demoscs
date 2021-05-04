@@ -52,6 +52,8 @@ jacocoTestReport {
 jar {
     enabled = true
     manifest {
+        attributes 'Specification-Title': project.name
+        attributes 'Specification-Version': VERSION
         attributes 'Implementation-Title': project.name
         attributes 'Implementation-Version': project.version
     }

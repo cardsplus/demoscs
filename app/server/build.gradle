@@ -43,6 +43,8 @@ jar {
 bootJar {
     enabled = true
     manifest {
+        attributes 'Specification-Title': project.name
+        attributes 'Specification-Version': VERSION
         attributes 'Implementation-Title': project.name
         attributes 'Implementation-Version': project.version
     }
@@ -60,4 +62,3 @@ bootBuildImage {
         "BPL_SPRING_CLOUD_BINDINGS_ENABLED":"false"
     ]
 }
-
