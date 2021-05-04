@@ -94,7 +94,7 @@ asciidoctorj {
   requires 'rouge'
   modules {
     diagram { 
-      version '2.1.0'
+      version '2.1.2'
     }
     pdf { 
       version '1.5.4'
