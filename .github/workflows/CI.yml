@@ -28,7 +28,7 @@ jobs:
           build
           app/backend/build
           app/backend-api/build
-          app/backend-hsql/build
+          app/server/build
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
 
