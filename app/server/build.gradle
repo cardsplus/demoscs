@@ -50,15 +50,6 @@ bootJar {
     }
 }
 
-import java.util.Optional;
-ext.IMAGE_NAME = Optional.ofNullable(System.getenv("IMAGE_NAME"))
-            .orElse(System.getenv("CI_REGISTRY_IMAGE") + "/" + project.name + ":latest")
-
 bootBuildImage {
-    enabled = System.getenv().containsKey('CI_REGISTRY_IMAGE')
-    imageName = IMAGE_NAME
-    environment = [
-        "BPL_JVM_THREAD_COUNT":"50",
-        "BPL_SPRING_CLOUD_BINDINGS_ENABLED":"false"
-    ]
+    enabled = false
 }
