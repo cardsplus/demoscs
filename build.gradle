@@ -42,7 +42,7 @@ spotless {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
     ruby.gems()
 }
 
@@ -52,7 +52,7 @@ dependencies {
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 
