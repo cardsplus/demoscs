@@ -4,12 +4,20 @@
 
 plugins {
     id 'base'
+    id 'eclipse'
     id 'idea'
     id 'com.diffplug.spotless' version '5.10.2'
     id 'com.palantir.git-version' version '0.12.3'
     id "org.asciidoctor.jvm.convert" version "3.3.2"
     id 'org.asciidoctor.jvm.pdf' version '3.3.2'
     id 'org.asciidoctor.jvm.gems' version '3.3.2'
+}
+
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
 }
 
 idea {
@@ -69,36 +77,6 @@ subprojects {
             showCauses true
             showStackTraces true
             showStandardStreams false
-        }
-    }
-}
-
-subprojects {
-    task cardsplusClasspath()  {
-        assemble.dependsOn it
-        doLast {
-            File plusFile = new File("${rootDir}/build/classpaths/"+project.name)
-            if (project.hasProperty('sourceSets')) {
-                plusFile.getParentFile().mkdirs()
-                plusFile.delete()
-                plusFile.withWriterAppend { 
-                    out -> sourceSets.main.output.each {
-                        out.println '{rootDir}'+it.path-rootDir.path
-                    }
-                }
-                plusFile.withWriterAppend { 
-                    out -> sourceSets.main.compileClasspath.each {
-                        if (it.path.startsWith(rootDir.path)) {
-                            out.println '{rootDir}'+it.path-rootDir.path
-                        } else {
-                            out.println '{homeDir}'+it.path-project.gradle.gradleUserHomeDir.path
-                        }
-                    }
-                }
-                println plusFile.name + " created."
-            } else {
-                println plusFile.name + " skipped."
-            }
         }
     }
 }
