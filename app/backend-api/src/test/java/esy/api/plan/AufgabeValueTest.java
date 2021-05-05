@@ -11,10 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AufgabeValueTest {
 
 	static AufgabeValue createWithName(final String name) {
-		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"id\": \"" + uuid + "\"," +
 				"\"text\": \"" + name + "\"," +
 				"\"aktiv\": \"false\"" +
 				"}";

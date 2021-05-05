@@ -168,6 +168,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         return this;
     }
 
+    // is never null
     public ProjektValue setAktiv(final boolean aktiv) {
         this.aktiv = aktiv;
         return this;
@@ -178,6 +179,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         return this;
     }
 
+    // can be null
     public ProjektValue setBesitzer(final NutzerValue besitzer) {
         this.besitzer = besitzer;
         return this;

@@ -52,8 +52,8 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
             name = "nutzer_sprache",
             joinColumns = @JoinColumn(name = "id"))
     @Column(name = "sprache")
-    @Enumerated(EnumType.ORDINAL)
     @OrderBy
+    @Enumerated(EnumType.ORDINAL)
     @Getter
     @JsonProperty
     private Set<Sprache> allSprache;
@@ -140,6 +140,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         return this;
     }
 
+    // is never null
     public NutzerValue setAktiv(final boolean aktiv) {
         this.aktiv = aktiv;
         return this;

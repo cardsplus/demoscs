@@ -10,13 +10,13 @@ TIP: Siehe
 https://scs-architecture.org
 für mehr Informationen.
 
-Der Dienst basiert im Backend auf dem _Spring_-Framework.
+Der Dienst nutzt das _Spring_-Framework.
 
 TIP: Siehe
 https://spring.io/projects
 für mehr Informationen.
 
-Der Dienst nutzt für das Frontend das _Svelte_-Framework.
+Der Dienst nutzt das _Svelte_-Framework.
 
 TIP: Siehe
 https://svelte.dev/

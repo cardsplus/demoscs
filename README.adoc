@@ -26,15 +26,15 @@ https://spring.io/projects/spring-data-rest
 
 https://docs.liquibase.com/home.html
 
-=== app/backend-hsql
+=== app/server
 
-Spring-Boot-App mit einer HSQL-Datenbank.
+Spring-Boot-Server mit einer HSQL-Datenbank.
 
 https://spring.io/projects/spring-boot
 
-=== app/frontend-svelte
+=== app/client
 
-Svelte-App für das Backend.
+Svelte-Client für das Backend.
 
 https://svelte.dev/
 
@@ -61,10 +61,10 @@ https://visionmedia.github.io/page.js/
 ----
 
 [[_f3]]
-=== Spring-Boot-Backend lokal starten
+=== Spring-Boot-Server lokal starten
 
 ----
-./gradlew app:backend-hsql:bootRun
+./gradlew app:server:bootRun
 ----
 
 Mit der Umgebungsvariable 'LOGGING_LEVEL_ORG_HIBERNATE_TYPE' kann die Ausgabe von Typinformationen gesteuert werden.
@@ -74,10 +74,10 @@ Mit der Umgebungsvariable 'LOGGING_LEVEL_ORG_HIBERNATE_STAT' kann die Ausgabe vo
 Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
 
 [[_f4]]
-=== Spring-Boot-Backend lokal bauen
+=== Spring-Boot-Server lokal bauen
 
 ----
-./gradlew app:backend-hsql:bootBuildImage
+./gradlew app:server:bootBuildImage
 ----
 
 Die Umgebungsvariable `CI_REGISTRY_IMAGE` muss gesetzt sein.
@@ -89,11 +89,11 @@ https://buildpacks.io/docs/reference/reproducibility/[Hinweise zum Zeitstempel]
 beachten.
 
 [[_f5]]
-=== Svelte-Frontend lokal starten
+=== Svelte-Client lokal starten
 
 ----
 cd app
-cd frontend-svelte
+cd client
 npm install
 npm run dev
 ----

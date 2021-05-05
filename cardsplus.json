@@ -10,14 +10,24 @@
     "allAdocElement": [
         {
             "filename": "glob:doc/Esy*Api.adoc",
+            "style": "service",
             "leveloffset": 1
         }
     ],
     "allJavaElement": [
         {
             "module": "app/backend-api",
-            "directory": "src/main/java/esy/api",
-            "style": "entity"
+            "directory": "src/main/java",
+            "allFilename" : [{
+                "style": "entity"
+            }]
+        },
+        {
+            "module": "app/backend",
+            "directory": "src/main/java",
+            "allFilename" : [{
+                "style": "tagged"
+            }]
         }
     ],
     "allPageStyler": [
