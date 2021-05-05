@@ -52,8 +52,8 @@ public final class NutzerValue extends JsonJpaValueBase&lt;NutzerValue&gt; {
             name = &quot;nutzer_sprache&quot;,
             joinColumns = @JoinColumn(name = &quot;id&quot;))
     @Column(name = &quot;sprache&quot;)
-    @Enumerated(EnumType.ORDINAL)
     @OrderBy
+    @Enumerated(EnumType.ORDINAL)
 <span class="fc" id="L57">    @Getter</span>
     @JsonProperty
     private Set&lt;Sprache&gt; allSprache;
@@ -140,18 +140,19 @@ public final class NutzerValue extends JsonJpaValueBase&lt;NutzerValue&gt; {
 <span class="fc" id="L140">        return this;</span>
     }
 
+    // is never null
     public NutzerValue setAktiv(final boolean aktiv) {
-<span class="fc" id="L144">        this.aktiv = aktiv;</span>
-<span class="fc" id="L145">        return this;</span>
+<span class="fc" id="L145">        this.aktiv = aktiv;</span>
+<span class="fc" id="L146">        return this;</span>
     }
 
     @Override
     public String writeJson() {
-<span class="fc" id="L150">        return new JsonMapper().writeJson(this);</span>
+<span class="fc" id="L151">        return new JsonMapper().writeJson(this);</span>
     }
 
-<span class="pc bpc" id="L153" title="1 of 2 branches missed.">    public static NutzerValue parseJson(@NonNull final String json) {</span>
-<span class="fc" id="L154">        return new JsonMapper().parseJson(json, NutzerValue.class);</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">    public static NutzerValue parseJson(@NonNull final String json) {</span>
+<span class="fc" id="L155">        return new JsonMapper().parseJson(json, NutzerValue.class);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

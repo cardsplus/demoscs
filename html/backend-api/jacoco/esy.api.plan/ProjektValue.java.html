@@ -168,38 +168,40 @@ public final class ProjektValue extends JsonJpaValueBase&lt;ProjektValue&gt; {
 <span class="fc" id="L168">        return this;</span>
     }
 
+    // is never null
     public ProjektValue setAktiv(final boolean aktiv) {
-<span class="fc" id="L172">        this.aktiv = aktiv;</span>
-<span class="fc" id="L173">        return this;</span>
+<span class="fc" id="L173">        this.aktiv = aktiv;</span>
+<span class="fc" id="L174">        return this;</span>
     }
 
-<span class="pc bpc" id="L176" title="1 of 2 branches missed.">    public ProjektValue setSprache(@NonNull final Sprache sprache) {</span>
-<span class="fc" id="L177">        this.sprache = sprache;</span>
-<span class="fc" id="L178">        return this;</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">    public ProjektValue setSprache(@NonNull final Sprache sprache) {</span>
+<span class="fc" id="L178">        this.sprache = sprache;</span>
+<span class="fc" id="L179">        return this;</span>
     }
 
+    // can be null
     public ProjektValue setBesitzer(final NutzerValue besitzer) {
-<span class="fc" id="L182">        this.besitzer = besitzer;</span>
-<span class="fc" id="L183">        return this;</span>
+<span class="fc" id="L184">        this.besitzer = besitzer;</span>
+<span class="fc" id="L185">        return this;</span>
     }
 
-<span class="pc bpc" id="L186" title="1 of 2 branches missed.">    public ProjektValue addMitglied(@NonNull final NutzerValue mitglied) {</span>
-<span class="fc" id="L187">        allMitglied.add(mitglied);</span>
-<span class="fc" id="L188">        return this;</span>
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">    public ProjektValue addMitglied(@NonNull final NutzerValue mitglied) {</span>
+<span class="fc" id="L189">        allMitglied.add(mitglied);</span>
+<span class="fc" id="L190">        return this;</span>
     }
 
-<span class="nc bnc" id="L191" title="All 2 branches missed.">    public ProjektValue addAufgabe(@NonNull final AufgabeValue aufgabe) {</span>
-<span class="nc" id="L192">        allAufgabe.add(aufgabe);</span>
-<span class="nc" id="L193">        return this;</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">    public ProjektValue addAufgabe(@NonNull final AufgabeValue aufgabe) {</span>
+<span class="nc" id="L194">        allAufgabe.add(aufgabe);</span>
+<span class="nc" id="L195">        return this;</span>
     }
 
     @Override
     public String writeJson() {
-<span class="fc" id="L198">        return new JsonMapper().writeJson(this);</span>
+<span class="fc" id="L200">        return new JsonMapper().writeJson(this);</span>
     }
 
-<span class="pc bpc" id="L201" title="1 of 2 branches missed.">    public static ProjektValue parseJson(@NonNull final String json) {</span>
-<span class="fc" id="L202">        return new JsonMapper().parseJson(json, ProjektValue.class);</span>
+<span class="pc bpc" id="L203" title="1 of 2 branches missed.">    public static ProjektValue parseJson(@NonNull final String json) {</span>
+<span class="fc" id="L204">        return new JsonMapper().parseJson(json, ProjektValue.class);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

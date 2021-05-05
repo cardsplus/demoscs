@@ -5,15 +5,19 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.NonNull;
 
-<span class="fc" id="L10">public class JsonMapper {</span>
+<span class="fc" id="L11">public class JsonMapper {</span>
 
-<span class="pc bpc" id="L12" title="1 of 2 branches missed.">    public static ObjectMapper configure(@NonNull final ObjectMapper mapper) {</span>
-<span class="fc" id="L13">        return mapper.registerModule(new Jdk8Module())</span>
-<span class="fc" id="L14">                .configure(SerializationFeature.WRITE_DATES_WITH_ZONE_ID, true)</span>
-<span class="fc" id="L15">                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)</span>
-<span class="fc" id="L16">                .setDefaultMergeable(true);</span>
+<span class="pc bpc" id="L13" title="1 of 2 branches missed.">    public static ObjectMapper configure(@NonNull final ObjectMapper mapper) {</span>
+<span class="fc" id="L14">        return mapper</span>
+<span class="fc" id="L15">                .registerModule(new Jdk8Module())</span>
+<span class="fc" id="L16">                .registerModule(new JavaTimeModule())</span>
+<span class="fc" id="L17">                .configure(SerializationFeature.WRITE_DATES_WITH_ZONE_ID, true)</span>
+<span class="fc" id="L18">                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</span>
+<span class="fc" id="L19">                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)</span>
+<span class="fc" id="L20">                .setDefaultMergeable(false);</span>
     }
 
     /**
@@ -22,12 +26,12 @@ import lombok.NonNull;
      * @param value Datenobjekt
      * @return JSON-Datenstruktur
      */
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">    public &lt;T&gt; String writeJson(@NonNull final T value) {</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">    public &lt;T&gt; String writeJson(@NonNull final T value) {</span>
         try {
-<span class="fc" id="L27">            return configure(new ObjectMapper()).writeValueAsString(value);</span>
-<span class="nc" id="L28">        } catch (final JsonProcessingException e) {</span>
+<span class="fc" id="L31">            return configure(new ObjectMapper()).writeValueAsString(value);</span>
+<span class="nc" id="L32">        } catch (final JsonProcessingException e) {</span>
             // may not occur
-<span class="nc" id="L30">            throw new IllegalArgumentException(e.toString(), e);</span>
+<span class="nc" id="L34">            throw new IllegalArgumentException(e.toString(), e);</span>
         }
     }
 
@@ -37,12 +41,12 @@ import lombok.NonNull;
      * @param json JSON-Datenstruktur
      * @return Datenobjekt
      */
-<span class="pc bpc" id="L40" title="2 of 4 branches missed.">    public &lt;T&gt; T parseJson(@NonNull final String json, @NonNull final Class&lt;T&gt; type) {</span>
+<span class="pc bpc" id="L44" title="2 of 4 branches missed.">    public &lt;T&gt; T parseJson(@NonNull final String json, @NonNull final Class&lt;T&gt; type) {</span>
         try {
-<span class="fc" id="L42">            return configure(new ObjectMapper()).readValue(json, type);</span>
-<span class="nc" id="L43">        } catch (final JsonProcessingException e) {</span>
+<span class="fc" id="L46">            return configure(new ObjectMapper()).readValue(json, type);</span>
+<span class="nc" id="L47">        } catch (final JsonProcessingException e) {</span>
             // may not occur
-<span class="nc" id="L45">            throw new IllegalArgumentException(e.toString(), e);</span>
+<span class="nc" id="L49">            throw new IllegalArgumentException(e.toString(), e);</span>
         }
     }
 }
