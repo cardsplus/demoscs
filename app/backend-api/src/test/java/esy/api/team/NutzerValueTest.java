@@ -12,10 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class NutzerValueTest {
 
 	static NutzerValue createWithName(final String name) {
-		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"id\": \"" + uuid + "\"," +
 				"\"mail\": \"" + name + "@a.de\"," +
 				"\"name\":\"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
@@ -103,7 +101,7 @@ public class NutzerValueTest {
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
 		assertFalse(value.isAktiv());
-		assertEquals(1, value.getAllSprache().size());;
+		assertEquals(1, value.getAllSprache().size());
 		assertTrue(value.getAllSprache().contains(Sprache.EN));
 	}
 

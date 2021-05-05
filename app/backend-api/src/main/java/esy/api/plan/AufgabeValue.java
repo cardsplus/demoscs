@@ -114,12 +114,14 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         return this;
     }
 
+    // is never null
     public AufgabeValue setAktiv(final boolean aktiv) {
         this.aktiv = aktiv;
         return this;
     }
 
-    public AufgabeValue setProjekt(@NonNull final ProjektValue projekt) {
+    // can be null
+    public AufgabeValue setProjekt(final ProjektValue projekt) {
         this.projekt = projekt;
         return this;
     }

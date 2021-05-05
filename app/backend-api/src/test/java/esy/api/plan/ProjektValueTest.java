@@ -13,10 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProjektValueTest {
 
 	static ProjektValue createWithName(final String name) {
-		final UUID uuid = UUID.randomUUID();
 		final String json = "{" +
 				"\"version\": \"1\"," +
-				"\"id\": \"" + uuid + "\"," +
 				"\"name\": \"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
 				"\"sprache\": \"EN\"," +
