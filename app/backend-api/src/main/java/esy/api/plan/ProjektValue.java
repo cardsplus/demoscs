@@ -89,11 +89,6 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     @JsonProperty
     private Set<AufgabeValue> allAufgabe;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     ProjektValue() {
         super();
         this.name = "";
@@ -104,12 +99,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         this.allAufgabe = new LinkedHashSet<>();
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    public ProjektValue(@NonNull final Long version, @NonNull final UUID id) {
+    ProjektValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.name = "";
         this.aktiv = true;

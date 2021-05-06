@@ -194,7 +194,10 @@ public class ProjektValueTest {
 		assertNull(value.getBesitzer());
 		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 
-		final NutzerValue nutzer = new NutzerValue(0L, uuid);
+		final NutzerValue nutzer = NutzerValue.parseJson("{" +
+				"\"mail\": \"Max.Mustermann@a.de\"," +
+				"\"name\": \"Max Mustermann\"" +
+				"}");
 		value.setBesitzer(nutzer);
 		assertDoesNotThrow(value::verify);
 		assertSame(nutzer, value.getBesitzer());
@@ -220,12 +223,15 @@ public class ProjektValueTest {
 		assertEquals(0, value.getAllMitglied().size());
 		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 
-		final NutzerValue nutzer = new NutzerValue(0L, uuid);
+		final NutzerValue nutzer = NutzerValue.parseJson("{" +
+				"\"mail\": \"Max.Mustermann@a.de\"," +
+				"\"name\": \"Max Mustermann\"" +
+				"}");
 		value.addMitglied(nutzer);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1, value.getAllMitglied().size());
 		assertEquals(1, value.getAllMitglied().stream()
-				.filter(e -> e.getId().equals(uuid))
+				.filter(e -> e.getId().equals(nutzer.getId()))
 				.count());
 		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
 

@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import javax.persistence.*;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Value-Objekt für einen Nutzer.
@@ -56,13 +53,8 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     @Enumerated(EnumType.ORDINAL)
     @Getter
     @JsonProperty
-    private Set<Sprache> allSprache;
+    private SortedSet<Sprache> allSprache;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     NutzerValue() {
         super();
         this.mail = "";
@@ -71,12 +63,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         this.allSprache = new TreeSet<>();
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    public NutzerValue(@NonNull final Long version, @NonNull final UUID id) {
+    NutzerValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.mail = "";
         this.name = "";

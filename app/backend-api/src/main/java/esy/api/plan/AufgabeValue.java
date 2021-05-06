@@ -47,11 +47,6 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     @JsonProperty
     private ProjektValue projekt;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     AufgabeValue() {
         super();
         this.text = "";
@@ -59,12 +54,7 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         this.projekt = null;
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    public AufgabeValue(@NonNull final Long version, @NonNull final UUID id) {
+    AufgabeValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.text = "";
         this.aktiv = true;
