@@ -37,7 +37,7 @@ jobs:
       env:
         JAVA_OPTS: '-Dorg.gradle.daemon=false'
         GRADLE_USER_HOME: .gradle
-      run: chmod +x gradlew && ./gradlew build asciidoctor jacocoTestReport
+      run: chmod +x gradlew && ./gradlew eclipse build asciidoctor jacocoTestReport
 
     # https://github.com/peaceiris/actions-gh-pages
     - name: Deploy preview
