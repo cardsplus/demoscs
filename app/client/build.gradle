@@ -25,8 +25,7 @@ task npmRun(type: Exec) {
 
 task versionCheck() {
     build.dependsOn it
-    doLast {
-        assert new File("${projectDir}/package.json").text
-                .contains('"version": "' + VERSION + '"')
-    }
+    assert new File("${projectDir}/package.json")
+        .text
+        .contains('"version": "' + VERSION + '"')
 }

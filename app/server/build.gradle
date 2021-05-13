@@ -53,3 +53,7 @@ bootJar {
 bootBuildImage {
     enabled = false
 }
+
+task versionCheck() {
+    build.dependsOn it
+}
