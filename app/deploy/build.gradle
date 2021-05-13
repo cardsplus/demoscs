@@ -1,0 +1,112 @@
+plugins {
+    id 'base'
+}
+
+import java.util.Optional;
+ext.SERVER_IMAGE = Optional.ofNullable(System.getenv("SERVER_IMAGE"))
+            .orElse(rootProject.name + "/server")
+ext.CLIENT_IMAGE = Optional.ofNullable(System.getenv("CLIENT_IMAGE"))
+            .orElse(rootProject.name + "/client")
+
+task deployIngress() {
+    doLast {
+        exec {
+            executable 'helm'
+            args 'repo', 'add', 'ingress-nginx', 'https://kubernetes.github.io/ingress-nginx'
+        }        
+        exec {
+            executable 'helm'
+            args 'repo', 'update'
+        }        
+        exec {
+            executable 'helm'
+            args 'install', 'ingress-nginx', 'ingress-nginx/ingress-nginx'
+        }  
+        execKubectlDescribeIngress();     
+    }
+}
+
+task deployDashboard() {
+    assert new File("${projectDir}/ui/dashboard.yaml").exists()
+    doLast {
+        execKubectlApply('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
+        execKubectlApply('ui/dashboard.yaml');
+        def userName = new ByteArrayOutputStream();
+        exec {
+            executable 'kubectl'
+            args '-n', 'kubernetes-dashboard', 'get', 'sa/cluster-admin-user', '-o', 'jsonpath="{.secrets[0].name}"'
+            standardOutput = userName
+        }        
+        println userName;
+        def userToken = new ByteArrayOutputStream();
+        exec {
+            executable 'kubectl'
+            args '-n', 'kubernetes-dashboard', 'get', 'secret', userName, '-o', 'jsonpath="{.data.token}"'
+            standardOutput = userToken
+        }
+        println new String(userToken.toString().decodeBase64());
+     }
+}
+
+task deployLocal() {
+    assert new File("${projectDir}/k8s/server.yaml").exists()
+    assert new File("${projectDir}/k8s/client.yaml").exists()
+    assert new File("${projectDir}/k8s/ingress.yaml").exists()
+    def SHA = versionDetails().gitHash
+    doLast {
+        execDockerBuild(SERVER_IMAGE, SHA, 'server');
+        execDockerBuild(CLIENT_IMAGE, SHA, 'client');
+        execKubectlApply('k8s');
+        execKubectlImage(SERVER_IMAGE, SHA, 'server');
+        execKubectlImage(CLIENT_IMAGE, SHA, 'client');
+    }
+}
+
+def execDockerBuild(String image, String tag, String name) {
+    println "\nBuilding docker image '" + image + ":" + tag + "' ..."
+    exec {
+        workingDir "${projectDir}/../" + name 
+        executable 'docker'
+        args 'build', '-t', image + ':latest', '-t', image + ':' + tag, '.'
+    }
+}
+
+def execKubectlApply(String path) {
+    println "\nApplying kubernetes configuration ..."
+    exec {
+        executable 'kubectl'
+        args 'apply', '-f', path
+    }
+}
+
+def execKubectlImage(String image, String tag, String name) {
+    println "\nApplying docker image '" + image + ":" + tag + "' ..."
+    exec {
+        workingDir "${projectDir}/k8s"
+        executable 'kubectl'
+        args 'set', 'image', 'deployments/' + name + '-deployment', name + '=' + image + ':' + tag
+    }
+}
+
+task clusterStatus() {
+    doLast {
+        execKubectlDescribeIngress();
+        execKubectlDescribeService('server');
+        execKubectlDescribeService('client');
+    }
+}
+def execKubectlDescribeIngress() {
+    exec {
+        println "\n"
+        executable 'kubectl'
+        args 'describe', 'service', 'ingress-nginx-controller'
+    }
+}
+
+def execKubectlDescribeService(String name) {
+    exec {
+        println "\n"
+        executable 'kubectl'
+        args 'describe', 'service', name + '-cluster-ip'
+    }
+}

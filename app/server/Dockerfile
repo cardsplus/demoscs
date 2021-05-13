@@ -8,4 +8,4 @@ WORKDIR /app
 COPY --from=0 dependencies/ ./
 COPY --from=0 spring-boot-loader/ ./
 COPY --from=0 application/ ./
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+CMD ["java", "org.springframework.boot.loader.JarLauncher"]
