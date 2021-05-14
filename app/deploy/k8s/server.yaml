@@ -15,7 +15,7 @@ spec:
       containers:
         - name: server
           image: bootscs/server
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: kube

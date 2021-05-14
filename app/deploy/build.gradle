@@ -3,10 +3,10 @@ plugins {
 }
 
 import java.util.Optional;
-ext.SERVER_URL = 'localhost'
+ext.SERVER_URL = 'http://localhost'
 ext.SERVER_IMAGE = Optional.ofNullable(System.getenv("SERVER_IMAGE"))
             .orElse(rootProject.name + "/server")            
-ext.CLIENT_URL = 'localhost'
+ext.CLIENT_URL = 'http://localhost'
 ext.CLIENT_IMAGE = Optional.ofNullable(System.getenv("CLIENT_IMAGE"))
             .orElse(rootProject.name + "/client")
             
@@ -89,7 +89,10 @@ def execDockerBuild(String image, String tag, String name) {
     exec {
         workingDir "${projectDir}/../" + name 
         executable 'docker'
-        args 'build', '.', '--build-arg', 'SERVER_URL='+SERVER_URL, '-t', image + ':latest', '-t', image + ':' + tag
+        args 'build', '.', \
+            '--build-arg', 'SERVER_URL='+SERVER_URL, \
+            '-t', image + ':latest', \
+            '-t', image + ':' + tag
     }
 }
 

@@ -15,7 +15,7 @@ spec:
       containers:
         - name: client
           image: bootscs/client
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
               name: http-port
