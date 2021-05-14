@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Robert Bruckbauer</span><br>
 <span id="email" class="email"><a href="mailto:bruckbauer@gmx.at">bruckbauer@gmx.at</a></span><br>
 <span id="revnumber">version 2.4.1,</span>
-<span id="revdate">2021/05/13</span>
+<span id="revdate">2021/05/14</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -454,6 +454,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#anwendung">Anwendung</a></li>
 <li><a href="#health-api">Health-API</a>
 <ul class="sectlevel2">
+<li><a href="#get"><code>GET /</code></a></li>
+<li><a href="#get-healthz"><code>GET /healthz</code></a></li>
 <li><a href="#get-actuatorhealth"><code>GET /actuator/health</code></a></li>
 <li><a href="#get-actuatorhealthliveness"><code>GET /actuator/health/liveness</code></a></li>
 <li><a href="#get-actuatorhealthreadiness"><code>GET /actuator/health/readiness</code></a></li>
@@ -645,6 +647,30 @@ für mehr Informationen.
 <div class="sectionbody">
 <div class="paragraph">
 <p>REST-API für die Abfrage der Gesundheit der Anwendung.</p>
+</div>
+<div class="sect2">
+<h3 id="get"><a class="anchor" href="#get"></a><code>GET /</code></h3>
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <strong>immer</strong> <code>Not found</code> bzw. den Code 404.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-healthz"><a class="anchor" href="#get-healthz"></a><code>GET /healthz</code></h3>
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/healthz'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <strong>immer</strong> <code>Ok</code> bzw. den Code 200.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="get-actuatorhealth"><a class="anchor" href="#get-actuatorhealth"></a><code>GET /actuator/health</code></h3>
@@ -844,7 +870,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-05-13 14:00:10 UTC
+Last updated 2021-05-14 12:07:09 UTC
 </div>
 </div>
 <style>
