@@ -28,13 +28,13 @@ https://docs.liquibase.com/home.html
 
 === app/server
 
-Spring-Boot-Server mit einer HSQL-Datenbank.
+Spring-Boot-Server der Anwendung mit einer HSQL-Datenbank.
 
 https://spring.io/projects/spring-boot
 
 === app/client
 
-Svelte-Client für das Backend.
+Svelte-Client der Anwendung.
 
 https://svelte.dev/
 
@@ -43,6 +43,24 @@ https://smeltejs.com/
 https://tailwindcss.com/docs
 
 https://visionmedia.github.io/page.js/
+
+=== app/deploy
+
+Deployment der Anwendung.
+
+https://docs.docker.com/desktop/kubernetes/
+
+https://kubernetes.io/docs
+
+https://github.com/kubernetes/kubectl
+
+https://github.com/kubernetes/ingress-nginx
+
+https://github.com/kubernetes/dashboard
+
+https://github.com/helm/helm
+
+https://helm.sh/
 
 == Häufig gestellte Fragen
 
@@ -92,10 +110,7 @@ beachten.
 === Svelte-Client lokal starten
 
 ----
-cd app
-cd client
-npm install
-npm run dev
+./gradlew app:client:nodeBuildImage
 ----
 
 [[_f6]]
@@ -106,3 +121,41 @@ npm run dev
 ----
 
 Die Dokumentation befindet sich im `pages`-Ordner.
+
+=== Kubernetes-Cluster lokal einrichten
+
+Mit Docker-Desktop wird der lokale Kubernetes-Cluster eingerichtet.
+
+=== Kubernetes-Ingress lokal einrichten
+
+----
+./gradlew deployIngress
+----
+
+Der Ingress-Service wird installiert und gestartet.
+
+=== Kubernetes-Dashboard lokal einrichten
+
+----
+./gradlew deployDashboard
+kubectl proxy
+----
+
+Das Dashboard wird mit der angezeigten URL aufgerufen.
+Beim ersten Aufruf muss das am Bildschirm angezeigte Token eingegeben werden.
+Das Token ist zeitlich befristet.
+Nach Ablauf der Gültigkeit muss mit
+
+----
+./gradlew createDashboardToken
+----
+
+ein neues Token erzeugt und eingegeben werden.
+
+=== Kubernetes-Deployment lokal ausführen
+
+----
+./gradlew deployApplication
+----
+
+Die Anwendung wird mit `localhost` aufgerufen.
