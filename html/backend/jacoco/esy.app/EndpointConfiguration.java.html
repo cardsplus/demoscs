@@ -15,13 +15,15 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
+
 import static org.springframework.data.rest.core.mapping.RepositoryDetectionStrategy.RepositoryDetectionStrategies;
 
 @Configuration
 @PropertySource(
         ignoreResourceNotFound = false,
         value = &quot;classpath:endpoint.properties&quot;)
-<span class="fc" id="L24">public class EndpointConfiguration {</span>
+<span class="fc" id="L26">public class EndpointConfiguration {</span>
 
     /**
      * Base path of the REST API requests.
@@ -33,37 +35,40 @@ import static org.springframework.data.rest.core.mapping.RepositoryDetectionStra
      * Same values must apply to Spring Security,
      * Spring Web AND Spring Data.
      */
-<span class="fc" id="L36">    static final CorsConfiguration CORS = new CorsConfiguration();</span>
+<span class="fc" id="L38">    static final CorsConfiguration CORS = new CorsConfiguration();</span>
 
     static {
-<span class="fc" id="L39">        CORS.setAllowCredentials(true);</span>
-<span class="fc" id="L40">        CORS.addAllowedHeader(&quot;Authorization&quot;);</span>
-<span class="fc" id="L41">        CORS.addAllowedHeader(&quot;Content-Type&quot;);</span>
-<span class="fc" id="L42">        CORS.addAllowedHeader(&quot;Content-Length&quot;);</span>
-<span class="fc" id="L43">        CORS.addAllowedMethod(&quot;GET&quot;);</span>
-<span class="fc" id="L44">        CORS.addAllowedMethod(&quot;POST&quot;);</span>
-<span class="fc" id="L45">        CORS.addAllowedMethod(&quot;PUT&quot;);</span>
-<span class="fc" id="L46">        CORS.addAllowedMethod(&quot;DELETE&quot;);</span>
-<span class="fc" id="L47">        CORS.addAllowedOrigin(&quot;http://localhost:5000&quot;);</span>
-<span class="fc" id="L48">        CORS.setMaxAge(3600L);</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L41">        CORS.setAllowCredentials(true);</span>
+<span class="fc" id="L42">        CORS.addAllowedHeader(&quot;Authorization&quot;);</span>
+<span class="fc" id="L43">        CORS.addAllowedHeader(&quot;Content-Type&quot;);</span>
+<span class="fc" id="L44">        CORS.addAllowedHeader(&quot;Content-Length&quot;);</span>
+<span class="fc" id="L45">        CORS.addAllowedMethod(&quot;GET&quot;);</span>
+<span class="fc" id="L46">        CORS.addAllowedMethod(&quot;POST&quot;);</span>
+<span class="fc" id="L47">        CORS.addAllowedMethod(&quot;PUT&quot;);</span>
+<span class="fc" id="L48">        CORS.addAllowedMethod(&quot;DELETE&quot;);</span>
+<span class="fc" id="L49">        CORS.setAllowedOriginPatterns(List.of(</span>
+                &quot;http://localhost:*&quot;,
+                &quot;http://localhost&quot;,
+                &quot;https://localhost&quot;));
+<span class="fc" id="L53">        CORS.setMaxAge(3600L);</span>
+<span class="fc" id="L54">    }</span>
 
-    static void applyCORS(final CorsRegistry registry) {
-<span class="fc" id="L52">        registry.addMapping(&quot;/**&quot;)</span>
-<span class="fc" id="L53">                .allowCredentials(CORS.getAllowCredentials())</span>
-<span class="fc" id="L54">                .allowedHeaders(CORS.getAllowedHeaders().toArray(String[]::new))</span>
-<span class="fc" id="L55">                .allowedMethods(CORS.getAllowedMethods().toArray(String[]::new))</span>
-<span class="fc" id="L56">                .allowedOrigins(CORS.getAllowedOrigins().toArray(String[]::new))</span>
-<span class="fc" id="L57">                .maxAge(CORS.getMaxAge());</span>
-<span class="fc" id="L58">    }</span>
+    void applyCORS(final CorsRegistry registry) {
+<span class="fc" id="L57">        registry.addMapping(&quot;/**&quot;)</span>
+<span class="fc" id="L58">                .allowCredentials(CORS.getAllowCredentials())</span>
+<span class="fc" id="L59">                .allowedHeaders(CORS.getAllowedHeaders().toArray(String[]::new))</span>
+<span class="fc" id="L60">                .allowedMethods(CORS.getAllowedMethods().toArray(String[]::new))</span>
+<span class="fc" id="L61">                .allowedOriginPatterns(CORS.getAllowedOriginPatterns().toArray(String[]::new))</span>
+<span class="fc" id="L62">                .maxAge(CORS.getMaxAge());</span>
+<span class="fc" id="L63">    }</span>
 
     @Bean
     public WebMvcConfigurer webMvcConfigurer() {
-<span class="fc" id="L62">        return new WebMvcConfigurer() {</span>
+<span class="fc" id="L67">        return new WebMvcConfigurer() {</span>
             @Override
             public void addCorsMappings(final CorsRegistry registry) {
-<span class="fc" id="L65">                applyCORS(registry);</span>
-<span class="fc" id="L66">            }</span>
+<span class="fc" id="L70">                applyCORS(registry);</span>
+<span class="fc" id="L71">            }</span>
         };
     }
 
@@ -73,27 +78,27 @@ import static org.springframework.data.rest.core.mapping.RepositoryDetectionStra
      */
     @Bean
     public RepositoryRestConfigurer repositoryRestConfigurer() {
-<span class="fc" id="L76">        return new RepositoryRestConfigurer() {</span>
+<span class="fc" id="L81">        return new RepositoryRestConfigurer() {</span>
 
             @Override
             public void configureJacksonObjectMapper(final ObjectMapper mapper) {
                 // apply defaults
-<span class="fc" id="L81">                JsonMapper.configure(mapper);</span>
-<span class="fc" id="L82">            }</span>
+<span class="fc" id="L86">                JsonMapper.configure(mapper);</span>
+<span class="fc" id="L87">            }</span>
 
             @Override
             public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration configuration, final CorsRegistry registry) {
                 // apply defaults
-<span class="fc" id="L87">                configuration.setRepositoryDetectionStrategy(RepositoryDetectionStrategies.ANNOTATED);</span>
-<span class="fc" id="L88">                configuration.setDefaultMediaType(MediaType.APPLICATION_JSON);</span>
-<span class="fc" id="L89">                configuration.setBasePath(BASE);</span>
+<span class="fc" id="L92">                configuration.setRepositoryDetectionStrategy(RepositoryDetectionStrategies.ANNOTATED);</span>
+<span class="fc" id="L93">                configuration.setDefaultMediaType(MediaType.APPLICATION_JSON);</span>
+<span class="fc" id="L94">                configuration.setBasePath(BASE);</span>
                 // expose value objects
-<span class="fc" id="L91">                configuration.exposeIdsFor(AufgabeValue.class);</span>
-<span class="fc" id="L92">                configuration.exposeIdsFor(NutzerValue.class);</span>
-<span class="fc" id="L93">                configuration.exposeIdsFor(ProjektValue.class);</span>
+<span class="fc" id="L96">                configuration.exposeIdsFor(AufgabeValue.class);</span>
+<span class="fc" id="L97">                configuration.exposeIdsFor(NutzerValue.class);</span>
+<span class="fc" id="L98">                configuration.exposeIdsFor(ProjektValue.class);</span>
                 // add CORS settings
-<span class="fc" id="L95">                applyCORS(registry);</span>
-<span class="fc" id="L96">            }</span>
+<span class="fc" id="L100">                applyCORS(registry);</span>
+<span class="fc" id="L101">            }</span>
         };
     }
 }
