@@ -5,36 +5,29 @@ plugins {
 import org.apache.tools.ant.taskdefs.condition.Os
 ext.NPM = Os.isFamily(Os.FAMILY_WINDOWS) ? "npm.cmd" : "npm";
 
-task npmInstall(type: Exec) {
-    enabled = System.getenv().containsKey('CI')
-    commandLine NPM, 'install'
-}
-build.dependsOn npmInstall
-
-task npmBuild(type: Exec) {
-    enabled = System.getenv().containsKey('CI')
-    mustRunAfter npmInstall
-    commandLine NPM, 'run', 'build'
-}
-build.dependsOn npmBuild
-
-task npmRun(type: Exec) {
-    mustRunAfter npmInstall
-    commandLine NPM, 'run', 'dev'
-}
-
-import java.util.Optional;
-ext.CLIENT_IMAGE = Optional.ofNullable(System.getenv("CLIENT_IMAGE"))
-            .orElse(rootProject.name + "/" + project.name + ":latest")
-ext.SERVER_URL = Optional.ofNullable(System.getenv("SERVER_URL"))
-            .orElse("http://localhost:8080")
-
-task nodeBuildImage {
-    enabled = true
+task npmInstall {
     doLast {
         exec {
-            executable 'docker'
-            args 'build', '.', '--build-arg', 'SERVER_URL='+SERVER_URL, '-t', CLIENT_IMAGE
+            commandLine NPM, 'install'
+        }
+    }
+}
+
+task npmUpgrade {
+    doLast {
+        exec {
+            commandLine NPM, 'upgrade'
+        }
+    }
+}
+
+task npmRun {
+    doLast {
+        exec {
+            commandLine NPM, 'run', 'build'
+        }
+        exec {
+            commandLine NPM, 'run', 'start'
         }
     }
 }
