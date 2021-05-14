@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: eu.gcr.io/bootscs/client
+          image: bootscs/client
           imagePullPolicy: Never
           ports:
             - containerPort: 5000

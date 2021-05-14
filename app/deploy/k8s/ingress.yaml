@@ -2,52 +2,54 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
-  annotations:
-    kubernetes.io/ingress.class: 'nginx'
-    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
+  defaultBackend:
+    service:
+      name: server-cluster-ip
+      port:
+        name: http-port
   rules:
     - http:
         paths:
-          - path: /?(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: client-cluster-ip
                 port:
-                  name: http-port
-          - path: /actuator/(.*)
+                  number: 5000
+          - path: /actuator
             pathType: Prefix
             backend:
               service:
                 name: server-cluster-ip
                 port:
-                  name: http-port
-          - path: /api/?(.*)
+                  number: 8080
+          - path: /api
             pathType: Prefix
             backend:
               service:
                 name: server-cluster-ip
                 port:
-                  name: http-port
-          - path: /doc/?(.*)
+                  number: 8080
+          - path: /doc
             pathType: Prefix
             backend:
               service:
                 name: server-cluster-ip
                 port:
-                  name: http-port
+                  number: 8080
           - path: /login
             pathType: Prefix
             backend:
               service:
                 name: server-cluster-ip
                 port:
-                  name: http-port
-          - path: /version(.*)
+                  number: 8080
+          - path: /version
             pathType: Prefix
             backend:
               service:
                 name: server-cluster-ip
                 port:
-                  name: http-port
+                  number: 8080

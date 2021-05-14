@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: eu.gcr.io/bootscs/server
+          image: bootscs/server
           imagePullPolicy: Never
           env:
             - name: SPRING_PROFILES_ACTIVE
