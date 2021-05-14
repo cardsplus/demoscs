@@ -23,6 +23,22 @@ task npmRun(type: Exec) {
     commandLine NPM, 'run', 'dev'
 }
 
+import java.util.Optional;
+ext.CLIENT_IMAGE = Optional.ofNullable(System.getenv("CLIENT_IMAGE"))
+            .orElse(rootProject.name + "/" + project.name + ":latest")
+ext.SERVER_URL = Optional.ofNullable(System.getenv("SERVER_URL"))
+            .orElse("http://localhost:8080")
+
+task nodeBuildImage {
+    enabled = true
+    doLast {
+        exec {
+            executable 'docker'
+            args 'build', '.', '--build-arg', 'SERVER_URL='+SERVER_URL, '-t', CLIENT_IMAGE
+        }
+    }
+}
+
 task versionCheck() {
     build.dependsOn it
     assert new File("${projectDir}/package.json")

@@ -1,10 +1,8 @@
 FROM adoptopenjdk/openjdk11
-RUN env
 COPY build/libs/*.jar ./server.jar
 RUN java -Djarmode=layertools -jar ./server.jar extract
 
 FROM adoptopenjdk/openjdk11
-RUN env
 EXPOSE 8080
 WORKDIR /app
 COPY --from=0 dependencies/ ./
