@@ -40,4 +40,5 @@ spec:
     component: client
   ports:
     - port: 5000
-      targetPort: 5000
+      name: http-port
+      targetPort: http-port

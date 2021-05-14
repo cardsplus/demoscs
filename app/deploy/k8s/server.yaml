@@ -51,4 +51,5 @@ spec:
     component: server
   ports:
     - port: 8080
-      targetPort: 8080
+      name: http-port
+      targetPort: http-port
