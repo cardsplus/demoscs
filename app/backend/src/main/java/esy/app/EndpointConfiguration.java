@@ -15,6 +15,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
+
 import static org.springframework.data.rest.core.mapping.RepositoryDetectionStrategy.RepositoryDetectionStrategies;
 
 @Configuration
@@ -44,16 +46,19 @@ public class EndpointConfiguration {
         CORS.addAllowedMethod("POST");
         CORS.addAllowedMethod("PUT");
         CORS.addAllowedMethod("DELETE");
-        CORS.addAllowedOrigin("http://localhost:5000");
+        CORS.setAllowedOriginPatterns(List.of(
+                "http://localhost:*",
+                "http://localhost",
+                "https://localhost"));
         CORS.setMaxAge(3600L);
     }
 
-    static void applyCORS(final CorsRegistry registry) {
+    void applyCORS(final CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowCredentials(CORS.getAllowCredentials())
                 .allowedHeaders(CORS.getAllowedHeaders().toArray(String[]::new))
                 .allowedMethods(CORS.getAllowedMethods().toArray(String[]::new))
-                .allowedOrigins(CORS.getAllowedOrigins().toArray(String[]::new))
+                .allowedOriginPatterns(CORS.getAllowedOriginPatterns().toArray(String[]::new))
                 .maxAge(CORS.getMaxAge());
     }
 
