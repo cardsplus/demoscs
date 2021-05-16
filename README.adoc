@@ -95,7 +95,7 @@ Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
 === Svelte-Client lokal starten
 
 ----
-./gradlew app:client:npmRun
+./gradlew app:client:nodeRun
 ----
 
 [[_f6]]
@@ -140,7 +140,7 @@ ein neues Token erzeugt und eingegeben werden.
 === Kubernetes-Deployment lokal ausführen
 
 ----
-./gradlew deployApplication
+./gradlew deploy
 ----
 
 Die Anwendung wird mit `localhost` aufgerufen.

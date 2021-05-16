@@ -21,7 +21,7 @@ task npmUpgrade {
     }
 }
 
-task npmRun {
+task nodeRun {
     doLast {
         exec {
             commandLine NPM, 'run', 'build'

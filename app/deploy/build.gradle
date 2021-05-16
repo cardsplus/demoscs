@@ -10,7 +10,7 @@ ext.CLIENT_URL = 'http://localhost'
 ext.CLIENT_IMAGE = Optional.ofNullable(System.getenv("CLIENT_IMAGE"))
             .orElse(rootProject.name + "/client")
             
-task deployIngress() {
+task deployIngress {
     doLast {
         exec {
             executable 'helm'
@@ -20,21 +20,21 @@ task deployIngress() {
             executable 'helm'
             args 'repo', 'update'
         }
-        execHelmInstall('ingress-nginx', 'ingress-nginx/ingress-nginx');
-        execKubectlDescribeIngress();
+        helmInstall('ingress-nginx', 'ingress-nginx/ingress-nginx');
+        kubectlDescribeIngress();
     }
 }
 
-task deployDashboard() {
+task deployDashboard {
     assert new File("${projectDir}/ui/dashboard.yaml").exists()
     doLast {
-        execKubectlApply('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
-        execKubectlApply('ui/dashboard.yaml');
+        kubectlApply('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
+        kubectlApply('ui/dashboard.yaml');
         createDashboardToken()
      }
 }
 
-task createDashboardToken() {
+task createDashboardToken {
     assert new File("${projectDir}/ui/dashboard.yaml").exists()
     doLast {
         def userName = new ByteArrayOutputStream();
@@ -54,37 +54,37 @@ task createDashboardToken() {
      }
 }
 
-task deployApplication() {
+task deploy {
     assert new File("${projectDir}/k8s/server.yaml").exists()
     assert new File("${projectDir}/k8s/client.yaml").exists()
     assert new File("${projectDir}/k8s/ingress.yaml").exists()
     def SHA = versionDetails().gitHash
     doLast {
-        execDockerBuild(SERVER_IMAGE, SHA, 'server');
-        execDockerBuild(CLIENT_IMAGE, SHA, 'client');
-        execKubectlApply('k8s');
-        execKubectlImage(SERVER_IMAGE, SHA, 'server');
-        execKubectlImage(CLIENT_IMAGE, SHA, 'client');
+        dockerBuild(SERVER_IMAGE, SHA, 'server');
+        dockerBuild(CLIENT_IMAGE, SHA, 'client');
+        kubectlApply('k8s');
+        kubectlImage(SERVER_IMAGE, SHA, 'server');
+        kubectlImage(CLIENT_IMAGE, SHA, 'client');
     }
 }
 
-task deployStatus() {
+task deployStatus {
     doLast {
-        execKubectlDescribeIngress();
-        execKubectlDescribeService('server');
-        execKubectlDescribeService('client');
+        kubectlDescribeIngress();
+        kubectlDescribeService('server');
+        kubectlDescribeService('client');
     }
 }
 
-task undeployAll() {
+task undeploy {
     doLast {
-        execKubectlDelete('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
-        execKubectlDelete('k8s');
-        execHelmUninstall('ingress-nginx');
+        kubectlDelete('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
+        kubectlDelete('k8s');
+        helmUninstall('ingress-nginx');
      }
 }
 
-def execDockerBuild(String image, String tag, String name) {
+def dockerBuild(String image, String tag, String name) {
     println "\nBuilding docker image '" + image + ":" + tag + "' ..."
     exec {
         workingDir "${projectDir}/../" + name 
@@ -96,7 +96,7 @@ def execDockerBuild(String image, String tag, String name) {
     }
 }
 
-def execKubectlApply(String path) {
+def kubectlApply(String path) {
     println "\nApplying kubernetes objects from '" + path + "' ..."
     exec {
         executable 'kubectl'
@@ -104,7 +104,7 @@ def execKubectlApply(String path) {
     }
 }
 
-def execKubectlImage(String image, String tag, String name) {
+def kubectlImage(String image, String tag, String name) {
     println "\nApplying docker image '" + image + ":" + tag + "' ..."
     exec {
         workingDir "${projectDir}/k8s"
@@ -113,23 +113,25 @@ def execKubectlImage(String image, String tag, String name) {
     }
 }
 
-def execKubectlDescribeIngress() {
+def kubectlDescribeIngress() {
+    println "\n"
     exec {
-        println "\n"
+        ignoreExitValue true
         executable 'kubectl'
         args 'describe', 'service', 'ingress-nginx-controller'
     }
 }
 
-def execKubectlDescribeService(String name) {
+def kubectlDescribeService(String name) {
+    println "\n"
     exec {
-        println "\n"
+        ignoreExitValue true
         executable 'kubectl'
         args 'describe', 'service', name + '-cluster-ip'
     }
 }
 
-def execKubectlDelete(String path) {
+def kubectlDelete(String path) {
     println "\nDeleting kubernetes objects from '" + path + "' ..."
     exec {
         ignoreExitValue true
@@ -138,15 +140,15 @@ def execKubectlDelete(String path) {
     }
 }
 
-def execHelmInstall(String name, String chart) {
-    println "\nDeleting kubernetes objects from '" + name + "' ..."
+def helmInstall(String name, String chart) {
+    println "\nCreating kubernetes objects from '" + name + "' ..."
     exec {
         executable 'helm'
         args 'install', name, chart
     }
 }
 
-def execHelmUninstall(String name) {
+def helmUninstall(String name) {
     println "\nDeleting kubernetes objects from '" + name + "' ..."
     exec {
         ignoreExitValue true
