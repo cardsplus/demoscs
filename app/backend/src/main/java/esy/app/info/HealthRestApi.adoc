@@ -3,6 +3,20 @@
 
 REST-API für die Abfrage der Gesundheit der Anwendung.
 
+== `GET /`
+
+.CURL
+include::{restdocDir}/get-default-backend-not-found/curl-request.adoc[]
+
+Die Operation meldet *immer* `Not found` bzw. den Code 404.
+
+== `GET /healthz`
+
+.CURL
+include::{restdocDir}/get-default-backend-healthz/curl-request.adoc[]
+
+Die Operation meldet *immer* `Ok` bzw. den Code 200.
+
 == `GET /actuator/health`
 
 ****

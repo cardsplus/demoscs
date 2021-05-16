@@ -84,10 +84,9 @@ subprojects {
 ext.VERSION = new File("${rootDir}/VERSION").text
 task versionCheck() {
     build.dependsOn it
-    doLast {
-        assert new File("${rootDir}/VERSION.md").text
-            .startsWith("# Version " + VERSION)
-    }
+    assert new File("${rootDir}/VERSION.md")
+        .text
+        .startsWith("# Version " + VERSION)
 }
 
 asciidoctorj {

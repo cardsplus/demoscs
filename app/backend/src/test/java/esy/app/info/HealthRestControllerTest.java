@@ -53,6 +53,22 @@ class HealthRestControllerTest {
     }
 
     @Test
+    void getDefaultBackendHealthz() throws Exception {
+        mockMvc.perform(get("/healthz"))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk());
+    }
+
+    @Test
+    void getDefaultBackendNotFound() throws Exception {
+        mockMvc.perform(get("/"))
+                .andDo(print())
+                .andExpect(status()
+                        .isNotFound());
+    }
+
+    @Test
     void getHealth() throws Exception {
         mockMvc.perform(get("/actuator/health")
                 .accept(MediaType.APPLICATION_JSON))

@@ -7,7 +7,7 @@
 	let alertSnackbarDialog = false;
 	let alertSnackbarText = 'ok';
 		
-	let homeUrl = BACKEND_URL;
+	let homeUrl = SERVER_URL;
 	let versionUrl = '/version';
 	let versionHtml = 'loading ..';
 	onMount(async () => {

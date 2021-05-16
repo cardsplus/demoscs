@@ -1,0 +1,55 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+spec:
+  defaultBackend:
+    service:
+      name: server-cluster-ip
+      port:
+        name: http-port
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: client-cluster-ip
+                port:
+                  name: http-port
+          - path: /actuator
+            pathType: Prefix
+            backend:
+              service:
+                name: server-cluster-ip
+                port:
+                  name: http-port
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: server-cluster-ip
+                port:
+                  name: http-port
+          - path: /doc
+            pathType: Prefix
+            backend:
+              service:
+                name: server-cluster-ip
+                port:
+                  name: http-port
+          - path: /login
+            pathType: Prefix
+            backend:
+              service:
+                name: server-cluster-ip
+                port:
+                  name: http-port
+          - path: /version
+            pathType: Prefix
+            backend:
+              service:
+                name: server-cluster-ip
+                port:
+                  name: http-port

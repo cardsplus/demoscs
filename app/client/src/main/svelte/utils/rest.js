@@ -1,5 +1,5 @@
 export async function loadAllValue(restUrl) {
-    return fetch(BACKEND_URL + restUrl, {
+    return fetch(SERVER_URL + restUrl, {
         method: 'GET',
         headers: {
             'Accept': 'application/json'
@@ -17,7 +17,7 @@ export async function loadAllValue(restUrl) {
 }
 
 export async function createValue(restUrl, value) {
-    return fetch(BACKEND_URL + restUrl, {
+    return fetch(SERVER_URL + restUrl, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -37,7 +37,7 @@ export async function createValue(restUrl, value) {
 }
 
 export async function updateValue(restUrl, value) {
-    return fetch(BACKEND_URL + restUrl, {
+    return fetch(SERVER_URL + restUrl, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -57,7 +57,7 @@ export async function updateValue(restUrl, value) {
 }
 
 export async function removeValue(restUrl) {
-    return fetch(BACKEND_URL + restUrl, {
+    return fetch(SERVER_URL + restUrl, {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json'
@@ -75,7 +75,7 @@ export async function removeValue(restUrl) {
 }
 
 export async function fetchDoc(adocUrl,accept) {
-    return fetch(BACKEND_URL + adocUrl, {
+    return fetch(SERVER_URL + adocUrl, {
         method: 'GET',
         headers: {
             'Accept': accept

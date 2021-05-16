@@ -1,10 +1,13 @@
-FROM node:lts-alpine
+FROM node:alpine
+ARG SERVER_URL
+ENV SERVER_URL=${SERVER_URL}
 WORKDIR /client
-COPY . .
+COPY ./package.json ./
 RUN npm install
+COPY . .
 RUN npm run build
 
-FROM nginx:stable-alpine
+FROM nginx
+EXPOSE 5000
 COPY --from=0 /client/public /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
+COPY nginx.conf /etc/nginx/conf.d/default.conf

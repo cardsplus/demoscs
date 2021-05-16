@@ -5,28 +5,36 @@ plugins {
 import org.apache.tools.ant.taskdefs.condition.Os
 ext.NPM = Os.isFamily(Os.FAMILY_WINDOWS) ? "npm.cmd" : "npm";
 
-task npmInstall(type: Exec) {
-    enabled = System.getenv().containsKey('CI')
-    commandLine NPM, 'install'
+task npmInstall {
+    doLast {
+        exec {
+            commandLine NPM, 'install'
+        }
+    }
 }
-build.dependsOn npmInstall
 
-task npmBuild(type: Exec) {
-    enabled = System.getenv().containsKey('CI')
-    mustRunAfter npmInstall
-    commandLine NPM, 'run', 'build'
+task npmUpgrade {
+    doLast {
+        exec {
+            commandLine NPM, 'upgrade'
+        }
+    }
 }
-build.dependsOn npmBuild
 
-task npmRun(type: Exec) {
-    mustRunAfter npmInstall
-    commandLine NPM, 'run', 'dev'
+task nodeRun {
+    doLast {
+        exec {
+            commandLine NPM, 'run', 'build'
+        }
+        exec {
+            commandLine NPM, 'run', 'start'
+        }
+    }
 }
 
 task versionCheck() {
     build.dependsOn it
-    doLast {
-        assert new File("${projectDir}/package.json").text
-                .contains('"version": "' + VERSION + '"')
-    }
+    assert new File("${projectDir}/package.json")
+        .text
+        .contains('"version": "' + VERSION + '"')
 }

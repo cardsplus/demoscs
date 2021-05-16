@@ -42,8 +42,8 @@ export default {
 		config(),
 
 		replace({
-			BACKEND_URL: () => process.env.BACKEND_URL
-				? JSON.stringify(process.env.BACKEND_URL)
+			SERVER_URL: () => process.env.SERVER_URL
+				? JSON.stringify(process.env.SERVER_URL)
 				: '"http://localhost:8080"'
 		}),
 		

@@ -1,3 +1,8 @@
+# Version 0.4.0
+
+* Deployment auf lokalen Kubernetes-Cluster
+* Deployment auf GKE-Cluster
+
 # Version 0.3.0
 
 * Neue Projektstruktur
