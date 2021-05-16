@@ -144,3 +144,9 @@ ein neues Token erzeugt und eingegeben werden.
 ----
 
 Die Anwendung wird mit `localhost` aufgerufen.
+
+=== Kubernetes-Deployment lokal entfernen
+
+----
+./gradlew undeploy
+----

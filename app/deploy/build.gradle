@@ -30,7 +30,6 @@ task deployDashboard {
     doLast {
         kubectlApply('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
         kubectlApply('ui/dashboard.yaml');
-        createDashboardToken()
      }
 }
 
