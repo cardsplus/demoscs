@@ -25,7 +25,7 @@ public class ProjektValueRestController extends JsonJpaRestControllerBase&lt;Pro
 <span class="fc" id="L25">    }</span>
 
     @Override
-    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; beforeLinkDeleteTransaction(final ProjektValue value) {
+    protected Optional&lt;TransactionCallback&lt;Void&gt;&gt; beforeLinkDeleteTransaction(final ProjektValue value, final Object rel) {
 <span class="fc bfc" id="L29" title="All 2 branches covered.">        if (value.getBesitzer() == null) {</span>
 <span class="fc" id="L30">            throw new DataIntegrityViolationException(&quot;besitzer is null&quot;);</span>
         }
