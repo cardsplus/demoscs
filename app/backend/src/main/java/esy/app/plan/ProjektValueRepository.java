@@ -1,16 +1,15 @@
 package esy.app.plan;
 
 import esy.api.plan.ProjektValue;
-import org.springframework.data.jpa.repository.JpaRepository;
+import esy.rest.JsonJpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RepositoryRestResource(path = "projekt", collectionResourceRel = "allProjekt")
-public interface ProjektValueRepository extends JpaRepository<ProjektValue, UUID> {
+public interface ProjektValueRepository extends JsonJpaRepository<ProjektValue> {
 
     /**
      * Returns all persisted values ordered by {@code text} column.

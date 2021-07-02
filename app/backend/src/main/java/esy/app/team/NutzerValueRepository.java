@@ -1,16 +1,15 @@
 package esy.app.team;
 
 import esy.api.team.NutzerValue;
-import org.springframework.data.jpa.repository.JpaRepository;
+import esy.rest.JsonJpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RepositoryRestResource(path = "nutzer", collectionResourceRel = "allNutzer")
-public interface NutzerValueRepository extends JpaRepository<NutzerValue, UUID> {
+public interface NutzerValueRepository extends JsonJpaRepository<NutzerValue> {
 
     /**
      * Returns all persisted values ordered by {@code mail} column.

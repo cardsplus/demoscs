@@ -25,7 +25,7 @@ public class ProjektValueRestController extends JsonJpaRestControllerBase<Projek
     }
 
     @Override
-    protected Optional<TransactionCallback<Void>> beforeLinkDeleteTransaction(final ProjektValue value) {
+    protected Optional<TransactionCallback<Void>> beforeLinkDeleteTransaction(final ProjektValue value, final Object rel) {
         if (value.getBesitzer() == null) {
             throw new DataIntegrityViolationException("besitzer is null");
         }
