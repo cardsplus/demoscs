@@ -69,30 +69,12 @@ TIP: Siehe
 https://docs.spring.io/spring-data/rest/docs/current/reference/html/#paging-and-sorting[Spring Data REST Reference Guide]
 im Abschnitt _Sorting_ für mehr Informationen.
 
-Mit einer Projection kann eine Ansicht (engl. view) auf eine Ressource gelegt werden.
+Mit einer _Projection_ kann eine Ansicht (engl. view) auf eine Ressource gelegt werden.
+Ein _Excerpt_ ist eine _Projection_, die automatisch auf eine _Collection Resource_ angewendet wird.
 
 TIP: Siehe
 https://docs.spring.io/spring-data/rest/docs/current/reference/html/#projections-excerpts[Spring Data REST Reference Guide]
 im Abschnitt _Projections_ für mehr Informationen.
-
-tbd Excerpt
-
-TIP: Siehe
-https://docs.spring.io/spring-data/rest/docs/current/reference/html/#projections-excerpts[Spring Data REST Reference Guide]
-im Abschnitt _Excerpts_ für mehr Informationen.
-
-tbd CORS
-
-TIP: Siehe
-https://docs.spring.io/spring-data/rest/docs/current/reference/html/#customizing-sdr.configuring-cors[Spring Data REST Reference Guide]
-im Abschnitt _Configuring CORS_ für mehr Informationen.
-
-tbd Normierte Statuscodes
-
-TIP: Siehe
-https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources.default-status-codes[Spring Data REST Reference Guide]
-im Abschnitt _Default Status Codes_ für mehr Informationen.
-Abhängig von der Art der Operation gibt es noch zusätzliche Informationen zu _Custom Status Codes_ in den folgenden Abschnitten.
 
 Alle schreibenden Operationen laufen in einer Transaktion ab.
 Flexiblen Callback-Methoden validieren und vervollständigen eingehende Datensätzen.
@@ -106,19 +88,6 @@ Ziel ist es, Datensätze nicht zu speichern, die durch falsche Eingaben des Nutz
 === eventPublisher
 
 Die Singleton-Instanz eines `ApplicationEventPublisher` wird dazu verwendet, alle Veränderungen in der Datenbank als Nachricht für andere Komponenten in diesem Server-Prozess bereitzustellen.
-
-.Web-Socket
-****
-Nachrichten mit Daten, die häufig aktualisiert werden, können via Web-Socket an den Client in diesem SCS übertragen werden.
-Damit können Nutzer durch den Client aktiv auf Veränderungen in den Daten hingewiesen werden.
-Konflikte durch gleichzeitige Bearbeitung können dadurch entschärft werden.
-****
-
-.Kafka-Topic
-****
-Nachrichten mit Daten, für die dieses SCS die Hoheit besitzt, können in ein Kafka-Topic geschrieben werden.
-Andere SCS werden so kontinuierlich mit aktuellen Daten aus diesem SCS versorgt.
-****
 
 === transactionTemplate
 
