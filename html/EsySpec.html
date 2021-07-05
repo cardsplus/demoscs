@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Robert Bruckbauer</span><br>
 <span id="email" class="email"><a href="mailto:bruckbauer@gmx.at">bruckbauer@gmx.at</a></span><br>
 <span id="revnumber">version 2.4.1,</span>
-<span id="revdate">2021/07/02</span>
+<span id="revdate">2021/07/05</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -894,7 +894,8 @@ im Abschnitt <em>Sorting</em> für mehr Informationen.
 </table>
 </div>
 <div class="paragraph">
-<p>Mit einer Projection kann eine Ansicht (engl. view) auf eine Ressource gelegt werden.</p>
+<p>Mit einer <em>Projection</em> kann eine Ansicht (engl. view) auf eine Ressource gelegt werden.
+Ein <em>Excerpt</em> ist eine <em>Projection</em>, die automatisch auf eine <em>Collection Resource</em> angewendet wird.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -906,58 +907,6 @@ im Abschnitt <em>Sorting</em> für mehr Informationen.
 Siehe
 <a href="https://docs.spring.io/spring-data/rest/docs/current/reference/html/#projections-excerpts">Spring Data REST Reference Guide</a>
 im Abschnitt <em>Projections</em> für mehr Informationen.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>tbd Excerpt</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Siehe
-<a href="https://docs.spring.io/spring-data/rest/docs/current/reference/html/#projections-excerpts">Spring Data REST Reference Guide</a>
-im Abschnitt <em>Excerpts</em> für mehr Informationen.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>tbd CORS</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Siehe
-<a href="https://docs.spring.io/spring-data/rest/docs/current/reference/html/#customizing-sdr.configuring-cors">Spring Data REST Reference Guide</a>
-im Abschnitt <em>Configuring CORS</em> für mehr Informationen.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>tbd Normierte Statuscodes</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Siehe
-<a href="https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources.default-status-codes">Spring Data REST Reference Guide</a>
-im Abschnitt <em>Default Status Codes</em> für mehr Informationen.
-Abhängig von der Art der Operation gibt es noch zusätzliche Informationen zu <em>Custom Status Codes</em> in den folgenden Abschnitten.
 </td>
 </tr>
 </table>
@@ -976,25 +925,6 @@ Ziel ist es, Datensätze nicht zu speichern, die durch falsche Eingaben des Nutz
 <h5 id="eventpublisher"><a class="anchor" href="#eventpublisher"></a>eventPublisher</h5>
 <div class="paragraph">
 <p>Die Singleton-Instanz eines <code>ApplicationEventPublisher</code> wird dazu verwendet, alle Veränderungen in der Datenbank als Nachricht für andere Komponenten in diesem Server-Prozess bereitzustellen.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Web-Socket</div>
-<div class="paragraph">
-<p>Nachrichten mit Daten, die häufig aktualisiert werden, können via Web-Socket an den Client in diesem SCS übertragen werden.
-Damit können Nutzer durch den Client aktiv auf Veränderungen in den Daten hingewiesen werden.
-Konflikte durch gleichzeitige Bearbeitung können dadurch entschärft werden.</p>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Kafka-Topic</div>
-<div class="paragraph">
-<p>Nachrichten mit Daten, für die dieses SCS die Hoheit besitzt, können in ein Kafka-Topic geschrieben werden.
-Andere SCS werden so kontinuierlich mit aktuellen Daten aus diesem SCS versorgt.</p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect4">
@@ -1272,7 +1202,7 @@ Nutzer können Daten, für die das SCS die Hoheit besitzt, bearbeiten und speich
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-07-02 15:00:31 UTC
+Last updated 2021-07-05 08:13:53 UTC
 </div>
 </div>
 <style>
