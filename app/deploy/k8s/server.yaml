@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: bootscs/server
+          image: demoscs/server
           imagePullPolicy: IfNotPresent
           env:
             - name: SPRING_PROFILES_ACTIVE

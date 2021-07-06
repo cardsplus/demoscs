@@ -20,9 +20,9 @@ fi
 gcloud components update kubectl
 gcloud auth activate-service-account --key-file service-account.json
 gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://${DOCKER_HOST}
-gcloud config set project bootscs
+gcloud config set project demoscs
 gcloud config set compute/zone europe-west3
-gcloud container clusters get-credentials bootscs-autopilot-cluster
+gcloud container clusters get-credentials demoscs-autopilot-cluster
 
 docker build -t ${DOCKER_HOST}/${SERVER_IMAGE}:latest -t ${DOCKER_HOST}/${SERVER_IMAGE}:${COMMIT_SHA} app/server
 docker push ${DOCKER_HOST}/${SERVER_IMAGE}:latest
