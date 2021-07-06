@@ -1,13 +1,17 @@
 {
     "wiki" : {
         "serverURI": "https://cardsplus.atlassian.net/wiki/rest/api",
-        "domain": "bootscs",
-        "space": "BOOTSCS"
+        "domain": "demoscs",
+        "space": "DEMOSCS"
     },
     "allLink": {
         ".*": "HEAD"
     },
     "allAdocElement": [
+        {
+            "filename": "doc/EsySpec.adoc",
+            "style": "spec"
+        },
         {
             "filename": "glob:doc/Esy*Api.adoc",
             "style": "service",
@@ -31,6 +35,10 @@
         }
     ],
     "allPageStyler": [
+        {
+            "name": "spec",
+            "titleStrategy": "TITLE"
+        },
         {
             "name": "service",
             "titleStrategy": "SCOPE",
