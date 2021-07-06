@@ -127,15 +127,15 @@ kubectl proxy
 ----
 
 Das Dashboard wird mit der angezeigten URL aufgerufen.
-Beim ersten Aufruf muss das am Bildschirm angezeigte Token eingegeben werden.
+Beim ersten Aufruf muss ein Token eingegeben werden.
 Das Token ist zeitlich befristet.
-Nach Ablauf der Gültigkeit muss mit
+Ein gültiges Token wird mit mit dem Aufruf von
 
 ----
 ./gradlew createDashboardToken
 ----
 
-ein neues Token erzeugt und eingegeben werden.
+erstellt.
 
 === Kubernetes-Deployment lokal ausführen
 
