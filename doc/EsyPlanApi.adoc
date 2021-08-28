@@ -41,7 +41,7 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 
 [plantuml,Plan,png]
 ----
-!pragma graphviz_dot smetana
+!pragma layout smetana
 hide members
 show attributes
 class NutzerValue<JsonJpaValueBase> {

@@ -37,7 +37,7 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 
 [plantuml,Team,png]
 ----
-!pragma graphviz_dot smetana
+!pragma layout smetana
 hide members
 show attributes
 package "team" {
