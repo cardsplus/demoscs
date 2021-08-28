@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.199s</div>
+<div class="counter">0.175s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,22 +79,22 @@
 </thead>
 <tr>
 <td class="success">getLiquibase()</td>
-<td class="success">0.057s</td>
+<td class="success">0.042s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getMappings()</td>
-<td class="success">0.038s</td>
+<td class="success">0.043s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getSessions()</td>
-<td class="success">0.065s</td>
+<td class="success">0.049s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getStartup()</td>
-<td class="success">0.039s</td>
+<td class="success">0.041s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -102,15 +102,15 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2021-08-28 13:10:18.725  INFO 2190 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [esy.app.info.StartupRestControllerTest], using SpringBootContextLoader
-2021-08-28 13:10:18.727  INFO 2190 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [esy.app.info.StartupRestControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2021-08-28 13:10:18.727  INFO 2190 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [esy.app.info.StartupRestControllerTest]: StartupRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2021-08-28 13:10:18.736  INFO 2190 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration esy.app.BackendConfigurationTest$BackendConfigurationApp for test class esy.app.info.StartupRestControllerTest
-2021-08-28 13:10:18.742  INFO 2190 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2021-08-28 13:10:18.747  INFO 2190 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@391c7422, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4239388c, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@71376058, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@11e7502, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@5bf9ac67, org.springframework.test.context.support.DirtiesContextTestExecutionListener@508f02cc, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1a708d25, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@68345d0c, org.springframework.test.context.event.EventPublishingTestExecutionListener@7e384ef9, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5609ba90, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@488e1cd1, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@218f4f1, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@3eeb3dcd, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@25adcdba, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1dfd354a]
-2021-08-28 13:10:18.758  INFO 2190 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-08-28 13:10:18.758  INFO 2190 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-08-28 13:10:18.764  INFO 2190 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+<pre>2021-08-28 13:13:48.794  INFO 2067 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [esy.app.info.StartupRestControllerTest], using SpringBootContextLoader
+2021-08-28 13:13:48.796  INFO 2067 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [esy.app.info.StartupRestControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-08-28 13:13:48.796  INFO 2067 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [esy.app.info.StartupRestControllerTest]: StartupRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2021-08-28 13:13:48.802  INFO 2067 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration esy.app.BackendConfigurationTest$BackendConfigurationApp for test class esy.app.info.StartupRestControllerTest
+2021-08-28 13:13:48.810  INFO 2067 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-08-28 13:13:48.811  INFO 2067 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7712e7f7, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@30b5a28d, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@6970d828, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@2c7d120e, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@4c306529, org.springframework.test.context.support.DirtiesContextTestExecutionListener@518c07e8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3ed22469, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7afbbcdf, org.springframework.test.context.event.EventPublishingTestExecutionListener@352d8784, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4af658e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@2b71e81e, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@ccba4eb, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@55031351, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@2a7f9f6a, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@e6ab323]
+2021-08-28 13:13:48.830  INFO 2067 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-08-28 13:13:48.830  INFO 2067 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-08-28 13:13:48.833  INFO 2067 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
 
 MockHttpServletRequest:
       HTTP Method = GET
@@ -147,9 +147,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2021-08-28 13:10:18.798  INFO 2190 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-08-28 13:10:18.799  INFO 2190 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-08-28 13:10:18.805  INFO 2190 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
+2021-08-28 13:13:48.874  INFO 2067 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-08-28 13:13:48.874  INFO 2067 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-08-28 13:13:48.883  INFO 2067 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 9 ms
 
 MockHttpServletRequest:
       HTTP Method = GET
@@ -186,9 +186,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2021-08-28 13:10:18.845  INFO 2190 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-08-28 13:10:18.845  INFO 2190 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-08-28 13:10:18.851  INFO 2190 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
+2021-08-28 13:13:48.924  INFO 2067 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-08-28 13:13:48.924  INFO 2067 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-08-28 13:13:48.929  INFO 2067 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
 
 MockHttpServletRequest:
       HTTP Method = GET
@@ -225,9 +225,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2021-08-28 13:10:18.913  INFO 2190 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-08-28 13:10:18.914  INFO 2190 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-08-28 13:10:18.920  INFO 2190 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2021-08-28 13:13:48.975  INFO 2067 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-08-28 13:13:48.975  INFO 2067 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-08-28 13:13:48.978  INFO 2067 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
 
 MockHttpServletRequest:
       HTTP Method = GET
@@ -275,7 +275,7 @@ MockHttpServletResponse:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 6.8.3</a> at Aug 28, 2021, 1:10:22 PM</p>
+<a href="http://www.gradle.org">Gradle 6.8.3</a> at Aug 28, 2021, 1:13:51 PM</p>
 </div>
 </div>
 </body>
