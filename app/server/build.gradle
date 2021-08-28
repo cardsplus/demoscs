@@ -35,7 +35,6 @@ processResources {
     }
 }
 
-
 jar {
     enabled = false
 }

@@ -31,6 +31,7 @@ spec:
               memory: 1Gi
           readinessProbe:
             initialDelaySeconds: 60
+            periodSeconds: 5
             failureThreshold: 10
             httpGet:
               port: http-port
