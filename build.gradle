@@ -6,9 +6,9 @@ plugins {
     id 'base'
     id 'eclipse'
     id 'idea'
-    id 'com.diffplug.spotless' version '5.10.2'
+    id 'com.diffplug.spotless' version '5.14.3'
     id 'com.palantir.git-version' version '0.12.3'
-    id "org.asciidoctor.jvm.convert" version "3.3.2"
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'org.asciidoctor.jvm.pdf' version '3.3.2'
     id 'org.asciidoctor.jvm.gems' version '3.3.2'
 }
@@ -47,7 +47,7 @@ repositories {
 }
 
 dependencies {
-    asciidoctorGems 'rubygems:rouge:3.22.0'
+    asciidoctorGems 'rubygems:rouge:3.26.0'
 }
 
 allprojects {
@@ -81,6 +81,57 @@ subprojects {
     }
 }
 
+ext.HTMLTOOL_IMAGE = 'registry.gitlab.emundo.eu/erd/cardsplus/integration/cardsplus-toolkit:v2.22'
+task cardsplusBuild {
+    dependsOn build
+    onlyIf {
+        System.env['HTMLTOOL_WIKI_USER'] != null
+        System.env['HTMLTOOL_WIKI_URI'] != null
+        System.env['HTMLTOOL_JIRA_URI'] != null
+    }
+    doLast {
+        exec {
+            commandLine 'docker', 'run', \
+                '--rm', \
+                '-v', "${project.gradle.gradleUserHomeDir}:/gradle", \
+                '-v', "${buildDir}:/out", \
+                '-v', "${rootDir}:/mnt", \
+                '-w', "/mnt", \
+                '-e', "HTMLTOOL_WIKI_URI", \
+                '-e', "HTMLTOOL_WIKI_USER", \
+                '-e', "HTMLTOOL_JIRA_URI", \
+                "${HTMLTOOL_IMAGE}", \
+                "plus", \
+                "--publish", \
+                "--message="+version 
+        }
+    }
+}
+task cardsplusUpload {
+    mustRunAfter cardsplusBuild
+    onlyIf {
+        System.env['HTMLTOOL_WIKI_USER'] != null
+        System.env['HTMLTOOL_WIKI_URI'] != null
+        System.env['HTMLTOOL_JIRA_URI'] != null
+        file('build/plus/cardsplus-upload.sh').exists()
+    }
+    doLast {
+        exec {
+            commandLine 'docker', 'run', \
+                '--rm', \
+                '-v', "${project.gradle.gradleUserHomeDir}:/gradle", \
+                '-v', "${buildDir}:/out", \
+                '-v', "${rootDir}:/mnt", \
+                '-w', "/mnt", \
+                '-e', "HTMLTOOL_WIKI_URI", \
+                '-e', "HTMLTOOL_WIKI_USER", \
+                '-e', "HTMLTOOL_JIRA_URI", \
+                "${HTMLTOOL_IMAGE}", \
+                "curl"
+        }
+    }
+}
+
 ext.VERSION = new File("${rootDir}/VERSION").text
 task versionCheck() {
     build.dependsOn it
@@ -93,10 +144,10 @@ asciidoctorj {
   requires 'rouge'
   modules {
     diagram { 
-      version '2.1.2'
+      version '2.2.0'
     }
     pdf { 
-      version '1.5.4'
+      version '1.6.0'
     }
   }
   logLevel 'INFO'

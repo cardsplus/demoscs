@@ -10,6 +10,7 @@
 	import Nutzer from './pages/Nutzer.svelte';
 	import Projekt from './pages/Projekt.svelte';
 	import Aufgabe from './pages/Aufgabe.svelte';
+	import Rechner from './pages/Rechner.svelte';
 	import Uhrzeit from './pages/Uhrzeit.svelte';
 	let open = false;
 </script>
@@ -74,6 +75,13 @@
 					</div>
 				</div>
 			</div>
+			<div class="flex items-center justify-between my-4">
+				<div class="flex-1 pl-2">
+					<div class="text-gray-600 font-thin">
+						<a on:click={() => open = false} href="/rechner">Rechner</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</nav>
 </aside>
@@ -85,7 +93,8 @@
 	<Route path="/projekt" component="{Projekt}" />
 	<Route path="/aufgabe" component="{Aufgabe}" />
 	<Route path="/uhrzeit" component="{Uhrzeit}" />
+	<Route path="/rechner" component="{Rechner}" />
 	<RouteNotFound>
-		<h1>Oje! Keine Seite gefunden.</h1>
+		<h1>Ups!</h1>
 	</RouteNotFound>
 </Router>

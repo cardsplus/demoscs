@@ -90,8 +90,10 @@ public class EndpointConfiguration {
             public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration configuration, final CorsRegistry registry) {
                 // apply defaults
                 configuration.setRepositoryDetectionStrategy(RepositoryDetectionStrategies.ANNOTATED);
-                configuration.setDefaultMediaType(MediaType.APPLICATION_JSON);
                 configuration.setBasePath(BASE);
+                // create JSON with content (not _embedded)
+                configuration.setDefaultMediaType(MediaType.APPLICATION_JSON);
+                configuration.useHalAsDefaultJsonMediaType(false);
                 // expose value objects
                 configuration.exposeIdsFor(AufgabeValue.class);
                 configuration.exposeIdsFor(NutzerValue.class);

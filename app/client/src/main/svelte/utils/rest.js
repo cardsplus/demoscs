@@ -1,3 +1,8 @@
+export const SERVER_URL = 
+    window.location.protocol + 
+    "//" + 
+    window.location.host.replace(":5000", ":8080");
+
 export async function loadAllValue(restUrl) {
     return fetch(SERVER_URL + restUrl, {
         method: 'GET',

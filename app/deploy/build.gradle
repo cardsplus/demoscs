@@ -1,14 +1,6 @@
 plugins {
     id 'base'
 }
-
-import java.util.Optional;
-ext.SERVER_URL = 'http://localhost'
-ext.SERVER_IMAGE = Optional.ofNullable(System.getenv("SERVER_IMAGE"))
-            .orElse(rootProject.name + "/server")            
-ext.CLIENT_URL = 'http://localhost'
-ext.CLIENT_IMAGE = Optional.ofNullable(System.getenv("CLIENT_IMAGE"))
-            .orElse(rootProject.name + "/client")
             
 task deployIngress {
     doLast {
@@ -25,11 +17,23 @@ task deployIngress {
     }
 }
 
+task undeployIngress {
+    doLast {
+        helmUninstall('ingress-nginx');
+     }
+}
+
 task deployDashboard {
     assert new File("${projectDir}/ui/dashboard.yaml").exists()
     doLast {
         kubectlApply('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
         kubectlApply('ui/dashboard.yaml');
+     }
+}
+
+task undeployDashboard {
+    doLast {
+        kubectlDelete('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
      }
 }
 
@@ -53,33 +57,59 @@ task createDashboardToken {
      }
 }
 
-task deploy {
-    assert new File("${projectDir}/k8s/server.yaml").exists()
-    assert new File("${projectDir}/k8s/client.yaml").exists()
-    assert new File("${projectDir}/k8s/ingress.yaml").exists()
-    def SHA = versionDetails().gitHash
-    doLast {
-        dockerBuild(SERVER_IMAGE, SHA, 'server');
-        dockerBuild(CLIENT_IMAGE, SHA, 'client');
-        kubectlApply('k8s');
-        kubectlImage(SERVER_IMAGE, SHA, 'server');
-        kubectlImage(CLIENT_IMAGE, SHA, 'client');
-    }
-}
+ext.SERVER_IMAGE = rootProject.name + "/server"                   
+ext.CLIENT_IMAGE = rootProject.name + "/client"                   
 
-task deployStatus {
-    doLast {
-        kubectlDescribeIngress();
-        kubectlDescribeService('server');
-        kubectlDescribeService('client');
+task deploy {
+    doLast {    
+        println '\nDeploying with latest'
+        dockerBuild(SERVER_IMAGE, 'latest', 'server');
+        dockerBuild(CLIENT_IMAGE, 'latest', 'client');
+        kubectlApply('k8s')
     }
 }
 
 task undeploy {
     doLast {
-        kubectlDelete('https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml');
-        kubectlDelete('k8s');
-        helmUninstall('ingress-nginx');
+        kubectlDelete('k8s')
+     }
+}
+
+task deployStatus {
+    doLast {
+        kubectlDescribeIngress();
+        kubectlDescribeService('server')
+        kubectlDescribeService('client')
+    }
+}
+
+task updateServer {
+    doLast {
+        def SHA = versionDetails().gitHash
+        println '\nDeploying with ' + SHA
+        dockerBuild(SERVER_IMAGE, SHA, 'server');
+        kubectlImage(SERVER_IMAGE, SHA, 'server')
+    }
+}
+
+task deleteServer {
+    doLast {
+        kubectlDelete('k8s/server.yaml')
+     }
+}
+
+task updateClient {
+    doLast {
+        def SHA = versionDetails().gitHash
+        println '\nDeploying with ' + SHA
+        dockerBuild(CLIENT_IMAGE, SHA, 'client');
+        kubectlImage(CLIENT_IMAGE, SHA, 'client')
+    }
+}
+
+task deleteClient {
+    doLast {
+        kubectlDelete('k8s/client.yaml')
      }
 }
 
@@ -89,7 +119,6 @@ def dockerBuild(String image, String tag, String name) {
         workingDir "${projectDir}/../" + name 
         executable 'docker'
         args 'build', '.', \
-            '--build-arg', 'SERVER_URL='+SERVER_URL, \
             '-t', image + ':latest', \
             '-t', image + ':' + tag
     }
