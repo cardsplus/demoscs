@@ -1,6 +1,5 @@
 import svelte from 'rollup-plugin-svelte';
 import smelte from 'smelte/rollup-plugin-smelte';
-import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
@@ -40,12 +39,6 @@ export default {
 	},
 	plugins: [
 		config(),
-
-		replace({
-			SERVER_URL: () => process.env.SERVER_URL
-				? JSON.stringify(process.env.SERVER_URL)
-				: '"http://localhost:8080"'
-		}),
 		
 		svelte({
 			compilerOptions: {

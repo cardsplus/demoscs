@@ -1,13 +1,15 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Chip, Snackbar } from "smelte";
+	import { Chip } from "smelte";
+	import { Snackbar } from "smelte";
+	import { SERVER_URL } from './utils/rest.js';
 	import { fetchDoc } from './utils/rest.js';
-	import { createTestSet, removeTestSet } from './utils/data.js';
+	import { createTestSet } from './utils/test.js';
+	import { removeTestSet } from './utils/test.js';
 
 	let alertSnackbarDialog = false;
 	let alertSnackbarText = 'ok';
 		
-	let homeUrl = SERVER_URL;
 	let versionUrl = '/version';
 	let versionHtml = 'loading ..';
 	onMount(async () => {
@@ -33,7 +35,7 @@
 		Version {@html versionHtml}	
 	</div>	
 	<div class="text-2xl">
-		<a class="underline text-blue-600" href="{homeUrl}/api" target="_blank">{homeUrl}</a>
+		<a class="underline text-blue-600" href="{SERVER_URL}/api" target="_blank">{SERVER_URL}</a>
 	</div>
 	<div>
 		<Chip on:click={createTestSet} icon="create">

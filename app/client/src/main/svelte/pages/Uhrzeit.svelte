@@ -1,10 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Button } from "smelte";
+	import { Button } from 'smelte';
+	import { appendLeadingZeroes } from '../utils/date.js';
 	let time = new Date();
-	$: timeHours = time.getHours();
-	$: timeMinutes = time.getMinutes();
-	$: timeSeconds = time.getSeconds();
+	$: timeHours = appendLeadingZeroes(time.getHours());
+	$: timeMinutes = appendLeadingZeroes(time.getMinutes());
+	$: timeSeconds = appendLeadingZeroes(time.getSeconds());
 	onMount(() => {
 		const interval = setInterval(() => {
 			time = new Date();
