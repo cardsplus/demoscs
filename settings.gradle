@@ -1,3 +1,16 @@
+pluginManagement {
+    plugins {
+        id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+        id 'org.springframework.boot' version '2.5.4'
+    }
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        maven {
+            url "https://dl.bintray.com/gradle/gradle-plugins"
+        }
+    }
+}
 rootProject.name = 'demoscs'
 include 'app:backend-api'
 include 'app:backend'
