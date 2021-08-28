@@ -6,13 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.rest.core.annotation.*;
-import org.springframework.http.HttpStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -22,13 +18,6 @@ public abstract class JsonJpaRestControllerBase<V extends JsonJpaValueBase<V>> {
     private final ApplicationEventPublisher eventPublisher;
 
     private final TransactionTemplate transactionTemplate;
-
-    @ExceptionHandler
-    void onIllegalArgumentException(final IllegalArgumentException cause, final HttpServletResponse response) throws IOException {
-        log.error(cause.getMessage());
-        log.trace(cause.getMessage(), cause);
-        response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), cause.getMessage());
-    }
 
     @HandleBeforeCreate
     public final void beforeCreate(@NonNull final V value) {
