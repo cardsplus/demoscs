@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Robert Bruckbauer</span><br>
 <span id="email" class="email"><a href="mailto:bruckbauer@gmx.at">bruckbauer@gmx.at</a></span><br>
 <span id="revnumber">version 2.4.1,</span>
-<span id="revdate">2021/07/06</span>
+<span id="revdate">2021/08/28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -573,9 +573,31 @@ für mehr Informationen.
 <p>Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="images/Plan.png" alt="Plan" width="503" height="206">
+<pre>Failed to generate image: PlantUML preprocessing failed: [From &lt;input&gt; (line 2) ]
+
+@startuml
+!pragma graphviz_dot smetana
+^^^^^
+ This directive has been renamed to '!pragma layout smetana'. Please update your diagram.
+
+!pragma graphviz_dot smetana
+hide members
+show attributes
+class NutzerValue&lt;JsonJpaValueBase&gt; {
+}
+package "plan" {
+  class AufgabeValue&lt;JsonJpaValueBase&gt; {
+    text
+  }
+  class ProjektValue&lt;JsonJpaValueBase&gt; {
+    name
+  }
+  ProjektValue "1" *-- "*" AufgabeValue
+  ProjektValue "1" --&gt; "1" NutzerValue : besitzer
+  ProjektValue "1" --&gt; "*" NutzerValue : mitglied
+}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -703,26 +725,26 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "77085f19-bbf9-464f-9bb8-b23c5af3da21",
+  "id" : "d09ab185-840e-49be-80ce-6809b94991e5",
   "name" : "Projekt A",
   "aktiv" : true,
   "sprache" : "EN",
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21"
+    "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5"
   }, {
     "rel" : "projektValue",
-    "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21"
-  }, {
-    "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21/besitzer"
+    "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5"
   }, {
     "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21/allMitglied"
+    "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5/besitzer"
   }, {
     "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21/allAufgabe"
+    "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5/allAufgabe"
   } ]
 }</code></pre>
 </div>
@@ -791,11 +813,11 @@ für mehr Informationen.
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
-  }, {
     "rel" : "allMitglied",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
   }, {
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
@@ -920,48 +942,48 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/projekt/search"
   } ],
   "content" : [ {
-    "id" : "27c0aa7b-577c-419d-9412-6b970365aac4",
+    "id" : "04515a29-628f-43c7-8448-c9304bacff9a",
     "name" : "Projekt B",
     "aktiv" : true,
     "sprache" : "DE",
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/27c0aa7b-577c-419d-9412-6b970365aac4"
+      "href" : "http://localhost:8080/api/projekt/04515a29-628f-43c7-8448-c9304bacff9a"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/27c0aa7b-577c-419d-9412-6b970365aac4"
-    }, {
-      "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/27c0aa7b-577c-419d-9412-6b970365aac4/besitzer"
+      "href" : "http://localhost:8080/api/projekt/04515a29-628f-43c7-8448-c9304bacff9a"
     }, {
       "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/27c0aa7b-577c-419d-9412-6b970365aac4/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/04515a29-628f-43c7-8448-c9304bacff9a/allMitglied"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/04515a29-628f-43c7-8448-c9304bacff9a/besitzer"
     }, {
       "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/27c0aa7b-577c-419d-9412-6b970365aac4/allAufgabe"
+      "href" : "http://localhost:8080/api/projekt/04515a29-628f-43c7-8448-c9304bacff9a/allAufgabe"
     } ]
   }, {
-    "id" : "77085f19-bbf9-464f-9bb8-b23c5af3da21",
+    "id" : "d09ab185-840e-49be-80ce-6809b94991e5",
     "name" : "Projekt A",
     "aktiv" : true,
     "sprache" : "EN",
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21"
+      "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21"
-    }, {
-      "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21/besitzer"
+      "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5"
     }, {
       "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5/allMitglied"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5/besitzer"
     }, {
       "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/77085f19-bbf9-464f-9bb8-b23c5af3da21/allAufgabe"
+      "href" : "http://localhost:8080/api/projekt/d09ab185-840e-49be-80ce-6809b94991e5/allAufgabe"
     } ]
   } ],
   "page" : {
@@ -1017,11 +1039,11 @@ für mehr Informationen.
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
-  }, {
     "rel" : "allMitglied",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
   }, {
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
@@ -1076,11 +1098,11 @@ für mehr Informationen.
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
-  }, {
     "rel" : "allMitglied",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
   }, {
     "rel" : "allAufgabe",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
@@ -1176,19 +1198,19 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "0de3087c-5946-4f7b-ac98-8eaa8ff7f8d6",
+  "id" : "21dd44c7-d685-4807-b395-97a0f57897de",
   "text" : "Aufgabe A",
   "aktiv" : true,
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/aufgabe/0de3087c-5946-4f7b-ac98-8eaa8ff7f8d6"
+    "href" : "http://localhost:8080/api/aufgabe/21dd44c7-d685-4807-b395-97a0f57897de"
   }, {
     "rel" : "aufgabeValue",
-    "href" : "http://localhost:8080/api/aufgabe/0de3087c-5946-4f7b-ac98-8eaa8ff7f8d6"
+    "href" : "http://localhost:8080/api/aufgabe/21dd44c7-d685-4807-b395-97a0f57897de"
   }, {
     "rel" : "projekt",
-    "href" : "http://localhost:8080/api/aufgabe/0de3087c-5946-4f7b-ac98-8eaa8ff7f8d6/projekt"
+    "href" : "http://localhost:8080/api/aufgabe/21dd44c7-d685-4807-b395-97a0f57897de/projekt"
   } ]
 }</code></pre>
 </div>
@@ -1351,49 +1373,49 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/aufgabe/search"
   } ],
   "content" : [ {
-    "id" : "0de3087c-5946-4f7b-ac98-8eaa8ff7f8d6",
-    "text" : "Aufgabe A",
-    "aktiv" : true,
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/0de3087c-5946-4f7b-ac98-8eaa8ff7f8d6"
-    }, {
-      "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/0de3087c-5946-4f7b-ac98-8eaa8ff7f8d6"
-    }, {
-      "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/0de3087c-5946-4f7b-ac98-8eaa8ff7f8d6/projekt"
-    } ]
-  }, {
-    "id" : "1a0a8920-1560-430e-9e8a-7906aa3deb62",
+    "id" : "0969181e-7183-4899-9d57-decb51cbc530",
     "text" : "Aufgabe B",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/1a0a8920-1560-430e-9e8a-7906aa3deb62"
+      "href" : "http://localhost:8080/api/aufgabe/0969181e-7183-4899-9d57-decb51cbc530"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/1a0a8920-1560-430e-9e8a-7906aa3deb62"
+      "href" : "http://localhost:8080/api/aufgabe/0969181e-7183-4899-9d57-decb51cbc530"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/1a0a8920-1560-430e-9e8a-7906aa3deb62/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/0969181e-7183-4899-9d57-decb51cbc530/projekt"
     } ]
   }, {
-    "id" : "bbb99b92-d91f-4813-ba2b-acaee2e78d00",
+    "id" : "21dd44c7-d685-4807-b395-97a0f57897de",
     "text" : "Aufgabe A",
     "aktiv" : true,
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/bbb99b92-d91f-4813-ba2b-acaee2e78d00"
+      "href" : "http://localhost:8080/api/aufgabe/21dd44c7-d685-4807-b395-97a0f57897de"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/bbb99b92-d91f-4813-ba2b-acaee2e78d00"
+      "href" : "http://localhost:8080/api/aufgabe/21dd44c7-d685-4807-b395-97a0f57897de"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/bbb99b92-d91f-4813-ba2b-acaee2e78d00/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/21dd44c7-d685-4807-b395-97a0f57897de/projekt"
+    } ]
+  }, {
+    "id" : "7d76414e-2d48-4780-b016-fb82839bff50",
+    "text" : "Aufgabe A",
+    "aktiv" : true,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/7d76414e-2d48-4780-b016-fb82839bff50"
+    }, {
+      "rel" : "aufgabeValue",
+      "href" : "http://localhost:8080/api/aufgabe/7d76414e-2d48-4780-b016-fb82839bff50"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/7d76414e-2d48-4780-b016-fb82839bff50/projekt"
     } ]
   } ],
   "page" : {
@@ -1551,7 +1573,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2021-07-06 14:16:40 UTC
+Last updated 2021-08-28 13:08:43 UTC
 </div>
 </div>
 <style>

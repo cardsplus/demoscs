@@ -90,15 +90,17 @@ import static org.springframework.data.rest.core.mapping.RepositoryDetectionStra
             public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration configuration, final CorsRegistry registry) {
                 // apply defaults
 <span class="fc" id="L92">                configuration.setRepositoryDetectionStrategy(RepositoryDetectionStrategies.ANNOTATED);</span>
-<span class="fc" id="L93">                configuration.setDefaultMediaType(MediaType.APPLICATION_JSON);</span>
-<span class="fc" id="L94">                configuration.setBasePath(BASE);</span>
+<span class="fc" id="L93">                configuration.setBasePath(BASE);</span>
+                // create JSON with content (not _embedded)
+<span class="fc" id="L95">                configuration.setDefaultMediaType(MediaType.APPLICATION_JSON);</span>
+<span class="fc" id="L96">                configuration.useHalAsDefaultJsonMediaType(false);</span>
                 // expose value objects
-<span class="fc" id="L96">                configuration.exposeIdsFor(AufgabeValue.class);</span>
-<span class="fc" id="L97">                configuration.exposeIdsFor(NutzerValue.class);</span>
-<span class="fc" id="L98">                configuration.exposeIdsFor(ProjektValue.class);</span>
+<span class="fc" id="L98">                configuration.exposeIdsFor(AufgabeValue.class);</span>
+<span class="fc" id="L99">                configuration.exposeIdsFor(NutzerValue.class);</span>
+<span class="fc" id="L100">                configuration.exposeIdsFor(ProjektValue.class);</span>
                 // add CORS settings
-<span class="fc" id="L100">                applyCORS(registry);</span>
-<span class="fc" id="L101">            }</span>
+<span class="fc" id="L102">                applyCORS(registry);</span>
+<span class="fc" id="L103">            }</span>
         };
     }
 }
