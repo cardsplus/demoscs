@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Button } from 'smelte';
+	import Button from '../components/Button';
 	import { appendLeadingZeroes } from '../utils/date.js';
 	let time = new Date();
 	$: timeHours = appendLeadingZeroes(time.getHours());

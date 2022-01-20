@@ -1,10 +1,14 @@
 <script>
    	import { onMount } from 'svelte';
-  	import { Button, Checkbox, Dialog, Snackbar, TextField } from "smelte";
-    import { loadAllValue, createValue, updateValue, removeValue } from '../utils/rest.js';
-
-	let alertSnackbarDialog = false;
-	let alertSnackbarText = 'ok';
+	import Button from '../components/Button';
+	import Checkbox from '../components/Checkbox';
+	import Dialog from '../components/Dialog';
+	import TextField from '../components/TextField';
+	import { toast } from '../components/Toast';
+    import { loadAllValue } from '../utils/rest.js';
+    import { createValue } from '../utils/rest.js';
+    import { updateValue } from '../utils/rest.js';
+    import { removeValue } from '../utils/rest.js';
 
 	const projektUrl = '/api/projekt';
 	let allProjekt = [];
@@ -18,8 +22,8 @@
 			projektIndexOf = 0;
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
 	});
 	
@@ -84,8 +88,8 @@
 			projektIndexOf = allProjekt.length - 1;
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
 	}
 
@@ -103,8 +107,8 @@
 			allProjekt = [...allProjekt.slice(0, i), json, ...allProjekt.slice(i + 1)];
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
 	}
 	function remove() {
@@ -117,15 +121,11 @@
 			projektIndexOf = 0;
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
 		});
 	}
 </script>
-
-<Snackbar bind:value={alertSnackbarDialog} bottom left color="alert" timeout={2000}>
-	<div>{alertSnackbarText}</div>
-</Snackbar>
 
 <h1>Projekt</h1>
 <div class="flex flex-col ml-2 mr-2 space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
@@ -150,7 +150,7 @@
 				{#each allProjektFiltered as projekt, i}
 				<tr  on:click|preventDefault={e => projektIndexOf = i}
 					title={projekt.id}
-					class:bg-gray-50={i === projektIndexOf}>
+					class:ring={i === projektIndexOf}>
 					<td class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
 						<span>{i + 1}</span>
 					</td>
@@ -225,16 +225,3 @@
 		</Button>
 	</div>
 </Dialog>
-
-<style>
-	h2 {
-		font-size: 1.2em;
-  		font-weight: bold;
-		margin-top: 0;
-		margin-bottom: 0.2em;
-		text-transform :uppercase;
-	}
-	hr {
-		border-width: 0.1em;
-	}
-</style>

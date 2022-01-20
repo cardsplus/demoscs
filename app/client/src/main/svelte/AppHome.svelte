@@ -1,14 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Chip } from "smelte";
-	import { Snackbar } from "smelte";
+	import Chip from './components/Chip';
+	import { toast } from './components/Toast';
 	import { SERVER_URL } from './utils/rest.js';
 	import { fetchDoc } from './utils/rest.js';
 	import { createTestSet } from './utils/test.js';
 	import { removeTestSet } from './utils/test.js';
-
-	let alertSnackbarDialog = false;
-	let alertSnackbarText = 'ok';
 		
 	let versionUrl = '/version';
 	let versionHtml = 'loading ..';
@@ -19,15 +16,11 @@
 			versionHtml = html;
 		})
 		.catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
 		});
 	});
 </script>
-
-<Snackbar bind:value={alertSnackbarDialog} bottom left color="alert" timeout={2000}>
-	<div>{alertSnackbarText}</div>
-</Snackbar>
 
 <h1>Info</h1>
 <div class="flex flex-col space-y-2">

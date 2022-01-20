@@ -1,10 +1,14 @@
 <script>
     import { onMount } from 'svelte';
-    import { Button, Checkbox, Select, Snackbar, TextField } from "smelte";
-    import { loadAllValue, createValue, updateValue, removeValue } from '../utils/rest.js';
-
-	let alertSnackbarDialog = false;
-	let alertSnackbarText = 'ok';
+	import Checkbox from '../components/Checkbox';
+	import Icon from '../components/Icon';
+	import Select from '../components/Select';
+	import TextField from '../components/TextField';
+	import { toast } from '../components/Toast';
+    import { loadAllValue } from '../utils/rest.js';
+    import { createValue } from '../utils/rest.js';
+    import { updateValue } from '../utils/rest.js';
+    import { removeValue } from '../utils/rest.js';
 
     const projektUrl = '/api/projekt';
     let allProjektItem = [];
@@ -25,8 +29,8 @@
             }            
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
     });
 
@@ -40,8 +44,8 @@
             allAufgabe = json.content;
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
     }
     
@@ -62,8 +66,8 @@
             aufgabeText = "";
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
     };
 
@@ -76,8 +80,8 @@
 			allAufgabe = [...allAufgabe.slice(0, i), json, ...allAufgabe.slice(i + 1)];
         })
         .catch(err => {
-            alertSnackbarText = err;
-            alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
     };
 
@@ -89,20 +93,16 @@
 			allAufgabe = [...allAufgabe.slice(0, i), ...allAufgabe.slice(i + 1)];
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
 		});
     };
 </script>
 
-<Snackbar bind:value={alertSnackbarDialog} bottom left color="alert" timeout={2000}>
-	<div>{alertSnackbarText}</div>
-</Snackbar>
-
 <h1>Aufgabe</h1>
 {#if projektSelected}
-<div class="flex flex-col space-y-2">
-    <div class="flex flex-row space-x-2">
+<div class="flex flex-col">
+    <div class="flex flex-row">
         <div class="flex-grow">
             <form on:submit|preventDefault={() => create()}>
                 <TextField bind:value={aufgabeText}
@@ -119,14 +119,14 @@
     <ul>
         {#each allAufgabe as aufgabe}
         <li>
-            <div class="flex flex-row">
+            <div class="flex flex-row py-1">
                 <div class="flex-grow">
                     <Checkbox on:change={() => update(aufgabe)} bind:checked={aufgabe.aktiv}
                         label={aufgabe.text} />
                 </div>
                 <div class="flex-none">
-                    <Button on:click={() => remove(aufgabe)}
-                        icon="delete" text light flat />
+                    <Icon on:click={() => remove(aufgabe)}
+                        name="delete" outlined />
                 </div>
             </div>
         </li>
