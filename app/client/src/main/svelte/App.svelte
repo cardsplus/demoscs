@@ -11,6 +11,7 @@
 	import AppMenu from './AppMenu.svelte'
 	import Aufgabe from './pages/Aufgabe.svelte';
 	import Nutzer from './pages/Nutzer.svelte';
+	import NutzerViewer from './pages/NutzerViewer.svelte';
 	import Projekt from './pages/Projekt.svelte';
 	import Galerie from './pages/Galerie.svelte';
 	import Uhrzeit from './pages/Uhrzeit.svelte';
@@ -57,6 +58,8 @@
 				component="{AppHelp}" />
 			<Route path="/nutzer" 
 				component="{Nutzer}" />
+			<Route path="/nutzer/:id"
+				component="{NutzerViewer}" />
 			<Route path="/projekt" 
 				component="{Projekt}" />
 			<Route path="/aufgabe" 

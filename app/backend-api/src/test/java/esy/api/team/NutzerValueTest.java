@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -87,8 +89,7 @@ public class NutzerValueTest {
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
 		assertTrue(value.isAktiv());
-		assertEquals(1, value.getAllSprache().size());
-		assertTrue(value.getAllSprache().contains(Sprache.DE));
+		assertEquals(0, value.getAllSprache().size());
 	}
 
 	@Test
@@ -102,7 +103,7 @@ public class NutzerValueTest {
 		assertEquals(name, value.getName());
 		assertFalse(value.isAktiv());
 		assertEquals(1, value.getAllSprache().size());
-		assertTrue(value.getAllSprache().contains(Sprache.EN));
+		assertTrue(value.getAllSprache().contains(Sprache.EN.name()));
 	}
 
 	@ParameterizedTest
@@ -196,27 +197,27 @@ public class NutzerValueTest {
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());
 		assertEquals(1, value.getAllSprache().size());
-		assertTrue(value.getAllSprache().contains(Sprache.EN));
+		assertTrue(value.getAllSprache().contains(Sprache.EN.name()));
 
-		value.getAllSprache().addAll(List.of(Sprache.values()));
+
+		value.getAllSprache().addAll(Arrays.stream(Sprache.values()).map(Sprache::name).collect(Collectors.toSet()));
 		assertDoesNotThrow(value::verify);
 		assertEquals(4, value.getAllSprache().size());
-		assertTrue(value.getAllSprache().contains(Sprache.DE));
-		assertTrue(value.getAllSprache().contains(Sprache.EN));
-		assertTrue(value.getAllSprache().contains(Sprache.FR));
-		assertTrue(value.getAllSprache().contains(Sprache.IT));
+		assertTrue(value.getAllSprache().contains(Sprache.DE.name()));
+		assertTrue(value.getAllSprache().contains(Sprache.EN.name()));
+		assertTrue(value.getAllSprache().contains(Sprache.FR.name()));
+		assertTrue(value.getAllSprache().contains(Sprache.IT.name()));
 		assertFalse(value.isEqual(NutzerValue.parseJson(json).verify()));
 
 		value.getAllSprache().clear();
 		assertDoesNotThrow(value::verify);
-		assertEquals(1, value.getAllSprache().size());
-		assertTrue(value.getAllSprache().contains(Sprache.DE));
+		assertEquals(0, value.getAllSprache().size());
 		assertFalse(value.isEqual(NutzerValue.parseJson(json).verify()));
 
 		value.getAllSprache().clear();
-		value.getAllSprache().add(Sprache.EN);
+		value.getAllSprache().add(Sprache.EN.name());
 		assertEquals(1, value.getAllSprache().size());
-		assertTrue(value.getAllSprache().contains(Sprache.EN));
+		assertTrue(value.getAllSprache().contains(Sprache.EN.name()));
 		assertTrue(value.isEqual(NutzerValue.parseJson(json).verify()));
 	}
 }

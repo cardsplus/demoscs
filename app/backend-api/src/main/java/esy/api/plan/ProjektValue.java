@@ -1,24 +1,26 @@
 package esy.api.plan;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.team.NutzerItem;
 import esy.api.team.NutzerValue;
-import esy.api.team.Sprache;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Value-Objekt für ein Projekt.
  */
 @Entity
-@Table(name = "projekt")
+@Table(name = "projekt", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"id"}),
+        @UniqueConstraint(columnNames = {"name"})
+})
 public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
 
     /**
@@ -30,7 +32,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     private String name;
 
     /**
-     * Projekt ist aktiv.
+     * Projekt ist aktiv?
      */
     @Column(name = "aktiv")
     @Getter
@@ -41,10 +43,9 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
      * Projektsprache.
      */
     @Column(name = "sprache")
-    @Enumerated(EnumType.ORDINAL)
     @Getter
     @JsonProperty
-    private Sprache sprache;
+    private String sprache;
 
     /**
      * Projektbesitzer.
@@ -52,28 +53,22 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
     @ManyToOne(
             fetch = FetchType.EAGER,
             optional = true)
-    @JoinColumn(
-            name = "besitzer_id",
-            referencedColumnName = "id")
+    @JoinColumn(name = "besitzer_id", referencedColumnName = "id")
     @Getter
-    @JsonProperty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private NutzerValue besitzer;
 
     /**
      * Projektmitglieder.
      */
     @ManyToMany(
-            fetch = FetchType.LAZY)
+            fetch = FetchType.EAGER)
     @JoinTable(
             name = "projekt_mitglied",
-            joinColumns = @JoinColumn(
-                    name = "projekt_id",
-                    referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "nutzer_id",
-                    referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "projekt_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "nutzer_id", referencedColumnName = "id"))
     @Getter
-    @JsonProperty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NutzerValue> allMitglied;
 
     /**
@@ -81,29 +76,39 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
      */
     @OneToMany(
             fetch = FetchType.LAZY,
+            mappedBy = "projekt",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            mappedBy = "projekt"
+            orphanRemoval = true
     )
     @Getter
-    @JsonProperty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AufgabeValue> allAufgabe;
 
+    /**
+     * Erzeugt eine Instanz mit Standardwerten. Die
+     * Instanz ist nicht gültig, d.h. der Aufruf von
+     * {@link #verify()} ist nicht erfolgreich.
+     */
     ProjektValue() {
         super();
         this.name = "";
         this.aktiv = true;
-        this.sprache = Sprache.DE;
+        this.sprache = "";
         this.besitzer = null;
         this.allMitglied = new LinkedHashSet<>();
         this.allAufgabe = new LinkedHashSet<>();
     }
 
+    /**
+     * Erzeugt eine Instanz mit Standardwerten. Die
+     * Instanz ist nicht gültig, d.h. der Aufruf von
+     * {@link #verify()} ist nicht erfolgreich.
+     */
     ProjektValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.name = "";
         this.aktiv = true;
-        this.sprache = Sprache.DE;
+        this.sprache = "";
         this.besitzer = null;
         this.allMitglied = new LinkedHashSet<>();
         this.allAufgabe = new LinkedHashSet<>();
@@ -111,7 +116,7 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
 
     @Override
     public String toString() {
-        return super.toString() + ",name='" + name + "'";
+        return super.toString() + ",name='" + name;
     }
 
     @Override
@@ -153,23 +158,33 @@ public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
         return value;
     }
 
+    @JsonAnyGetter
+    private Map<String, Object> extraJson() {
+        final Map<String, Object> allExtra = new HashMap<>();
+        allExtra.put("version", getVersion());
+        // provide relation properties
+        allExtra.put("besitzerItem", NutzerItem.fromValue(besitzer));
+        allExtra.put("allMitgliedItem", allMitglied.stream()
+                .map(NutzerItem::fromValue)
+                .collect(Collectors.toSet()));
+        return allExtra;
+    }
+
     public ProjektValue setName(@NonNull final String name) {
         this.name = name;
         return this;
     }
 
-    // is never null
     public ProjektValue setAktiv(final boolean aktiv) {
         this.aktiv = aktiv;
         return this;
     }
 
-    public ProjektValue setSprache(@NonNull final Sprache sprache) {
+    public ProjektValue setSprache(@NonNull final String sprache) {
         this.sprache = sprache;
         return this;
     }
 
-    // can be null
     public ProjektValue setBesitzer(final NutzerValue besitzer) {
         this.besitzer = besitzer;
         return this;

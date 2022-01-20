@@ -59,7 +59,7 @@ public class ProjektValueRestApiTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"GET", "POST", "PUT", "DELETE"})
+    @ValueSource(strings = {"GET", "POST", "PUT", "PATCH", "DELETE"})
     @Order(1)
     void preflight(final String method) throws Exception {
         mockMvc.perform(options("/api/projekt")
@@ -78,7 +78,7 @@ public class ProjektValueRestApiTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"PATCH"})
+    @ValueSource(strings = {"TRACE"})
     @Order(2)
     void preflightNotAllowed(final String method) throws Exception {
         mockMvc.perform(options("/api/projekt")
@@ -195,7 +195,7 @@ public class ProjektValueRestApiTest {
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
                 .andExpect(jsonPath("$.sprache")
-                        .value("DE"));
+                        .value(""));
         assertTrue(projektValueRepository.findByName(name).isPresent());
     }
 
@@ -297,7 +297,7 @@ public class ProjektValueRestApiTest {
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
                 .andExpect(jsonPath("$.sprache")
-                        .value("DE"));
+                        .value(""));
     }
 
     @Test
