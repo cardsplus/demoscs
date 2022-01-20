@@ -13,12 +13,8 @@
 
 	let allProjektValue = [];
 	let projektIndexOf = undefined;
-	let projektSelected = undefined;
 	function onProjektClicked(index) {
 		projektIndexOf = index;
-		projektSelected = allProjektValueFiltered[index];
-		aufgabeSelected = undefined;
-        reloadAufgabe(projektSelected);
 	}
 
 	let projektEditorCreate = false;
@@ -60,7 +56,6 @@
 	let filterPrefix = '';
 	function filterProjekt(prefix,allValue) {
 		projektIndexOf = undefined;
-		projektSelected = undefined;
 		if (!filterPrefix) return allValue;
 		return allValue.filter(e => {
 			for (const s of e.name.split(" ")) {
