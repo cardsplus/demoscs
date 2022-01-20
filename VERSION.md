@@ -1,3 +1,10 @@
+# Version 0.5.0
+
+* Upgrade auf `spring boot` Version 2.6.2.
+* Upgrade auf `svelte` Version 3.46.2.
+* Vite statt Rollup
+* Smelte entfernt
+
 # Version 0.4.0
 
 * Deployment auf lokalen Kubernetes-Cluster
