@@ -4,10 +4,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
-public class BackendHsqlRunner {
+public class ServerRunner {
 
     public static void main(final String[] args) {
-        final SpringApplicationBuilder builder = new SpringApplicationBuilder(BackendHsqlRunner.class);
+        final SpringApplicationBuilder builder = new SpringApplicationBuilder(ServerRunner.class);
         builder.run(args);
     }
 }
