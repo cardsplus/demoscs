@@ -7,7 +7,7 @@
 	import { toast } from '../components/Toast';
     import { loadAllValue } from '../utils/rest.js';
     import { createValue } from '../utils/rest.js';
-    import { updateValue } from '../utils/rest.js';
+    import { updatePatch } from '../utils/rest.js';
     import { removeValue } from '../utils/rest.js';
     import { toProjektItem } from './projekt.js';
 
@@ -17,7 +17,7 @@
     let aufgabeProjektId = undefined;
 
     onMount(async () => {
-		loadAllValue('/api/projekt/?sort=name')
+		loadAllValue('/api/projekt?sort=name')
         .then(json => {
 			console.log(json);
             allProjektItem = json.map(toProjektItem);
@@ -34,7 +34,7 @@
     $: if (aufgabeProjektId) reload();
 
     function reload() {
-        loadAllValue('/api/projekt/' + aufgabeProjektId + '/allAufgabe')
+        loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId)
         .then(json => {
 			console.log(json);
             allAufgabeValue = json;
@@ -52,7 +52,7 @@
             projekt: '/api/aufgabe/' + aufgabeProjektId
 		})
 		.then(() => {
-			return loadAllValue('/api/projekt/' + aufgabeProjektId + '/allAufgabe');
+			return loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId);
 		})        
         .then(json => {
 			console.log(json);
@@ -65,9 +65,9 @@
     };
 
     function updateAufgabe(aufgabe) {
-        updateValue('/api/aufgabe/' + aufgabe.id, aufgabe)
+        updatePatch('/api/aufgabe/' + aufgabe.id, aufgabe)
 		.then(() => {
-			return loadAllValue('/api/projekt/' + aufgabeProjektId + '/allAufgabe');
+			return loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId);
 		})        
         .then(json => {
 			console.log(json);
@@ -83,7 +83,7 @@
 		if (!confirm("Aufgabe '" + aufgabe.text + "' wirklich löschen?")) return;
 		removeValue('/api/aufgabe/' + aufgabe.id)
 		.then(() => {
-			return loadAllValue('/api/projekt/' + aufgabeProjektId + '/allAufgabe');
+			return loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId);
 		})        
         .then(json => {
 			console.log(json);
@@ -132,7 +132,9 @@
                 <div class="flex-none">
                     <Icon 
                         on:click={() => removeAufgabe(aufgabe)}
-                        name="delete" outlined />
+                        disabled={aufgabe.aktiv}
+                        name="delete"
+                        outlined />
                 </div>
             </div>
         </li>
