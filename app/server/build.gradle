@@ -18,10 +18,7 @@ dependencies {
     // https://projectlombok.org
     testImplementation('org.projectlombok:lombok')
     // https://spring.io/projects/spring-boot
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'junit', module: 'junit' // by both name and group
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
     // https://junit.org/junit5
     testImplementation('org.junit.jupiter:junit-jupiter')
     // https://site.mockito.org/
@@ -51,6 +48,18 @@ bootJar {
 
 bootBuildImage {
     enabled = false
+}
+
+task dockerTest(type: Test) {
+    enabled = true
+    mustRunAfter 'bootBuildImage'
+    // https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestFilter.html
+    filter { // <3>
+        includeTestsMatching '*DockerTest'
+        failOnNoMatchingTests false
+    }
+    // https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/TaskOutputs.html
+    outputs.upToDateWhen {false}
 }
 
 task versionCheck() {

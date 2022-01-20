@@ -29,10 +29,7 @@ dependencies {
     // https://projectlombok.org
     testImplementation('org.projectlombok:lombok')
     // https://spring.io/projects/spring-boot
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'junit', module: 'junit' // by both name and group
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
     // https://spring.io/projects/spring-restdocs
     testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
     // https://junit.org/junit5
