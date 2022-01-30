@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Robert Bruckbauer</span><br>
 <span id="email" class="email"><a href="mailto:bruckbauer@gmx.at">bruckbauer@gmx.at</a></span><br>
 <span id="revnumber">version 2.4.1,</span>
-<span id="revdate">2022/01/20</span>
+<span id="revdate">2022/01/30</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -703,7 +703,7 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "fd934a1c-fc03-4c1f-aa68-d3148e956d47",
+  "id" : "41d6205f-82a0-43fe-92e3-e0d9bb392cc4",
   "name" : "Projekt A",
   "aktiv" : true,
   "sprache" : "EN",
@@ -715,19 +715,19 @@ für mehr Informationen.
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47"
+    "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4"
   }, {
     "rel" : "projektValue",
-    "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47"
-  }, {
-    "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47/allAufgabe"
-  }, {
-    "rel" : "besitzer",
-    "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47/besitzer"
+    "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4"
   }, {
     "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47/allMitglied"
+    "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4/besitzer"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4/allAufgabe"
   } ]
 }</code></pre>
 </div>
@@ -801,14 +801,14 @@ für mehr Informationen.
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   } ]
 }</code></pre>
 </div>
@@ -930,34 +930,7 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/projekt/search"
   } ],
   "content" : [ {
-    "id" : "15478d7e-f750-40ef-a4fb-e65ac043f3b2",
-    "name" : "Projekt B",
-    "aktiv" : true,
-    "sprache" : "",
-    "besitzerItem" : {
-      "text" : ""
-    },
-    "version" : 0,
-    "allMitgliedItem" : [ ],
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/15478d7e-f750-40ef-a4fb-e65ac043f3b2"
-    }, {
-      "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/15478d7e-f750-40ef-a4fb-e65ac043f3b2"
-    }, {
-      "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/15478d7e-f750-40ef-a4fb-e65ac043f3b2/allAufgabe"
-    }, {
-      "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/15478d7e-f750-40ef-a4fb-e65ac043f3b2/besitzer"
-    }, {
-      "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/15478d7e-f750-40ef-a4fb-e65ac043f3b2/allMitglied"
-    } ]
-  }, {
-    "id" : "fd934a1c-fc03-4c1f-aa68-d3148e956d47",
+    "id" : "41d6205f-82a0-43fe-92e3-e0d9bb392cc4",
     "name" : "Projekt A",
     "aktiv" : true,
     "sprache" : "EN",
@@ -969,19 +942,46 @@ für mehr Informationen.
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47"
+      "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4"
     }, {
       "rel" : "projektValue",
-      "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47"
-    }, {
-      "rel" : "allAufgabe",
-      "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47/allAufgabe"
-    }, {
-      "rel" : "besitzer",
-      "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47/besitzer"
+      "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4"
     }, {
       "rel" : "allMitglied",
-      "href" : "http://localhost:8080/api/projekt/fd934a1c-fc03-4c1f-aa68-d3148e956d47/allMitglied"
+      "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4/allMitglied"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4/besitzer"
+    }, {
+      "rel" : "allAufgabe",
+      "href" : "http://localhost:8080/api/projekt/41d6205f-82a0-43fe-92e3-e0d9bb392cc4/allAufgabe"
+    } ]
+  }, {
+    "id" : "cf1ef8cc-e2af-430d-995b-242a04ecd8e9",
+    "name" : "Projekt B",
+    "aktiv" : true,
+    "sprache" : "",
+    "besitzerItem" : {
+      "text" : ""
+    },
+    "version" : 0,
+    "allMitgliedItem" : [ ],
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/projekt/cf1ef8cc-e2af-430d-995b-242a04ecd8e9"
+    }, {
+      "rel" : "projektValue",
+      "href" : "http://localhost:8080/api/projekt/cf1ef8cc-e2af-430d-995b-242a04ecd8e9"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/cf1ef8cc-e2af-430d-995b-242a04ecd8e9/allMitglied"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/cf1ef8cc-e2af-430d-995b-242a04ecd8e9/besitzer"
+    }, {
+      "rel" : "allAufgabe",
+      "href" : "http://localhost:8080/api/projekt/cf1ef8cc-e2af-430d-995b-242a04ecd8e9/allAufgabe"
     } ]
   } ],
   "page" : {
@@ -1043,14 +1043,14 @@ für mehr Informationen.
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   } ]
 }</code></pre>
 </div>
@@ -1108,14 +1108,14 @@ für mehr Informationen.
     "rel" : "projektValue",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
   }, {
-    "rel" : "allAufgabe",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
   }, {
     "rel" : "besitzer",
     "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
   }, {
-    "rel" : "allMitglied",
-    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
   } ]
 }</code></pre>
 </div>
@@ -1208,7 +1208,7 @@ für mehr Informationen.
 <div class="title">Response</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code>{
-  "id" : "34a9f4c5-ae2b-4a1f-93cc-065c8fbf450b",
+  "id" : "b5ebff7a-9711-4236-987c-3712952c3baa",
   "text" : "Aufgabe A",
   "aktiv" : true,
   "projektItem" : {
@@ -1219,13 +1219,13 @@ für mehr Informationen.
   "content" : [ ],
   "links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8080/api/aufgabe/34a9f4c5-ae2b-4a1f-93cc-065c8fbf450b"
+    "href" : "http://localhost:8080/api/aufgabe/b5ebff7a-9711-4236-987c-3712952c3baa"
   }, {
     "rel" : "aufgabeValue",
-    "href" : "http://localhost:8080/api/aufgabe/34a9f4c5-ae2b-4a1f-93cc-065c8fbf450b"
+    "href" : "http://localhost:8080/api/aufgabe/b5ebff7a-9711-4236-987c-3712952c3baa"
   }, {
     "rel" : "projekt",
-    "href" : "http://localhost:8080/api/aufgabe/34a9f4c5-ae2b-4a1f-93cc-065c8fbf450b/projekt"
+    "href" : "http://localhost:8080/api/aufgabe/b5ebff7a-9711-4236-987c-3712952c3baa/projekt"
   } ]
 }</code></pre>
 </div>
@@ -1393,7 +1393,27 @@ für mehr Informationen.
     "href" : "http://localhost:8080/api/aufgabe/search"
   } ],
   "content" : [ {
-    "id" : "2f4cd1fb-3105-4305-abdd-a29169c22a3f",
+    "id" : "20b32ae0-c953-4c7f-a24e-f4e05f335382",
+    "text" : "Aufgabe A",
+    "aktiv" : true,
+    "projektItem" : {
+      "value" : "a1111111-5cc7-3115-a010-de73703ac17f",
+      "text" : "Projekt A"
+    },
+    "version" : 0,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/20b32ae0-c953-4c7f-a24e-f4e05f335382"
+    }, {
+      "rel" : "aufgabeValue",
+      "href" : "http://localhost:8080/api/aufgabe/20b32ae0-c953-4c7f-a24e-f4e05f335382"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/20b32ae0-c953-4c7f-a24e-f4e05f335382/projekt"
+    } ]
+  }, {
+    "id" : "adc359ee-cd59-4921-9eb3-eb1bb7abff1e",
     "text" : "Aufgabe B",
     "aktiv" : true,
     "projektItem" : {
@@ -1404,16 +1424,16 @@ für mehr Informationen.
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/2f4cd1fb-3105-4305-abdd-a29169c22a3f"
+      "href" : "http://localhost:8080/api/aufgabe/adc359ee-cd59-4921-9eb3-eb1bb7abff1e"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/2f4cd1fb-3105-4305-abdd-a29169c22a3f"
+      "href" : "http://localhost:8080/api/aufgabe/adc359ee-cd59-4921-9eb3-eb1bb7abff1e"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/2f4cd1fb-3105-4305-abdd-a29169c22a3f/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/adc359ee-cd59-4921-9eb3-eb1bb7abff1e/projekt"
     } ]
   }, {
-    "id" : "34a9f4c5-ae2b-4a1f-93cc-065c8fbf450b",
+    "id" : "b5ebff7a-9711-4236-987c-3712952c3baa",
     "text" : "Aufgabe A",
     "aktiv" : true,
     "projektItem" : {
@@ -1424,33 +1444,13 @@ für mehr Informationen.
     "content" : [ ],
     "links" : [ {
       "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/34a9f4c5-ae2b-4a1f-93cc-065c8fbf450b"
+      "href" : "http://localhost:8080/api/aufgabe/b5ebff7a-9711-4236-987c-3712952c3baa"
     }, {
       "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/34a9f4c5-ae2b-4a1f-93cc-065c8fbf450b"
+      "href" : "http://localhost:8080/api/aufgabe/b5ebff7a-9711-4236-987c-3712952c3baa"
     }, {
       "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/34a9f4c5-ae2b-4a1f-93cc-065c8fbf450b/projekt"
-    } ]
-  }, {
-    "id" : "7b22dd43-0407-4793-945b-072514ca029a",
-    "text" : "Aufgabe A",
-    "aktiv" : true,
-    "projektItem" : {
-      "value" : "a1111111-5cc7-3115-a010-de73703ac17f",
-      "text" : "Projekt A"
-    },
-    "version" : 0,
-    "content" : [ ],
-    "links" : [ {
-      "rel" : "self",
-      "href" : "http://localhost:8080/api/aufgabe/7b22dd43-0407-4793-945b-072514ca029a"
-    }, {
-      "rel" : "aufgabeValue",
-      "href" : "http://localhost:8080/api/aufgabe/7b22dd43-0407-4793-945b-072514ca029a"
-    }, {
-      "rel" : "projekt",
-      "href" : "http://localhost:8080/api/aufgabe/7b22dd43-0407-4793-945b-072514ca029a/projekt"
+      "href" : "http://localhost:8080/api/aufgabe/b5ebff7a-9711-4236-987c-3712952c3baa/projekt"
     } ]
   } ],
   "page" : {
@@ -1613,7 +1613,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2022-01-20 19:43:59 UTC
+Last updated 2022-01-30 17:25:18 UTC
 </div>
 </div>
 <style>
