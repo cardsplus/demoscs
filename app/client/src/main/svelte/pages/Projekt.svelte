@@ -12,12 +12,8 @@
 
 	let allProjektValue = [];
 	let projektIndexOf = undefined;
-	let projektSelected = undefined;
 	function onProjektClicked(index) {
 		projektIndexOf = index;
-		projektSelected = allProjektValueFiltered[index];
-		aufgabeSelected = undefined;
-        reloadAufgabe(projektSelected);
 	}
 
 	let projektEditorCreate = false;

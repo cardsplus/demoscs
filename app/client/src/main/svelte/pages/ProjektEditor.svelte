@@ -23,7 +23,7 @@
     }
     let newMitgliedId = null;
 
-    $: disabled = !newProjekt.name || !newProjekt.sprache || !newProjekt.besitzerItem;
+    $: disabled = !newProjekt.name || !newProjekt.sprache || !newProjekt.besitzerItem.value;
     $: if (projekt) onChange()
     function onChange() {
         showUpdate = true;
@@ -79,18 +79,21 @@
 
 <div class="flex flex-col">
     <div class="w-full">
-        <TextField bind:value={newProjekt.name} 
+        <TextField 
+            bind:value={newProjekt.name} 
             label="Name"		
             placeholder="Bitte den Namen eingeben"/>
     </div>
     <div class="w-40">
-        <Select bind:value={newProjekt.sprache} 
+        <Select 
+            bind:value={newProjekt.sprache} 
             items={allSpracheItem} 
             label="Sprache"
             placeholder="Bitte hier die Projektsprache wählen" />
     </div>
     <div class="w-full">
-        <Select bind:value={newProjekt.besitzerItem.value}
+        <Select 
+            bind:value={newProjekt.besitzerItem.value}
             items={allNutzerItem} 
             label="Besitzer"
             placeholder="Bitte hier eine Person wählen" />
