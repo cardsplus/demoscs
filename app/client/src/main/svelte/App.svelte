@@ -10,6 +10,7 @@
     import AppLogo from './AppLogo.svelte'
 	import AppMenu from './AppMenu.svelte'
 	import Aufgabe from './pages/Aufgabe.svelte';
+	import Enum from './pages/Enum.svelte';
 	import Nutzer from './pages/Nutzer.svelte';
 	import NutzerViewer from './pages/NutzerViewer.svelte';
 	import Projekt from './pages/Projekt.svelte';
@@ -41,6 +42,12 @@
 				</div>
 			</div>
 			<div class="flex flex-col p-2 text-gray-600 gap-1">
+				<span class="text-lg text-gray-900">Aufzählungen</span>
+				<div class="flex flex-col p-4 text-gray-600 gap-1">
+					<a on:click={() => menuVisible = false} href="/enum/sprache">Sprache</a>
+				</div>
+			</div>
+			<div class="flex flex-col p-2 text-gray-600 gap-1">
 				<span class="text-lg text-gray-900">Experimente</span>
 				<div class="flex flex-col p-4 text-gray-600 gap-1">
 					<a on:click={() => menuVisible = false} href="/galerie">Galerie</a>
@@ -64,6 +71,8 @@
 				component="{Projekt}" />
 			<Route path="/aufgabe" 
 				component="{Aufgabe}" />
+			<Route path="/enum/sprache" 
+				component="{Enum}" art="sprache" />
 			<Route path="/galerie" 
 				component="{Galerie}" />
 			<Route path="/uhrzeit" 

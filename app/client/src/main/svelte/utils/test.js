@@ -1,24 +1,43 @@
-import { updateValue, removeValue } from './rest.js';
+import { createValue } from './rest.js';
+import { updateValue } from './rest.js';
 export async function createTestSet() {
-    const allPromise = await Promise.all(allNutzer.map(value => {
+    try {
+        await Promise.all(allSprache.map(value => {
+              return createValue("/api/enum/sprache/", value);
+        }));
+    } catch (err) {
+        // just ignore
+    }
+    await Promise.all(allNutzer.map(value => {
 		  return updateValue("/api/nutzer/" + value.id, value);
-    })) + await Promise.all(allProjekt.map(value => {
+    }));
+    await Promise.all(allProjekt.map(value => {
 		  return updateValue("/api/projekt/" + value.id, value);
-    })) + await Promise.all(allAufgabe.map(value => {
+    }));
+    await Promise.all(allAufgabe.map(value => {
 		  return updateValue("/api/aufgabe/" + value.id, value);
     }));
-    return allPromise;
 }
+
+import { removeValue } from './rest.js';
 export async function removeTestSet() {
-    const allPromise = await Promise.all(allAufgabe.map(value => {
+    await Promise.all(allAufgabe.map(value => {
 		  return removeValue("/api/aufgabe/" + value.id);
-    })) + await Promise.all(allProjekt.map(value => {
+    }));
+    await Promise.all(allProjekt.map(value => {
 		  return removeValue("/api/projekt/" + value.id);
-    })) + await Promise.all(allNutzer.map(value => {
+    }));
+    await Promise.all(allNutzer.map(value => {
 		  return removeValue("/api/nutzer/" + value.id);
     }));
-    return allPromise;
 }
+
+const allSprache = [
+    {code: 0, name: 'DE', text: 'Deutsch'},
+    {code: 1, name: 'EN', text: 'Englisch'},
+    {code: 2, name: 'IT', text: 'Italienisch'},
+    {code: 3, name: 'FR', text: 'Französisch'}
+]
 
 const allNutzer = [
     {

@@ -8,12 +8,7 @@
     export let visible = false;
     export let projekt = undefined;
     export let allNutzerItem;
-    export let allSpracheItem = [
-        {value: "DE", text: "Deutsch"},
-        {value: "EN", text: "Englisch"},
-        {value: "FR", text: "Französisch"},
-        {value: "IT", text: "Italienisch"}
-    ];
+    export let allSpracheItem;
 
     let showUpdate;
     let showRemove;

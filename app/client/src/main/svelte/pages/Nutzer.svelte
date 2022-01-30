@@ -10,7 +10,6 @@
 	import { removeValue } from '../utils/rest.js';
 	import NutzerEditor from './NutzerEditor.svelte';
 
-	let allGruppeItem = [];
 	let allNutzerValue = [];
 	let nutzerIndexOf = undefined;
 	function onNutzerClicked(index) {
@@ -29,10 +28,14 @@
 	}
 	$: nutzerEditorDisabled = nutzerEditorCreate || nutzerEditorUpdate;
 
+	let allSpracheItem = [];
+
     onMount(async () => {
         try {
             allNutzerValue = await loadAllValue('/api/nutzer/search/findAllByOrderByMailAsc');
             console.log(['onMount', allNutzerValue]);
+			allSpracheItem = await loadAllValue('/api/enum/sprache');
+            console.log(['onMount', allSpracheItem]);
         } catch(err) {
 			console.log(['onMount', err]);
 			toast.push(err.toString());
@@ -144,7 +147,8 @@
 					<td colspan="2">
 						<NutzerEditor
 							bind:visible={nutzerEditorCreate} 
-							on:create={e => createNutzer(e.detail)}/>
+							on:create={e => createNutzer(e.detail)}
+							{allSpracheItem}/>
 					<td>
 				</tr>
 				{/if}
@@ -180,7 +184,8 @@
 							bind:visible={nutzerEditorUpdate} 
 							on:update={e => updateNutzer(e.detail)}
 							on:remove={e => removeNutzer(e.detail)}
-							{nutzer}/>
+							{nutzer}
+							{allSpracheItem}/>
 					<td>
 				</tr>
 				{/if}
