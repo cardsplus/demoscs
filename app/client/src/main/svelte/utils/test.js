@@ -1,10 +1,3 @@
-import { writable } from 'svelte/store';
-const createdStorage = localStorage.getItem("created");
-export const created = writable(createdStorage);
-created.subscribe(value => {
-    localStorage.setItem("created", value === true ? true : false);
-});
-
 import { updateValue, removeValue } from './rest.js';
 export async function createTestSet() {
     const allPromise = await Promise.all(allNutzer.map(value => {
@@ -14,7 +7,6 @@ export async function createTestSet() {
     })) + await Promise.all(allAufgabe.map(value => {
 		  return updateValue("/api/aufgabe/" + value.id, value);
     }));
-    created.set(true);
     return allPromise;
 }
 export async function removeTestSet() {
@@ -25,7 +17,6 @@ export async function removeTestSet() {
     })) + await Promise.all(allNutzer.map(value => {
 		  return removeValue("/api/nutzer/" + value.id);
     }));
-    created.set(false);
     return allPromise;
 }
 

@@ -1,100 +1,83 @@
 <script>
-	import "smelte/src/tailwind.css";
-	import AppHelp from './AppHelp.svelte';
-	import AppInfo from './AppInfo.svelte';
-    import AppLogo from './AppLogo.svelte'
-	import AppMenu from './AppMenu.svelte'
+	import './index.css';
+    import Menu from "./components/Menu";
+    import Toast from "./components/Toast";
 	import Router from './pager/Router.svelte';
   	import Route from './pager/Route.svelte';
-  	import RouteNotFound from './pager/RouteNotFound.svelte';	
-	import Nutzer from './pages/Nutzer.svelte';
-	import Projekt from './pages/Projekt.svelte';
+  	import RouteNotFound from './pager/RouteNotFound.svelte';
+	import AppHelp from './AppHelp.svelte';
+	import AppHome from './AppHome.svelte';
+    import AppLogo from './AppLogo.svelte'
+	import AppMenu from './AppMenu.svelte'
 	import Aufgabe from './pages/Aufgabe.svelte';
-	import Rechner from './pages/Rechner.svelte';
+	import Nutzer from './pages/Nutzer.svelte';
+	import NutzerViewer from './pages/NutzerViewer.svelte';
+	import Projekt from './pages/Projekt.svelte';
+	import Galerie from './pages/Galerie.svelte';
 	import Uhrzeit from './pages/Uhrzeit.svelte';
-	let open = false;
+	import Rechner from './pages/Rechner.svelte';
+	let menuVisible = false;
 </script>
 
-<style>
-	aside {
-		left: -100%;
-		transition: left 0.3s ease-in-out;
-		z-index: 99;
-	}
-	.open {
-		left: 0
-	}
-</style>
-
-<header class="flex justify-between bg-gray-200 p-2 border-b-2 z-50 sticky top-0">
-	<nav class="flex text-lg text-gray-600 space-x-2 items-left">
-        <AppMenu bind:open={open}/>
-        <AppLogo bind:open={open}/>
-	</nav>
-	<nav class="flex text-lg text-gray-600 space-x-2 items-right">
-		<a on:click={() => open = false} href="/help">?</a>
-	</nav>
-</header>
-
-<aside class="absolute w-full h-full bg-gray-200 border-r-2 shadow-lg" class:open>
-	<nav class="p-12 text-xl">
-		<div class="w-1/2 rounded px-6">
-			<div class="border-l-4 border-red-400 -ml-6 pl-6 flex items-center justify-between my-4">
-				<div class="font-semibold text-gray-800 text-xl">Anwendung</div>
-			</div>
-			<div class="flex items-center my-4">
-				<div class="flex-1 pl-2">
-					<div class="text-gray-600 font-thin">
-						<a on:click={() => open = false} href="/nutzer">Nutzer</a>
-					</div>
+<article class="flex flex-col h-screen">
+	<header class="flex justify-between bg-gray-200 p-2 h-12">
+		<nav class="flex flex-row text-lg text-gray-600 gap-1">
+			<AppMenu bind:open={menuVisible}/>
+			<AppLogo bind:open={menuVisible}/>
+		</nav>
+		<nav class="flex flex-row text-lg text-gray-600 gap-1">
+			<a on:click={() => menuVisible = false} href="/help">?</a>
+		</nav>
+	</header>
+	<main class="flex-1 overflow-y-auto">
+		<Toast />
+		<Menu bind:show={menuVisible}>
+			<div class="flex flex-col p-2 text-gray-600 gap-1">
+				<span class="text-lg text-gray-900 capitalize">Anwendung</span>
+				<div class="flex flex-col p-4 text-gray-600 gap-1">
+					<a on:click={() => menuVisible = false} href="/nutzer">Nutzer</a>
+					<a on:click={() => menuVisible = false} href="/projekt">Projekt</a>
+					<a on:click={() => menuVisible = false} href="/aufgabe">Aufgabe</a>
 				</div>
 			</div>
-			<div class="flex items-center justify-between my-4">
-				<div class="flex-1 pl-2">
-					<div class="text-gray-600 font-thin">
-						<a on:click={() => open = false} href="/projekt">Projekt</a>
-					</div>
+			<div class="flex flex-col p-2 text-gray-600 gap-1">
+				<span class="text-lg text-gray-900">Experimente</span>
+				<div class="flex flex-col p-4 text-gray-600 gap-1">
+					<a on:click={() => menuVisible = false} href="/galerie">Galerie</a>
+					<a on:click={() => menuVisible = false} href="/uhrzeit">Uhrzeit</a>
+					<a on:click={() => menuVisible = false} href="/rechner">Rechner</a>
 				</div>
 			</div>
-			<div class="flex items-center justify-between my-4">
-				<div class="flex-1 pl-2">
-					<div class="text-gray-600 font-thin">
-						<a on:click={() => open = false} href="/aufgabe">Aufgabe</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="w-1/2 rounded px-6">
-			<div class="border-l-4 border-red-400 -ml-6 pl-6 flex items-center justify-between my-4">
-				<div class="font-semibold text-gray-800 text-xl">Experimente</div>
-			</div>
-			<div class="flex items-center justify-between my-4">
-				<div class="flex-1 pl-2">
-					<div class="text-gray-600 font-thin">
-						<a on:click={() => open = false} href="/uhrzeit">Uhrzeit</a>
-					</div>
-				</div>
-			</div>
-			<div class="flex items-center justify-between my-4">
-				<div class="flex-1 pl-2">
-					<div class="text-gray-600 font-thin">
-						<a on:click={() => open = false} href="/rechner">Rechner</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
-</aside>
-
-<Router>
-	<Route path="/" component="{AppInfo}" />
-	<Route path="/help" component="{AppHelp}" />
-	<Route path="/nutzer" component="{Nutzer}" />
-	<Route path="/projekt" component="{Projekt}" />
-	<Route path="/aufgabe" component="{Aufgabe}" />
-	<Route path="/uhrzeit" component="{Uhrzeit}" />
-	<Route path="/rechner" component="{Rechner}" />
-	<RouteNotFound>
-		<h1>Ups!</h1>
-	</RouteNotFound>
-</Router>
+		</Menu>
+		<Router>
+			<Route path="/" 
+				component="{AppHome}" />
+			<Route path="/home" 
+				component="{AppHome}" />
+			<Route path="/help" 
+				component="{AppHelp}" />
+			<Route path="/nutzer" 
+				component="{Nutzer}" />
+			<Route path="/nutzer/:id"
+				component="{NutzerViewer}" />
+			<Route path="/projekt" 
+				component="{Projekt}" />
+			<Route path="/aufgabe" 
+				component="{Aufgabe}" />
+			<Route path="/galerie" 
+				component="{Galerie}" />
+			<Route path="/uhrzeit" 
+				component="{Uhrzeit}" />
+			<Route path="/rechner" 
+				component="{Rechner}" />
+			<RouteNotFound>
+				<h1>Ups!</h1>
+			</RouteNotFound>
+		</Router>
+	</main>
+	<footer class="flex justify-center bg-gray-200 p-2 h-10">
+		<nav class="flex flex-row text-sm text-gray-600 gap-1">
+			<a on:click={() => menuVisible = false} href="/help">Impressum</a>
+		</nav>
+	</footer>
+</article>

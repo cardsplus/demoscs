@@ -9,7 +9,7 @@
             <column name="id" type="UUID">
                 <constraints nullable="false"/>
             </column>
-            <column name="sprache" type="INT" defaultValue="0">
+            <column name="sprache" type="VARCHAR(16)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

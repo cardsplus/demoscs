@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
-public class BackendHsqlRunnerTest {
+public class ServerRunnerTest {
 
 	@LocalServerPort
 	private int port;
@@ -83,7 +83,7 @@ public class BackendHsqlRunnerTest {
 				"\"mail\":\"" + mail + "\"," +
 				"\"name\":\"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
-				"\"allRolle\": [\"BEARBEITER\"]" +
+				"\"allSprache\": [\"DE\"]" +
 				"}");
 		assertThat(result0.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
@@ -173,7 +173,7 @@ public class BackendHsqlRunnerTest {
 				"\"mail\":\"" + mail + "\"," +
 				"\"name\":\"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
-				"\"allRolle\": [\"BEARBEITER\"]" +
+				"\"allSprache\": [\"DE\"]" +
 				"}");
 		assertThat(result0.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
@@ -190,7 +190,7 @@ public class BackendHsqlRunnerTest {
 						"\"mail\":\"" + mail + "\"," +
 						"\"name\":\"" + name + "\"," +
 						"\"aktiv\": \"true\"," +
-						"\"allRolle\": [\"BEARBEITER\"]" +
+						"\"allSprache\": [\"DE\", \"EN\"]" +
 						"}");
 		assertThat(result1.getCode(),
 				equalTo(HttpStatus.OK.value()));
@@ -278,22 +278,21 @@ public class BackendHsqlRunnerTest {
 		final NutzerValue value0 = result0.toObject(NutzerValue.class);
 		assertEquals(uuid, value0.getId());
 		assertEquals(name, value0.getName());
-		assertEquals(1, value0.getAllSprache().size());
-		assertTrue(value0.getAllSprache().contains(Sprache.DE));
+		assertEquals(0, value0.getAllSprache().size());
 		assertTrue(value0.isEqual(RestApiConnection.with(
 				toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
 
-		for (final Sprache rolle: Sprache.values()) {
+		for (final Sprache sprache: Sprache.values()) {
 			final RestApiResult result1 = RestApiConnection.with(
 					toBackendUrl("/api/nutzer/" + uuid))
-					.put(String.format(json, "\"" + rolle.name() + "\""));
+					.put(String.format(json, "\"" + sprache + "\""));
 			assertThat(result1.getCode(),
 					equalTo(HttpStatus.OK.value()));
 			final NutzerValue value1 = result1.toObject(NutzerValue.class);
 			assertEquals(uuid, value1.getId());
 			assertEquals(name, value1.getName());
-			assertEquals(1, value0.getAllSprache().size());
-			assertTrue(value1.getAllSprache().contains(rolle));
+			assertEquals(1, value1.getAllSprache().size());
+			assertTrue(value1.getAllSprache().contains(sprache.name()));
 			assertTrue(value1.isEqual(RestApiConnection.with(
 					toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
 		}
@@ -307,10 +306,10 @@ public class BackendHsqlRunnerTest {
 		assertEquals(uuid, value2.getId());
 		assertEquals(name, value2.getName());
 		assertEquals(4, value2.getAllSprache().size());
-		assertTrue(value2.getAllSprache().contains(Sprache.DE));
-		assertTrue(value2.getAllSprache().contains(Sprache.EN));
-		assertTrue(value2.getAllSprache().contains(Sprache.FR));
-		assertTrue(value2.getAllSprache().contains(Sprache.IT));
+		assertTrue(value2.getAllSprache().contains(Sprache.DE.name()));
+		assertTrue(value2.getAllSprache().contains(Sprache.EN.name()));
+		assertTrue(value2.getAllSprache().contains(Sprache.FR.name()));
+		assertTrue(value2.getAllSprache().contains(Sprache.IT.name()));
 		assertTrue(value2.isEqual(RestApiConnection.with(
 				toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
 
@@ -322,16 +321,7 @@ public class BackendHsqlRunnerTest {
 		final NutzerValue value3 = result3.toObject(NutzerValue.class);
 		assertEquals(uuid, value3.getId());
 		assertEquals(name, value3.getName());
-		assertEquals(1, value3.getAllSprache().size());
-		assertTrue(value3.getAllSprache().contains(Sprache.DE));
-		assertTrue(value3.isEqual(RestApiConnection.with(
-				toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
-
-		final RestApiResult result4 = RestApiConnection.with(
-				toBackendUrl("/api/nutzer/" + uuid))
-				.put(String.format(json, "\"GARBAGE\""));
-		assertThat(result4.getCode(),
-				equalTo(HttpStatus.BAD_REQUEST.value()));
+		assertEquals(0, value3.getAllSprache().size());
 		assertTrue(value3.isEqual(RestApiConnection.with(
 				toBackendUrl("/api/nutzer/" + uuid)).get().toObject(NutzerValue.class)));
 

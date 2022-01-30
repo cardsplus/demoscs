@@ -1,240 +1,211 @@
 <script>
-   	import { onMount } from 'svelte';
-  	import { Button, Checkbox, Dialog, Snackbar, TextField } from "smelte";
-    import { loadAllValue, createValue, updateValue, removeValue } from '../utils/rest.js';
+	import { onMount } from 'svelte';
+	import Icon from '../components/Icon';
+	import Checkbox from '../components/Checkbox';
+	import TextField from '../components/TextField';
+	import { toast } from '../components/Toast';
+	import { loadAllValue } from '../utils/rest.js';
+	import { createValue } from '../utils/rest.js';
+	import { updatePatch } from '../utils/rest.js';
+	import { removeValue } from '../utils/rest.js';
+	import ProjektEditor from './ProjektEditor.svelte';
 
-	let alertSnackbarDialog = false;
-	let alertSnackbarText = 'ok';
-
-	const projektUrl = '/api/projekt';
-	let allProjekt = [];
-    onMount(async () => {
-		loadAllValue(projektUrl + "?sort=name")
-        .then(res => res.json())
-        .then(json => {
-			console.log(json);
-			filterPrefix = '';
-            allProjekt = json.content;
-			projektIndexOf = 0;
-        })
-        .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
-        });
-	});
-	
-	let projektName = '';
-	let projektAktiv = true;
-	let projektSprache = "DE";	
-	let projektSpracheDialog = false;
+	let allProjektValue = [];
 	let projektIndexOf = undefined;
+	let projektSelected = undefined;
+	function onProjektClicked(index) {
+		projektIndexOf = index;
+		projektSelected = allProjektValueFiltered[index];
+		aufgabeSelected = undefined;
+        reloadAufgabe(projektSelected);
+	}
 
-	// refresh after change in filter criteria
+	let projektEditorCreate = false;
+	function projektEditorCreateClicked() {
+		projektEditorCreate = true;
+	}	 
+	let projektEditorUpdate = false;
+	let projektEditorUpdateId = undefined;
+	function projektEditorUpdateClicked(id) {
+		projektEditorUpdateId = id;
+		projektEditorUpdate = true;
+	}
+	$: projektEditorDisabled = projektEditorCreate || projektEditorUpdate;
+
+	let allNutzerItem = [];
+
+    onMount(async () => {
+        try {
+			allProjektValue = await loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
+            console.log(['onMount', allProjektValue]);
+			allNutzerItem = await loadAllValue('/api/nutzer/search/findAllItem');
+            console.log(['onMount', allNutzerItem]);
+        } catch(err) {
+			console.log(['onMount', err]);
+			toast.push(err.toString());
+        };
+	});
+
 	let filterPrefix = '';
-	$: allProjektFiltered = filterPrefix
-		? allProjekt.filter(projekt => {
-            if (`${projekt.name}`.toLowerCase().startsWith(filterPrefix.toLowerCase())) {
-                return true;
-            }
+	function filterProjekt(prefix,allValue) {
+		projektIndexOf = undefined;
+		if (!filterPrefix) return allValue;
+		return allValue.filter(e => {
+			for (const s of e.name.split(" ")) {
+				if (s.toLowerCase().startsWith(prefix.toLowerCase())) {
+					return true;
+				}
+			}
             return false;
 		})
-		: allProjekt;
-
-	// refresh after change of unique mail address
-	$: projektSelected = onChangedValue(allProjekt.find(projekt => projekt.name == projektName));
-	function onChangedValue(projekt) {
-		if (projekt) {
-			projektName = projekt.name;
-			projektAktiv = projekt.aktiv;
-			projektSprache = projekt.sprache;
-			projektIndexOf = allProjektFiltered.indexOf(projekt);
-		} else {			
-			projektIndexOf = undefined;
-		}
-		return projekt;
 	}
-
-	// refresh after change of projektIndexOf list item
-	$: projektSelected = onChangedIndex(allProjektFiltered[projektIndexOf]);
-	function onChangedIndex(projekt) {
-		if (projekt) {
-			projektName = projekt.name;
-			projektAktiv = projekt.aktiv;
-			projektSprache = projekt.sprache;
-		} else {
-			// don't reset unique key value
-			projektAktiv = true;
-			projektSprache = "DE";
-		}
-		return projekt;
-	}
-
-	$: disableCreate = !projektName || projektIndexOf !== undefined;
-	function create() {
-		createValue(projektUrl, {
-			name: projektName, 
-			aktiv: projektAktiv,
-			sprache: projektSprache
+	$: allProjektValueFiltered = filterProjekt(filterPrefix,allProjektValue);
+ 
+	function createProjekt(projekt) {
+		createValue('/api/projekt', projekt)
+		.then(() => {
+			return loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
 		})
-        .then(res => res.json())
-        .then(json => {
+		.then(json => {
 			console.log(json);
-			filterPrefix = '';
-			allProjekt = [...allProjekt, json];
-			projektIndexOf = allProjekt.length - 1;
-        })
-        .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
-        });
-	}
-
-	$: disableUpdate = !projektName || projektIndexOf === undefined;
-	function update() {
-		updateValue(projektUrl + '/' + projektSelected.id, {
-			name: projektName, 
-			aktiv: projektAktiv,
-			sprache: projektSprache
+			allProjektValue = json;
 		})
-        .then(res => res.json())
-        .then(json => {
-			console.log(json);
-			const i = allProjekt.indexOf(projektSelected);
-			allProjekt = [...allProjekt.slice(0, i), json, ...allProjekt.slice(i + 1)];
-        })
-        .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
-        });
-	}
-	function remove() {
-		if (!confirm("Projekt '" + projektName + "' wirklich löschen?")) return;
-		removeValue(projektUrl + '/' + projektSelected.id)
-        .then(res => {
-			filterPrefix = '';
-			const i = allProjekt.indexOf(projektSelected);
-			allProjekt = [...allProjekt.slice(0, i), ...allProjekt.slice(i + 1)];
-			projektIndexOf = 0;
-        })
-        .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+		.catch(err => {
+            console.log(err);
+			toast.push(err.toString());
 		});
-	}
+	};
+
+	function updateProjekt(projekt) {
+		updatePatch('/api/projekt/' + projekt.id, projekt)
+		.then(() => {
+			return loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
+		})
+		.then(json => {
+			console.log(json);
+			allProjektValue = json;
+		})
+		.catch(err => {
+            console.log(err);
+			toast.push(err.toString());
+		});
+	};
+
+	function removeProjekt(projekt) {
+		if (!confirm("Projekt '" + projekt.name + "' wirklich löschen?")) return;
+		removeValue('/api/projekt/' + projekt.id)
+		.then(() => {
+			return loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
+		})
+		.then(json => {
+			console.log(json);
+			allProjektValue = json;
+		})
+		.catch(err => {
+            console.log(err);
+			toast.push(err.toString());
+		});
+	};
 </script>
 
-<Snackbar bind:value={alertSnackbarDialog} bottom left color="alert" timeout={2000}>
-	<div>{alertSnackbarText}</div>
-</Snackbar>
-
 <h1>Projekt</h1>
-<div class="flex flex-col ml-2 mr-2 space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
+<div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
-		<h2 title="Filter für die gespeicherte Projekte">Aktueller Filter</h2>
+		<h4 title="Filter für die Projekt, nicht case-sensitiv">
+			Aktueller Filter
+		</h4>
 		<TextField bind:value={filterPrefix}
 			label="Filter" 
 			placeholder="Bitte Filterkriterien eingeben"/>
-		<h2 title="Liste der gespeicherte Projekte, filterbar, editierbar">Aktuelle Liste</h2>
+		<h4 title="Liste der Projekt, ggfs. gefiltert, jedes Element editierbar">
+			Aktuelle Projekte <small>({allProjektValueFiltered.length})</small>
+		</h4>
 		<table class="table-fixed">
 			<thead class="justify-between">
 				<tr class="bg-gray-100">
-					<th class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
-						<span class="text-gray-600">#</span>
+					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
+						<span class="text-gray-600 text-sm">Aktiv</span>
 					</th>
-					<th class="px-6 py-3 border-b-2 border-gray-300 text-left w-full">
+					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/3">
 						<span class="text-gray-600">Name</span>
+					</th>
+					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-full">
+						<span class="text-gray-600">Team</span>
+					</th>
+					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
+						<Icon on:click={() => projektEditorCreateClicked()}
+							disabled={projektEditorDisabled}
+							name="edit"
+                            outlined/>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				{#each allProjektFiltered as projekt, i}
-				<tr  on:click|preventDefault={e => projektIndexOf = i}
-					title={projekt.id}
-					class:bg-gray-50={i === projektIndexOf}>
-					<td class="px-6 py-3 border-b-2 border-gray-300 text-center w-1">
-						<span>{i + 1}</span>
+				{#if projektEditorCreate}
+				<tr>
+					<td>
 					</td>
-					<td class="px-6 py-3 border-b-2 border-gray-300 text-left w-full">
+					<td	colspan="3">
+						<ProjektEditor
+							bind:visible={projektEditorCreate} 
+							on:create={e => createProjekt(e.detail)}
+							{allNutzerItem}/>
+					<td>
+				</tr>
+				{/if}
+				{#each allProjektValueFiltered as projekt, i}
+				<tr on:click={e => onProjektClicked(i)}
+					title={projekt.id}
+					class:ring={projektIndexOf === i}>
+					<td class="px-2 py-3">
+						<Checkbox bind:checked={projekt.aktiv}
+							on:change={() => updateProjekt(projekt)} />
+					</td>
+					<td  class="px-2 py-3 text-left">
 						<span>{projekt.name}</span>
 					</td>
+					<td  class="px-2 py-3 text-left">
+						<div class="flex flex-col">
+							{#each projekt.allMitgliedItem as nutzerItem}
+							<div class="text-sm underline text-blue-600">
+								<a href={'/nutzer/' + nutzerItem.value}>{nutzerItem.text}</a>
+							</div>
+							{:else}
+							<div class="text-sm underline text-blue-600">
+								<a href={'/nutzer/'}>Keine Mitglieder</a>
+							</div>
+							{/each}
+						</div>
+					</td>
+					<td class="px-2 py-3">
+						<Icon on:click={() => projektEditorUpdateClicked(projekt.id)}
+							disabled={projektEditorDisabled}
+							name="edit"
+                            outlined/>
+					</td>
 				</tr>
+				{#if projektEditorUpdate && projektEditorUpdateId === projekt.id}
+				<tr>
+					<td>
+					</td>
+					<td	colspan="3">
+						<ProjektEditor
+							bind:visible={projektEditorUpdate} 
+							on:update={e => updateProjekt(e.detail)}
+							on:remove={e => removeProjekt(e.detail)}
+							{projekt}
+							{allNutzerItem}/>
+					<td>
+				</tr>
+				{/if}
 				{:else}
 				<tr>
-					<td class="px-6 py-3 text-center w-1" colspan="2">
+					<td class="px-2 py-3" colspan="5">
 						Keine Projekte
 					</td>
-				</tr>				
+				</tr>
 				{/each}
 			</tbody>
 		</table>
-	</div>	
-	<div class="space-y-2">
-		{#if projektSelected}
-		<h2>Gewähltes Projekt</h2>
-		{:else}
-		<h2>Neues Projekt</h2>
-		{/if}
-		<TextField bind:value={projektName}
-			label="Name" 
-			placeholder="Bitte den vollen Namen eingeben"/>
-		<Checkbox bind:checked={projektAktiv}
-			label="Bitte Haken setzen, wenn das Projekt aktiv ist?"/>
-		<Button on:click={() => projektSpracheDialog=true}
-			disabled={!projektName}
-			outlined block>
-			Sprache <small>({projektSprache})</small>
-		</Button>
-		<div class="py-2">
-			<hr class="my-2"/>
-		</div>
-		<div class="buttons">
-			<Button on:click={create} disabled={disableCreate}>
-				Anlegen
-			</Button>
-			<Button on:click={update} disabled={disableUpdate}>
-				Ändern
-			</Button>
-			<Button on:click={remove} disabled={disableUpdate}>
-				Löschen
-			</Button>
-		</div>
 	</div>
 </div>
-
-<Dialog bind:value={projektSpracheDialog} classes="z-50 bg-white p-4">
-	<h5 slot="title">
-		Projektsprache
-	</h5>
-	<div class="flex flex-col space-y-2">
-		<label>
-			<input type=radio bind:group={projektSprache} value="DE"/>
-			Deutsch (DE)
-		</label>
-		<label>
-			<input type=radio bind:group={projektSprache} value="EN"/>
-			Englisch (EN)
-		</label>
-		<label>
-			<input type=radio bind:group={projektSprache} value="IT"/>
-			Italienisch (IT)
-		</label>
-	</div>
-	<div slot="actions">
-		<Button text on:click={() => projektSpracheDialog=false}>
-			Ok
-		</Button>
-	</div>
-</Dialog>
-
-<style>
-	h2 {
-		font-size: 1.2em;
-  		font-weight: bold;
-		margin-top: 0;
-		margin-bottom: 0.2em;
-		text-transform :uppercase;
-	}
-	hr {
-		border-width: 0.1em;
-	}
-</style>

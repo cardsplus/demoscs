@@ -56,7 +56,7 @@ public class AufgabeValueRestApiTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"GET", "POST", "PUT", "DELETE"})
+    @ValueSource(strings = {"GET", "POST", "PUT", "PATCH", "DELETE"})
     @Order(1)
     void preflight(final String method) throws Exception {
         mockMvc.perform(options("/api/aufgabe")
@@ -75,7 +75,7 @@ public class AufgabeValueRestApiTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"PATCH"})
+    @ValueSource(strings = {"TRACE"})
     @Order(2)
     void preflightNotAllowed(final String method) throws Exception {
         mockMvc.perform(options("/api/aufgabe")

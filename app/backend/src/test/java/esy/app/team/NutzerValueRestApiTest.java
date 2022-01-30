@@ -50,7 +50,7 @@ public class NutzerValueRestApiTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"GET", "POST", "PUT", "DELETE"})
+    @ValueSource(strings = {"GET", "POST", "PUT", "PATCH", "DELETE"})
     @Order(1)
     void preflight(final String method) throws Exception {
         mockMvc.perform(options("/api/nutzer")
@@ -69,7 +69,7 @@ public class NutzerValueRestApiTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"PATCH"})
+    @ValueSource(strings = {"TRACE"})
     @Order(2)
     void preflightNotAllowed(final String method) throws Exception {
         mockMvc.perform(options("/api/nutzer")
@@ -189,7 +189,7 @@ public class NutzerValueRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"1\""))
+                        .string("ETag", "\"0\""))
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.mail")
@@ -201,8 +201,6 @@ public class NutzerValueRestApiTest {
                 .andExpect(jsonPath("$.allSprache")
                         .isArray())
                 .andExpect(jsonPath("$.allSprache[0]")
-                        .value("DE"))
-                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
         assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
     }
@@ -332,8 +330,6 @@ public class NutzerValueRestApiTest {
                 .andExpect(jsonPath("$.allSprache")
                         .isArray())
                 .andExpect(jsonPath("$.allSprache[0]")
-                        .value("DE"))
-                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
     }
 
@@ -373,8 +369,6 @@ public class NutzerValueRestApiTest {
                 .andExpect(jsonPath("$.allSprache")
                         .isArray())
                 .andExpect(jsonPath("$.allSprache[0]")
-                        .value("DE"))
-                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
     }
 
@@ -408,8 +402,6 @@ public class NutzerValueRestApiTest {
                 .andExpect(jsonPath("$.allSprache")
                         .isArray())
                 .andExpect(jsonPath("$.allSprache[0]")
-                        .value("DE"))
-                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
     }
 
@@ -454,8 +446,6 @@ public class NutzerValueRestApiTest {
                 .andExpect(jsonPath("$.allSprache")
                         .isArray())
                 .andExpect(jsonPath("$.allSprache[0]")
-                        .value("DE"))
-                .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
     }
 
@@ -471,6 +461,31 @@ public class NutzerValueRestApiTest {
                 .andDo(print())
                 .andExpect(status()
                         .isNotFound());
+    }
+
+    @Test
+    @Order(44)
+    void getApiNutzerItem() throws Exception {
+        assertEquals(3, nutzerValueRepository.findAll().size());
+        mockMvc.perform(get("/api/nutzer/search/findAllItem")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0]")
+                        .exists())
+                .andExpect(jsonPath("$.content[1]")
+                        .exists())
+                .andExpect(jsonPath("$.content[2]")
+                        .exists())
+                .andExpect(jsonPath("$.content[3]")
+                        .doesNotExist());
     }
 
     @Test

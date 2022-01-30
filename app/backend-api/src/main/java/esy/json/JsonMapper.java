@@ -2,12 +2,14 @@ package esy.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.NonNull;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
@@ -30,7 +32,7 @@ public class JsonMapper {
      * Erzeugt eine JSON-Struktur für ein Value-Objekt.
      *
      * @param value Value-Objekt
-     * @return JSON-Struktur
+     * @return JSON
      */
     public <T> String writeJson(@NonNull final T value) {
         try {
@@ -42,10 +44,25 @@ public class JsonMapper {
     }
 
     /**
-     * Erzeugt eine Map mit allen Elementen einer JSON-Struktur.
+     * Erzeugt einen {@link JsonNode} mit allen Elementen einer JSON-Struktur.
      *
-     * @param json JSON-Struktur
-     * @return Map
+     * @param json JSON
+     * @return {@link JsonNode}
+     */
+    public JsonNode parseJsonNode(@NonNull final String json) {
+        try {
+            var mapper = configure(new ObjectMapper());
+            return mapper.readTree(json);
+        } catch (final JsonProcessingException e) {
+            throw new IllegalArgumentException(e.toString(), e);
+        }
+    }
+
+    /**
+     * Erzeugt eine {@link Map} mit allen Elementen einer JSON-Struktur.
+     *
+     * @param json JSON
+     * @return {@link Map}
      */
     public Map<String, Object> parseJson(@NonNull final String json) {
         try {
@@ -59,16 +76,37 @@ public class JsonMapper {
     /**
      * Erzeugt ein Value-Objekt aus einer JSON-Struktur.
      *
-     * @param json JSON-Struktur
+     * @param json JSON
      * @param type Value-Klasse
      * @return Value-Objekt
      */
-    public <T> T parseJson(@NonNull final String json, @NonNull final Class<T> type, @NonNull final Consumer<T>... patcher) {
+    @SafeVarargs
+    public final <T> T parseJson(@NonNull final String json, @NonNull final Class<T> type, @NonNull final Consumer<T>... patcher) {
         try {
             var mapper = configure(new ObjectMapper());
             var value = mapper.readValue(json, type);
             Stream.of(patcher).forEach(p -> p.accept(value));
             return value;
+        } catch (final JsonProcessingException e) {
+            throw new IllegalArgumentException(e.toString(), e);
+        }
+    }
+
+    /**
+     * Erzeugt eine Liste von Value-Objekten aus einer Liste von JSON-Strukturen.
+     *
+     * @param json JSON
+     * @param type Value-Klasse
+     * @return Value-Objekte
+     */
+    @SafeVarargs
+    public final <T> List<T> parseJsonContent(@NonNull final String json, @NonNull final Class<T> type, @NonNull final Consumer<T>... patcher) {
+        try {
+            var mapper = configure(new ObjectMapper());
+            var mappedType = mapper.getTypeFactory().constructParametricType(JsonJpaCollectionModel.class, type);
+            var allValue = ((JsonJpaCollectionModel<T>)mapper.readValue(json, mappedType)).getContent();
+            Stream.of(patcher).forEach(p -> allValue.forEach(value -> p.accept(value)));
+            return allValue;
         } catch (final JsonProcessingException e) {
             throw new IllegalArgumentException(e.toString(), e);
         }

@@ -1,140 +1,135 @@
 <script>
     import { onMount } from 'svelte';
-    import { Button, Checkbox, Select, Snackbar, TextField } from "smelte";
-    import { loadAllValue, createValue, updateValue, removeValue } from '../utils/rest.js';
+	import Checkbox from '../components/Checkbox';
+	import Icon from '../components/Icon';
+	import Select from '../components/Select';
+	import TextField from '../components/TextField';
+	import { toast } from '../components/Toast';
+    import { loadAllValue } from '../utils/rest.js';
+    import { createValue } from '../utils/rest.js';
+    import { updatePatch } from '../utils/rest.js';
+    import { removeValue } from '../utils/rest.js';
 
-	let alertSnackbarDialog = false;
-	let alertSnackbarText = 'ok';
+    let allProjektItem = [];    
+    let allAufgabeValue = [];
+    let aufgabeText = undefined;
+    let aufgabeProjektId = null;
 
-    const projektUrl = '/api/projekt';
-    let allProjektItem = [];
-    let projektSelected = undefined;
     onMount(async () => {
-		loadAllValue(projektUrl + "?sort=name")
-        .then(res => res.json())
-        .then(json => {
-			console.log(json);
-            allProjektItem = json.content.map(e => {
-                return {
-                    value: e,
-                    text: e.name
-                };
-            });
-            if (allProjektItem.length) {
-                projektSelected = allProjektItem[0].value;
-            }            
-        })
-        .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
-        });
+        try {
+            allProjektItem = await loadAllValue('/api/projekt/search/findAllItem');
+            console.log(['onMount', allProjektItem]);
+        } catch(err) {
+			console.log(['onMount', err]);
+			toast.push(err.toString());
+        };
     });
 
-    $: if (projektSelected) reload();
-
+    $: if (aufgabeProjektId) reload();
     function reload() {
-        loadAllValue(projektUrl + "/" + projektSelected.id + "/allAufgabe")
-        .then(res => res.json())
+        loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId)
         .then(json => {
 			console.log(json);
-            allAufgabe = json.content;
+            allAufgabeValue = json;
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
     }
-    
-    const aufgabeUrl = '/api/aufgabe';
-    let aufgabeText = "";
-    let allAufgabe = [];
  
-    function create() {
+    function createAufgabe() {
         if (!aufgabeText) return;
-		createValue(aufgabeUrl, {
+		createValue('/api/aufgabe', {
             text: aufgabeText,
-            projekt: projektUrl + "/" + projektSelected.id
+            projekt: '/api/aufgabe/' + aufgabeProjektId
 		})
-        .then(res => res.json())
+		.then(() => {
+			return loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId);
+		})        
         .then(json => {
 			console.log(json);
-			allAufgabe = [...allAufgabe, json];
-            aufgabeText = "";
+            allAufgabeValue = json;
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
     };
 
-    function update(aufgabe) {
-        updateValue(aufgabeUrl + '/' + aufgabe.id, aufgabe)
-        .then(res => res.json())
+    function updateAufgabe(aufgabe) {
+        updatePatch('/api/aufgabe/' + aufgabe.id, aufgabe)
+		.then(() => {
+			return loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId);
+		})        
         .then(json => {
-            console.log(json);
-			const i = allAufgabe.indexOf(aufgabe);
-			allAufgabe = [...allAufgabe.slice(0, i), json, ...allAufgabe.slice(i + 1)];
+			console.log(json);
+            allAufgabeValue = json;
         })
         .catch(err => {
-            alertSnackbarText = err;
-            alertSnackbarDialog = true;
+			console.log(err);
+			toast.push(err.toString());
         });
     };
 
-    function remove(aufgabe) {
+    function removeAufgabe(aufgabe) {
 		if (!confirm("Aufgabe '" + aufgabe.text + "' wirklich löschen?")) return;
-		removeValue(aufgabeUrl + '/' + aufgabe.id)
-        .then(res => {
-			const i = allAufgabe.indexOf(aufgabe);
-			allAufgabe = [...allAufgabe.slice(0, i), ...allAufgabe.slice(i + 1)];
+		removeValue('/api/aufgabe/' + aufgabe.id)
+		.then(() => {
+			return loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId);
+		})        
+        .then(json => {
+			console.log(json);
+            allAufgabeValue = json;
         })
         .catch(err => {
-			alertSnackbarText = err;
-			alertSnackbarDialog = true;
-		});
+			console.log(err);
+			toast.push(err.toString());
+        });
     };
 </script>
 
-<Snackbar bind:value={alertSnackbarDialog} bottom left color="alert" timeout={2000}>
-	<div>{alertSnackbarText}</div>
-</Snackbar>
-
 <h1>Aufgabe</h1>
-{#if projektSelected}
-<div class="flex flex-col space-y-2">
-    <div class="flex flex-row space-x-2">
-        <div class="flex-grow">
-            <form on:submit|preventDefault={() => create()}>
-                <TextField bind:value={aufgabeText}
+<div class="flex flex-col ml-2 mr-2">
+    <div class="flex flex-row gap-1">
+        <div class="w-2/3">
+            <form on:submit|preventDefault={() => createAufgabe()}>
+                <TextField 
+                    bind:value={aufgabeText}
                     label="Text"
-                    placeholder="Bitte hier eine neue Aufgabe eingeben" />
+                    placeholder="Bitte hier eine neue Aufgabe eingeben"
+                    disabled={!aufgabeProjektId}
+                    required/>
             </form>
         </div>
-        <div>
-            <Select bind:value={projektSelected} items={allProjektItem} 
+        <div class="w-1/3">
+            <Select 
+                bind:value={aufgabeProjektId} 
+                items={allProjektItem} 
                 label="Projekt"
-                placeholder="Bitte hier das Projekt wählen" />
+                placeholder="Bitte hier das Projekt wählen"/>
         </div>
     </div>
     <ul>
-        {#each allAufgabe as aufgabe}
+        {#each allAufgabeValue as aufgabe}
         <li>
-            <div class="flex flex-row">
+            <div class="flex flex-row py-1">
                 <div class="flex-grow">
-                    <Checkbox on:change={() => update(aufgabe)} bind:checked={aufgabe.aktiv}
-                        label={aufgabe.text} />
+                    <Checkbox 
+                        bind:checked={aufgabe.aktiv}
+                        on:change={() => updateAufgabe(aufgabe)} 
+                        label={aufgabe.text}
+                        title={aufgabe.id} />
                 </div>
                 <div class="flex-none">
-                    <Button on:click={() => remove(aufgabe)}
-                        icon="delete" text light flat />
+                    <Icon 
+                        on:click={() => removeAufgabe(aufgabe)}
+                        disabled={aufgabe.aktiv}
+                        name="delete"
+                        outlined />
                 </div>
             </div>
         </li>
         {/each}
     </ul>
 </div>
-{:else}
-<span class="px-6 py-3 text-center w-1">
-    Keine Projekte
-</span>
-{/if}

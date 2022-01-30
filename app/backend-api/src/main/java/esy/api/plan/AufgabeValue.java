@@ -1,5 +1,6 @@
 package esy.api.plan;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
@@ -7,14 +8,15 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import javax.persistence.*;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Value-Objekt für eine Aufgabe.
  */
 @Entity
-@Table(name = "aufgabe")
+@Table(name = "aufgabe", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"id"})
+})
 public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
 
     /**
@@ -40,13 +42,16 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
             fetch = FetchType.EAGER,
             optional = false
     )
-    @JoinColumn(
-            name = "projekt_id",
-            referencedColumnName = "id")
+    @JoinColumn(name = "projekt_id", referencedColumnName = "id")
     @Getter
-    @JsonProperty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ProjektValue projekt;
 
+    /**
+     * Erzeugt eine Instanz mit Standardwerten. Die
+     * Instanz ist nicht gültig, d.h. der Aufruf von
+     * {@link #verify()} ist nicht erfolgreich.
+     */
     AufgabeValue() {
         super();
         this.text = "";
@@ -54,6 +59,11 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         this.projekt = null;
     }
 
+    /**
+     * Erzeugt eine Instanz mit Standardwerten. Die
+     * Instanz ist nicht gültig, d.h. der Aufruf von
+     * {@link #verify()} ist nicht erfolgreich.
+     */
     AufgabeValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.text = "";
@@ -99,18 +109,24 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         return value;
     }
 
+    @JsonAnyGetter
+    private Map<String, Object> extraJson() {
+        final Map<String, Object> allExtra = new HashMap<>();
+        allExtra.put("version", getVersion());
+        allExtra.put("projektItem", ProjektItem.fromValue(projekt));
+        return allExtra;
+    }
+
     public AufgabeValue setText(@NonNull final String text) {
         this.text = text;
         return this;
     }
 
-    // is never null
     public AufgabeValue setAktiv(final boolean aktiv) {
         this.aktiv = aktiv;
         return this;
     }
 
-    // can be null
     public AufgabeValue setProjekt(final ProjektValue projekt) {
         this.projekt = projekt;
         return this;

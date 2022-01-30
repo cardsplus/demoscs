@@ -13,18 +13,23 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(512)">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="aktiv" type="BOOLEAN" defaultValue="true">
                 <constraints nullable="false"/>
             </column>
-            <column name="sprache" type="INT" defaultValue="0">
+            <column name="sprache" type="VARCHAR(16)">
                 <constraints nullable="false"/>
             </column>
             <column name="besitzer_id" type="UUID">
                 <constraints nullable="true"/>
             </column>
         </createTable>
+        <addUniqueConstraint
+                constraintName="uk_projekt"
+                tableName="projekt"
+                columnNames="name"
+        />
         <addForeignKeyConstraint
                 constraintName="fk_projekt_besitzer_id"
                 baseTableName="projekt"

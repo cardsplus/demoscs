@@ -1,5 +1,6 @@
 package esy.api.team;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
@@ -13,7 +14,10 @@ import java.util.*;
  * Value-Objekt für einen Nutzer.
  */
 @Entity
-@Table(name = "nutzer")
+@Table(name = "nutzer", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"id"}),
+        @UniqueConstraint(columnNames = {"mail"})
+})
 public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
 
     /**
@@ -33,7 +37,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     private String name;
 
     /**
-     * Nutzer ist aktiv.
+     * Nutzer ist aktiv?
      */
     @Column(name = "aktiv")
     @Getter
@@ -41,7 +45,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     private boolean aktiv;
 
     /**
-     * Sprachen, die ein Nutzer beherrscht.
+     * Sprachen, die der Nutzer beherrscht.
      */
     @ElementCollection(
             fetch = FetchType.EAGER)
@@ -50,11 +54,15 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
             joinColumns = @JoinColumn(name = "id"))
     @Column(name = "sprache")
     @OrderBy
-    @Enumerated(EnumType.ORDINAL)
     @Getter
     @JsonProperty
-    private SortedSet<Sprache> allSprache;
+    private SortedSet<String> allSprache;
 
+    /**
+     * Erzeugt eine Instanz mit Standardwerten. Die
+     * Instanz ist nicht gültig, d.h. der Aufruf von
+     * {@link #verify()} ist nicht erfolgreich.
+     */
     NutzerValue() {
         super();
         this.mail = "";
@@ -63,6 +71,11 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         this.allSprache = new TreeSet<>();
     }
 
+    /**
+     * Erzeugt eine Instanz mit Standardwerten. Die
+     * Instanz ist nicht gültig, d.h. der Aufruf von
+     * {@link #verify()} ist nicht erfolgreich.
+     */
     NutzerValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.mail = "";
@@ -87,19 +100,18 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         return this.mail.equals(that.mail) &&
                 this.name.equals(that.name) &&
                 this.aktiv == that.aktiv &&
-                this.allSprache.equals(that.allSprache) ;
+                this.allSprache.equals(that.allSprache);
     }
 
     @Override
     public NutzerValue verify() {
-        if (mail.isBlank()) {
+        // Check if e-mail address is valid
+        if (mail.isBlank()) { // TODO check format
             throw new IllegalArgumentException("mail is blank");
         }
-        if (name.isBlank()) {
+        // Check if name is valid
+        if (name.isBlank()) { // TODO check format
             throw new IllegalArgumentException("name is blank");
-        }
-        if (allSprache.isEmpty()) {
-            allSprache.add(Sprache.DE);
         }
         return this;
     }
@@ -117,6 +129,13 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         return value;
     }
 
+    @JsonAnyGetter
+    private Map<String, Object> extraJson() {
+        final Map<String, Object> allExtra = new HashMap<>();
+        allExtra.put("version", getVersion());
+        return allExtra;
+    }
+
     public NutzerValue setMail(@NonNull final String mail) {
         this.mail = mail;
         return this;
@@ -127,7 +146,6 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         return this;
     }
 
-    // is never null
     public NutzerValue setAktiv(final boolean aktiv) {
         this.aktiv = aktiv;
         return this;

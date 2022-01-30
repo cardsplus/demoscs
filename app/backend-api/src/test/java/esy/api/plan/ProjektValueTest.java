@@ -101,7 +101,7 @@ public class ProjektValueTest {
 		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
 		assertFalse(value.isAktiv());
-		assertEquals(Sprache.EN, value.getSprache());
+		assertEquals(Sprache.EN.name(), value.getSprache());
 		assertNull(value.getBesitzer());
 		assertEquals(0, value.getAllMitglied().size());
 	}
@@ -170,13 +170,13 @@ public class ProjektValueTest {
 		final ProjektValue value = ProjektValue.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name, value.getName());
-		assertEquals(Sprache.EN, value.getSprache());
+		assertEquals(Sprache.EN.name(), value.getSprache());
 
-		value.setSprache(Sprache.DE);
+		value.setSprache(Sprache.DE.name());
 		assertDoesNotThrow(value::verify);
 		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
 
-		value.setSprache(Sprache.EN);
+		value.setSprache(Sprache.EN.name());
 		assertDoesNotThrow(value::verify);
 		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 	}

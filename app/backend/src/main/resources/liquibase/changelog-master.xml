@@ -8,4 +8,5 @@
     <include file="0002/projekt.xml" relativeToChangelogFile="true"/>
     <include file="0002/projekt_mitglied.xml" relativeToChangelogFile="true"/>
     <include file="0003/aufgabe.xml" relativeToChangelogFile="true"/>
+    <include file="0004/enum.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

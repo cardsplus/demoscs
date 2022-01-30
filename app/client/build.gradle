@@ -22,9 +22,13 @@ task npmUpgrade {
 }
 
 task npmBuild {
+    build.dependsOn it
     doLast {
         exec {
             commandLine NPM, 'install'
+        }
+        exec {
+            commandLine NPM, 'run', 'test'
         }
         exec {
             commandLine NPM, 'run', 'build'
@@ -32,13 +36,16 @@ task npmBuild {
     }
 }
 
-task npmRun {
+task dockerRun {
     doLast {
+        def IMAGE = rootProject.name + '/' + project.name;
         exec {
-            commandLine NPM, 'run', 'build'
+            executable 'docker'
+            args 'build', '.', '-t', IMAGE
         }
         exec {
-            commandLine NPM, 'run', 'start'
+            executable 'docker'
+            args 'run', '-d', '--rm', '-p', '5000:5000', IMAGE
         }
     }
 }
