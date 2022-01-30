@@ -464,6 +464,31 @@ public class NutzerValueRestApiTest {
     }
 
     @Test
+    @Order(44)
+    void getApiNutzerItem() throws Exception {
+        assertEquals(3, nutzerValueRepository.findAll().size());
+        mockMvc.perform(get("/api/nutzer/search/findAllItem")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0]")
+                        .exists())
+                .andExpect(jsonPath("$.content[1]")
+                        .exists())
+                .andExpect(jsonPath("$.content[2]")
+                        .exists())
+                .andExpect(jsonPath("$.content[3]")
+                        .doesNotExist());
+    }
+
+    @Test
     @Order(50)
     void deleteApiNutzer() throws Exception {
         final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";

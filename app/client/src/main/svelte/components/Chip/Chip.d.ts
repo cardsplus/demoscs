@@ -15,6 +15,11 @@ declare const _ChipProps: {
      */
     icon?: string;
 
+    /**
+     * Title for tooltip
+     */
+    title?: string
+
 } & SvelteAllProps;
 
 declare const _ChipEvents: {

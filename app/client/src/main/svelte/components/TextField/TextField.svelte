@@ -3,11 +3,13 @@
   const props = filterProps([
     'disabled',
     'label',
-    'value'
+    'value',
+    'title'
   ], $$props);
   export let disabled = false;
   export let label;
   export let value;
+  export let title = undefined;
   let focused;
 </script>
 
@@ -24,6 +26,7 @@
   <input
     type=text
     {...props}
+    {title}
     {disabled}
     class="disabled:opacity-50 w-full pb-2 px-4 pt-6 text-black bg-gray-100"
     class:border-0={!focused}

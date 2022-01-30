@@ -1,15 +1,16 @@
 <script>
-   	import { onMount } from 'svelte';
-	import Checkbox from '../components/Checkbox';
+	import { onMount } from 'svelte';
 	import Icon from '../components/Icon';
+	import Checkbox from '../components/Checkbox';
 	import TextField from '../components/TextField';
 	import { toast } from '../components/Toast';
-    import { loadAllValue } from '../utils/rest.js';
-    import { createValue } from '../utils/rest.js';
+	import { loadAllValue } from '../utils/rest.js';
+	import { createValue } from '../utils/rest.js';
 	import { updatePatch } from '../utils/rest.js';
-    import { removeValue } from '../utils/rest.js';
+	import { removeValue } from '../utils/rest.js';
 	import NutzerEditor from './NutzerEditor.svelte';
 
+	let allGruppeItem = [];
 	let allNutzerValue = [];
 	let nutzerIndexOf = undefined;
 	function onNutzerClicked(index) {
@@ -29,16 +30,13 @@
 	$: nutzerEditorDisabled = nutzerEditorCreate || nutzerEditorUpdate;
 
     onMount(async () => {
-		await loadAllValue('/api/nutzer/search/findAllByOrderByMailAsc')
-        .then(json => {
-			console.log(json);
-			filterPrefix = '';
-            allNutzerValue = json;
-        })
-        .catch(err => {
-			console.log(err);
+        try {
+            allNutzerValue = await loadAllValue('/api/nutzer/search/findAllByOrderByMailAsc');
+            console.log(['onMount', allNutzerValue]);
+        } catch(err) {
+			console.log(['onMount', err]);
 			toast.push(err.toString());
-        });
+        };
 	});
 
 	let filterPrefix = '';

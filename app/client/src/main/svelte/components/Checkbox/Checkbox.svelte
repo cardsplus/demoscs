@@ -1,16 +1,22 @@
-<!-- 
-  https://svelte.dev/tutorial/checkbox-inputs
--->
-
 <script>
+  import filterProps from "../filterProps.js";
+  const props = filterProps([
+    'checked',
+    'disabled',
+    'label',
+    'title'
+  ], $$props);
   export let checked;
   export let disabled = false;
   export let label = undefined;
+  export let title = undefined;
 </script>
 
 <div class="relative w-auto h-auto">
-  <label class="inline-flex items-center p-2 cursor-pointer">
+  <label {title} class="inline-flex items-center p-2 cursor-pointer">
     <input
+      {...props}
+      {title}
       class="disabled:opacity-50 border-2 border-primary-500 text-primary-500"
       type=checkbox 
       {disabled} 

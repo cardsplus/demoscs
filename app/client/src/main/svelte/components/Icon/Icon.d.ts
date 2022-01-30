@@ -19,6 +19,11 @@ declare const _IconProps: {
      */
     outlined?: boolean;
 
+    /**
+     * Title for tooltip
+     */
+    title?: string
+
 } & SvelteAllProps;
 
 declare const _IconEvents: {

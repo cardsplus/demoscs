@@ -2,15 +2,18 @@
   import filterProps from "../filterProps.js";
   const props = filterProps([
     'disabled',
-    'icon'
+    'icon',
+    'title'
   ], $$props);
   export let disabled = false;
   export let icon = "forward"
   export let outlined = false;
+  export let title = undefined;
 </script>
 
 <button
   {...props}
+  {title}
   {disabled}
   class:disabled={disabled}
   class="text-sm text-white pr-4 rounded-full py-2 px-2 disabled:opacity-50 hover:opacity-90 focus:ring bg-primary-500 overflow-hidden"
@@ -22,6 +25,7 @@
 >
   <div class="flex flex-row content-center justify-start items-center gap-1">
     <i
+      {title}
       aria-hidden="true"
       class="material-icons icon text-xl select-none duration-200 ease-in"
       disabled

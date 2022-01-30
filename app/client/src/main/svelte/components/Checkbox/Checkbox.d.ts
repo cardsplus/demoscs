@@ -19,6 +19,11 @@ declare const _CheckboxProps: {
      */
     label?: string;
 
+    /**
+     * Title for tooltip
+     */
+    title?: string
+
 } & SvelteAllProps;
 
 declare const _CheckboxEvents: {

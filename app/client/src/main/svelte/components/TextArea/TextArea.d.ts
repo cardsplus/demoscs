@@ -19,6 +19,11 @@ declare const _TextAreaProps: {
      */
     value?: string;
 
+    /**
+     * Title for tooltip
+     */
+    title?: string
+
 } & SvelteAllProps;
 
 declare const _TextAreaEvents: {

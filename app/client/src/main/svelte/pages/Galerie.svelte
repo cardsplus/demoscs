@@ -1,29 +1,37 @@
 <script>
 	import Button from '../components/Button';
 	import Checkbox from '../components/Checkbox';
-	import CheckboxGroup from '../components/CheckboxGroup';
 	import Chip from '../components/Chip';
 	import Dialog from '../components/Dialog';
 	import Goto from '../components/Goto';
+	import Groupbox from '../components/Groupbox';
 	import Icon from '../components/Icon';
+	import Radiobox from '../components/Radiobox';
 	import Select from '../components/Select';
 	import TextArea from '../components/TextArea';
 	import TextField from '../components/TextField';
 	import { toast } from '../components/Toast';
 
-    let allSpracheItem = [{
+    const allQuelleItem = [
+        'JIRA', 'GITHUB', 'GITLAB'
+    ];
+
+    const DE = {name: 'DE', code: 1};
+    const EN = {name: 'EN', code: 2};
+    const IT = {name: 'IT', code: 3};
+    const allSpracheItem = [{
         icon: 'bolt',
-        value: 'DE',
+        value: DE,
         text: 'Deutsch'
     },
     {
         icon: 'cloud',
-        value: 'EN',
+        value: EN,
         text: 'Englisch'
     },
     {
         icon: 'sunny',
-        value: 'IT',
+        value: IT,
         text: 'Italienisch'
     }];
 
@@ -36,14 +44,24 @@
     let chipAction = undefined;
 
     let checkboxValue = {
-        status: undefined,
-        allSprache: ['EN']
+        status: undefined
+    };
+
+    let groupboxValue = {
+        allQuelle: ['JIRA'],
+        allSprache: [EN]
+    };
+
+    let radioboxValue = {
+        quelle: 'JIRA',
+        sprache: EN
     };
 
     let dialogVisible = false;
 
     let selectValue = {
-        sprache: 'EN'
+        quelle: 'JIRA',
+        sprache: EN
     }
 
     let textAreaValue = {
@@ -90,18 +108,28 @@
 </Dialog>
 
 <h1>Galerie</h1>
-
 <div class="flex flex-col ml-2 mr-2 space-y-2">
+    
+	<fieldset class="p-4 border-2 space-y-2">
+    <legend class="text-xs">Dialog</legend>
+        <div class="flex flex-row gap-1 items-center">
+            <Button title="Dialog aufrufen." on:click={() => dialogVisible = true}>Dialog</Button>
+            <Icon title="Dialog aufrufen." on:click={() => dialogVisible = true}/>
+            <Chip title="Dialog aufrufen." on:click={() => dialogVisible = true}>Dialog</Chip>
+            <Checkbox title="Dialog aufrufen." bind:checked={dialogVisible} label="Dialog"/>
+        </div>
+	</fieldset>
+
 	<fieldset class="p-4 border-2 space-y-2">
 		<legend class="text-xs">Button</legend>
         <div class="flex flex-col gap-1">
             <div class="grid grid-cols-2 md:grid-cols-8 justify-center items-center justify-items-left gap-1">
-                <Button on:click={() => buttonAction = 'Default'}>Default</Button>
-                <Button on:click={() => buttonAction = 'Disabled'} disabled>Default</Button>
+                <Button title="Klick mich" on:click={() => buttonAction = 'Default'}>Default</Button>
+                <Button title="Klick mich" on:click={() => buttonAction = 'Disabled'} disabled>Default</Button>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-8 justify-center items-center justify-items-left gap-1">
-                <Button on:click={() => buttonAction = 'Outlined Default'} outlined>Default</Button>
-                <Button on:click={() => buttonAction = 'Outlined Disabled'} outlined disabled>Default</Button>
+                <Button title="Klick mich" on:click={() => buttonAction = 'Outlined Default'} outlined>Default</Button>
+                <Button title="Klick mich" on:click={() => buttonAction = 'Outlined Disabled'} outlined disabled>Default</Button>
             </div>
         </div>
         <pre class="max-w-0" class:line-through={!buttonAction}>{buttonAction}</pre>
@@ -111,12 +139,12 @@
 		<legend class="text-xs">Goto</legend>
         <div class="flex flex-col gap-1">
             <div class="grid grid-cols-2 md:grid-cols-8 justify-center items-center justify-items-left gap-1">
-                <Goto on:click={() => gotoAction = 'Home'} page="/" target="_blank">Home</Goto>
-                <Goto on:click={() => gotoAction = 'Home'} page="/" target="_blank" disabled>Home</Goto>
+                <Goto title="Klick mich" on:click={() => gotoAction = 'Home'} page="/" target="_blank">Home</Goto>
+                <Goto title="Klick mich" on:click={() => gotoAction = 'Home'} page="/" target="_blank" disabled>Home</Goto>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-8 justify-center items-center justify-items-left gap-1">
-                <Goto on:click={() => gotoAction = 'Outlined Home'} outlined page="/" target="_blank">Home</Goto>
-                <Goto on:click={() => gotoAction = 'Outlined Home'} outlined page="/" target="_blank" disabled>Home</Goto>
+                <Goto title="Klick mich" on:click={() => gotoAction = 'Outlined Home'} outlined page="/" target="_blank">Home</Goto>
+                <Goto title="Klick mich" on:click={() => gotoAction = 'Outlined Home'} outlined page="/" target="_blank" disabled>Home</Goto>
             </div>
         </div>
         <pre class="max-w-0" class:line-through={!gotoAction}>{gotoAction}</pre>
@@ -126,17 +154,17 @@
 		<legend class="text-xs">Icon</legend>
         <div class="flex flex-col gap-1">
             <div class="grid grid-cols-4 md:grid-cols-12 justify-center items-center justify-items-center gap-1">
-                <Icon on:click={() => iconAction = "Default Icon"}/>
-                <Icon on:click={() => iconAction = "Default Icon"} disabled/>
+                <Icon title="Klick mich" on:click={() => iconAction = "Default Icon"}/>
+                <Icon title="Klick mich" on:click={() => iconAction = "Default Icon"} disabled/>
                 {#each ['Build', 'Edit', 'Delete', 'Link', 'Lock', 'Login', 'Logout', 'Print', 'Schedule', 'Search'] as name}
-                <Icon on:click={() => iconAction = name + " Icon"} name={name.toLowerCase()}/>
+                <Icon title="Klick mich" on:click={() => iconAction = name + " Icon"} name={name.toLowerCase()}/>
                 {/each}
             </div>
             <div class="grid grid-cols-4 md:grid-cols-12 justify-center items-center justify-items-center gap-1">
-                <Icon on:click={() => iconAction = "Outlined Default Icon"} outlined/>
-                <Icon on:click={() => iconAction = "Outlined Default Icon"} outlined disabled/>
+                <Icon title="Klick mich" on:click={() => iconAction = "Outlined Default Icon"} outlined/>
+                <Icon title="Klick mich" on:click={() => iconAction = "Outlined Default Icon"} outlined disabled/>
                 {#each ['Build', 'Edit', 'Delete', 'Link', 'Lock', 'Login', 'Logout', 'Print', 'Schedule', 'Search'] as name}
-                <Icon on:click={() => iconAction = "Outlined " + name + " Icon"} name={name.toLowerCase()} outlined/>
+                <Icon title="Klick mich" on:click={() => iconAction = "Outlined " + name + " Icon"} name={name.toLowerCase()} outlined/>
                 {/each}
             </div>
         </div>
@@ -147,14 +175,14 @@
 		<legend class="text-xs">Chip</legend>
         <div class="flex flex-col gap-1">
             <div class="grid grid-cols-2 md:grid-cols-8 justify-center items-center justify-items-left gap-1">
-                <Chip on:click={() => chipAction = 'Chip'}>Chip</Chip>
-                <Chip on:click={() => chipAction = 'Chip'} disabled>Chip</Chip>
+                <Chip title="Klick mich" on:click={() => chipAction = 'Chip'}>Chip</Chip>
+                <Chip title="Klick mich" on:click={() => chipAction = 'Chip'} disabled>Chip</Chip>
             </div>
         </div>
         <div class="flex flex-col gap-1">
             <div class="grid grid-cols-2 md:grid-cols-8 justify-center items-center justify-items-left gap-1">
-                <Chip on:click={() => chipAction = 'Outlined Chip'} outlined>Chip</Chip>
-                <Chip on:click={() => chipAction = 'Outlined Chip'} outlined disabled>Chip</Chip>
+                <Chip title="Klick mich" on:click={() => chipAction = 'Outlined Chip'} outlined>Chip</Chip>
+                <Chip title="Klick mich" on:click={() => chipAction = 'Outlined Chip'} outlined disabled>Chip</Chip>
             </div>
         </div>
         <pre class="max-w-0" class:line-through={!chipAction}>{chipAction}</pre>
@@ -163,53 +191,127 @@
 	<fieldset class="p-4 border-2 space-y-2">
 		<legend class="text-xs">Checkbox</legend>
         <div class="flex flex-col md:flex-row gap-1">
-            <div class="w-full md:w-1/3 border-2">
+            <div class="w-full md:w-1/2 border-2">
                 <Checkbox 
-                    bind:checked={checkboxValue.status}/>
+                    bind:checked={checkboxValue.status}
+                    title="Status wählen"/>
                 <Checkbox 
                     bind:checked={checkboxValue.status} 
+                    title="Status wählen"
                     label="Status"/>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row gap-1">
+            <div class="w-full md:w-1/2 border-2">
+                <Checkbox 
+                    bind:checked={checkboxValue.status}
+                    title="Status wählen"
+                    disabled/>
                 <Checkbox 
                     bind:checked={checkboxValue.status} 
+                    title="Status wählen"
                     label="Status"
                     disabled/>
             </div>
-            <div class="w-full md:w-1/3 border-2">
-                {#each allSpracheItem as item}
-                <CheckboxGroup 
-                    bind:group={checkboxValue.allSprache} 
-                    value={item.value}
-                    label={item.text}/>
-                {/each}
-            </div>
-            <div class="w-full md:w-1/3 border-2">
-                {#each allSpracheItem as item}
-                <CheckboxGroup 
-                    bind:group={checkboxValue.allSprache} 
-                    value={item.value}
-                    label={item.text}
-                    disabled/>
-                {/each}
-            </div>
         </div>
-        <pre class="max-w-0">{JSON.stringify(checkboxValue)}</pre>
+        <details>
+            <summary>JSON</summary>
+            <pre class="max-w-0">{JSON.stringify(checkboxValue, null, 2)}</pre>
+        </details>
 	</fieldset>
-    
+
 	<fieldset class="p-4 border-2 space-y-2">
-    <legend class="text-xs">Dialog</legend>
-        <div class="flex flex-row gap-1 items-center">
-            <Button title="Dialog aufrufen." on:click={() => dialogVisible = true}>Dialog</Button>
-            <Icon title="Dialog aufrufen." on:click={() => dialogVisible = true}/>
-            <Chip title="Dialog aufrufen." on:click={() => dialogVisible = true}>Dialog</Chip>
-            <Checkbox title="Dialog aufrufen." bind:checked={dialogVisible}/>
+		<legend class="text-xs">Groupbox</legend>
+        <div class="flex flex-col md:flex-row gap-1">
+            <div class="w-full md:w-1/2 border-2">
+                <Groupbox 
+                    bind:group={groupboxValue.allQuelle}
+                    items={allQuelleItem}
+                    title="Quelle wählen"/>
+            </div>
+            <div class="w-full md:w-1/2 border-2">
+                <Groupbox 
+                    bind:group={groupboxValue.allSprache}
+                    items={allSpracheItem}
+                    title="Sprache wählen"/>
+            </div>
         </div>
+        <div class="flex flex-col md:flex-row gap-1">
+            <div class="w-full md:w-1/2 border-2">
+                <Groupbox 
+                    bind:group={groupboxValue.allQuelle}
+                    items={allQuelleItem}
+                    title="Quelle wählen"
+                    disabled/>
+            </div>
+            <div class="w-full md:w-1/2 border-2">
+                <Groupbox 
+                    bind:group={groupboxValue.allSprache}
+                    items={allSpracheItem}
+                    title="Sprache wählen"
+                    disabled/>
+            </div>
+        </div>
+        <details>
+            <summary>JSON</summary>
+            <pre class="max-w-0">{JSON.stringify(groupboxValue, null, 2)}</pre>
+        </details>
+	</fieldset>
+
+	<fieldset class="p-4 border-2 space-y-2">
+		<legend class="text-xs">Radiobox</legend>
+        <div class="flex flex-col md:flex-row gap-1">
+            <div class="w-full md:w-1/2 border-2">
+                <Radiobox 
+                    bind:group={radioboxValue.quelle}
+                    items={allQuelleItem}
+                    title="Quelle wählen"/>
+            </div>
+            <div class="w-full md:w-1/2 border-2">
+                <Radiobox 
+                    bind:group={radioboxValue.sprache}
+                    items={allSpracheItem}
+                    title="Sprache wählen"/>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row gap-1">
+            <div class="w-full md:w-1/2 border-2">
+                <Radiobox 
+                    bind:group={radioboxValue.quelle}
+                    items={allQuelleItem}
+                    title="Quelle wählen"
+                    disabled/>
+            </div>
+            <div class="w-full md:w-1/2 border-2">
+                <Radiobox 
+                    bind:group={radioboxValue.sprache}
+                    items={allSpracheItem}
+                    title="Sprache wählen"
+                    disabled/>
+            </div>
+        </div>
+        <details>
+            <summary>JSON</summary>
+            <pre class="max-w-0">{JSON.stringify(radioboxValue, null, 2)}</pre>
+        </details>
 	</fieldset>
 
 	<fieldset class="p-4 border-2 space-y-2">
 		<legend class="text-xs">Select</legend>
         <div class="flex flex-col md:flex-row gap-1 items-baseline">
             <div class="w-full md:w-1/2">
-                <Select bind:value={selectValue.sprache}
+                <Select 
+                    bind:value={selectValue.quelle}
+                    title="Wähle mich" 
+                    items={allQuelleItem} 
+                    label="Quelle"
+                    placeholder="Bitte hier eine Quelle wählen"/>
+            </div>
+            <div class="w-full md:w-1/2">
+                <Select 
+                    bind:value={selectValue.sprache}
+                    bind:valueItem={selectValue.spracheItem}
+                    title="Wähle mich" 
                     items={allSpracheItem} 
                     label="Sprache"
                     placeholder="Bitte hier eine Sprache wählen"/>
@@ -217,13 +319,28 @@
         </div>
         <div class="flex flex-col md:flex-row gap-1 items-baseline">
             <div class="w-full md:w-1/2">
-                <Select bind:value={selectValue.sprache}
+                <Select 
+                    bind:value={selectValue.quelle}
+                    title="Wähle mich" 
+                    items={allQuelleItem} 
+                    label="Quelle"
+                    placeholder="Bitte hier eine Quelle wählen"
+                    disabled/>
+            </div>
+            <div class="w-full md:w-1/2">
+                <Select 
+                    bind:value={selectValue.sprache}
+                    bind:valueItem={selectValue.spracheItem}
+                    title="Wähle mich" 
                     items={allSpracheItem} 
                     label="Sprache"
                     disabled/>
             </div>
         </div>
-        <pre class="max-w-0">{JSON.stringify(selectValue)}</pre>
+        <details>
+            <summary>JSON</summary>
+            <pre class="max-w-0">{JSON.stringify(selectValue, null, 2)}</pre>
+        </details>
 	</fieldset>
 
 	<fieldset class="p-4 border-2 space-y-2">
@@ -244,7 +361,10 @@
                     disabled/>
             </div>
         </div>
-        <pre class="max-w-0">{JSON.stringify(textAreaValue)}</pre>
+        <details>
+            <summary>JSON</summary>
+            <pre class="max-w-0">{JSON.stringify(textAreaValue, null, 2)}</pre>
+        </details>
 	</fieldset>
 
 	<fieldset class="p-4 border-2 space-y-2">
@@ -312,6 +432,9 @@
                     disabled/>
             </div>
         </div>
-        <pre class="max-w-0">{JSON.stringify(textFieldValue)}</pre>
+        <details>
+            <summary>JSON</summary>
+            <pre class="max-w-0">{JSON.stringify(textFieldValue, null, 2)}</pre>
+        </details>
 	</fieldset>
 </div>

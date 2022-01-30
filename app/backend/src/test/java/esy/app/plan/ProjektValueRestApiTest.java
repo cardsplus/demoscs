@@ -535,6 +535,31 @@ public class ProjektValueRestApiTest {
     }
 
     @Test
+    @Order(44)
+    void getApiProjektItem() throws Exception {
+        assertEquals(3, projektValueRepository.findAll().size());
+        mockMvc.perform(get("/api/projekt/search/findAllItem")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0]")
+                        .exists())
+                .andExpect(jsonPath("$.content[1]")
+                        .exists())
+                .andExpect(jsonPath("$.content[2]")
+                        .exists())
+                .andExpect(jsonPath("$.content[3]")
+                        .doesNotExist());
+    }
+
+    @Test
     @Order(50)
     void deleteApiProjekt() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";

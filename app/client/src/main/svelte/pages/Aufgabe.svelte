@@ -9,30 +9,23 @@
     import { createValue } from '../utils/rest.js';
     import { updatePatch } from '../utils/rest.js';
     import { removeValue } from '../utils/rest.js';
-    import { toProjektItem } from './projekt.js';
 
     let allProjektItem = [];    
     let allAufgabeValue = [];
-    let aufgabeText = "";
-    let aufgabeProjektId = undefined;
+    let aufgabeText = undefined;
+    let aufgabeProjektId = null;
 
     onMount(async () => {
-		loadAllValue('/api/projekt?sort=name')
-        .then(json => {
-			console.log(json);
-            allProjektItem = json.map(toProjektItem);
-            if (allProjektItem.length) {
-                aufgabeProjektId = allProjektItem[0].value;
-            }
-        })
-        .catch(err => {
-			console.log(err);
+        try {
+            allProjektItem = await loadAllValue('/api/projekt/search/findAllItem');
+            console.log(['onMount', allProjektItem]);
+        } catch(err) {
+			console.log(['onMount', err]);
 			toast.push(err.toString());
-        });
+        };
     });
 
     $: if (aufgabeProjektId) reload();
-
     function reload() {
         loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId)
         .then(json => {
@@ -97,7 +90,6 @@
 </script>
 
 <h1>Aufgabe</h1>
-{#if aufgabeProjektId}
 <div class="flex flex-col ml-2 mr-2">
     <div class="flex flex-row gap-1">
         <div class="w-2/3">
@@ -106,7 +98,7 @@
                     bind:value={aufgabeText}
                     label="Text"
                     placeholder="Bitte hier eine neue Aufgabe eingeben"
-                    disable={!aufgabeProjektId}
+                    disabled={!aufgabeProjektId}
                     required/>
             </form>
         </div>
@@ -141,8 +133,3 @@
         {/each}
     </ul>
 </div>
-{:else}
-<span class="px-6 py-3 text-center w-1">
-    Keine Projekte
-</span>
-{/if}

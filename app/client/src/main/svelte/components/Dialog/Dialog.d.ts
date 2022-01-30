@@ -20,7 +20,6 @@ declare const _DialogSlots: {
     default: {};
     actions: {};
 };
-
 export declare type DialogProps = typeof _DialogProps;
 export declare type DialogEvents = typeof _DialogEvents;
 export declare type DialogSlots = typeof _DialogSlots;

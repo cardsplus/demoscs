@@ -18,13 +18,13 @@
 
 <h1>Uhrzeit</h1>
 <h2>Digital</h2>
-<div class="buttons">
+<div class="flex flex-row ml-2 mr-2 space-x-2">
 	<Button disabled outline>{timeHours}</Button>
 	<Button disabled outline>{timeMinutes}</Button>
 	<Button disabled outline>{timeSeconds}</Button>
 </div>
 <h2>Analog</h2>
-<div class="flex flex-col sm:flex-row space-x-2">
+<div class="flex flex-col sm:flex-row ml-2 mr-2 space-x-2">
 	<div>
 		<svg viewBox='-50 -50 100 100'>
 			<circle class='clock-face' r='48'/>

@@ -14,6 +14,11 @@ declare const _ButtonProps: {
      */
     outlined?: boolean;
 
+    /**
+     * Title for tooltip
+     */
+    title?: string
+
 } & SvelteAllProps;
 
 declare const _ButtonEvents: {

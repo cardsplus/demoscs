@@ -1,8 +1,8 @@
 <script>
     import { createEventDispatcher } from 'svelte';
 	import Button from '../components/Button';
-	import CheckboxGroup from '../components/CheckboxGroup';
 	import Dialog from '../components/Dialog';
+	import Groupbox from '../components/Groupbox';
 	import TextField from '../components/TextField';
     
     export let visible = false;
@@ -17,8 +17,8 @@
     let showUpdate;
     let showRemove;
     let newNutzer = {
-        name: '',
-        mail: '',
+        name: undefined,
+        mail: undefined,
         allSprache: [],
         aktiv: true
     }
@@ -40,7 +40,7 @@
             allSprache: nutzer.allSprache,
             aktiv: nutzer.aktiv
         }
-        console.log(newNutzer);
+        console.log(['onChange', newNutzer]);
     }
 
     const dispatch = createEventDispatcher();
@@ -75,7 +75,7 @@
             label="E-Mail"		
             placeholder="Bitte die E-Mail-Adresse eingeben"/>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 py-2">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-2 py-2">
         <Button on:click={() => allSpracheDialog=true}
             disabeled={!newNutzer.name}
             outlined block>
@@ -115,11 +115,9 @@
 		{newNutzer.name}s Sprachen
 	</h5>
     <div class="flex flex-col gap-1">
-        {#each allSpracheItem as spracheItem}
-        <CheckboxGroup bind:group={newNutzer.allSprache} 
-            value={spracheItem.value}
-            label={spracheItem.text} />
-        {/each}
+        <Groupbox 
+            bind:group={newNutzer.allSprache} 
+            items={allSpracheItem}/>
     </div>
     <div slot="actions">
 		<Button text on:click={onAllSpracheDialogOk}>Ok</Button>

@@ -21,9 +21,24 @@ declare const _SelectProps: {
     items?: ({value:string, text: string}|string)[];
 
     /** 
-     * Selected Value.
+     * Selected value.
      */
     value?: string;
+
+     /** 
+      * Selected value item.
+      */
+    valueItem?: object;
+
+     /** 
+      * Null value.
+      */
+    valueNull?: object;
+
+    /**
+     * Title for tooltip
+     */
+    title?: string
     
 } & SvelteAllProps;
 

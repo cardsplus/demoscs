@@ -20,6 +20,11 @@ declare const _TextFieldProps: {
      */
     value?: string;
 
+    /**
+     * Title for tooltip
+     */
+    title?: string
+
 } & SvelteAllProps;
 
 declare const _TextFieldEvents: {

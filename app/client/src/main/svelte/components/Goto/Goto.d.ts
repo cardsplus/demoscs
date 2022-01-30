@@ -24,6 +24,11 @@ declare const _GotoProps: {
      */
     outlined?: boolean;
 
+    /**
+     * Title for tooltip
+     */
+    title?: string
+
 } & SvelteAllProps;
 
 declare const _GotoEvents: {

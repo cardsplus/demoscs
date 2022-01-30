@@ -9,19 +9,18 @@
     let nutzer = {
         name: undefined,
         mail: undefined,
-        allSprache: []
+        allGruppeItem: [],
+        allSprache: [],
     };
 
     onMount(async () => {
-        await loadOneValue('/api/nutzer/' + id)
-        .then((json) => {
-            console.log(json);
-            nutzer = json;
-        })
-        .catch((err) => {
-            console.log(err);
+        try {
+            nutzer = await loadOneValue('/api/nutzer/' + id);
+            console.log(['onMount', nutzer]);
+        } catch(err) {
+			console.log(['onMount', err]);
 			toast.push(err.toString());
-        });
+        };
     });
 </script>
 

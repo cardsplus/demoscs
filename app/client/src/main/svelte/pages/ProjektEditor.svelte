@@ -4,7 +4,6 @@
 	import Icon from '../components/Icon';
 	import Select from '../components/Select';
 	import TextField from '../components/TextField';
-    import { toNutzerLink } from "./nutzer.js";
     
     export let visible = false;
     export let projekt = undefined;
@@ -19,13 +18,15 @@
     let showUpdate;
     let showRemove;
     let newProjekt = {
-        name: '',
+        name: undefined,
         sprache: undefined,
-        besitzerItem: {},
+        besitzerItem: {
+            value: null
+        },
         allMitgliedItem: [],
         aktiv: true
     }
-    let newMitgliedId;
+    let newMitgliedId = null;
 
     $: disabled = !newProjekt.name || !newProjekt.sprache || !newProjekt.besitzerItem;
     $: if (projekt) onChange()
@@ -47,13 +48,13 @@
     const dispatch = createEventDispatcher();
     function onCreate() {
         visible = false;
-        newProjekt.besitzer = toNutzerLink(newProjekt.besitzerItem);
+        newProjekt.besitzer = '/api/nutzer/' + newProjekt.besitzerItem.value;
         console.log(['create', newProjekt]);
         dispatch('create', newProjekt);
     }
     function onUpdate() {
         visible = false;
-        newProjekt.besitzer = toNutzerLink(newProjekt.besitzerItem);
+        newProjekt.besitzer = '/api/nutzer/'  + newProjekt.besitzerItem.value;
         console.log(['update', newProjekt]);
         dispatch('update', newProjekt);
     }
@@ -68,14 +69,14 @@
     function onInsertMitglied(id) {
         console.log(['onInsertMitglied',id]);
         newProjekt.allMitgliedItem = newProjekt.allMitgliedItem.concat(allNutzerItem.filter(e => e.value == id));
-        newProjekt.allMitglied = newProjekt.allMitgliedItem.map(toNutzerLink);
+        newProjekt.allMitglied = newProjekt.allMitgliedItem.map(e => '/api/nutzer/' + e.value);
         newMitgliedId = null;
         console.log(['onInsertMitglied',newProjekt]);
     }
     function onRemoveMitglied(id) {
         console.log(['onRemoveMitglied',id]);
         newProjekt.allMitgliedItem = newProjekt.allMitgliedItem.filter(e => e.value != id);
-        newProjekt.allMitglied = newProjekt.allMitgliedItem.map(toNutzerLink);
+        newProjekt.allMitglied = newProjekt.allMitgliedItem.map(e => '/api/nutzer/' + e.value);
         newMitgliedId = null;
         console.log(['onRemoveMitglied',newProjekt]);
     }
@@ -91,13 +92,13 @@
         <Select bind:value={newProjekt.sprache} 
             items={allSpracheItem} 
             label="Sprache"
-            placeholder="Bitte die Projektsprache wählen" />
+            placeholder="Bitte hier die Projektsprache wählen" />
     </div>
     <div class="w-full">
         <Select bind:value={newProjekt.besitzerItem.value}
             items={allNutzerItem} 
             label="Besitzer"
-            placeholder="Bitte eine Person wählen" />
+            placeholder="Bitte hier eine Person wählen" />
     </div>
     <div class="w-full">
         {#each newProjekt.allMitgliedItem as mitgliedItem, i}
@@ -110,7 +111,7 @@
             </div>
             <Icon on:click={() => onRemoveMitglied(mitgliedItem.value)}
                 name="delete"
-                outline/>
+                outlined/>
         </div>
         {/each}
         <div class="flex flex-row gap-1 items-baseline">
@@ -123,7 +124,7 @@
             <Icon on:click={() => onInsertMitglied(newMitgliedId)}
                 disabled={!newMitgliedId}
                 name="add"
-                outline/>
+                outlined/>
         </div>
     </div>
 </div>

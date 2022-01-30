@@ -8,13 +8,16 @@
 	import { createValue } from '../utils/rest.js';
 	import { updatePatch } from '../utils/rest.js';
 	import { removeValue } from '../utils/rest.js';
-	import { toNutzerItem } from './nutzer.js';
 	import ProjektEditor from './ProjektEditor.svelte';
 
 	let allProjektValue = [];
 	let projektIndexOf = undefined;
+	let projektSelected = undefined;
 	function onProjektClicked(index) {
 		projektIndexOf = index;
+		projektSelected = allProjektValueFiltered[index];
+		aufgabeSelected = undefined;
+        reloadAufgabe(projektSelected);
 	}
 
 	let projektEditorCreate = false;
@@ -32,25 +35,15 @@
 	let allNutzerItem = [];
 
     onMount(async () => {
-		await loadAllValue('/api/projekt/search/findAllByOrderByNameAsc')
-        .then(json => {
-			console.log(json);
-			filterPrefix = '';
-            allProjektValue = json;
-        })
-        .catch(err => {
-            console.log(err);
+        try {
+			allProjektValue = await loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
+            console.log(['onMount', allProjektValue]);
+			allNutzerItem = await loadAllValue('/api/nutzer/search/findAllItem');
+            console.log(['onMount', allNutzerItem]);
+        } catch(err) {
+			console.log(['onMount', err]);
 			toast.push(err.toString());
-        });
-		await loadAllValue('/api/nutzer/search/findAllByOrderByMailAsc')
-        .then(json => {
-			console.log(json);
-            allNutzerItem = json.map(toNutzerItem);
-         })
-        .catch(err => {
-            console.log(err);
-			toast.push(err.toString());
-        });
+        };
 	});
 
 	let filterPrefix = '';
@@ -172,7 +165,7 @@
 						<span>{projekt.name}</span>
 					</td>
 					<td  class="px-2 py-3 text-left">
-						<div class="flex flex-wrap gap-1">
+						<div class="flex flex-col">
 							{#each projekt.allMitgliedItem as nutzerItem}
 							<div class="text-sm underline text-blue-600">
 								<a href={'/nutzer/' + nutzerItem.value}>{nutzerItem.text}</a>

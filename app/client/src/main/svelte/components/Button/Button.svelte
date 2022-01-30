@@ -2,14 +2,17 @@
   import filterProps from "../filterProps.js";
   const props = filterProps([
     'disabled',
-    'outlined'
+    'outlined',
+    'title'
   ], $$props);
   export let disabled = false;
   export let outlined = false;
+  export let title = undefined;
 </script>
 
 <button
   {...props}
+  {title}
   {disabled}
   class:disabled={disabled}
   class="text-sm text-white rounded uppercase py-2 px-4 disabled:opacity-50 hover:opacity-90 focus:ring bg-primary-500 overflow-hidden"

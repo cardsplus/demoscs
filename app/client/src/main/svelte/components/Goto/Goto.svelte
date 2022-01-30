@@ -4,13 +4,15 @@
     'disabled',
     'icon',
     'outlined',
-    'page'
+    'page',
+    'title'
   ], $$props);
   export let disabled = false;
   export let icon = "forward"
   export let outlined = false;
   export let page;
   export let target = "_self";
+  export let title = undefined;
 </script>
 
 <a 
@@ -21,6 +23,7 @@
 >
   <button
     {...props}
+    {title}
     {disabled}
     class:disabled={disabled}
     class="w-full h-full text-sm text-white rounded uppercase py-2 px-4 disabled:opacity-50 hover:opacity-90 focus:ring bg-primary-500 overflow-hidden"
@@ -32,6 +35,7 @@
   >
     <div class="flex flex-row content-center justify-center items-center gap-1">
       <i
+        {title}
         aria-hidden="true"
         class="material-icons icon text-xl select-none duration-200 ease-in"
         disabled
