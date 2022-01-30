@@ -466,6 +466,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#get-version"><code>GET /version</code></a></li>
 </ul>
 </li>
+<li><a href="#enum-api">Enum-API</a>
+<ul class="sectlevel2">
+<li><a href="#post-apienumart"><code>POST /api/enum/{art}</code></a></li>
+<li><a href="#put-apienumartcode"><code>PUT /api/enum/{art}/{code}</code></a></li>
+<li><a href="#get-apienumart"><code>GET /api/enum/{art}</code></a></li>
+</ul>
+</li>
 <li><a href="#konfiguration">Konfiguration</a>
 <ul class="sectlevel2">
 <li><a href="#endpoint-properties"><code>endpoint.properties</code></a></li>
@@ -820,6 +827,185 @@ für mehr Informationen.
 </div>
 </div>
 <div class="sect1">
+<h2 id="enum-api"><a class="anchor" href="#enum-api"></a>Enum-API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>REST-API für die Verwaltung von konfigurierbaren Aufzählungen mit  <em>Enum</em>-Objekten.</p>
+</div>
+<div class="sect2">
+<h3 id="post-apienumart"><a class="anchor" href="#post-apienumart"></a><code>POST /api/enum/{art}</code></h3>
+<div class="paragraph">
+<p>Die Operation erstellt ein <em>Enum</em>-Objekt für eine Art von Aufzählung.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/enum/TEST'</span> <span class="nt">-i</span> <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "code" : "2",
+  "name" : "C",
+  "text" : "Gamma"
+}'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">POST</span> <span class="nn">/api/enum/TEST</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">54</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"C"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"text"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Gamma"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "name" : "C",
+  "text" : "Gamma",
+  "code" : 2,
+  "value" : "C"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Created</code> bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn das Objekt schon existiert.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="put-apienumartcode"><a class="anchor" href="#put-apienumartcode"></a><code>PUT /api/enum/{art}/{code}</code></h3>
+<div class="paragraph">
+<p>Die Operation aktualisiert ein <em>Enum</em>-Objekt für eine Art von Aufzählung.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/enum/TEST/0'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "code" : "0",
+  "name" : "A1",
+  "text" : "Alpha Eins"
+}'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/enum/TEST/0</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">60</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"A1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"text"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Alpha Eins"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "name" : "A1",
+  "text" : "Alpha Eins",
+  "code" : 0,
+  "value" : "A1"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn das Objekt erfolgreich aktualisiert wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn das Objekt bereit existiert.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-apienumart"><a class="anchor" href="#get-apienumart"></a><code>GET /api/enum/{art}</code></h3>
+<div class="paragraph">
+<p>Die Operation liefert alle gespeicherten <em>Enum</em>-Objekte einer Art von Aufzählung.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/enum/TEST'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/enum/TEST</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "links" : [ ],
+  "content" : [ {
+    "name" : "A1",
+    "text" : "Alpha Eins",
+    "code" : 0,
+    "value" : "A1"
+  }, {
+    "name" : "B",
+    "text" : "Beta",
+    "code" : 1,
+    "value" : "B"
+  }, {
+    "name" : "C",
+    "text" : "Gamma",
+    "code" : 2,
+    "value" : "C"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.
+Das Ergebnis kann auch leer sein.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="konfiguration"><a class="anchor" href="#konfiguration"></a>Konfiguration</h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -870,7 +1056,7 @@ spring.jpa.properties.hibernate.generate_statistics=true</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2022-01-30 18:05:55 UTC
+Last updated 2022-01-30 18:13:17 UTC
 </div>
 </div>
 <style>
