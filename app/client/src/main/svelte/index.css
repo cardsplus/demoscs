@@ -58,6 +58,10 @@ input:focus {
   outline: none;
 }
 
+input::placeholder { 
+  text-align: left;
+}
+
 input[type=number] {
   text-align: right;
 }
