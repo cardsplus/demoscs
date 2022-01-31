@@ -50,6 +50,7 @@
         .then(json => {
 			console.log(json);
             allAufgabeValue = json;
+            aufgabeText = undefined;
         })
         .catch(err => {
 			console.log(err);

@@ -12,12 +12,8 @@
 
 	let allProjektValue = [];
 	let projektIndexOf = undefined;
-	let projektSelected = undefined;
 	function onProjektClicked(index) {
 		projektIndexOf = index;
-		projektSelected = allProjektValueFiltered[index];
-		aufgabeSelected = undefined;
-        reloadAufgabe(projektSelected);
 	}
 
 	let projektEditorCreate = false;
@@ -34,12 +30,16 @@
 
 	let allNutzerItem = [];
 
+	let allSpracheItem = [];
+
     onMount(async () => {
         try {
 			allProjektValue = await loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
             console.log(['onMount', allProjektValue]);
 			allNutzerItem = await loadAllValue('/api/nutzer/search/findAllItem');
             console.log(['onMount', allNutzerItem]);
+			allSpracheItem = await loadAllValue('/api/enum/sprache');
+            console.log(['onMount', allSpracheItem]);
         } catch(err) {
 			console.log(['onMount', err]);
 			toast.push(err.toString());
@@ -149,7 +149,8 @@
 						<ProjektEditor
 							bind:visible={projektEditorCreate} 
 							on:create={e => createProjekt(e.detail)}
-							{allNutzerItem}/>
+							{allNutzerItem}
+							{allSpracheItem}/>
 					<td>
 				</tr>
 				{/if}
@@ -194,7 +195,8 @@
 							on:update={e => updateProjekt(e.detail)}
 							on:remove={e => removeProjekt(e.detail)}
 							{projekt}
-							{allNutzerItem}/>
+							{allNutzerItem}
+							{allSpracheItem}/>
 					<td>
 				</tr>
 				{/if}

@@ -1,4 +1,4 @@
-package esy.app;
+package esy;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

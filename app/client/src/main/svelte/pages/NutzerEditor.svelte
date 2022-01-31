@@ -7,12 +7,7 @@
     
     export let visible = false;
     export let nutzer = undefined;
-    export let allSpracheItem = [
-        {value: "DE", text: "Deutsch"},
-        {value: "EN", text: "Englisch"},
-        {value: "FR", text: "Französisch"},
-        {value: "IT", text: "Italienisch"}
-    ];
+    export let allSpracheItem;
 
     let showUpdate;
     let showRemove;

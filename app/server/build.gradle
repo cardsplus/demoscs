@@ -50,18 +50,6 @@ bootBuildImage {
     enabled = false
 }
 
-task dockerTest(type: Test) {
-    enabled = true
-    mustRunAfter 'bootBuildImage'
-    // https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestFilter.html
-    filter { // <3>
-        includeTestsMatching '*DockerTest'
-        failOnNoMatchingTests false
-    }
-    // https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/TaskOutputs.html
-    outputs.upToDateWhen {false}
-}
-
 task versionCheck() {
     build.dependsOn it
 }

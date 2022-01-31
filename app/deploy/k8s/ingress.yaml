@@ -2,6 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
+  annotations:
+    # https://kubernetes.github.io/ingress-nginx
+    kubernetes.io/ingress.class: "nginx"
 spec:
   defaultBackend:
     service:
@@ -26,20 +29,6 @@ spec:
                 port:
                   name: http-port
           - path: /api
-            pathType: Prefix
-            backend:
-              service:
-                name: server-cluster-ip
-                port:
-                  name: http-port
-          - path: /doc
-            pathType: Prefix
-            backend:
-              service:
-                name: server-cluster-ip
-                port:
-                  name: http-port
-          - path: /login
             pathType: Prefix
             backend:
               service:
