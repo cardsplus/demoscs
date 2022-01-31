@@ -1,4 +1,4 @@
-package esy.app;
+package esy;
 
 
 import esy.api.info.EnumValue;
