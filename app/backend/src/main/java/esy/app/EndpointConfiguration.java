@@ -20,6 +20,7 @@ import java.util.List;
 import static org.springframework.data.rest.core.mapping.RepositoryDetectionStrategy.RepositoryDetectionStrategies;
 
 @Configuration
+@ComponentScan(basePackages = {"esy.app", "scs.app"})
 @PropertySource(
         ignoreResourceNotFound = false,
         value = "classpath:endpoint.properties")
@@ -104,6 +105,7 @@ public class EndpointConfiguration {
                 configuration.useHalAsDefaultJsonMediaType(false);
                 // expose id for value objects
                 applyJsonConfiguration("esy.api", configuration);
+                applyJsonConfiguration("scs.api", configuration);
                 // apply CORS settings
                 applyCorsConfiguration(registry);
             }
