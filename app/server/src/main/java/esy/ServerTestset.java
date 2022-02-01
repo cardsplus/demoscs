@@ -27,6 +27,16 @@ import static java.util.function.Function.identity;
 @Component
 public class ServerTestset implements CommandLineRunner {
 
+    static final List<String> allLoremIpsum = List.of(
+            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+            "At vero eos et accusam et justo duo dolores et ea rebum.",
+            "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+            "Magni accusantium labore et id quis provident.",
+            "Consectetur impedit quisquam qui deserunt non rerum consequuntur eius.",
+            "Quia atque aliquam sunt impedit voluptatum rerum assumenda nisi.",
+            "Cupiditate quos possimus corporis quisquam exercitationem beatae."
+    );
+
     @Autowired
     private EnumRepository enumRepository;
 
@@ -151,22 +161,40 @@ public class ServerTestset implements CommandLineRunner {
     @Transactional
     private List<Visit> createAllVisit(Map<String, Pet> allPet, Map<String, Vet> allVet) {
         return Stream.of(
-                        Visit.parseJson("{\"date\": \"2021-04-21\"}")
+                        Visit.parseJson("{" +
+                                        "\"date\": \"2021-04-21\"," +
+                                        "\"text\": \"" + allLoremIpsum.get(0) + "\"" +
+                                        "}")
                                 .setPet(allPet.get("Tom"))
                                 .setVet(allVet.get("Graham Chapman")),
-                        Visit.parseJson("{\"date\": \"2021-04-21\"}")
+                        Visit.parseJson("{" +
+                                        "\"date\": \"2021-04-21\"," +
+                                        "\"text\": \"" + allLoremIpsum.get(1) + "\"" +
+                                        "}")
                                 .setPet(allPet.get("Odi"))
                                 .setVet(allVet.get("Graham Chapman")),
-                        Visit.parseJson("{\"date\": \"2021-04-22\"}")
+                        Visit.parseJson("{" +
+                                        "\"date\": \"2021-04-22\"," +
+                                        "\"text\": \"" + allLoremIpsum.get(2) + "\"" +
+                                        "}")
                                 .setPet(allPet.get("Odi"))
                                 .setVet(allVet.get("John Cleese")),
-                        Visit.parseJson("{\"date\": \"2021-04-23\"}")
+                        Visit.parseJson("{" +
+                                        "\"date\": \"2021-04-23\"," +
+                                        "\"text\": \"" + allLoremIpsum.get(3) + "\"" +
+                                        "}")
                                 .setPet(allPet.get("Odi"))
                                 .setVet(allVet.get("Terry Gilliam")),
-                        Visit.parseJson("{\"date\": \"2021-04-24\"}")
+                        Visit.parseJson("{" +
+                                        "\"date\": \"2021-04-24\"," +
+                                        "\"text\": \"" + allLoremIpsum.get(4) + "\"" +
+                                        "}")
                                 .setPet(allPet.get("Odi"))
                                 .setVet(allVet.get("Eric Idle")),
-                        Visit.parseJson("{\"date\": \"2021-04-24\"}")
+                        Visit.parseJson("{" +
+                                        "\"date\": \"2021-04-24\"," +
+                                        "\"text\": \"" + allLoremIpsum.get(5) + "\"" +
+                                        "}")
                                 .setPet(allPet.get("Fox"))
                                 .setVet(allVet.get("Terry Jones"))
                 )

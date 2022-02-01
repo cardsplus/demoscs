@@ -28,6 +28,11 @@ public final class Visit extends JsonJpaValueBase<Visit> {
     @JsonProperty
     private LocalDate date;
 
+    @Column(name = "text")
+    @Getter
+    @JsonProperty
+    private String text;
+
     @ManyToOne(
             fetch = FetchType.EAGER,
             optional = true)
@@ -47,6 +52,7 @@ public final class Visit extends JsonJpaValueBase<Visit> {
     Visit() {
         super();
         this.date = LocalDate.of(2000, 1, 1);
+        this.text = "";
         this.pet = null;
         this.vet = null;
     }
@@ -54,6 +60,7 @@ public final class Visit extends JsonJpaValueBase<Visit> {
     Visit(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.date = LocalDate.of(2000, 1, 1);
+        this.text = "";
         this.pet = null;
         this.vet = null;
     }
@@ -72,12 +79,17 @@ public final class Visit extends JsonJpaValueBase<Visit> {
             return false;
         }
         return this.date.equals(that.date) &&
+                this.text.equals(that.text) &&
                 Objects.equals(this.pet, that.pet) &&
                 Objects.equals(this.vet, that.vet);
     }
 
     @Override
     public Visit verify() {
+        // Check if text is valid
+        if (text.isBlank()) {
+            throw new IllegalArgumentException("text is blank");
+        }
         return this;
     }
 
@@ -88,6 +100,7 @@ public final class Visit extends JsonJpaValueBase<Visit> {
         }
         final Visit value = new Visit(getVersion(), id);
         value.date = this.date;
+        value.text = this.text;
         value.pet = this.pet;
         value.vet = this.vet;
         return value;
