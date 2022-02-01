@@ -9,9 +9,11 @@
 	import { updatePatch } from '../utils/rest.js';
 	import { removeValue } from '../utils/rest.js';
 	import OwnerEditor from './OwnerEditor.svelte';
+	import VisitEditor from './VisitEditor.svelte';
 
 	let allOwner = [];
 	let ownerIndexOf = undefined;
+	let ownerId = undefined;
 	function onOwnerClicked(index) {
 		ownerIndexOf = index;
 		reloadAllVisit(allOwner[index]);
@@ -19,26 +21,31 @@
 
 	let ownerEditorCreate = false;
 	let ownerEditorUpdate = false;
-	let ownerEditorUpdateId = undefined;
 	$: ownerEditorDisabled = ownerEditorCreate || ownerEditorUpdate;
 	function ownerEditorCreateClicked() {
 		ownerEditorCreate = true;
 	}    
-	function ownerEditorUpdateClicked(id) {
-		ownerEditorUpdateId = id;
+	function ownerEditorUpdateClicked(owner) {
+		ownerId = owner.id;
 		ownerEditorUpdate = true;
 	}
 
+	let visitEditorInsert = false;
+	function visitEditorInsertClicked(owner) {
+		ownerId = owner.id;
+		visitEditorInsert = true;
+	}    
+
 	let allVisitByDate = new Map();
-	let visitIndexOf = undefined;
-	function onVisitClicked(index) {
-		visitIndexOf = index;
-	}
+
+	let allVetItem = [];
 
     onMount(async () => {
         try {
             allOwner = await loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
             console.log(['onMount', allOwner]);
+            allVetItem = await loadAllValue('/api/vet/search/findAllItem');
+            console.log(['onMount', allVetItem]);
         } catch(err) {
 			console.log(['onMount', err]);
 			toast.push(err.toString());
@@ -112,7 +119,7 @@
 			console.log(json);
 			allVisitByDate = new Map();
 			json.forEach(e => {
-				let k = '"' + e.petItem.text + '" on ' + e.date;		
+				let k = e.petItem.text + ' on ' + e.date;		
 				let v = allVisitByDate.get(k);
 				if (v) {
 					allVisitByDate.set(k, [...v, e]);
@@ -126,6 +133,21 @@
 			toast.push(err.toString());
 		});
 	}
+ 
+ function createVisit(visit) {
+	 createValue('/api/visit', visit)
+	 .then(() => {
+		 return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
+	 })
+	 .then(json => {
+		 console.log(json);
+		 allOwner = json;
+	 })
+	 .catch(err => {
+		 console.log(err);
+		 toast.push(err.toString());
+	 });
+ };
 </script>
 
 <h1>Owner <span class="text-sm">({allOwnerFiltered.length})</span></h1>
@@ -142,6 +164,10 @@
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-full">
 						<span class="text-gray-600">Pets</span>
+					</th>
+					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
+					</th>
+					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
 						<Icon on:click={() => ownerEditorCreateClicked()}
@@ -170,18 +196,48 @@
 							<a href={'/owner/' + owner.id}>{owner.name}</a>
 						</div>
 					</td>
-					<td class="px-2 py-3 text-left">
+					<td class="px-2 py-3 text-left">						
+						<div class="flex flex-col">
+							{#each owner.allPetItem as petItem}
+							<span>{petItem.text}</span>
+							{:else}
+							<span>No pets</span>
+							{/each}
+						</div>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => ownerEditorUpdateClicked(owner.id)}
+						<Icon on:click={() => visitEditorInsertClicked(owner)}
+							disabled={visitEditorInsert}
+							name="add"
+                            outlined/>
+					</td>
+					<td class="px-2 py-3">
+						<Icon 
+							disabled
+							name="list"
+                            outlined/>
+					</td>
+					<td class="px-2 py-3">
+						<Icon on:click={() => ownerEditorUpdateClicked(owner)}
 							disabled={ownerEditorDisabled}
 							name="edit"
                             outlined/>
 					</td>
 				</tr>
-				{#if ownerEditorUpdate && ownerEditorUpdateId === owner.id}
+				{#if visitEditorInsert && ownerId === owner.id}
 				<tr>
-					<td	colspan="2">
+					<td class="px-4" colspan="5">
+						<VisitEditor
+							bind:visible={visitEditorInsert} 
+							on:create={e => createVisit(e.detail)}
+							allPetItem={owner.allPetItem}
+							allVetItem={allVetItem}/>
+					<td>
+				</tr>
+				{/if}
+				{#if ownerEditorUpdate && ownerId === owner.id}
+				<tr>
+					<td class="px-4" colspan="5">
 						<OwnerEditor
 							bind:visible={ownerEditorUpdate} 
 							on:update={e => updateOwner(e.detail)}
@@ -192,7 +248,7 @@
 				{/if}
 				{:else}
 				<tr>
-					<td class="px-2 py-3" colspan="3">
+					<td class="px-2 py-3" colspan="5">
 						No owners
 					</td>
 				</tr>
