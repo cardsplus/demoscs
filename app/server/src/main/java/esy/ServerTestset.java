@@ -1,18 +1,19 @@
 package esy;
 
-
-import esy.api.info.Enum;
-import esy.api.plan.Aufgabe;
-import esy.api.plan.Projekt;
-import esy.api.team.Nutzer;
-import esy.app.info.EnumRepository;
-import esy.app.plan.AufgabeRepository;
-import esy.app.plan.ProjektRepository;
-import esy.app.team.NutzerRepository;
+import esy.api.info.EnumValue;
+import esy.app.info.EnumValueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import scs.api.clinic.Vet;
+import scs.api.clinic.Visit;
+import scs.api.owner.Owner;
+import scs.api.owner.Pet;
+import scs.app.clinic.VetRepository;
+import scs.app.clinic.VisitRepository;
+import scs.app.owner.OwnerRepository;
+import scs.app.owner.PetRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -26,194 +27,150 @@ import static java.util.function.Function.identity;
 @Component
 public class ServerTestset implements CommandLineRunner {
 
-    static final List<String> allLoremIpsum = List.of(
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-            "At vero eos et accusam et justo duo dolores et ea rebum.",
-            "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-            "Magni accusantium labore et id quis provident.",
-            "Consectetur impedit quisquam qui deserunt non rerum consequuntur eius.",
-            "Quia atque aliquam sunt impedit voluptatum rerum assumenda nisi.",
-            "Cupiditate quos possimus corporis quisquam exercitationem beatae."
-    );
-
-    @Autowired
-    private AufgabeRepository aufgabeRepository;
-
     @Autowired
     private EnumRepository enumRepository;
 
     @Autowired
-    private NutzerRepository nutzerRepository;
+    private OwnerRepository ownerRepository;
 
     @Autowired
-    private ProjektRepository projektRepository;
+    private PetRepository petRepository;
+
+    @Autowired
+    private VetRepository vetRepository;
+
+    @Autowired
+    private VisitRepository visitRepository;
 
     @Override
     @Transactional
     public void run(final String... args) throws Exception {
-        if (nutzerRepository.count() != 0) {
+        if (ownerRepository.count() != 0) {
             return;
         }
 
-        final Map<String, Enum> allEnumSprache = createAllEnumSprache();
-        allEnumSprache.values().forEach(e -> log.info("CREATED [{}]", e));
+        final Map<String, EnumValue> allEnumSkill = createAllEnumSkill();
+        allEnumSkill.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final Map<String, Nutzer> allNutzer = createAllNutzer();
-        allNutzer.values().forEach(e -> log.info("CREATED [{}]", e));
+        final Map<String, Owner> allOwner = createAllOwner();
+        allOwner.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final Map<String, Projekt> allProjekt = createAllProjekt(allNutzer);
-        allProjekt.values().forEach(e -> log.info("CREATED [{}]", e));
+        final Map<String, Pet> allPet = createAllPet(allOwner);
+        allPet.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final List<Aufgabe> allAufgabe = createAllAufgabe(allProjekt);
-        allAufgabe.forEach(e -> log.info("CREATED [{}]", e));
+        final Map<String, Vet> allVet = createAllVet();
+        allVet.values().forEach(e -> log.info("CREATED [{}]", e));
+
+        final List<Visit> allVisit = createAllVisit(allPet, allVet);
+        allVisit.forEach(e -> log.info("CREATED [{}]", e));
     }
 
     @Transactional
-    private Map<String, Enum> createAllEnumSprache() {
+    private Map<String, EnumValue> createAllEnumSkill() {
         return Stream.of(
                         Enum.parseJson("{" +
                                 "\"code\": 0," +
-                                "\"name\": \"DE\"," +
-                                "\"text\": \"Deutsch\"" +
+                                "\"name\": \"radiology\"," +
+                                "\"text\": \"Radiology is the medical discipline that uses medical imaging to diagnose and treat diseases within the bodies of animals and humans\"" +
                                 "}"),
                         Enum.parseJson("{" +
                                 "\"code\": 1," +
-                                "\"name\": \"EN\"," +
-                                "\"text\": \"Englisch\"" +
+                                "\"name\": \"dentistry\"," +
+                                "\"text\": \"Dentistry is a branch of medicine that consists of the study, diagnosis, prevention, and treatment of diseases, disorders, and conditions of the oral cavity (the mouth).\"" +
                                 "}"),
                         Enum.parseJson("{" +
                                 "\"code\": 2," +
-                                "\"name\": \"IT\"," +
-                                "\"text\": \"Italienisch\"" +
-                                "}"),
-                        Enum.parseJson("{" +
-                                "\"code\": 3," +
-                                "\"name\": \"FR\"," +
-                                "\"text\": \"Französisch\"" +
+                                "\"name\": \"surgery\"," +
+                                "\"text\": \"Surgery he branch of medical practice that treats injuries, diseases, and deformities by the physical removal, repair, or readjustment of organs and tissues.\"" +
                                 "}"))
-                .map(e -> e.setArt("sprache"))
-                .map(enumRepository::save)
-                .collect(Collectors.toMap(Enum::getName, identity()));
+                .map(e -> e.setArt("skill"))
+                .map(enumValueRepository::save)
+                .collect(Collectors.toMap(EnumValue::getName, identity()));
     }
 
     @Transactional
-    private Map<String, Nutzer> createAllNutzer() {
+    private Map<String, Owner> createAllOwner() {
         return Stream.of(
-                        Nutzer.parseJson("{" +
-                                        "\"mail\": \"bruckbauer@gmx.at" + "\"," +
-                                        "\"name\": \"Robert Bruckbauer\"," +
-                                        "\"allSprache\": [\"DE\", \"EN\"]," +
-                                        "\"aktiv\": \"true\"" +
-                                        "}"),
-                        Nutzer.parseJson("{" +
-                                        "\"mail\": \"brombertje@gmail.com" + "\"," +
-                                        "\"name\": \"Bertram Bär\"," +
-                                        "\"allSprache\": [\"DE\", \"EN\"]," +
-                                        "\"aktiv\": \"true\"" +
-                                        "}"),
-                        Nutzer.parseJson("{" +
-                                        "\"mail\": \"max.mustermann@firma.de" + "\"," +
-                                        "\"name\": \"Max Mustermann\"," +
-                                        "\"allSprache\": [\"DE\", \"EN\"]," +
-                                        "\"aktiv\": \"true\"" +
-                                        "}"),
-                        Nutzer.parseJson("{" +
-                                        "\"mail\": \"mia.musterfrau@firma.de" + "\"," +
-                                        "\"name\": \"Mia Musterfrau\"," +
-                                        "\"allSprache\": [\"DE\", \"IT\"]," +
-                                        "\"aktiv\": \"true\"" +
-                                        "}"),
-                        Nutzer.parseJson("{" +
-                                        "\"mail\": \"szweig@gmail.com" + "\"," +
-                                        "\"name\": \"Stefan Zweig\"," +
-                                        "\"allSprache\": [\"DE\"]," +
-                                        "\"aktiv\": \"false\"" +
-                                        "}"),
-                        Nutzer.parseJson("{" +
-                                        "\"mail\": \"mozart@gmail.com" + "\"," +
-                                        "\"name\": \"Wolfgang A. Mozart\"," +
-                                        "\"allSprache\": [\"DE\"]," +
-                                        "\"aktiv\": \"false\"" +
-                                        "}"),
-                        Nutzer.parseJson("{" +
-                                        "\"mail\": \"doyle@gmail.com" + "\"," +
-                                        "\"name\": \"Arthur Conan Doyle\"," +
-                                        "\"allSprache\": [\"EN\"]," +
-                                        "\"aktiv\": \"false\"" +
-                                        "}"))
-                .map(nutzerRepository::save)
-                .collect(Collectors.toMap(Nutzer::getMail, identity()));
+                        Owner.parseJson("{" +
+                                "\"name\": \"Thomas Mann\"" +
+                                "}"),
+                        Owner.parseJson("{" +
+                                "\"name\": \"Stefan Zweig\"" +
+                                "}"),
+                        Owner.parseJson("{" +
+                                "\"name\": \"Wolfgang A. Mozart\"" +
+                                "}"),
+                        Owner.parseJson("{" +
+                                "\"name\": \"Arthur Conan Doyle\"" +
+                                "}"))
+                .map(ownerRepository::save)
+                .collect(Collectors.toMap(Owner::getName, identity()));
     }
 
     @Transactional
-    private Map<String, Projekt> createAllProjekt(final Map<String, Nutzer> allNutzer) {
+    private Map<String, Pet> createAllPet(final Map<String, Owner> allOwner) {
         return Stream.of(
-                        Projekt.parseJson("{" +
-                                        "\"name\": \"Projekt Alpha\"," +
-                                        "\"sprache\": \"DE\"," +
-                                        "\"aktiv\": \"true\"" +
+                        Pet.parseJson("{" +
+                                        "\"name\": \"Tom\"" +
                                         "}")
-                                .setBesitzer(allNutzer.get("max.mustermann@firma.de"))
-                                .addMitglied(allNutzer.get("max.mustermann@firma.de")),
-                        Projekt.parseJson("{" +
-                                        "\"name\": \"Projekt Beta\"," +
-                                        "\"sprache\": \"DE\"," +
-                                        "\"aktiv\": \"true\"" +
+                                .setOwner(allOwner.get("Thomas Mann")),
+                        Pet.parseJson("{" +
+                                        "\"name\": \"Odi\"" +
                                         "}")
-                                .setBesitzer(allNutzer.get("mia.musterfrau@firma.de"))
-                                .addMitglied(allNutzer.get("mia.musterfrau@firma.de"))
-                                .addMitglied(allNutzer.get("max.mustermann@firma.de"))
-                                .addMitglied(allNutzer.get("szweig@gmail.com"))
-                                .addMitglied(allNutzer.get("mozart@gmail.com"))
-                                .addMitglied(allNutzer.get("doyle@gmail.com")),
-                        Projekt.parseJson("{" +
-                                        "\"name\": \"Projekt Gamma\"," +
-                                        "\"sprache\": \"EN\"," +
-                                        "\"aktiv\": \"true\"" +
+                                .setOwner(allOwner.get("Thomas Mann")),
+                        Pet.parseJson("{" +
+                                        "\"name\": \"Fox\"" +
                                         "}")
-                                .setBesitzer(allNutzer.get("bruckbauer@gmx.at")))
-                .map(projektRepository::save)
-                .collect(Collectors.toMap(Projekt::getName, identity()));
-    }
-
-    private Aufgabe createLoremIpsumAufgabe(final int index) {
-        final String text = allLoremIpsum.get(index);
-        return Aufgabe.parseJson("{" +
-                        "\"text\": \"" + text + "\"," +
-                        "\"aktiv\": \"true\"" +
-                        "}");
+                                .setOwner(allOwner.get("Stefan Zweig")))
+                .map(petRepository::save)
+                .collect(Collectors.toMap(Pet::getName, identity()));
     }
 
     @Transactional
-    private List<Aufgabe> createAllAufgabe(final Map<String, Projekt> allProjekt) {
+    private Map<String, Vet> createAllVet() {
         return Stream.of(
-                        createLoremIpsumAufgabe(0)
-                                .setProjekt(allProjekt.get("Projekt Alpha")),
-                        createLoremIpsumAufgabe(1)
-                                .setProjekt(allProjekt.get("Projekt Alpha")),
-                        createLoremIpsumAufgabe(2)
-                                .setProjekt(allProjekt.get("Projekt Alpha")),
-                        createLoremIpsumAufgabe(3)
-                                .setProjekt(allProjekt.get("Projekt Alpha")),
-                        createLoremIpsumAufgabe(4)
-                                .setProjekt(allProjekt.get("Projekt Alpha")),
-                        createLoremIpsumAufgabe(5)
-                                .setProjekt(allProjekt.get("Projekt Alpha")),
-                        createLoremIpsumAufgabe(6)
-                                .setProjekt(allProjekt.get("Projekt Alpha")),
-                        Aufgabe.parseJson("{" +
-                                        "\"text\": \"" +
-                                        "Bis 100:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
-                                        "Bis 200:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
-                                        "Bis 300:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
-                                        "Bis 400:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
-                                        "Bis 500:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
-                                        "Bis 512:\\n1234567\\n" +
-                                        "\"," +
-                                        "\"aktiv\": \"true\"" +
-                                        "}")
-                                .setProjekt(allProjekt.get("Projekt Beta")))
-                .map(aufgabeRepository::save)
+                        Vet.parseJson("{" +
+                                "\"name\": \"Graham Chapman\"" +
+                                "}"),
+                        Vet.parseJson("{" +
+                                "\"name\": \"John Cleese\"" +
+                                "}"),
+                        Vet.parseJson("{" +
+                                "\"name\": \"Terry Gilliam\"" +
+                                "}"),
+                        Vet.parseJson("{" +
+                                "\"name\": \"Eric Idle\"" +
+                                "}"),
+                        Vet.parseJson("{" +
+                                "\"name\": \"Terry Jones\"" +
+                                "}"))
+                .map(vetRepository::save)
+                .collect(Collectors.toMap(Vet::getName, identity()));
+    }
+
+    @Transactional
+    private List<Visit> createAllVisit(Map<String, Pet> allPet, Map<String, Vet> allVet) {
+        return Stream.of(
+                        Visit.parseJson("{\"date\": \"2021-04-21\"}")
+                                .setPet(allPet.get("Tom"))
+                                .setVet(allVet.get("Graham Chapman")),
+                        Visit.parseJson("{\"date\": \"2021-04-21\"}")
+                                .setPet(allPet.get("Odi"))
+                                .setVet(allVet.get("Graham Chapman")),
+                        Visit.parseJson("{\"date\": \"2021-04-22\"}")
+                                .setPet(allPet.get("Odi"))
+                                .setVet(allVet.get("John Cleese")),
+                        Visit.parseJson("{\"date\": \"2021-04-23\"}")
+                                .setPet(allPet.get("Odi"))
+                                .setVet(allVet.get("Terry Gilliam")),
+                        Visit.parseJson("{\"date\": \"2021-04-24\"}")
+                                .setPet(allPet.get("Odi"))
+                                .setVet(allVet.get("Eric Idle")),
+                        Visit.parseJson("{\"date\": \"2021-04-24\"}")
+                                .setPet(allPet.get("Fox"))
+                                .setVet(allVet.get("Terry Jones"))
+                )
+                .map(visitRepository::save)
                 .collect(Collectors.toList());
     }
 }

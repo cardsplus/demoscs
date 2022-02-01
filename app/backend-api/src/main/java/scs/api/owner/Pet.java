@@ -1,6 +1,7 @@
 package scs.api.owner;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
@@ -89,6 +90,12 @@ public final class Pet extends JsonJpaValueBase<Pet> {
         allExtra.put("version", getVersion());
         allExtra.put("ownerItem", OwnerItem.fromValue(owner));
         return allExtra;
+    }
+
+    @JsonIgnore
+    public Pet setOwner(@NonNull final Owner owner) {
+        this.owner = owner;
+        return this;
     }
 
     @Override
