@@ -301,7 +301,7 @@ class VisitRestApiTest {
     @Order(40)
     void getApiVisit() throws Exception {
         assertEquals(4, visitRepository.count());
-        mockMvc.perform(get("/api/visit/search/findAllByOrderByDateAsc")
+        mockMvc.perform(get("/api/visit/search/findAllByOrderByDateDesc")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
@@ -312,14 +312,14 @@ class VisitRestApiTest {
                         .exists("Vary"))
                 .andExpect(jsonPath("$.content")
                         .isArray())
-                .andExpect(jsonPath("$.content[0]")
-                        .exists())
-                .andExpect(jsonPath("$.content[1]")
-                        .exists())
-                .andExpect(jsonPath("$.content[2]")
-                        .exists())
-                .andExpect(jsonPath("$.content[3]")
-                        .exists())
+                .andExpect(jsonPath("$.content[0].date")
+                        .value("2021-04-24"))
+                .andExpect(jsonPath("$.content[1].date")
+                        .value("2021-04-22"))
+                .andExpect(jsonPath("$.content[2].date")
+                        .value("2021-04-22"))
+                .andExpect(jsonPath("$.content[3].date")
+                        .value("2021-04-21"))
                 .andExpect(jsonPath("$.content[4]")
                         .doesNotExist());
     }
@@ -357,6 +357,34 @@ class VisitRestApiTest {
                 .andDo(print())
                 .andExpect(status()
                         .isNotFound());
+    }
+
+    @Test
+    @Order(43)
+    void getApiVisitByOwner() throws Exception {
+        final String uuid = "b2222222-2222-beef-dead-beefdeadbeef";
+        assertTrue(ownerRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(get("/api/visit/search/findAllByOwner?ownerId=" + uuid)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0].date")
+                        .value("2021-04-24"))
+                .andExpect(jsonPath("$.content[1].date")
+                        .value("2021-04-22"))
+                .andExpect(jsonPath("$.content[2].date")
+                        .value("2021-04-22"))
+                .andExpect(jsonPath("$.content[3].date")
+                        .value("2021-04-21"))
+                .andExpect(jsonPath("$.content[4].date")
+                        .doesNotExist());
     }
 
     @Test
