@@ -10,6 +10,7 @@
 	import { removeValue } from '../utils/rest.js';
 	import OwnerEditor from './OwnerEditor.svelte';
 	import VisitEditor from './VisitEditor.svelte';
+	import VisitViewer from './VisitViewer.svelte';
 
 	let allOwner = [];
 	let ownerIndexOf = undefined;
@@ -29,14 +30,20 @@
 		ownerId = owner.id;
 		ownerEditorUpdate = true;
 	}
+	
+	let allVisit = [];
 
-	let visitEditorInsert = false;
-	function visitEditorInsertClicked(owner) {
+	let visitEditorCreate = false;
+	function visitEditorCreateClicked(owner) {
 		ownerId = owner.id;
-		visitEditorInsert = true;
-	}    
+		visitEditorCreate = true;
+	}
 
-	let allVisitByDate = new Map();
+	let visitViewerCreate = false;
+	function visitViewerCreateClicked(owner) {
+		ownerId = owner.id;
+		visitViewerCreate = true;
+	}
 
 	let allVetItem = [];
 
@@ -117,16 +124,7 @@
 		loadAllValue('/api/visit/search/findAllByOwner?ownerId=' + owner.id)
 		.then(json => {
 			console.log(json);
-			allVisitByDate = new Map();
-			json.forEach(e => {
-				let k = e.petItem.text + ' on ' + e.date;		
-				let v = allVisitByDate.get(k);
-				if (v) {
-					allVisitByDate.set(k, [...v, e]);
-				} else {
-					allVisitByDate.set(k, [e]);
-				}
-			});
+			allVisit = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -206,15 +204,14 @@
 						</div>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => visitEditorInsertClicked(owner)}
-							disabled={visitEditorInsert}
-							name="add"
+						<Icon on:click={() => visitViewerCreateClicked(owner)}
+							name="list"
                             outlined/>
 					</td>
 					<td class="px-2 py-3">
-						<Icon 
-							disabled
-							name="list"
+						<Icon on:click={() => visitEditorCreateClicked(owner)}
+							disabled={visitEditorCreate}
+							name="add"
                             outlined/>
 					</td>
 					<td class="px-2 py-3">
@@ -224,11 +221,20 @@
                             outlined/>
 					</td>
 				</tr>
-				{#if visitEditorInsert && ownerId === owner.id}
+				{#if visitViewerCreate && ownerId === owner.id}
+				<tr>
+					<td class="px-4" colspan="5">
+						<VisitViewer
+							bind:visible={visitViewerCreate} 
+							{allVisit}/>
+					<td>
+				</tr>
+				{/if}
+				{#if visitEditorCreate && ownerId === owner.id}
 				<tr>
 					<td class="px-4" colspan="5">
 						<VisitEditor
-							bind:visible={visitEditorInsert} 
+							bind:visible={visitEditorCreate} 
 							on:create={e => createVisit(e.detail)}
 							allPetItem={owner.allPetItem}
 							allVetItem={allVetItem}/>
@@ -256,20 +262,4 @@
 			</tbody>
 		</table>
 	</div>
-	
-	{#each [...allVisitByDate] as [titel, allVisit]}
-	<details>
-		<summary>{titel}</summary>
-		<div class="ml-4">
-		{#each allVisit as visit}
-		<TextField value={visit.vetItem.text}
-			label="Veterinarian" 
-			disabled/>
-		<TextArea value={visit.text}
-			label="Diagnosis" 
-			disabled/>
-		{/each}
-		</div>
-	</details>
-	{/each}
 </div>
