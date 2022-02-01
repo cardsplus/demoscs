@@ -12,7 +12,8 @@ import java.util.Optional;
 public interface PetRepository extends JsonJpaRepository<Pet> {
 
     /**
-     * Returns all persisted entities ordered by {@code name} column.
+     * Returns all persisted entities.
+     * Orders by {@code name} column.
      *
      * @return persisted entities
      */
