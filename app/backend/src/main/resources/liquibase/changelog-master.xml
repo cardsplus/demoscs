@@ -9,4 +9,8 @@
     <include file="0002/projekt_mitglied.xml" relativeToChangelogFile="true"/>
     <include file="0003/aufgabe.xml" relativeToChangelogFile="true"/>
     <include file="0004/enum.xml" relativeToChangelogFile="true"/>
+    <include file="1001/owner.xml" relativeToChangelogFile="true"/>
+    <include file="1001/pet.xml" relativeToChangelogFile="true"/>
+    <include file="1002/vet.xml" relativeToChangelogFile="true"/>
+    <include file="1002/visit.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
