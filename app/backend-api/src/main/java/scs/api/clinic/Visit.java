@@ -1,6 +1,7 @@
 package scs.api.clinic;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
@@ -99,6 +100,18 @@ public final class Visit extends JsonJpaValueBase<Visit> {
         allExtra.put("petItem", PetItem.fromValue(pet));
         allExtra.put("vetItem", VetItem.fromValue(vet));
         return allExtra;
+    }
+
+    @JsonIgnore
+    public Visit setPet(@NonNull final Pet pet) {
+        this.pet = pet;
+        return this;
+    }
+
+    @JsonIgnore
+    public Visit setVet(@NonNull final Vet vet) {
+        this.vet = vet;
+        return this;
     }
 
     @Override
