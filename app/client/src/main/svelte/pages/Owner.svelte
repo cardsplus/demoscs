@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import Icon from '../components/Icon';
+	import TextArea from '../components/TextArea';
 	import TextField from '../components/TextField';
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
@@ -9,28 +10,35 @@
 	import { removeValue } from '../utils/rest.js';
 	import OwnerEditor from './OwnerEditor.svelte';
 
-	let allOwnerValue = [];
+	let allOwner = [];
 	let ownerIndexOf = undefined;
 	function onOwnerClicked(index) {
 		ownerIndexOf = index;
+		reloadAllVisit(allOwner[index]);
 	}
 
 	let ownerEditorCreate = false;
-	function ownerEditorCreateClicked() {
-		ownerEditorCreate = true;
-	}    
 	let ownerEditorUpdate = false;
 	let ownerEditorUpdateId = undefined;
 	$: ownerEditorDisabled = ownerEditorCreate || ownerEditorUpdate;
+	function ownerEditorCreateClicked() {
+		ownerEditorCreate = true;
+	}    
 	function ownerEditorUpdateClicked(id) {
 		ownerEditorUpdateId = id;
 		ownerEditorUpdate = true;
 	}
 
+	let allVisitByDate = new Map();
+	let visitIndexOf = undefined;
+	function onVisitClicked(index) {
+		visitIndexOf = index;
+	}
+
     onMount(async () => {
         try {
-            allOwnerValue = await loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
-            console.log(['onMount', allOwnerValue]);
+            allOwner = await loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
+            console.log(['onMount', allOwner]);
         } catch(err) {
 			console.log(['onMount', err]);
 			toast.push(err.toString());
@@ -38,7 +46,7 @@
 	});
 
 	let filterPrefix = '';
-	$: allOwnerValueFiltered = filterOwner(filterPrefix,allOwnerValue);
+	$: allOwnerFiltered = filterOwner(filterPrefix,allOwner);
 	function filterOwner(prefix,allValue) {
 		ownerIndexOf = undefined;
 		if (!filterPrefix) return allValue;
@@ -59,7 +67,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allOwnerValue = json;
+			allOwner = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -74,7 +82,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allOwnerValue = json;
+			allOwner = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -90,16 +98,37 @@
 		})
 		.then(json => {
 			console.log(json);
-			allOwnerValue = json;
+			allOwner = json;
 		})
 		.catch(err => {
 			console.log(err);
 			toast.push(err.toString());
 		});
 	};
+
+	function reloadAllVisit(owner) {
+		loadAllValue('/api/visit/search/findAllByOwner?ownerId=' + owner.id)
+		.then(json => {
+			console.log(json);
+			allVisitByDate = new Map();
+			json.forEach(e => {
+				let k = '"' + e.petItem.text + '" on ' + e.date;		
+				let v = allVisitByDate.get(k);
+				if (v) {
+					allVisitByDate.set(k, [...v, e]);
+				} else {
+					allVisitByDate.set(k, [e]);
+				}
+			});
+		})
+		.catch(err => {
+			console.log(err);
+			toast.push(err.toString());
+		});
+	}
 </script>
 
-<h1>Owner <span class="text-sm">({allOwnerValueFiltered.length})</span></h1>
+<h1>Owner <span class="text-sm">({allOwnerFiltered.length})</span></h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
 		<TextField bind:value={filterPrefix}
@@ -132,7 +161,7 @@
 					<td>
 				</tr>
 				{/if}
-				{#each allOwnerValueFiltered as owner, i}
+				{#each allOwnerFiltered as owner, i}
 				<tr on:click={e => onOwnerClicked(i)}
 					title={owner.id}
 					class:ring={ownerIndexOf === i}>
@@ -171,4 +200,20 @@
 			</tbody>
 		</table>
 	</div>
+	
+	{#each [...allVisitByDate] as [titel, allVisit]}
+	<details>
+		<summary>{titel}</summary>
+		<div class="ml-4">
+		{#each allVisit as visit}
+		<TextField value={visit.vetItem.text}
+			label="Veterinarian" 
+			disabled/>
+		<TextArea value={visit.text}
+			label="Diagnosis" 
+			disabled/>
+		{/each}
+		</div>
+	</details>
+	{/each}
 </div>

@@ -18,12 +18,12 @@
 	}
 
 	let itemEditorCreate = false;
-	function itemEditorCreateClicked() {
-		itemEditorCreate = true;
-	}
 	let itemEditorUpdate = false;
 	let itemEditorUpdateCode = undefined;
 	$: itemEditorDisabled = itemEditorCreate || itemEditorUpdate;
+	function itemEditorCreateClicked() {
+		itemEditorCreate = true;
+	}
 	function itemEditorUpdateClicked(code) {
 		itemEditorUpdateCode = code;
 		itemEditorUpdate = true;
