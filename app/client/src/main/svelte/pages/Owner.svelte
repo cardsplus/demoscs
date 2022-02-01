@@ -7,30 +7,30 @@
 	import { createValue } from '../utils/rest.js';
 	import { updatePatch } from '../utils/rest.js';
 	import { removeValue } from '../utils/rest.js';
-	import VetEditor from './VetEditor.svelte';
+	import OwnerEditor from './OwnerEditor.svelte';
 
-	let allVetValue = [];
-	let vetIndexOf = undefined;
-	function onVetClicked(index) {
-		vetIndexOf = index;
+	let allOwnerValue = [];
+	let ownerIndexOf = undefined;
+	function onOwnerClicked(index) {
+		ownerIndexOf = index;
 	}
 
-	let vetEditorCreate = false;
-	function vetEditorCreateClicked() {
-		vetEditorCreate = true;
+	let ownerEditorCreate = false;
+	function ownerEditorCreateClicked() {
+		ownerEditorCreate = true;
 	}    
-	let vetEditorUpdate = false;
-	let vetEditorUpdateId = undefined;
-	$: vetEditorDisabled = vetEditorCreate || vetEditorUpdate;
-	function vetEditorUpdateClicked(id) {
-		vetEditorUpdateId = id;
-		vetEditorUpdate = true;
+	let ownerEditorUpdate = false;
+	let ownerEditorUpdateId = undefined;
+	$: ownerEditorDisabled = ownerEditorCreate || ownerEditorUpdate;
+	function ownerEditorUpdateClicked(id) {
+		ownerEditorUpdateId = id;
+		ownerEditorUpdate = true;
 	}
 
     onMount(async () => {
         try {
-            allVetValue = await loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
-            console.log(['onMount', allVetValue]);
+            allOwnerValue = await loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
+            console.log(['onMount', allOwnerValue]);
         } catch(err) {
 			console.log(['onMount', err]);
 			toast.push(err.toString());
@@ -38,9 +38,9 @@
 	});
 
 	let filterPrefix = '';
-	$: allVetValueFiltered = filterVet(filterPrefix,allVetValue);
-	function filterVet(prefix,allValue) {
-		vetIndexOf = undefined;
+	$: allOwnerValueFiltered = filterOwner(filterPrefix,allOwnerValue);
+	function filterOwner(prefix,allValue) {
+		ownerIndexOf = undefined;
 		if (!filterPrefix) return allValue;
 		return allValue.filter(e => {
 			for (const s of e.name.split(" ")) {
@@ -52,14 +52,14 @@
 		})
 	}
  
-	function createVet(vet) {
-		createValue('/api/vet', vet)
+	function createOwner(owner) {
+		createValue('/api/owner', owner)
 		.then(() => {
-			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
+			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
 			console.log(json);
-			allVetValue = json;
+			allOwnerValue = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -67,14 +67,14 @@
 		});
 	};
 
-	function updateVet(vet) {
-		updatePatch('/api/vet/' + vet.id, vet)
+	function updateOwner(owner) {
+		updatePatch('/api/owner/' + owner.id, owner)
 		.then(() => {
-			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
+			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
 			console.log(json);
-			allVetValue = json;
+			allOwnerValue = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -82,15 +82,15 @@
 		});
 	};
 
-	function removeVet(vet) {
-		if (!confirm("Really delete '" + vet.name + "'?")) return;
-		removeValue('/api/vet/' + vet.id)
+	function removeOwner(owner) {
+		if (!confirm("Really delete '" + owner.name + "'?")) return;
+		removeValue('/api/owner/' + owner.id)
 		.then(() => {
-			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
+			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
 			console.log(json);
-			allVetValue = json;
+			allOwnerValue = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -99,7 +99,7 @@
 	};
 </script>
 
-<h1>Vet <span class="text-sm">({allVetValueFiltered.length})</span></h1>
+<h1>Owner <span class="text-sm">({allOwnerValueFiltered.length})</span></h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
 		<TextField bind:value={filterPrefix}
@@ -112,59 +112,59 @@
 						<span class="text-gray-600">Name</span>
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-full">
-						<span class="text-gray-600">Skills</span>
+						<span class="text-gray-600">Pets</span>
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
-						<Icon on:click={() => vetEditorCreateClicked()}
-							disabled={vetEditorDisabled}
+						<Icon on:click={() => ownerEditorCreateClicked()}
+							disabled={ownerEditorDisabled}
 							name="edit"
                             outlined/>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				{#if vetEditorCreate}
+				{#if ownerEditorCreate}
 				<tr>
 					<td colspan="2">
-						<VetEditor
-							bind:visible={vetEditorCreate} 
-							on:create={e => createVet(e.detail)}/>
+						<OwnerEditor
+							bind:visible={ownerEditorCreate} 
+							on:create={e => createOwner(e.detail)}/>
 					<td>
 				</tr>
 				{/if}
-				{#each allVetValueFiltered as vet, i}
-				<tr on:click={e => onVetClicked(i)}
-					title={vet.id}
-					class:ring={vetIndexOf === i}>
+				{#each allOwnerValueFiltered as owner, i}
+				<tr on:click={e => onOwnerClicked(i)}
+					title={owner.id}
+					class:ring={ownerIndexOf === i}>
 					<td class="px-2 py-3 text-left">
 						<div class="text-sm underline text-blue-600">
-							<a href={'/vet/' + vet.id}>{vet.name}</a>
+							<a href={'/owner/' + owner.id}>{owner.name}</a>
 						</div>
 					</td>
 					<td class="px-2 py-3 text-left">
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => vetEditorUpdateClicked(vet.id)}
-							disabled={vetEditorDisabled}
+						<Icon on:click={() => ownerEditorUpdateClicked(owner.id)}
+							disabled={ownerEditorDisabled}
 							name="edit"
                             outlined/>
 					</td>
 				</tr>
-				{#if vetEditorUpdate && vetEditorUpdateId === vet.id}
+				{#if ownerEditorUpdate && ownerEditorUpdateId === owner.id}
 				<tr>
 					<td	colspan="2">
-						<VetEditor
-							bind:visible={vetEditorUpdate} 
-							on:update={e => updateVet(e.detail)}
-							on:remove={e => removeVet(e.detail)}
-							{vet}/>
+						<OwnerEditor
+							bind:visible={ownerEditorUpdate} 
+							on:update={e => updateOwner(e.detail)}
+							on:remove={e => removeOwner(e.detail)}
+							{owner}/>
 					<td>
 				</tr>
 				{/if}
 				{:else}
 				<tr>
 					<td class="px-2 py-3" colspan="3">
-						No vets
+						No owners
 					</td>
 				</tr>
 				{/each}

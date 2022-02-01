@@ -4,41 +4,41 @@
 	import TextField from '../components/TextField';
     
     export let visible = false;
-    export let vet = undefined;
+    export let owner = undefined;
 
     let showUpdate;
     let showRemove;
-    let newVet = {
+    let newOwner = {
         name: undefined
     }
 
-    $: disabled = !newVet.name;
-    $: if (vet) onChange()
+    $: disabled = !newOwner.name;
+    $: if (owner) onChange()
     function onChange() {
         showUpdate = true;
-        showRemove = !vet.aktiv;
-        newVet = {
-            id: vet.id,
-            name: vet.name
+        showRemove = !owner.aktiv;
+        newOwner = {
+            id: owner.id,
+            name: owner.name
         }
-        console.log(['onChange', newVet]);
+        console.log(['onChange', newOwner]);
     }
 
     const dispatch = createEventDispatcher();
     function onCreate() {
         visible = false;
-        console.log(['create', newVet]);
-        dispatch('create', newVet);
+        console.log(['create', newOwner]);
+        dispatch('create', newOwner);
     }
     function onUpdate() {
         visible = false;
-        console.log(['update', newVet]);
-        dispatch('update', newVet);
+        console.log(['update', newOwner]);
+        dispatch('update', newOwner);
     }
     function onRemove() {
         visible = false;
-        console.log(['remove', newVet]);
-        dispatch('remove', newVet);
+        console.log(['remove', newOwner]);
+        dispatch('remove', newOwner);
     }
     function onCancel() {
         visible = false;
@@ -47,7 +47,7 @@
 
 <div class="flex flex-col">
     <div class="w-full">
-        <TextField bind:value={newVet.name} 
+        <TextField bind:value={newOwner.name} 
             label="Name"		
             placeholder="Insert a name"/>
     </div>
@@ -75,5 +75,5 @@
 
 <details>
     <summary>JSON</summary>
-    <pre>{JSON.stringify(newVet, null, 2)}</pre>
+    <pre>{JSON.stringify(newOwner, null, 2)}</pre>
 </details>

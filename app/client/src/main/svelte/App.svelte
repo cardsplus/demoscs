@@ -10,6 +10,8 @@
     import AppLogo from './AppLogo.svelte'
 	import AppMenu from './AppMenu.svelte'
 	import Enum from './pages/Enum.svelte';
+	import Owner from './pages/Owner.svelte';
+	import OwnerViewer from './pages/OwnerViewer.svelte';
 	import Vet from './pages/Vet.svelte';
 	import VetViewer from './pages/VetViewer.svelte';
 	let menuVisible = false;
@@ -30,13 +32,14 @@
 		<Menu bind:show={menuVisible}>
 			<div class="flex flex-col p-2 text-gray-600 gap-1">
 				<span class="text-lg text-gray-900 capitalize">Client</span>
+				<div class="flex flex-col p-4 text-gray-600 gap-1">
+					<a on:click={() => menuVisible = false} href="/owner">Owner</a>
+				</div>
 			</div>
 			<div class="flex flex-col p-2 text-gray-600 gap-1">
 				<span class="text-lg text-gray-900 capitalize">Clinic</span>
 				<div class="flex flex-col p-4 text-gray-600 gap-1">
 					<a on:click={() => menuVisible = false} href="/vet">Vet</a>
-				</div>
-				<div class="flex flex-col p-4 text-gray-600 gap-1">
 					<a on:click={() => menuVisible = false} href="/enum/skill">Skill</a>
 				</div>
 			</div>
@@ -48,6 +51,10 @@
 				component="{AppHome}" />
 			<Route path="/help" 
 				component="{AppHelp}" />
+			<Route path="/owner" 
+				component="{Owner}" />
+			<Route path="/owner/:id"
+				component="{OwnerViewer}" />
 			<Route path="/vet" 
 				component="{Vet}" />
 			<Route path="/vet/:id"
