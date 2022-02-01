@@ -262,6 +262,29 @@ class PetRestApiTest {
 
     @Test
     @Order(41)
+    void getApiPetItem() throws Exception {
+        assertEquals(2, petRepository.count());
+        mockMvc.perform(get("/api/pet/search/findAllItem")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0]")
+                        .exists())
+                .andExpect(jsonPath("$.content[1]")
+                        .exists())
+                .andExpect(jsonPath("$.content[2]")
+                        .doesNotExist());
+    }
+
+    @Test
+    @Order(42)
     void getApiPetById() throws Exception {
         final String name = "Anita";
         final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
@@ -284,7 +307,7 @@ class PetRestApiTest {
     }
 
     @Test
-    @Order(42)
+    @Order(43)
     void getApiPetByIdNotFound() throws Exception {
         final String uuid = "a1111111-ffff-beef-dead-beefdeadbeef";
         assertFalse(petRepository.findById(UUID.fromString(uuid)).isPresent());
@@ -296,7 +319,7 @@ class PetRestApiTest {
     }
 
     @Test
-    @Order(43)
+    @Order(44)
     void getApiPetByName() throws Exception {
         final String name = "Anita";
         final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
@@ -319,7 +342,7 @@ class PetRestApiTest {
     }
 
     @Test
-    @Order(44)
+    @Order(45)
     void getApiPetByNameNotFound() throws Exception {
         final String name = "Atina";
         assertFalse(petRepository.findByName(name).isPresent());
