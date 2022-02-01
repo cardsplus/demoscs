@@ -2,6 +2,7 @@ package esy.app.plan;
 
 import esy.api.plan.AufgabeValue;
 import esy.api.plan.ProjektValue;
+import esy.app.EndpointConfiguration;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,11 +14,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Tag("slow")
 @SpringBootTest
-@AutoConfigureMockMvc
+@ContextConfiguration(classes = EndpointConfiguration.class)
+@AutoConfigureMockMvc(addFilters = false)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({MockitoExtension.class, RestDocumentationExtension.class})
 public class AufgabeValueRestApiTest {
@@ -477,6 +482,13 @@ public class AufgabeValueRestApiTest {
                         .exists())
                 .andExpect(jsonPath("$.content[3]")
                         .doesNotExist());
+    }
+
+    @Test
+    @Order(99)
+    @Transactional
+    @Rollback(false)
+    void cleanup() {
         assertEquals(3, aufgabeValueRepository.count());
         aufgabeValueRepository.deleteAll();
     }

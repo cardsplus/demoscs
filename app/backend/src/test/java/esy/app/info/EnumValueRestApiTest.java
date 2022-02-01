@@ -29,7 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Tag("slow")
 @SpringBootTest
-@AutoConfigureMockMvc
+@ContextConfiguration(classes = EndpointConfiguration.class)
+@AutoConfigureMockMvc(addFilters = false)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({MockitoExtension.class, RestDocumentationExtension.class})
 class EnumValueRestApiTest {

@@ -2,6 +2,7 @@ package esy.app.plan;
 
 import esy.api.plan.ProjektValue;
 import esy.api.team.NutzerValue;
+import esy.app.EndpointConfiguration;
 import esy.app.team.NutzerValueRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -33,7 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Tag("slow")
 @SpringBootTest
-@AutoConfigureMockMvc
+@ContextConfiguration(classes = EndpointConfiguration.class)
+@AutoConfigureMockMvc(addFilters = false)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({MockitoExtension.class, RestDocumentationExtension.class})
 public class ProjektValueRestApiTest {
@@ -603,6 +606,13 @@ public class ProjektValueRestApiTest {
                         .exists())
                 .andExpect(jsonPath("$.content[2]")
                         .doesNotExist());
+    }
+
+    @Test
+    @Order(99)
+    @javax.transaction.Transactional
+    @Rollback(false)
+    void cleanup() {
         assertEquals(2, projektValueRepository.count());
         projektValueRepository.deleteAll();
         assertEquals(2, nutzerValueRepository.count());
