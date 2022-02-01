@@ -9,19 +9,19 @@
 	import { removeValue } from '../utils/rest.js';
 	import VetEditor from './VetEditor.svelte';
 
-	let allVetValue = [];
+	let allVet = [];
 	let vetIndexOf = undefined;
 	function onVetClicked(index) {
 		vetIndexOf = index;
 	}
 
 	let vetEditorCreate = false;
-	function vetEditorCreateClicked() {
-		vetEditorCreate = true;
-	}    
 	let vetEditorUpdate = false;
 	let vetEditorUpdateId = undefined;
 	$: vetEditorDisabled = vetEditorCreate || vetEditorUpdate;
+	function vetEditorCreateClicked() {
+		vetEditorCreate = true;
+	}    
 	function vetEditorUpdateClicked(id) {
 		vetEditorUpdateId = id;
 		vetEditorUpdate = true;
@@ -29,8 +29,8 @@
 
     onMount(async () => {
         try {
-            allVetValue = await loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
-            console.log(['onMount', allVetValue]);
+            allVet = await loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
+            console.log(['onMount', allVet]);
         } catch(err) {
 			console.log(['onMount', err]);
 			toast.push(err.toString());
@@ -38,7 +38,7 @@
 	});
 
 	let filterPrefix = '';
-	$: allVetValueFiltered = filterVet(filterPrefix,allVetValue);
+	$: allVetFiltered = filterVet(filterPrefix,allVet);
 	function filterVet(prefix,allValue) {
 		vetIndexOf = undefined;
 		if (!filterPrefix) return allValue;
@@ -59,7 +59,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allVetValue = json;
+			allVet = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -74,7 +74,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allVetValue = json;
+			allVet = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -90,7 +90,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allVetValue = json;
+			allVet = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -99,7 +99,7 @@
 	};
 </script>
 
-<h1>Vet <span class="text-sm">({allVetValueFiltered.length})</span></h1>
+<h1>Vet <span class="text-sm">({allVetFiltered.length})</span></h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
 		<TextField bind:value={filterPrefix}
@@ -132,7 +132,7 @@
 					<td>
 				</tr>
 				{/if}
-				{#each allVetValueFiltered as vet, i}
+				{#each allVetFiltered as vet, i}
 				<tr on:click={e => onVetClicked(i)}
 					title={vet.id}
 					class:ring={vetIndexOf === i}>
