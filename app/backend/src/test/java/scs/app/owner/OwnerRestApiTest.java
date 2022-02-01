@@ -197,6 +197,29 @@ class OwnerRestApiTest {
 
     @Test
     @Order(41)
+    void getApiOwnerItem() throws Exception {
+        assertEquals(2, ownerRepository.count());
+        mockMvc.perform(get("/api/owner/search/findAllItem")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0]")
+                        .exists())
+                .andExpect(jsonPath("$.content[1]")
+                        .exists())
+                .andExpect(jsonPath("$.content[2]")
+                        .doesNotExist());
+    }
+
+    @Test
+    @Order(42)
     void getApiOwnerById() throws Exception {
         final String name = "Bea Musterfrau";
         final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
@@ -219,7 +242,7 @@ class OwnerRestApiTest {
     }
 
     @Test
-    @Order(42)
+    @Order(43)
     void getApiOwnerByIdNotFound() throws Exception {
         final String uuid = "a1111111-ffff-beef-dead-beefdeadbeef";
         assertFalse(ownerRepository.findById(UUID.fromString(uuid)).isPresent());
@@ -231,7 +254,7 @@ class OwnerRestApiTest {
     }
 
     @Test
-    @Order(43)
+    @Order(44)
     void getApiOwnerByName() throws Exception {
         final String name = "Bea Musterfrau";
         final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
@@ -254,7 +277,7 @@ class OwnerRestApiTest {
     }
 
     @Test
-    @Order(44)
+    @Order(45)
     void getApiOwnerByNameNotFound() throws Exception {
         final String name = "Mia Musterfrau";
         assertFalse(ownerRepository.findByName(name).isPresent());
