@@ -23,10 +23,12 @@
 	$: vetEditorDisabled = vetEditorCreate || vetEditorUpdate;
 	function vetEditorCreateClicked() {
 		vetEditorCreate = true;
+		visitViewerCreate = false;
 	}    
 	function vetEditorUpdateClicked(vet) {
 		vetId = vet.id;
 		vetEditorUpdate = true;
+		visitViewerCreate = false;
 	}
 	
 	let allVisit = [];

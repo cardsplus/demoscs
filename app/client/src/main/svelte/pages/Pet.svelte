@@ -25,8 +25,8 @@
 		petEditorCreate = true;
 	}    
 	function petEditorUpdateClicked(pet) {
-		petEditorUpdate = true;
 		petId = pet.id;
+		petEditorUpdate = true;
 	}
 
     let allOwnerItem = [];

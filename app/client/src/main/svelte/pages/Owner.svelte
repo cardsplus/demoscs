@@ -25,6 +25,7 @@
 	$: ownerEditorDisabled = ownerEditorCreate || ownerEditorUpdate || petEditorCreate || visitEditorCreate;
 	function ownerEditorCreateClicked() {
 		ownerEditorCreate = true;
+		visitViewerCreate = false;
 	}    
 	function ownerEditorUpdateClicked(owner) {
 		ownerId = owner.id;

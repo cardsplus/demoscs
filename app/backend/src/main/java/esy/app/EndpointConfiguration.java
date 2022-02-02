@@ -105,7 +105,6 @@ public class EndpointConfiguration {
                 configuration.useHalAsDefaultJsonMediaType(false);
                 // expose id for value objects
                 applyJsonConfiguration("esy.api", configuration);
-                applyJsonConfiguration("scs.api", configuration);
                 // apply CORS settings
                 applyCorsConfiguration(registry);
             }

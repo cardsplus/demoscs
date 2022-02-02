@@ -5,7 +5,7 @@
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
 	import { createValue } from '../utils/rest.js';
-	import { updatePatch } from '../utils/rest.js';
+	import { updateValue } from '../utils/rest.js';
 	import { removeValue } from '../utils/rest.js';
 	import EnumEditor from './EnumEditor.svelte';
 
@@ -68,7 +68,7 @@
 	};
 
 	function updateItem(item) {
-		updatePatch('/api/enum/' + art + '/' + item.id, item)
+		updateValue('/api/enum/' + art + '/' + item.code, item)
 		.then(() => {
 			return loadAllValue('/api/enum/' + art);
 		})
@@ -84,7 +84,7 @@
 
 	function removeItem(item) {
 		if (!confirm("Enum '" + item.name + "' wirklich löschen?")) return;
-		removeValue('/api/enum/' + art + '/' + item.id)
+		removeValue('/api/enum/' + art + '/' + item.code)
 		.then(() => {
 			return loadAllValue('/api/enum/' + art);
 		})
