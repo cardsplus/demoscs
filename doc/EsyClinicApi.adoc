@@ -1,10 +1,12 @@
 :projectDir: ..
 :icons: font
-= EsyTeamApi
+= EsyClinicApi
 
 == Überblick
 
-Der Dienst ist Teil eines _Self Contained Systems_.
+Mit dem API werden Tierärzte (engl. vet) und Termine (engl. visits) in einer Tierklinik verwaltet.
+
+Das API ist Teil eines _Self Contained Systems_.
 
 TIP: Siehe
 https://scs-architecture.org
@@ -35,15 +37,25 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,EsyTeam,png]
+[plantuml,EsyPlan,png]
 ----
 !pragma layout smetana
 hide members
 show attributes
-package "team" {
-  class Nutzer<JPA> {
-    mail
+package "client" {
+    class Pet<JsonJpaBase> {
+        name
+    }
+}
+package "clinic" {
+  class Vet<JsonJpaBase> {
+        name
   }
+  class Visit<JsonJpaBase> {
+        date, text
+  }
+  Vet "1" *-- "*" Visit
+  Pet "1" *-- "*" Visit
 }
 ----
 
@@ -77,7 +89,9 @@ TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
 
-include::{projectDir}/app/backend/src/main/java/esy/app/team/NutzerRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/clinic/VetRestApi.adoc[leveloffset=+1]
+
+include::{projectDir}/app/backend/src/main/java/esy/app/clinic/VisitRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 

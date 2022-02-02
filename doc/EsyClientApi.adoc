@@ -1,14 +1,12 @@
 :projectDir: ..
 :icons: font
-= EsyPlanApi
+= EsyClientApi
 
 == Überblick
 
-Der Dienst hat die Aufgabe, Projekte zu verwalten.
-Projekte haben einen verantwortlichen Nutzer, den Besitzer.
-Beliebig viele Nutzer (inkl. des Besitzer) sind Projektmitglieder, die Aufgaben in diesem Projekt erledigen.
+Mit dem API werden Patienten (engl. pet) einer Tierklinik und ihre Besitzer (engl. owner) verwaltet.
 
-Der Dienst ist Teil eines _Self Contained Systems_.
+Das API ist Teil eines _Self Contained Systems_.
 
 TIP: Siehe
 https://scs-architecture.org
@@ -39,23 +37,19 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,EsyPlan,png]
+[plantuml,Plan,png]
 ----
 !pragma layout smetana
 hide members
 show attributes
-class Nutzer<JPA> {
-}
-package "plan" {
-  class Aufgabe<JPA> {
-    text
-  }
-  class Projekt<JPA> {
-    name
-  }
-  Projekt "1" *-- "*" Aufgabe
-  Projekt "1" --> "1" Nutzer : besitzer
-  Projekt "1" --> "*" Nutzer : mitglied
+package "client" {
+    class Owner<JsonJpaBase> {
+        name
+    }
+    class Pet<JsonJpaBase> {
+        name
+    }
+    Pet "1" *-- "*" Owner
 }
 ----
 
@@ -89,9 +83,9 @@ TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/ProjektRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/client/OwnerRestApi.adoc[leveloffset=+1]
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/AufgabeRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/client/PetRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 
