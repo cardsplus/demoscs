@@ -1,4 +1,4 @@
-package scs.app.owner;
+package esy.app.client;
 
 import esy.app.EndpointConfiguration;
 import org.junit.jupiter.api.*;

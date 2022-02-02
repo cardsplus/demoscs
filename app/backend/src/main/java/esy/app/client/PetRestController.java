@@ -1,5 +1,7 @@
-package scs.app.owner;
+package esy.app.client;
 
+import esy.api.client.Pet;
+import esy.api.client.PetItem;
 import esy.rest.JsonJpaRestControllerBase;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
-import scs.api.owner.Pet;
-import scs.api.owner.PetItem;
 
 import java.util.ArrayList;
 import java.util.List;

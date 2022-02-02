@@ -8,12 +8,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = {"esy.app", "scs.app"})
+@ComponentScan(basePackages = {"esy.app"})
 @PropertySource(
         ignoreResourceNotFound = false,
         value = "classpath:database.properties")
-@EntityScan(basePackages = {"esy.api", "scs.api"})
-@EnableJpaRepositories(basePackages = {"esy.app", "scs.app"})
+@EntityScan(basePackages = {"esy.api"})
+@EnableJpaRepositories(basePackages = {"esy.app"})
 @EnableTransactionManagement
 public class DatabaseConfiguration {
 }

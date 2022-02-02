@@ -1,4 +1,4 @@
-package scs.api.clinic;
+package esy.api.clinic;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;

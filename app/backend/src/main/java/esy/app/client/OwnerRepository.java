@@ -1,15 +1,15 @@
-package scs.app.clinic;
+package esy.app.client;
 
+import esy.api.client.Owner;
 import esy.rest.JsonJpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import scs.api.clinic.Vet;
 
 import java.util.List;
 import java.util.Optional;
 
-@RepositoryRestResource(path = "vet", collectionResourceRel = "allVet")
-public interface VetRepository extends JsonJpaRepository<Vet> {
+@RepositoryRestResource(path = "owner", collectionResourceRel = "allOwner")
+public interface OwnerRepository extends JsonJpaRepository<Owner> {
 
     /**
      * Returns all persisted entities.
@@ -17,7 +17,7 @@ public interface VetRepository extends JsonJpaRepository<Vet> {
      *
      * @return persisted entities
      */
-    List<Vet> findAllByOrderByNameAsc();
+    List<Owner> findAllByOrderByNameAsc();
 
     /**
      * Returns a persisted entity with given unique name
@@ -26,5 +26,5 @@ public interface VetRepository extends JsonJpaRepository<Vet> {
      * @param name unique name
      * @return persisted entity or nothing
      */
-    Optional<Vet> findByName(@Param("name") String name);
+    Optional<Owner> findByName(@Param("name") String name);
 }

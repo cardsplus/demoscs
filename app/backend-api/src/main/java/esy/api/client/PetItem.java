@@ -1,4 +1,4 @@
-package scs.api.owner;
+package esy.api.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.json.JsonJpaItem;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Embeddable
 @EqualsAndHashCode
-public class OwnerItem implements JsonJpaItem<UUID> {
+public class PetItem implements JsonJpaItem<UUID> {
 
     /**
      * Eindeutige UUID des Projekts.
@@ -31,12 +31,12 @@ public class OwnerItem implements JsonJpaItem<UUID> {
     @JsonProperty
     private final String text;
 
-    private OwnerItem() {
+    private PetItem() {
         this.value = null;
         this.text = "";
     }
 
-    private OwnerItem(@NonNull final Owner value) {
+    private PetItem(@NonNull final Pet value) {
         this.value = value.getId();
         this.text = value.getName();
     }
@@ -46,11 +46,11 @@ public class OwnerItem implements JsonJpaItem<UUID> {
         return text;
     }
 
-    public static OwnerItem fromValue(final Owner value) {
+    public static PetItem fromValue(final Pet value) {
         if (value != null) {
-            return new OwnerItem(value);
+            return new PetItem(value);
         } else {
-            return new OwnerItem();
+            return new PetItem();
         }
     }
 }
