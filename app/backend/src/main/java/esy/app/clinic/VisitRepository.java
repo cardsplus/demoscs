@@ -21,7 +21,7 @@ public interface VisitRepository extends JsonJpaRepository<Visit> {
 
     /**
      * Returns persisted entities for a {@link Owner}.
-     * Orders by {@code date} columns.
+     * Orders by {@code date} column.
      *
      * @param ownerId a {@link Owner} id
      * @return persisted entities

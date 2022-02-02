@@ -426,7 +426,7 @@ class VisitRestApiTest {
                         .value("2021-04-22"))
                 .andExpect(jsonPath("$.content[3].date")
                         .value("2021-04-21"))
-                .andExpect(jsonPath("$.content[4].date")
+                .andExpect(jsonPath("$.content[4]")
                         .doesNotExist());
     }
 

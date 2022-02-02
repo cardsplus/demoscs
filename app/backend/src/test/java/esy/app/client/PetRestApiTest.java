@@ -252,10 +252,10 @@ class PetRestApiTest {
                         .exists("Vary"))
                 .andExpect(jsonPath("$.content")
                         .isArray())
-                .andExpect(jsonPath("$.content[0]")
-                        .exists())
-                .andExpect(jsonPath("$.content[1]")
-                        .exists())
+                .andExpect(jsonPath("$.content[0].name")
+                        .value("Anita"))
+                .andExpect(jsonPath("$.content[1].name")
+                        .value("Roger"))
                 .andExpect(jsonPath("$.content[2]")
                         .doesNotExist());
     }
@@ -275,10 +275,10 @@ class PetRestApiTest {
                         .exists("Vary"))
                 .andExpect(jsonPath("$.content")
                         .isArray())
-                .andExpect(jsonPath("$.content[0]")
-                        .exists())
-                .andExpect(jsonPath("$.content[1]")
-                        .exists())
+                .andExpect(jsonPath("$.content[0].text")
+                        .value("Anita"))
+                .andExpect(jsonPath("$.content[1].text")
+                        .value("Roger"))
                 .andExpect(jsonPath("$.content[2]")
                         .doesNotExist());
     }
@@ -352,6 +352,28 @@ class PetRestApiTest {
                 .andDo(print())
                 .andExpect(status()
                         .isNotFound());
+    }
+
+    @Test
+    @Order(46)
+    void getApiPetByOwner() throws Exception {
+        final String uuid = "b2222222-2222-beef-dead-beefdeadbeef";
+        assertTrue(ownerRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(get("/api/pet/search/findAllByOwner?ownerId=" + uuid)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0].name")
+                        .value("Anita"))
+                .andExpect(jsonPath("$.content[1]")
+                        .doesNotExist());
     }
 
     @Test
