@@ -111,7 +111,7 @@
 					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/3">
 						<span class="text-gray-600">Name</span>
 					</th>
-					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-full">
+					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-2/3">
 						<span class="text-gray-600">Skills</span>
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
@@ -125,7 +125,7 @@
 			<tbody>
 				{#if vetEditorCreate}
 				<tr>
-					<td colspan="2">
+					<td colspan="3">
 						<VetEditor
 							bind:visible={vetEditorCreate} 
 							on:create={e => createVet(e.detail)}/>
@@ -142,6 +142,7 @@
 						</div>
 					</td>
 					<td class="px-2 py-3 text-left">
+						<span>tbd</span>
 					</td>
 					<td class="px-2 py-3">
 						<Icon on:click={() => vetEditorUpdateClicked(vet.id)}
@@ -152,7 +153,7 @@
 				</tr>
 				{#if vetEditorUpdate && vetEditorUpdateId === vet.id}
 				<tr>
-					<td	colspan="2">
+					<td	colspan="3">
 						<VetEditor
 							bind:visible={vetEditorUpdate} 
 							on:update={e => updateVet(e.detail)}

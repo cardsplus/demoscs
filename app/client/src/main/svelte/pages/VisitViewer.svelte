@@ -1,26 +1,15 @@
 <script>
 	import TextArea from '../components/TextArea';
 	import TextField from '../components/TextField';
+	import { mapify } from '../utils/list.js';
 
     export let allVisit;
 
     let allVisitByDate = new Map();
-    $: allVisitByDate = process(allVisit);
-    function process(l) {
-        console.log(['process', l]);
-        let m = new Map();
-        l.forEach(e => {
-            let k = e.petItem.text + ' on ' + e.date;		
-            let v = m.get(k);
-            if (v) {
-                m.set(k, [...v, e]);
-            } else {
-                m.set(k, [e]);
-            }
-        });
-        console.log(['process', m]);
-        return m;
-	}
+    $: allVisitByDate = mapify(allVisit, visitKey);
+    function visitKey(e) {
+        return e.petItem.text + ' on ' + e.date;
+    }
 </script>
 
 {#each [...allVisitByDate] as [k, l]}
