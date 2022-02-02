@@ -13,22 +13,20 @@
     let allPet = []; 
     let petOwnerId = null; 
 	let petIndexOf = undefined;
+	let petId = undefined;
 	function onPetClicked(index) {
 		petIndexOf = index;
 	}
 
 	let petEditorCreate = false;
-	let petEditorCreateId = undefined;
 	let petEditorUpdate = false;
-	let petEditorUpdateId = undefined;
 	$: petEditorDisabled = petEditorCreate || petEditorUpdate;
-	function petEditorCreateClicked(id) {
-		petEditorCreateId = id;
+	function petEditorCreateClicked() {
 		petEditorCreate = true;
 	}    
-	function petEditorUpdateClicked(id) {
-		petEditorUpdateId = id;
+	function petEditorUpdateClicked(pet) {
 		petEditorUpdate = true;
+		petId = pet.id;
 	}
 
     let allOwnerItem = [];
@@ -153,13 +151,13 @@
                     <span>tbd</span>
                 </td>
                 <td class="px-2 py-3">
-                    <Icon on:click={() => petEditorUpdateClicked(pet.id)}
+                    <Icon on:click={() => petEditorUpdateClicked(pet)}
                         disabled={petEditorDisabled}
                         name="edit"
                         outlined/>
                 </td>
             </tr>
-            {#if petEditorUpdate && petEditorUpdateId === pet.id}
+            {#if petEditorUpdate && petId === pet.id}
             <tr>
                 <td	colspan="4">
                     <PetEditor

@@ -255,7 +255,7 @@
 					</td>
 					<td class="px-2 py-3">
 						<Icon on:click={() => ownerEditorUpdateClicked(owner)}
-							title="Edit owner"
+							title="Edit owner details"
 							disabled={ownerEditorDisabled}
 							name="edit"
                             outlined/>

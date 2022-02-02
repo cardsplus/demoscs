@@ -125,6 +125,7 @@ class VisitRestApiTest {
     @Test
     @Order(30)
     void putApiVisit() throws Exception {
+        final String text = "Lorem ipsum";
         final String date = "2021-04-23";
         final String uuid = "e1111111-1111-beef-dead-beefdeadbeef";
         assertFalse(visitRepository.findById(UUID.fromString(uuid)).isPresent());
@@ -133,7 +134,7 @@ class VisitRestApiTest {
                                 "\"pet\":\"/api/pet/c1111111-1111-beef-dead-beefdeadbeef\"," +
                                 "\"vet\":\"/api/vet/d1111111-1111-beef-dead-beefdeadbeef\"," +
                                 "\"date\":\"" + date + "\"," +
-                                "\"text\":\"Lorem ipsum.\"" +
+                                "\"text\":\"" + text + "\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -159,7 +160,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.date")
                         .value(date))
                 .andExpect(jsonPath("$.text")
-                        .exists());
+                        .value(text));
     }
 
     @Test
@@ -237,7 +238,6 @@ class VisitRestApiTest {
     @Test
     @Order(33)
     void patchApiVisitPet() throws Exception {
-        final String date = "2021-04-24";
         final String uuid = "e1111111-1111-beef-dead-beefdeadbeef";
         assertTrue(visitRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(patch("/api/visit/" + uuid)
@@ -266,7 +266,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.vetItem.text")
                         .value("Alex Fleming"))
                 .andExpect(jsonPath("$.date")
-                        .value(date));
+                        .value("2021-04-24"));
     }
 
     @Test
@@ -290,7 +290,6 @@ class VisitRestApiTest {
     @Test
     @Order(35)
     void patchApiVisitVet() throws Exception {
-        final String date = "2021-04-24";
         final String uuid = "e1111111-1111-beef-dead-beefdeadbeef";
         assertTrue(visitRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(patch("/api/visit/" + uuid)
@@ -319,7 +318,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.vetItem.text")
                         .value("Phillip Dick"))
                 .andExpect(jsonPath("$.date")
-                        .value(date));
+                        .value("2021-04-24"));
     }
 
     @Test
@@ -370,7 +369,6 @@ class VisitRestApiTest {
     @Test
     @Order(41)
     void getApiVisitById() throws Exception {
-        final String date = "2021-04-24";
         final String uuid = "e1111111-1111-beef-dead-beefdeadbeef";
         assertTrue(visitRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(get("/api/visit/" + uuid)
@@ -387,7 +385,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.date")
-                        .value(date));
+                        .value("2021-04-24"));
     }
 
     @Test
@@ -427,6 +425,50 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.content[3].date")
                         .value("2021-04-21"))
                 .andExpect(jsonPath("$.content[4]")
+                        .doesNotExist());
+    }
+
+    @Test
+    @Order(44)
+    void getApiVisitByPet() throws Exception {
+        final String uuid = "c2222222-2222-beef-dead-beefdeadbeef";
+        assertTrue(petRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(get("/api/visit/search/findAllByPet?petId=" + uuid)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0].date")
+                        .value("2021-04-24"))
+                .andExpect(jsonPath("$.content[1]")
+                        .doesNotExist());
+    }
+
+    @Test
+    @Order(45)
+    void getApiVisitByVet() throws Exception {
+        final String uuid = "d2222222-2222-beef-dead-beefdeadbeef";
+        assertTrue(vetRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(get("/api/visit/search/findAllByVet?vetId=" + uuid)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(jsonPath("$.content")
+                        .isArray())
+                .andExpect(jsonPath("$.content[0].date")
+                        .value("2021-04-24"))
+                .andExpect(jsonPath("$.content[1]")
                         .doesNotExist());
     }
 

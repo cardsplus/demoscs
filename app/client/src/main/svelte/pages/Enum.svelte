@@ -13,20 +13,20 @@
 
 	let allItem = [];
 	let itemIndexOf = undefined;
+	let itemCode = undefined;
 	function onItemClicked(index) {
 		itemIndexOf = index;
 	}
 
 	let itemEditorCreate = false;
 	let itemEditorUpdate = false;
-	let itemEditorUpdateCode = undefined;
 	$: itemEditorDisabled = itemEditorCreate || itemEditorUpdate;
 	function itemEditorCreateClicked() {
 		itemEditorCreate = true;
 	}
-	function itemEditorUpdateClicked(code) {
-		itemEditorUpdateCode = code;
+	function itemEditorUpdateClicked(item) {
 		itemEditorUpdate = true;
+		itemCode = item.code;
 	}
 
     onMount(async () => {
@@ -149,13 +149,13 @@
 						<span>{item.text}</span>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => itemEditorUpdateClicked(item.code)}
+						<Icon on:click={() => itemEditorUpdateClicked(item)}
 							disabled={itemEditorDisabled}
 							name="edit"
                             outlined/>
 					</td>
 				</tr>
-				{#if itemEditorUpdate && itemEditorUpdateCode === item.code}
+				{#if itemEditorUpdate && itemCode === item.code}
 				<tr>
 					<td colspan="3">
 						<EnumEditor
