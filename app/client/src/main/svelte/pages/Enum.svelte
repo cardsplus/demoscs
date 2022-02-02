@@ -4,7 +4,9 @@
 	import TextField from '../components/TextField';
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
+	import { createValue } from '../utils/rest.js';
 	import { updateValue } from '../utils/rest.js';
+	import { removeValue } from '../utils/rest.js';
 	import EnumEditor from './EnumEditor.svelte';
 
 	export let art;
@@ -63,7 +65,23 @@
 			reloadAllItem();
 		})
 		.catch(err => {
-			console.log(['updateItem', err]);
+			console.log(err);
+			toast.push(err.toString());
+		});
+	};
+
+	function removeItem(item) {
+		if (!confirm("Enum '" + item.name + "' wirklich löschen?")) return;
+		removeValue('/api/enum/' + art + '/' + item.code)
+		.then(() => {
+			return loadAllValue('/api/enum/' + art);
+		})
+		.then(json => {
+			console.log(json);
+			allItem = json;
+		})
+		.catch(err => {
+			console.log(err);
 			toast.push(err.toString());
 		});
 	};
