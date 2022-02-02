@@ -12,6 +12,7 @@
 	import Enum from './pages/Enum.svelte';
 	import Owner from './pages/Owner.svelte';
 	import OwnerViewer from './pages/OwnerViewer.svelte';
+	import PetViewer from './pages/PetViewer.svelte';
 	import Vet from './pages/Vet.svelte';
 	import VetViewer from './pages/VetViewer.svelte';
 	let menuVisible = false;
@@ -55,6 +56,8 @@
 				component="{Owner}" />
 			<Route path="/owner/:id"
 				component="{OwnerViewer}" />
+			<Route path="/pet/:id"
+				component="{PetViewer}" />
 			<Route path="/vet" 
 				component="{Vet}" />
 			<Route path="/vet/:id"

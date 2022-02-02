@@ -168,7 +168,7 @@
 				{/if}
 				{:else}
 				<tr>
-					<td class="px-2 py-3" colspan="4">
+					<td class="px-2 py-3" colspan="3">
 						No items
 					</td>
 				</tr>

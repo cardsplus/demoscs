@@ -17,7 +17,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "pet", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"}),
-        @UniqueConstraint(columnNames = {"name"})
+        @UniqueConstraint(columnNames = {"name","owner_id"})
 })
 public final class Pet extends JsonJpaValueBase<Pet> {
 

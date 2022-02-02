@@ -22,7 +22,7 @@
         <addUniqueConstraint
                 constraintName="uk_pet"
                 tableName="pet"
-                columnNames="name"
+                columnNames="name,owner_id"
         />
         <addForeignKeyConstraint
                 constraintName="fk_pet_owner_id"
