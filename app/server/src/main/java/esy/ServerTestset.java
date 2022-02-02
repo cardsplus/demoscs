@@ -1,20 +1,20 @@
 package esy;
 
 
+import esy.api.client.Owner;
+import esy.api.client.Pet;
+import esy.api.clinic.Vet;
+import esy.api.clinic.Visit;
 import esy.api.info.EnumValue;
+import esy.app.client.OwnerRepository;
+import esy.app.client.PetRepository;
+import esy.app.clinic.VetRepository;
+import esy.app.clinic.VisitRepository;
 import esy.app.info.EnumValueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import scs.api.clinic.Vet;
-import scs.api.clinic.Visit;
-import scs.api.owner.Owner;
-import scs.api.owner.Pet;
-import scs.app.clinic.VetRepository;
-import scs.app.clinic.VisitRepository;
-import scs.app.owner.OwnerRepository;
-import scs.app.owner.PetRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;

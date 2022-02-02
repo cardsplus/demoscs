@@ -1,14 +1,14 @@
-package scs.api.clinic;
+package esy.api.clinic;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.client.Pet;
+import esy.api.client.PetItem;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
-import scs.api.owner.Pet;
-import scs.api.owner.PetItem;
 
 import javax.persistence.*;
 import java.time.LocalDate;

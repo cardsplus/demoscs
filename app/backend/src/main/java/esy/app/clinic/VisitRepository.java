@@ -1,9 +1,9 @@
-package scs.app.clinic;
+package esy.app.clinic;
 
+import esy.api.clinic.Visit;
 import esy.rest.JsonJpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import scs.api.clinic.Visit;
 
 import java.util.List;
 import java.util.UUID;

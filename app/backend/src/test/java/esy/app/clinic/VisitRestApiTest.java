@@ -1,6 +1,8 @@
-package scs.app.clinic;
+package esy.app.clinic;
 
 import esy.app.EndpointConfiguration;
+import esy.app.client.OwnerRepository;
+import esy.app.client.PetRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,8 +20,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import scs.app.owner.OwnerRepository;
-import scs.app.owner.PetRepository;
 
 import javax.transaction.Transactional;
 import java.util.UUID;

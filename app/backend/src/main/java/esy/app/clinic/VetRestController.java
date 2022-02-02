@@ -1,5 +1,7 @@
-package scs.app.clinic;
+package esy.app.clinic;
 
+import esy.api.clinic.Vet;
+import esy.api.clinic.VetItem;
 import esy.rest.JsonJpaRestControllerBase;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
-import scs.api.clinic.Vet;
-import scs.api.clinic.VetItem;
 
 import java.util.ArrayList;
 import java.util.List;

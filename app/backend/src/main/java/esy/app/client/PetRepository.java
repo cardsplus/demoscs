@@ -1,9 +1,9 @@
-package scs.app.owner;
+package esy.app.client;
 
+import esy.api.client.Pet;
 import esy.rest.JsonJpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import scs.api.owner.Pet;
 
 import java.util.List;
 import java.util.Optional;

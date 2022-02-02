@@ -1,4 +1,4 @@
-package scs.app.clinic;
+package esy.app.clinic;
 
 import esy.app.EndpointConfiguration;
 import org.junit.jupiter.api.*;

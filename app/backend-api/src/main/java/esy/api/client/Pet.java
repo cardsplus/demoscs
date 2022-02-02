@@ -1,4 +1,4 @@
-package scs.api.owner;
+package esy.api.client;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
