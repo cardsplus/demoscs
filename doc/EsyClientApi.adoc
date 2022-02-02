@@ -1,10 +1,12 @@
 :projectDir: ..
 :icons: font
-= EsyTeamApi
+= EsyClientApi
 
 == Überblick
 
-Der Dienst ist Teil eines _Self Contained Systems_.
+Mit dem API werden Patienten (engl. pet) einer Tierklinik und ihre Besitzer (engl. owner) verwaltet.
+
+Das API ist Teil eines _Self Contained Systems_.
 
 TIP: Siehe
 https://scs-architecture.org
@@ -35,15 +37,19 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,Team,png]
+[plantuml,Plan,png]
 ----
 !pragma layout smetana
 hide members
 show attributes
-package "team" {
-  class NutzerValue<JsonJpaValueBase> {
-    mail
-  }
+package "client" {
+    class Owner<JsonJpaBase> {
+        name
+    }
+    class Pet<JsonJpaBase> {
+        name
+    }
+    Pet "1" *-- "*" Owner
 }
 ----
 
@@ -77,7 +83,9 @@ TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
 
-include::{projectDir}/app/backend/src/main/java/esy/app/team/NutzerValueRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/client/OwnerRestApi.adoc[leveloffset=+1]
+
+include::{projectDir}/app/backend/src/main/java/esy/app/client/PetRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 

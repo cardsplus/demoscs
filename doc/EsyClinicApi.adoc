@@ -1,14 +1,12 @@
 :projectDir: ..
 :icons: font
-= EsyPlanApi
+= EsyClinicApi
 
 == Überblick
 
-Der Dienst hat die Aufgabe, Projekte zu verwalten.
-Projekte haben einen verantwortlichen Nutzer, den Besitzer.
-Beliebig viele Nutzer (inkl. des Besitzer) sind Projektmitglieder, die Aufgaben in diesem Projekt erledigen.
+Mit dem API werden Tierärzte (engl. vet) und Termine (engl. visits) in einer Tierklinik verwaltet.
 
-Der Dienst ist Teil eines _Self Contained Systems_.
+Das API ist Teil eines _Self Contained Systems_.
 
 TIP: Siehe
 https://scs-architecture.org
@@ -44,18 +42,20 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 !pragma layout smetana
 hide members
 show attributes
-class NutzerValue<JsonJpaValueBase> {
+package "client" {
+    class Pet<JsonJpaBase> {
+        name
+    }
 }
-package "plan" {
-  class AufgabeValue<JsonJpaValueBase> {
-    text
+package "clinic" {
+  class Vet<JsonJpaBase> {
+        name
   }
-  class ProjektValue<JsonJpaValueBase> {
-    name
+  class Visit<JsonJpaBase> {
+        date, text
   }
-  ProjektValue "1" *-- "*" AufgabeValue
-  ProjektValue "1" --> "1" NutzerValue : besitzer
-  ProjektValue "1" --> "*" NutzerValue : mitglied
+  Vet "1" *-- "*" Visit
+  Pet "1" *-- "*" Visit
 }
 ----
 
@@ -89,9 +89,9 @@ TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/clinic/VetRestApi.adoc[leveloffset=+1]
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/clinic/VisitRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 
