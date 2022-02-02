@@ -205,17 +205,20 @@
 					</td>
 					<td class="px-2 py-3">
 						<Icon on:click={() => visitViewerCreateClicked(owner)}
+							title="Show all visits"
 							name="list"
                             outlined/>
 					</td>
 					<td class="px-2 py-3">
 						<Icon on:click={() => visitEditorCreateClicked(owner)}
+							title="Add a new visit"
 							disabled={visitEditorCreate}
-							name="add"
+							name="event"
                             outlined/>
 					</td>
 					<td class="px-2 py-3">
 						<Icon on:click={() => ownerEditorUpdateClicked(owner)}
+							title="Edit owner"
 							disabled={ownerEditorDisabled}
 							name="edit"
                             outlined/>
