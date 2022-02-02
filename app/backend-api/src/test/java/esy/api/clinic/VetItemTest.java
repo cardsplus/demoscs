@@ -1,4 +1,4 @@
-package esy.api.team;
+package esy.api.clinic;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -6,38 +6,36 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("fast")
-public class NutzerItemTest {
+public class VetItemTest {
 
-    NutzerValue createWithName(final String name) {
+    Vet createWithName(final String name) {
         final String json = "{" +
-                "\"mail\": \"" + name + "@a.de\"," +
-                "\"name\":\"" + name + "\"," +
-                "\"aktiv\": \"true\"" +
+                "\"name\":\"" + name + "\"" +
                 "}";
-        return NutzerValue.parseJson(json);
+        return Vet.parseJson(json);
     }
 
     @Test
     void equalsHashcodeToString() {
-        final String name = "Max.Mustermann";
-        final NutzerValue value = createWithName(name);
-        final NutzerItem item0 = NutzerItem.fromValue(value);
+        final String name = "Vet A";
+        final Vet value = createWithName(name);
+        final VetItem item0 = VetItem.fromValue(value);
         // Identisches Objekt
         assertEquals(item0, item0);
         assertEquals(item0.hashCode(), item0.hashCode());
         assertEquals(item0.toString(), item0.toString());
         // Gleiches Objekt
-        final NutzerItem item1 = NutzerItem.fromValue(value);
+        final VetItem item1 = VetItem.fromValue(value);
         assertEquals(item1, item0);
         assertEquals(item1.hashCode(), item0.hashCode());
         assertEquals(item1.toString(), item0.toString());
         // Gleicher Name
-        final NutzerItem item2 = NutzerItem.fromValue(createWithName(name));
+        final VetItem item2 = VetItem.fromValue(createWithName(name));
         assertNotEquals(item2, item0);
         assertNotEquals(item2.hashCode(), item0.hashCode());
         assertEquals(item2.toString(), item0.toString());
         // Anderer Name
-        final NutzerItem item3 = NutzerItem.fromValue(createWithName("X" + name));
+        final VetItem item3 = VetItem.fromValue(createWithName("X" + name));
         assertNotEquals(item3, item0);
         assertNotEquals(item3.hashCode(), item0.hashCode());
         assertNotEquals(item3.toString(), item0.toString());
@@ -49,7 +47,7 @@ public class NutzerItemTest {
 
     @Test
     void ofNull() {
-        final NutzerItem item = NutzerItem.fromValue(null);
+        final VetItem item = VetItem.fromValue(null);
         assertNull(item.getValue());
         assertTrue(item.getText().isEmpty());
         assertFalse(item.isCreate());
@@ -59,11 +57,11 @@ public class NutzerItemTest {
 
     @Test
     void ofValue() {
-        final String name = "Max.Mustermann";
-        final NutzerValue value = createWithName(name);
-        final NutzerItem item = NutzerItem.fromValue(value);
+        final String name = "Vet A";
+        final Vet value = createWithName(name);
+        final VetItem item = VetItem.fromValue(value);
         assertEquals(item.getValue(), value.getId());
-        assertEquals(item.getText(), value.getName() + " <" + value.getMail() + ">");
+        assertEquals(item.getText(), value.getName());
         assertFalse(item.isCreate());
         assertTrue(item.isUpdate());
         assertFalse(item.isDelete());

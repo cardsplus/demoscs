@@ -1,4 +1,4 @@
-package esy.api.plan;
+package esy.api.client;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -6,37 +6,36 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("fast")
-public class ProjektItemTest {
+public class PetItemTest {
 
-    ProjektValue createWithName(final String name) {
+    Pet createWithName(final String name) {
         final String json = "{" +
-                "\"name\":\"" + name + "\"," +
-                "\"aktiv\": \"true\"" +
+                "\"name\":\"" + name + "\"" +
                 "}";
-        return ProjektValue.parseJson(json);
+        return Pet.parseJson(json);
     }
 
     @Test
     void equalsHashcodeToString() {
-        final String name = "Projekt A";
-        final ProjektValue value = createWithName(name);
-        final ProjektItem item0 = ProjektItem.fromValue(value);
+        final String name = "Pet A";
+        final Pet value = createWithName(name);
+        final PetItem item0 = PetItem.fromValue(value);
         // Identisches Objekt
         assertEquals(item0, item0);
         assertEquals(item0.hashCode(), item0.hashCode());
         assertEquals(item0.toString(), item0.toString());
         // Gleiches Objekt
-        final ProjektItem item1 = ProjektItem.fromValue(value);
+        final PetItem item1 = PetItem.fromValue(value);
         assertEquals(item1, item0);
         assertEquals(item1.hashCode(), item0.hashCode());
         assertEquals(item1.toString(), item0.toString());
         // Gleicher Name
-        final ProjektItem item2 = ProjektItem.fromValue(createWithName(name));
+        final PetItem item2 = PetItem.fromValue(createWithName(name));
         assertNotEquals(item2, item0);
         assertNotEquals(item2.hashCode(), item0.hashCode());
         assertEquals(item2.toString(), item0.toString());
         // Anderer Name
-        final ProjektItem item3 = ProjektItem.fromValue(createWithName("X" + name));
+        final PetItem item3 = PetItem.fromValue(createWithName("X" + name));
         assertNotEquals(item3, item0);
         assertNotEquals(item3.hashCode(), item0.hashCode());
         assertNotEquals(item3.toString(), item0.toString());
@@ -48,7 +47,7 @@ public class ProjektItemTest {
 
     @Test
     void ofNull() {
-        final ProjektItem item = ProjektItem.fromValue(null);
+        final PetItem item = PetItem.fromValue(null);
         assertNull(item.getValue());
         assertTrue(item.getText().isEmpty());
         assertFalse(item.isCreate());
@@ -58,9 +57,9 @@ public class ProjektItemTest {
 
     @Test
     void ofValue() {
-        final String name = "Projekt A";
-        final ProjektValue value = createWithName(name);
-        final ProjektItem item = ProjektItem.fromValue(value);
+        final String name = "Pet A";
+        final Pet value = createWithName(name);
+        final PetItem item = PetItem.fromValue(value);
         assertEquals(item.getValue(), value.getId());
         assertEquals(item.getText(), value.getName());
         assertFalse(item.isCreate());

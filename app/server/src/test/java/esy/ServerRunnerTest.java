@@ -4,7 +4,7 @@ import esy.api.client.Owner;
 import esy.api.client.Pet;
 import esy.api.clinic.Vet;
 import esy.api.clinic.Visit;
-import esy.api.team.NutzerValue;
+import esy.api.info.EnumValue;
 import esy.http.RestApiConnection;
 import esy.http.RestApiResult;
 import org.junit.jupiter.api.*;
@@ -68,7 +68,7 @@ public class ServerRunnerTest {
 				toBackendUrl("/api/enum/skill")).get();
 		assertThat(result.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertEquals(3, result.toCollection(NutzerValue.class).size());
+		assertEquals(3, result.toCollection(EnumValue.class).size());
 	}
 
 	@Test
