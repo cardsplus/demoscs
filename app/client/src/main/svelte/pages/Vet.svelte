@@ -8,23 +8,33 @@
 	import { updatePatch } from '../utils/rest.js';
 	import { removeValue } from '../utils/rest.js';
 	import VetEditor from './VetEditor.svelte';
+	import VisitViewer from './VisitViewer.svelte';
 
 	let allVet = [];
 	let vetIndexOf = undefined;
+	let vetId = undefined;
 	function onVetClicked(index) {
-		vetIndexOf = index;
+		vetIndexOf = index;		
+		reloadAllVisit(allVet[index]);
 	}
 
 	let vetEditorCreate = false;
 	let vetEditorUpdate = false;
-	let vetEditorUpdateId = undefined;
 	$: vetEditorDisabled = vetEditorCreate || vetEditorUpdate;
 	function vetEditorCreateClicked() {
 		vetEditorCreate = true;
 	}    
-	function vetEditorUpdateClicked(id) {
-		vetEditorUpdateId = id;
+	function vetEditorUpdateClicked(vet) {
+		vetId = vet.id;
 		vetEditorUpdate = true;
+	}
+	
+	let allVisit = [];
+
+	let visitViewerCreate = false;
+	function visitViewerCreateClicked(vet) {
+		vetId = vet.id;
+		visitViewerCreate = !visitViewerCreate;
 	}
 
     onMount(async () => {
@@ -97,6 +107,18 @@
 			toast.push(err.toString());
 		});
 	};
+
+	function reloadAllVisit(vet) {
+		loadAllValue('/api/visit/search/findAllByVet?vetId=' + vet.id)
+		.then(json => {
+			console.log(json);
+			allVisit = json;
+		})
+		.catch(err => {
+			console.log(err);
+			toast.push(err.toString());
+		});
+	}
 </script>
 
 <h1>Vet <span class="text-sm">({allVetFiltered.length})</span></h1>
@@ -113,6 +135,8 @@
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-2/3">
 						<span class="text-gray-600">Skills</span>
+					</th>
+					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
 						<Icon on:click={() => vetEditorCreateClicked()}
@@ -145,13 +169,30 @@
 						<span>tbd</span>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => vetEditorUpdateClicked(vet.id)}
+						<Icon on:click={() => visitViewerCreateClicked(vet)}
+							title="Show all visits"
+							disabled={vetEditorDisabled}
+							name="list"
+                            outlined/>
+					</td>
+					<td class="px-2 py-3">
+						<Icon on:click={() => vetEditorUpdateClicked(vet)}
+							title="Edit vet details"
 							disabled={vetEditorDisabled}
 							name="edit"
                             outlined/>
 					</td>
 				</tr>
-				{#if vetEditorUpdate && vetEditorUpdateId === vet.id}
+				{#if visitViewerCreate && vetId === vet.id}
+				<tr>
+					<td class="px-4" colspan="6">
+						<VisitViewer
+							bind:visible={visitViewerCreate} 
+							{allVisit}/>
+					<td>
+				</tr>
+				{/if}
+				{#if vetEditorUpdate && vetId === vet.id}
 				<tr>
 					<td	colspan="3">
 						<VetEditor
