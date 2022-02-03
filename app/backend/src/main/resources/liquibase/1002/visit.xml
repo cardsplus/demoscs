@@ -16,7 +16,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="text" type="VARCHAR(512)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="pet_id" type="UUID">
                 <constraints nullable="true"/>
@@ -25,6 +25,11 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
+        <addUniqueConstraint
+                constraintName="uk_visit"
+                tableName="visit"
+                columnNames="date,pet_id"
+        />
         <addForeignKeyConstraint
                 constraintName="fk_visit_pet_id"
                 baseTableName="visit"
