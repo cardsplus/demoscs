@@ -28,6 +28,11 @@ public final class Owner extends JsonJpaEntity<Owner> {
     @JsonProperty
     private String address;
 
+    @Column(name = "contact")
+    @Getter
+    @JsonProperty
+    private String contact;
+
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "owner",
@@ -42,6 +47,7 @@ public final class Owner extends JsonJpaEntity<Owner> {
         super();
         this.name = "";
         this.address = "";
+        this.contact = "";
         this.allPet = new LinkedHashSet<>();
     }
 
@@ -49,6 +55,7 @@ public final class Owner extends JsonJpaEntity<Owner> {
         super(version, id);
         this.name = "";
         this.address = "";
+        this.contact = "";
         this.allPet = new LinkedHashSet<>();
     }
 
@@ -67,6 +74,7 @@ public final class Owner extends JsonJpaEntity<Owner> {
         }
         return this.name.equals(that.name) &&
                 this.address.equals(that.address) &&
+                this.contact.equals(that.contact) &&
                 this.allPet.equals(that.allPet);
     }
 
@@ -91,6 +99,7 @@ public final class Owner extends JsonJpaEntity<Owner> {
         final Owner value = new Owner(getVersion(), id);
         value.name = this.name;
         value.address = this.address;
+        value.contact = this.contact;
         value.allPet = this.allPet;
         return value;
     }

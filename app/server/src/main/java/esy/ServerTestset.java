@@ -130,19 +130,23 @@ public class ServerTestset implements CommandLineRunner {
         return Stream.of(
                         Owner.parseJson("{" +
                                 "\"name\":\"Thomas Mann\"," +
-                                "\"address\":\"110 W. Liberty St.\"" +
+                                "\"address\":\"110 W. Liberty St.\"," +
+                                "\"contact\":\"+43 660 5551023\"" +
                                 "}"),
                         Owner.parseJson("{" +
                                 "\"name\":\"Stefan Zweig\"," +
-                                "\"address\":\"638 Cardinal Ave.\"" +
+                                "\"address\":\"638 Cardinal Ave.\"," +
+                                "\"contact\":\"+43 660 5551749\"" +
                                 "}"),
                         Owner.parseJson("{" +
                                 "\"name\":\"Wolfgang A. Mozart\"," +
-                                "\"address\":\"2387 S. Fair Way\"" +
+                                "\"address\":\"2387 S. Fair Way\"," +
+                                "\"contact\":\"+43 660 5552765\"" +
                                 "}"),
                         Owner.parseJson("{" +
                                 "\"name\":\"Arthur Conan Doyle\"," +
-                                "\"address\":\"1450 Oak Blvd.\"" +
+                                "\"address\":\"1450 Oak Blvd.\"," +
+                                "\"contact\":\"+43 660 5555387\"" +
                                 "}"))
                 .map(ownerRepository::save)
                 .collect(Collectors.toMap(Owner::getName, identity()));
