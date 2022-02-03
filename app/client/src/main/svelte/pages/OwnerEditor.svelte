@@ -14,7 +14,7 @@
         contact: undefined
     }
 
-    $: disabled = !newOwner.name;
+    $: disabled = !newOwner.name || !newOwner.address || !newOwner.contact;
     $: if (owner) onChange()
     function onChange() {
         showUpdate = true;

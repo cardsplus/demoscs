@@ -11,13 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PetTest {
 
-	static Pet createWithName(final String name) {
-		final String json = "{" +
+	Pet createWithName(final String name) {
+		return Pet.parseJson("{" +
 				"\"name\":\"" + name + "\"," +
 				"\"born\":\"2021-04-22\"," +
 				"\"species\":\"Cat\"" +
-				"}";
-		return Pet.parseJson(json);
+				"}");
 	}
 
 	@Test
@@ -30,20 +29,19 @@ public class PetTest {
 		assertEquals(value.hashCode(), value.hashCode());
 		assertEquals(value.toString(), value.toString());
 		// Gleiches Objekt
-		final Pet clone = Pet.parseJson(value.writeJson());
-		assertTrue(clone.isEqual(value));
-		assertEquals(clone.hashCode(), value.hashCode());
-		assertEquals(clone.toString(), value.toString());
-		// Gleicher Text
-		assertNotEquals(createWithName(name), value);
-		assertTrue(value.isEqual(createWithName(name)));
-		assertNotEquals(createWithName(name).hashCode(), value.hashCode());
-		assertNotEquals(createWithName(name).toString(), value.toString());
-		// Anderer Text
-		assertNotEquals(createWithName("X" + name), value);
-		assertFalse(value.isEqual(createWithName("X" + name)));
-		assertNotEquals(createWithName("X" + name).hashCode(), value.hashCode());
-		assertNotEquals(createWithName("X" + name).toString(), value.toString());
+		final Pet clone = createWithName(name);
+		assertNotSame(value, clone);
+		assertNotEquals(clone, value);
+		assertTrue(value.isEqual(clone));
+		assertNotEquals(clone.hashCode(), value.hashCode());
+		assertNotEquals(clone.toString(), value.toString());
+		// Anderes Objekt
+		final Pet other = createWithName("X" + name);
+		assertNotSame(value, other);
+		assertNotEquals(other, value);
+		assertFalse(value.isEqual(other));
+		assertNotEquals(other.hashCode(), value.hashCode());
+		assertNotEquals(other.toString(), value.toString());
 		// Kein Objekt
 		assertNotEquals(value, null);
 		assertFalse(value.isEqual(null));
@@ -60,30 +58,6 @@ public class PetTest {
 		final Pet value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
-	}
-
-	@ParameterizedTest
-	@ValueSource(strings = {
-			"metaId",
-			"metaCreated",
-			"garbage"
-	})
-	void jsonGarbage(final String key) {
-		final String name = "Tom";
-		final String json = "{" +
-				"\"" + key + "\": \"" + name + "\"," +
-				"\"name\":\"" + name + "\"," +
-				"\"born\":\"2021-04-22\"," +
-				"\"species\":\"Cat\"" +
-				"}";
-		final Pet value = Pet.parseJson(json);
-		assertDoesNotThrow(value::verify);
-		assertNotNull(value.getId());
-		assertEquals(name, value.getName());
-		assertEquals(2021, value.getBorn().getYear());
-		assertEquals(Month.APRIL, value.getBorn().getMonth());
-		assertEquals(22, value.getBorn().getDayOfMonth());
-		assertEquals("Cat", value.getSpecies());
 	}
 
 	@Test

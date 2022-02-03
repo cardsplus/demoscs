@@ -9,36 +9,31 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VetItemTest {
 
     Vet createWithName(final String name) {
-        final String json = "{" +
+        return Vet.parseJson("{" +
                 "\"name\":\"" + name + "\"" +
-                "}";
-        return Vet.parseJson(json);
+                "}");
     }
 
     @Test
     void equalsHashcodeToString() {
-        final String name = "Max Mustermann";
-        final Vet value = createWithName(name);
-        final VetItem item0 = VetItem.fromValue(value);
+        final String name = "Tom";
+        final VetItem value = VetItem.fromValue(createWithName(name));
         // Identisches Objekt
         assertEquals(value, value);
         assertEquals(value.hashCode(), value.hashCode());
         assertEquals(value.toString(), value.toString());
         // Gleiches Objekt
-        final VetItem item1 = VetItem.fromValue(value);
-        assertEquals(item1, item0);
-        assertEquals(item1.hashCode(), item0.hashCode());
-        assertEquals(item1.toString(), item0.toString());
-        // Gleicher Name
-        final VetItem item2 = VetItem.fromValue(createWithName(name));
-        assertNotEquals(item2, item0);
-        assertNotEquals(item2.hashCode(), item0.hashCode());
-        assertEquals(item2.toString(), item0.toString());
-        // Anderer Name
-        final VetItem item3 = VetItem.fromValue(createWithName("X" + name));
-        assertNotEquals(item3, item0);
-        assertNotEquals(item3.hashCode(), item0.hashCode());
-        assertNotEquals(item3.toString(), item0.toString());
+        final VetItem clone = VetItem.fromValue(createWithName(name));
+        assertNotSame(value, clone);
+        assertNotEquals(clone, value);
+        assertNotEquals(clone.hashCode(), value.hashCode());
+        assertEquals(clone.toString(), value.toString());
+        // Anderes Objekt
+        final VetItem other = VetItem.fromValue(createWithName("X" + name));
+        assertNotSame(value, other);
+        assertNotEquals(other, value);
+        assertNotEquals(other.hashCode(), value.hashCode());
+        assertNotEquals(other.toString(), value.toString());
         // Kein Objekt
         assertNotEquals(value, null);
         // Falsches Objekt
