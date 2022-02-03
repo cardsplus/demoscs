@@ -90,8 +90,8 @@ class VisitRestApiTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
+            "2021-04-20",
             "2021-04-21",
-            "2021-04-22",
             "2021-04-22"
     })
     @Order(20)
@@ -120,6 +120,23 @@ class VisitRestApiTest {
                         .value(date))
                 .andExpect(jsonPath("$.text")
                         .exists());
+    }
+
+    @Test
+    @Order(21)
+    void postApiVisitConflict() throws Exception {
+        mockMvc.perform(post("/api/visit")
+                        .content("{" +
+                                "\"pet\":\"/api/pet/c1111111-1111-beef-dead-beefdeadbeef\"," +
+                                "\"vet\":\"/api/vet/d1111111-1111-beef-dead-beefdeadbeef\"," +
+                                "\"date\":\"2021-04-22\"," +
+                                "\"text\":\"Lorem ipsum.\"" +
+                                "}")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isConflict());
     }
 
     @Test
@@ -186,14 +203,6 @@ class VisitRestApiTest {
                         .string("ETag", "\"1\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
-                .andExpect(jsonPath("$.petItem.value")
-                        .value("c1111111-1111-beef-dead-beefdeadbeef"))
-                .andExpect(jsonPath("$.petItem.text")
-                        .value("Dog 'Odi'"))
-                .andExpect(jsonPath("$.vetItem.value")
-                        .value("d1111111-1111-beef-dead-beefdeadbeef"))
-                .andExpect(jsonPath("$.vetItem.text")
-                        .value("Alex Fleming"))
                 .andExpect(jsonPath("$.date")
                         .value(date));
     }
@@ -221,16 +230,6 @@ class VisitRestApiTest {
                         .string("ETag", "\"2\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
-                .andExpect(jsonPath("$.petItem.value")
-                        .value("c1111111-1111-beef-dead-beefdeadbeef"))
-                .andExpect(jsonPath("$.petItem.text")
-                        .value("Dog 'Odi'"))
-                .andExpect(jsonPath("$.vetItem.value")
-                        .value("d1111111-1111-beef-dead-beefdeadbeef"))
-                .andExpect(jsonPath("$.vetItem.text")
-                        .value("Alex Fleming"))
-                .andExpect(jsonPath("$.date")
-                        .exists())
                 .andExpect(jsonPath("$.text")
                         .value(text));
     }
@@ -262,11 +261,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.petItem.text")
                         .value("Cat 'Tom'"))
                 .andExpect(jsonPath("$.vetItem.value")
-                        .value("d1111111-1111-beef-dead-beefdeadbeef"))
-                .andExpect(jsonPath("$.vetItem.text")
-                        .value("Alex Fleming"))
-                .andExpect(jsonPath("$.date")
-                        .value("2021-04-24"));
+                        .value("d1111111-1111-beef-dead-beefdeadbeef"));
     }
 
     @Test
@@ -314,11 +309,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.petItem.text")
                         .value("Cat 'Tom'"))
                 .andExpect(jsonPath("$.vetItem.value")
-                        .value("d2222222-2222-beef-dead-beefdeadbeef"))
-                .andExpect(jsonPath("$.vetItem.text")
-                        .value("Phillip Dick"))
-                .andExpect(jsonPath("$.date")
-                        .value("2021-04-24"));
+                        .value("d2222222-2222-beef-dead-beefdeadbeef"));
     }
 
     @Test
@@ -359,9 +350,9 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.content[1].date")
                         .value("2021-04-22"))
                 .andExpect(jsonPath("$.content[2].date")
-                        .value("2021-04-22"))
-                .andExpect(jsonPath("$.content[3].date")
                         .value("2021-04-21"))
+                .andExpect(jsonPath("$.content[3].date")
+                        .value("2021-04-20"))
                 .andExpect(jsonPath("$.content[4]")
                         .doesNotExist());
     }
@@ -421,9 +412,9 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.content[1].date")
                         .value("2021-04-22"))
                 .andExpect(jsonPath("$.content[2].date")
-                        .value("2021-04-22"))
-                .andExpect(jsonPath("$.content[3].date")
                         .value("2021-04-21"))
+                .andExpect(jsonPath("$.content[3].date")
+                        .value("2021-04-20"))
                 .andExpect(jsonPath("$.content[4]")
                         .doesNotExist());
     }

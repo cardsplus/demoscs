@@ -19,7 +19,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "visit", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"id"})
+        @UniqueConstraint(columnNames = {"id"}),
+        @UniqueConstraint(columnNames = {"date","pet_id"})
 })
 public final class Visit extends JsonJpaEntity<Visit> {
 
