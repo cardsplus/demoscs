@@ -4,11 +4,11 @@ package esy;
 import esy.api.info.EnumValue;
 import esy.api.plan.AufgabeValue;
 import esy.api.plan.ProjektValue;
-import esy.api.team.NutzerValue;
+import esy.api.team.Nutzer;
 import esy.app.info.EnumValueRepository;
 import esy.app.plan.AufgabeValueRepository;
 import esy.app.plan.ProjektValueRepository;
-import esy.app.team.NutzerValueRepository;
+import esy.app.team.NutzerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -43,7 +43,7 @@ public class ServerTestset implements CommandLineRunner {
     private EnumValueRepository enumValueRepository;
 
     @Autowired
-    private NutzerValueRepository nutzerValueRepository;
+    private NutzerRepository nutzerValueRepository;
 
     @Autowired
     private ProjektValueRepository projektValueRepository;
@@ -58,7 +58,7 @@ public class ServerTestset implements CommandLineRunner {
         final Map<String, EnumValue> allEnumSprache = createAllEnumSprache();
         allEnumSprache.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final Map<String, NutzerValue> allNutzer = createAllNutzer();
+        final Map<String, Nutzer> allNutzer = createAllNutzer();
         allNutzer.values().forEach(e -> log.info("CREATED [{}]", e));
 
         final Map<String, ProjektValue> allProjekt = createAllProjekt(allNutzer);
@@ -97,56 +97,56 @@ public class ServerTestset implements CommandLineRunner {
     }
 
     @Transactional
-    private Map<String, NutzerValue> createAllNutzer() {
+    private Map<String, Nutzer> createAllNutzer() {
         return Stream.of(
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"bruckbauer@gmx.at" + "\"," +
                                         "\"name\": \"Robert Bruckbauer\"," +
                                         "\"allSprache\": [\"DE\", \"EN\"]," +
                                         "\"aktiv\": \"true\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"brombertje@gmail.com" + "\"," +
                                         "\"name\": \"Bertram Bär\"," +
                                         "\"allSprache\": [\"DE\", \"EN\"]," +
                                         "\"aktiv\": \"true\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"max.mustermann@firma.de" + "\"," +
                                         "\"name\": \"Max Mustermann\"," +
                                         "\"allSprache\": [\"DE\", \"EN\"]," +
                                         "\"aktiv\": \"true\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"mia.musterfrau@firma.de" + "\"," +
                                         "\"name\": \"Mia Musterfrau\"," +
                                         "\"allSprache\": [\"DE\", \"IT\"]," +
                                         "\"aktiv\": \"true\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"szweig@gmail.com" + "\"," +
                                         "\"name\": \"Stefan Zweig\"," +
                                         "\"allSprache\": [\"DE\"]," +
                                         "\"aktiv\": \"false\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"mozart@gmail.com" + "\"," +
                                         "\"name\": \"Wolfgang A. Mozart\"," +
                                         "\"allSprache\": [\"DE\"]," +
                                         "\"aktiv\": \"false\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"doyle@gmail.com" + "\"," +
                                         "\"name\": \"Arthur Conan Doyle\"," +
                                         "\"allSprache\": [\"EN\"]," +
                                         "\"aktiv\": \"false\"" +
                                         "}"))
                 .map(nutzerValueRepository::save)
-                .collect(Collectors.toMap(NutzerValue::getMail, identity()));
+                .collect(Collectors.toMap(Nutzer::getMail, identity()));
     }
 
     @Transactional
-    private Map<String, ProjektValue> createAllProjekt(final Map<String, NutzerValue> allNutzer) {
+    private Map<String, ProjektValue> createAllProjekt(final Map<String, Nutzer> allNutzer) {
         return Stream.of(
                         ProjektValue.parseJson("{" +
                                         "\"name\": \"Projekt Alpha\"," +

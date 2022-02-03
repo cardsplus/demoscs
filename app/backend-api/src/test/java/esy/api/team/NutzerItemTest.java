@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("fast")
 public class NutzerItemTest {
 
-    NutzerValue createWithName(final String name) {
-        return NutzerValue.parseJson("{" +
+    Nutzer createWithName(final String name) {
+        return Nutzer.parseJson("{" +
                 "\"version\": \"1\"," +
                 "\"mail\": \"" + name + "@a.de\"," +
                 "\"name\":\"" + name + "\"," +
@@ -57,7 +57,7 @@ public class NutzerItemTest {
     @Test
     void ofValue() {
         final String name = "Max.Mustermann";
-        final NutzerValue value = createWithName(name);
+        final Nutzer value = createWithName(name);
         final NutzerItem item = NutzerItem.fromValue(value);
         assertEquals(item.getValue(), value.getId());
         assertEquals(item.getText(), value.getName() + " <" + value.getMail() + ">");

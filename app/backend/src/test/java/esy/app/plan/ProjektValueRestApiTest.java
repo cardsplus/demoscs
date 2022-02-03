@@ -1,8 +1,8 @@
 package esy.app.plan;
 
 import esy.api.plan.ProjektValue;
-import esy.api.team.NutzerValue;
-import esy.app.team.NutzerValueRepository;
+import esy.api.team.Nutzer;
+import esy.app.team.NutzerRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -42,7 +42,7 @@ public class ProjektValueRestApiTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private NutzerValueRepository nutzerValueRepository;
+    private NutzerRepository nutzerValueRepository;
 
     @Autowired
     private ProjektValueRepository projektValueRepository;
@@ -371,7 +371,7 @@ public class ProjektValueRestApiTest {
     @Test
     @Order(35)
     void putApiProjektBesitzer() throws Exception {
-        final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
+        final Nutzer nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
@@ -390,7 +390,7 @@ public class ProjektValueRestApiTest {
     @Test
     @Order(36)
     void deleteApiProjektBesitzerConflict() throws Exception {
-        final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
+        final Nutzer nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
@@ -408,7 +408,7 @@ public class ProjektValueRestApiTest {
     @Transactional
     @Rollback(false)
     void putApiProjektMitglied() throws Exception {
-        final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
+        final Nutzer nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
@@ -429,7 +429,7 @@ public class ProjektValueRestApiTest {
     @Transactional
     @Rollback(false)
     void deleteApiProjektMitglied() throws Exception {
-        final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
+        final Nutzer nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))

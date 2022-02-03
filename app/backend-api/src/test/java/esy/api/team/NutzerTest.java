@@ -5,16 +5,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NutzerValueTest {
+public class NutzerTest {
 
-	NutzerValue createWithName(final String name) {
-		return NutzerValue.parseJson("{" +
+	Nutzer createWithName(final String name) {
+		return Nutzer.parseJson("{" +
 				"\"version\": \"1\"," +
 				"\"mail\": \"" + name + "@a.de\"," +
 				"\"name\":\"" + name + "\"," +
@@ -26,21 +25,21 @@ public class NutzerValueTest {
 	@Test
 	void equalsHashcodeToString() {
 		final String name = "Max Mustermann";
-		final NutzerValue value = createWithName(name);
+		final Nutzer value = createWithName(name);
 		// Identisches Objekt
 		assertEquals(value, value);
 		assertTrue(value.isEqual(value));
 		assertEquals(value.hashCode(), value.hashCode());
 		assertEquals(value.toString(), value.toString());
 		// Gleiches Objekt
-		final NutzerValue clone = createWithName(name);
+		final Nutzer clone = createWithName(name);
 		assertNotSame(clone, value);
 		assertNotEquals(clone, value);
 		assertTrue(clone.isEqual(value));
 		assertNotEquals(clone.hashCode(), value.hashCode());
 		assertNotEquals(clone.toString(), value.toString());
 		// Anderes Objekt
-		final NutzerValue other = createWithName("X" + name);
+		final Nutzer other = createWithName("X" + name);
 		assertNotSame(other, value);
 		assertNotEquals(other, value);
 		assertFalse(value.isEqual(other));
@@ -56,10 +55,10 @@ public class NutzerValueTest {
 	@Test
 	void withId() {
 		final String name = "Max.Mustermann";
-		final NutzerValue value0 = createWithName(name);
-		final NutzerValue value1 = value0.withId(value0.getId());
+		final Nutzer value0 = createWithName(name);
+		final Nutzer value1 = value0.withId(value0.getId());
 		assertSame(value0, value1);
-		final NutzerValue value2 = value0.withId(UUID.randomUUID());
+		final Nutzer value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
 	}
@@ -67,7 +66,7 @@ public class NutzerValueTest {
 	@Test
 	void json() {
 		final String name = "Max Mustermann";
-		final NutzerValue value = createWithName(name);
+		final Nutzer value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
 		assertNotNull(value.getId());
@@ -92,14 +91,14 @@ public class NutzerValueTest {
 			"{\"name\": \"\\t\", \"mail\": \"me@a.de\"}"
 	})
 	void jsonConstraints(final String json) {
-		final NutzerValue value = NutzerValue.parseJson(json);
+		final Nutzer value = Nutzer.parseJson(json);
 		assertThrows(IllegalArgumentException.class, value::verify);
 	}
 
 	@Test
 	public void jsonSprache() {
 		final String name = "Max Mustermann";
-		final NutzerValue value = createWithName(name);
+		final Nutzer value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name + "@a.de", value.getMail());
 		assertEquals(name, value.getName());

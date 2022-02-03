@@ -1,6 +1,6 @@
 package esy.api.plan;
 
-import esy.api.team.NutzerValue;
+import esy.api.team.Nutzer;
 import esy.api.team.Sprache;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -96,7 +96,7 @@ public class ProjektValueTest {
 		assertDoesNotThrow(value::verify);
 		assertNull(value.getBesitzer());
 
-		final NutzerValue nutzer = NutzerValue.parseJson("{" +
+		final Nutzer nutzer = Nutzer.parseJson("{" +
 				"\"mail\": \"Max.Mustermann@a.de\"," +
 				"\"name\": \"Max Mustermann\"" +
 				"}");
@@ -117,7 +117,7 @@ public class ProjektValueTest {
 		assertEquals(name, value.getName());
 		assertEquals(0, value.getAllMitglied().size());
 
-		final NutzerValue nutzer = NutzerValue.parseJson("{" +
+		final Nutzer nutzer = Nutzer.parseJson("{" +
 				"\"mail\": \"Max.Mustermann@a.de\"," +
 				"\"name\": \"Max Mustermann\"" +
 				"}");

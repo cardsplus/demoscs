@@ -3,8 +3,8 @@ package esy.api.plan;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.team.Nutzer;
 import esy.api.team.NutzerItem;
-import esy.api.team.NutzerValue;
 import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
@@ -54,7 +54,7 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
     @JoinColumn(name = "besitzer_id", referencedColumnName = "id")
     @Getter
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private NutzerValue besitzer;
+    private Nutzer besitzer;
 
     /**
      * Projektmitglieder.
@@ -67,7 +67,7 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
             inverseJoinColumns = @JoinColumn(name = "nutzer_id", referencedColumnName = "id"))
     @Getter
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Set<NutzerValue> allMitglied;
+    private Set<Nutzer> allMitglied;
 
     /**
      * Projektbezogene Aufgaben.
@@ -158,13 +158,13 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
     }
 
     @JsonIgnore
-    public ProjektValue setBesitzer(final NutzerValue besitzer) {
+    public ProjektValue setBesitzer(final Nutzer besitzer) {
         this.besitzer = besitzer;
         return this;
     }
 
     @JsonIgnore
-    public ProjektValue addMitglied(@NonNull final NutzerValue mitglied) {
+    public ProjektValue addMitglied(@NonNull final Nutzer mitglied) {
         allMitglied.add(mitglied);
         return this;
     }

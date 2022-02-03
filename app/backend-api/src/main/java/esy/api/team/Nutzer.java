@@ -15,7 +15,7 @@ import java.util.*;
         @UniqueConstraint(columnNames = {"id"}),
         @UniqueConstraint(columnNames = {"mail"})
 })
-public final class NutzerValue extends JsonJpaEntity<NutzerValue> {
+public final class Nutzer extends JsonJpaEntity<Nutzer> {
 
     /**
      * Eindeutige E-Mail-Adresse des Nutzers.
@@ -55,7 +55,7 @@ public final class NutzerValue extends JsonJpaEntity<NutzerValue> {
     @JsonProperty
     private SortedSet<String> allSprache;
 
-    NutzerValue() {
+    Nutzer() {
         super();
         this.mail = "";
         this.name = "";
@@ -63,7 +63,7 @@ public final class NutzerValue extends JsonJpaEntity<NutzerValue> {
         this.allSprache = new TreeSet<>();
     }
 
-    NutzerValue(@NonNull final Long version, @NonNull final UUID id) {
+    Nutzer(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.mail = "";
         this.name = "";
@@ -77,7 +77,7 @@ public final class NutzerValue extends JsonJpaEntity<NutzerValue> {
     }
 
     @Override
-    public boolean isEqual(final NutzerValue that) {
+    public boolean isEqual(final Nutzer that) {
         if (this == that) {
             return true;
         }
@@ -91,7 +91,7 @@ public final class NutzerValue extends JsonJpaEntity<NutzerValue> {
     }
 
     @Override
-    public NutzerValue verify() {
+    public Nutzer verify() {
         if (mail.isBlank()) {
             throw new IllegalArgumentException("mail is blank");
         }
@@ -102,11 +102,11 @@ public final class NutzerValue extends JsonJpaEntity<NutzerValue> {
     }
 
     @Override
-    public NutzerValue withId(@NonNull final UUID id) {
+    public Nutzer withId(@NonNull final UUID id) {
         if (Objects.equals(getId(), id)) {
             return this;
         }
-        final NutzerValue value = new NutzerValue(getVersion(), id);
+        final Nutzer value = new Nutzer(getVersion(), id);
         value.mail = this.mail;
         value.name = this.name;
         value.aktiv = this.aktiv;
@@ -126,7 +126,7 @@ public final class NutzerValue extends JsonJpaEntity<NutzerValue> {
         return new JsonMapper().writeJson(this);
     }
 
-    public static NutzerValue parseJson(@NonNull final String json) {
-        return new JsonMapper().parseJson(json, NutzerValue.class);
+    public static Nutzer parseJson(@NonNull final String json) {
+        return new JsonMapper().parseJson(json, Nutzer.class);
     }
 }

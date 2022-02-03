@@ -36,7 +36,7 @@ public class NutzerItem implements JsonJpaItem<UUID> {
         this.text = "";
     }
 
-    NutzerItem(@NonNull final NutzerValue value) {
+    NutzerItem(@NonNull final Nutzer value) {
         this.value = value.getId();
         this.text = value.getName() + " <" + value.getMail() + ">";
     }
@@ -46,7 +46,7 @@ public class NutzerItem implements JsonJpaItem<UUID> {
         return text;
     }
 
-    public static NutzerItem fromValue(final NutzerValue value) {
+    public static NutzerItem fromValue(final Nutzer value) {
         if (value != null) {
             return new NutzerItem(value);
         } else {
