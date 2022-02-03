@@ -42,20 +42,22 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 !pragma layout smetana
 hide members
 show attributes
+enum SKILL
 package "client" {
-    class Pet<JsonJpaBase> {
+    class Pet<JPA> {
         name
     }
 }
 package "clinic" {
-  class Vet<JsonJpaBase> {
+    class Vet<JPA> {
         name
-  }
-  class Visit<JsonJpaBase> {
+    }
+    class Visit<JPA> {
         date, text
-  }
-  Vet "1" *-- "*" Visit
-  Pet "1" *-- "*" Visit
+    }
+    Vet "1" *-- "*" Visit
+    Vet -- SKILL
+    Pet "1" *-- "*" Visit
 }
 ----
 
