@@ -43,7 +43,7 @@ public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
     @JoinColumn(name = "projekt_id", referencedColumnName = "id")
     @Getter
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private ProjektValue projekt;
+    private Projekt projekt;
 
     AufgabeValue() {
         super();
@@ -106,7 +106,7 @@ public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
     }
 
     @JsonIgnore
-    public AufgabeValue setProjekt(final ProjektValue projekt) {
+    public AufgabeValue setProjekt(final Projekt projekt) {
         this.projekt = projekt;
         return this;
     }

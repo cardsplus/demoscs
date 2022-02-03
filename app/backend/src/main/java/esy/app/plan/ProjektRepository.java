@@ -1,6 +1,6 @@
 package esy.app.plan;
 
-import esy.api.plan.ProjektValue;
+import esy.api.plan.Projekt;
 import esy.rest.JsonJpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RepositoryRestResource(path = "projekt", collectionResourceRel = "allProjekt")
-public interface ProjektValueRepository extends JsonJpaRepository<ProjektValue> {
+public interface ProjektRepository extends JsonJpaRepository<Projekt> {
 
     /**
      * Returns all persisted values ordered by {@code text} column.
      *
      * @return persisted values
      */
-    List<ProjektValue> findAllByOrderByNameAsc();
+    List<Projekt> findAllByOrderByNameAsc();
 
     /**
      * Returns a persisted value with given unique name
@@ -25,5 +25,5 @@ public interface ProjektValueRepository extends JsonJpaRepository<ProjektValue> 
      * @param name unique name
      * @return persisted value or nothing
      */
-    Optional<ProjektValue> findByName(@Param("name") String name);
+    Optional<Projekt> findByName(@Param("name") String name);
 }

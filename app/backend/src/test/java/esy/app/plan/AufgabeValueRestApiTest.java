@@ -1,7 +1,7 @@
 package esy.app.plan;
 
 import esy.api.plan.AufgabeValue;
-import esy.api.plan.ProjektValue;
+import esy.api.plan.Projekt;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -42,7 +42,7 @@ public class AufgabeValueRestApiTest {
     private AufgabeValueRepository aufgabeValueRepository;
 
     @Autowired
-    private ProjektValueRepository projektValueRepository;
+    private ProjektRepository projektRepository;
 
     @BeforeEach
     void setUp(final WebApplicationContext webApplicationContext,
@@ -116,7 +116,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(20)
     void postApiAufgabe() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String text = "Aufgabe A";
         assertEquals(0, aufgabeValueRepository.findAll().stream()
@@ -153,7 +153,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(21)
     void postApiAufgabeAgain() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String text = "Aufgabe A";
         assertEquals(1, aufgabeValueRepository.findAll().stream()
@@ -190,7 +190,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(22)
     void postApiAufgabeDefault() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String text = "Aufgabe B";
         assertEquals(0, aufgabeValueRepository.findAll().stream()
@@ -226,7 +226,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(30)
     void putApiAufgabe() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
@@ -260,7 +260,7 @@ public class AufgabeValueRestApiTest {
     @RepeatedTest(5)
     @Order(31)
     void putApiAufgabeAgain(final RepetitionInfo info) throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
@@ -293,7 +293,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(32)
     void putApiAufgabeDefault() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
@@ -325,7 +325,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(33)
     void putApiAufgabeAktiv() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
@@ -358,7 +358,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(34)
     void putApiAufgabeProjekt() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("b2222222-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("b2222222-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final AufgabeValue aufgabe0 = aufgabeValueRepository.findById(UUID.fromString(uuid))
@@ -380,7 +380,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(35)
     void deleteApiAufgabeProjekt() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("b2222222-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("b2222222-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final AufgabeValue aufgabe0 = aufgabeValueRepository.findById(UUID.fromString(uuid))

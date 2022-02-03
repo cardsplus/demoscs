@@ -3,11 +3,11 @@ package esy;
 
 import esy.api.info.EnumValue;
 import esy.api.plan.AufgabeValue;
-import esy.api.plan.ProjektValue;
+import esy.api.plan.Projekt;
 import esy.api.team.Nutzer;
 import esy.app.info.EnumValueRepository;
 import esy.app.plan.AufgabeValueRepository;
-import esy.app.plan.ProjektValueRepository;
+import esy.app.plan.ProjektRepository;
 import esy.app.team.NutzerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +43,15 @@ public class ServerTestset implements CommandLineRunner {
     private EnumValueRepository enumValueRepository;
 
     @Autowired
-    private NutzerRepository nutzerValueRepository;
+    private NutzerRepository nutzerRepository;
 
     @Autowired
-    private ProjektValueRepository projektValueRepository;
+    private ProjektRepository projektRepository;
 
     @Override
     @Transactional
     public void run(final String... args) throws Exception {
-        if (nutzerValueRepository.count() != 0) {
+        if (nutzerRepository.count() != 0) {
             return;
         }
 
@@ -61,7 +61,7 @@ public class ServerTestset implements CommandLineRunner {
         final Map<String, Nutzer> allNutzer = createAllNutzer();
         allNutzer.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final Map<String, ProjektValue> allProjekt = createAllProjekt(allNutzer);
+        final Map<String, Projekt> allProjekt = createAllProjekt(allNutzer);
         allProjekt.values().forEach(e -> log.info("CREATED [{}]", e));
 
         final List<AufgabeValue> allAufgabe = createAllAufgabe(allProjekt);
@@ -141,21 +141,21 @@ public class ServerTestset implements CommandLineRunner {
                                         "\"allSprache\": [\"EN\"]," +
                                         "\"aktiv\": \"false\"" +
                                         "}"))
-                .map(nutzerValueRepository::save)
+                .map(nutzerRepository::save)
                 .collect(Collectors.toMap(Nutzer::getMail, identity()));
     }
 
     @Transactional
-    private Map<String, ProjektValue> createAllProjekt(final Map<String, Nutzer> allNutzer) {
+    private Map<String, Projekt> createAllProjekt(final Map<String, Nutzer> allNutzer) {
         return Stream.of(
-                        ProjektValue.parseJson("{" +
+                        Projekt.parseJson("{" +
                                         "\"name\": \"Projekt Alpha\"," +
                                         "\"sprache\": \"DE\"," +
                                         "\"aktiv\": \"true\"" +
                                         "}")
                                 .setBesitzer(allNutzer.get("max.mustermann@firma.de"))
                                 .addMitglied(allNutzer.get("max.mustermann@firma.de")),
-                        ProjektValue.parseJson("{" +
+                        Projekt.parseJson("{" +
                                         "\"name\": \"Projekt Beta\"," +
                                         "\"sprache\": \"DE\"," +
                                         "\"aktiv\": \"true\"" +
@@ -166,14 +166,14 @@ public class ServerTestset implements CommandLineRunner {
                                 .addMitglied(allNutzer.get("szweig@gmail.com"))
                                 .addMitglied(allNutzer.get("mozart@gmail.com"))
                                 .addMitglied(allNutzer.get("doyle@gmail.com")),
-                        ProjektValue.parseJson("{" +
+                        Projekt.parseJson("{" +
                                         "\"name\": \"Projekt Gamma\"," +
                                         "\"sprache\": \"EN\"," +
                                         "\"aktiv\": \"true\"" +
                                         "}")
                                 .setBesitzer(allNutzer.get("bruckbauer@gmx.at")))
-                .map(projektValueRepository::save)
-                .collect(Collectors.toMap(ProjektValue::getName, identity()));
+                .map(projektRepository::save)
+                .collect(Collectors.toMap(Projekt::getName, identity()));
     }
 
     private AufgabeValue createLoremIpsumAufgabe(final int index) {
@@ -185,7 +185,7 @@ public class ServerTestset implements CommandLineRunner {
     }
 
     @Transactional
-    private List<AufgabeValue> createAllAufgabe(final Map<String, ProjektValue> allProjekt) {
+    private List<AufgabeValue> createAllAufgabe(final Map<String, Projekt> allProjekt) {
         return Stream.of(
                         createLoremIpsumAufgabe(0)
                                 .setProjekt(allProjekt.get("Projekt Alpha")),

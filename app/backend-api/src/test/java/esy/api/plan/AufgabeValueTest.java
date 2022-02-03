@@ -87,7 +87,7 @@ public class AufgabeValueTest {
 		assertDoesNotThrow(value::verify);
 		assertNull(value.getProjekt());
 
-		final ProjektValue projekt = ProjektValue.parseJson("{" +
+		final Projekt projekt = Projekt.parseJson("{" +
 				"\"name\": \"Projekt A\"" +
 				"}");
 		value.setProjekt(projekt);

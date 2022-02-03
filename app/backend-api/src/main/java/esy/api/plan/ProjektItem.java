@@ -36,7 +36,7 @@ public class ProjektItem implements JsonJpaItem<UUID> {
         this.text = "";
     }
 
-    ProjektItem(@NonNull final ProjektValue value) {
+    ProjektItem(@NonNull final Projekt value) {
         this.value = value.getId();
         this.text = value.getName();
     }
@@ -46,7 +46,7 @@ public class ProjektItem implements JsonJpaItem<UUID> {
         return text;
     }
 
-    public static ProjektItem fromValue(final ProjektValue value) {
+    public static ProjektItem fromValue(final Projekt value) {
         if (value != null) {
             return new ProjektItem(value);
         } else {

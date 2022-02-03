@@ -10,10 +10,10 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ProjektValueTest {
+public class ProjektTest {
 
-	ProjektValue createWithName(final String name) {
-		return ProjektValue.parseJson("{" +
+	Projekt createWithName(final String name) {
+		return Projekt.parseJson("{" +
 				"\"version\": \"1\"," +
 				"\"name\": \"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
@@ -26,21 +26,21 @@ public class ProjektValueTest {
 	@Test
 	void equalsHashcodeToString() {
 		final String name = "Projekt A";
-		final ProjektValue value = createWithName(name);
+		final Projekt value = createWithName(name);
 		// Identisches Objekt
 		assertEquals(value, value);
 		assertTrue(value.isEqual(value));
 		assertEquals(value.hashCode(), value.hashCode());
 		assertEquals(value.toString(), value.toString());
 		// Gleiches Objekt
-		final ProjektValue clone = createWithName(name);
+		final Projekt clone = createWithName(name);
 		assertNotSame(clone, value);
 		assertNotEquals(clone, value);
 		assertTrue(clone.isEqual(value));
 		assertNotEquals(clone.hashCode(), value.hashCode());
 		assertNotEquals(clone.toString(), value.toString());
 		// Anderes Objekt
-		final ProjektValue other = createWithName("X" + name);
+		final Projekt other = createWithName("X" + name);
 		assertNotSame(other, value);
 		assertNotEquals(other, value);
 		assertFalse(value.isEqual(other));
@@ -56,10 +56,10 @@ public class ProjektValueTest {
 	@Test
 	void withId() {
 		final String name = "Projekt A";
-		final ProjektValue value0 = createWithName(name);
-		final ProjektValue value1 = value0.withId(value0.getId());
+		final Projekt value0 = createWithName(name);
+		final Projekt value1 = value0.withId(value0.getId());
 		assertSame(value0, value1);
-		final ProjektValue value2 = value0.withId(UUID.randomUUID());
+		final Projekt value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
 	}
@@ -67,7 +67,7 @@ public class ProjektValueTest {
 	@Test
 	void json() {
 		final String name = "Projekt A";
-		final ProjektValue value = createWithName(name);
+		final Projekt value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
 		assertNotNull(value.getId());
@@ -85,14 +85,14 @@ public class ProjektValueTest {
 			"{\"aktiv\": \"false\"}"
 	})
 	void jsonConstraints(final String json) {
-		final ProjektValue value = ProjektValue.parseJson(json);
+		final Projekt value = Projekt.parseJson(json);
 		assertThrows(IllegalArgumentException.class, value::verify);
 	}
 
 	@Test
 	public void jsonBesitzer() {
 		final String name = "Projekt A";
-		final ProjektValue value = createWithName(name);
+		final Projekt value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertNull(value.getBesitzer());
 
@@ -112,7 +112,7 @@ public class ProjektValueTest {
 	@Test
 	public void jsonMitglied() {
 		final String name = "Projekt A";
-		final ProjektValue value = createWithName(name);
+		final Projekt value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name, value.getName());
 		assertEquals(0, value.getAllMitglied().size());
@@ -136,7 +136,7 @@ public class ProjektValueTest {
 	@Test
 	public void jsonAufgabe() {
 		final String name = "Projekt A";
-		final ProjektValue value = createWithName(name);
+		final Projekt value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name, value.getName());
 		assertEquals(0, value.getAllMitglied().size());

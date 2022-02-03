@@ -1,7 +1,7 @@
 package esy;
 
 import esy.api.plan.AufgabeValue;
-import esy.api.plan.ProjektValue;
+import esy.api.plan.Projekt;
 import esy.api.team.Nutzer;
 import esy.http.RestApiConnection;
 import esy.http.RestApiResult;
@@ -179,7 +179,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result1a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
-		final ProjektValue value1 = result1a.toObject(ProjektValue.class);
+		final Projekt value1 = result1a.toObject(Projekt.class);
 		assertEquals(1L, value1.getVersion());
 		assertNotNull(value1.getId());
 		assertEquals(name, value1.getName());
@@ -201,7 +201,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result2a.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final ProjektValue value2 = result2a.toObject(ProjektValue.class);
+		final Projekt value2 = result2a.toObject(Projekt.class);
 		assertEquals(2L, value2.getVersion());
 		assertNotNull(value2.getId());
 		assertEquals(name, value2.getName());
@@ -212,7 +212,7 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result3a.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final List<ProjektValue> allValue2a = result3a.toCollection(ProjektValue.class);
+		final List<Projekt> allValue2a = result3a.toCollection(Projekt.class);
 		assertEquals(4, allValue2a.size());
 		assertEquals(1, allValue2a.stream()
 				.filter(e -> value2.getId().equals(e.getId()))
@@ -223,14 +223,14 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result3b.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertTrue(value2.isEqual(result3b.toObject(ProjektValue.class)));
+		assertTrue(value2.isEqual(result3b.toObject(Projekt.class)));
 
 		final RestApiResult result3c = RestApiConnection.with(
 				toBackendUrl("/api/projekt/search/findByName?name=" + URLEncoder.encode(name, UTF_8)))
 				.get();
 		assertThat(result3c.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertTrue(value2.isEqual(result3c.toObject(ProjektValue.class)));
+		assertTrue(value2.isEqual(result3c.toObject(Projekt.class)));
 
 		final RestApiResult result3d = RestApiConnection.with(
 				toBackendUrl("/api/projekt/" + value2.getId() + "/besitzer"))
@@ -269,10 +269,10 @@ public class ServerRunnerTest {
 		final String name = "Projekt Gamma";
 		final String text = "Aufgabe A";
 
-		final ProjektValue projekt = RestApiConnection.with(
+		final Projekt projekt = RestApiConnection.with(
 				toBackendUrl("/api/projekt/search/findByName?name=" + URLEncoder.encode(name, UTF_8)))
 				.get()
-				.toObject(ProjektValue.class);
+				.toObject(Projekt.class);
 
 		final RestApiResult result1a = RestApiConnection.with(
 				toBackendUrl("/api/aufgabe"))

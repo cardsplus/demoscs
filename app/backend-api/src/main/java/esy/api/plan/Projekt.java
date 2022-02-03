@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
         @UniqueConstraint(columnNames = {"id"}),
         @UniqueConstraint(columnNames = {"name"})
 })
-public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
+public final class Projekt extends JsonJpaEntity<Projekt> {
 
     /**
      * Eindeutiger Name des Projekts.
@@ -82,7 +82,7 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AufgabeValue> allAufgabe;
 
-    ProjektValue() {
+    Projekt() {
         super();
         this.name = "";
         this.aktiv = true;
@@ -92,7 +92,7 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
         this.allAufgabe = new LinkedHashSet<>();
     }
 
-    ProjektValue(@NonNull final Long version, @NonNull final UUID id) {
+    Projekt(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.name = "";
         this.aktiv = true;
@@ -108,7 +108,7 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
     }
 
     @Override
-    public boolean isEqual(final ProjektValue that) {
+    public boolean isEqual(final Projekt that) {
         if (this == that) {
             return true;
         }
@@ -124,7 +124,7 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
     }
 
     @Override
-    public ProjektValue verify() {
+    public Projekt verify() {
         if (name.isBlank()) {
             throw new IllegalArgumentException("name is blank");
         }
@@ -132,11 +132,11 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
     }
 
     @Override
-    public ProjektValue withId(@NonNull final UUID id) {
+    public Projekt withId(@NonNull final UUID id) {
         if (Objects.equals(getId(), id)) {
             return this;
         }
-        final ProjektValue value = new ProjektValue(getVersion(), id);
+        final Projekt value = new Projekt(getVersion(), id);
         value.name = this.name;
         value.aktiv = this.aktiv;
         value.sprache = this.sprache;
@@ -158,19 +158,19 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
     }
 
     @JsonIgnore
-    public ProjektValue setBesitzer(final Nutzer besitzer) {
+    public Projekt setBesitzer(final Nutzer besitzer) {
         this.besitzer = besitzer;
         return this;
     }
 
     @JsonIgnore
-    public ProjektValue addMitglied(@NonNull final Nutzer mitglied) {
+    public Projekt addMitglied(@NonNull final Nutzer mitglied) {
         allMitglied.add(mitglied);
         return this;
     }
 
     @JsonIgnore
-    public ProjektValue addAufgabe(@NonNull final AufgabeValue aufgabe) {
+    public Projekt addAufgabe(@NonNull final AufgabeValue aufgabe) {
         allAufgabe.add(aufgabe);
         return this;
     }
@@ -180,7 +180,7 @@ public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
         return new JsonMapper().writeJson(this);
     }
 
-    public static ProjektValue parseJson(@NonNull final String json) {
-        return new JsonMapper().parseJson(json, ProjektValue.class);
+    public static Projekt parseJson(@NonNull final String json) {
+        return new JsonMapper().parseJson(json, Projekt.class);
     }
 }
