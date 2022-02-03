@@ -170,6 +170,7 @@ public class ServerRunnerTest {
 				.post("{" +
 						"\"owner\":\"/api/owner/" + owner.getId() + "\"," +
 						"\"name\":\"Alf\"," +
+						"\"born\":\"2021-04-22\"," +
 						"\"species\":\"Alien\"" +
 						"}");
 		assertThat(result1a.getCode(),
@@ -178,6 +179,9 @@ public class ServerRunnerTest {
 		assertEquals(0L, value1.getVersion());
 		assertNotNull(value1.getId());
 		assertEquals("Alf", value1.getName());
+		assertEquals(2021, value1.getBorn().getYear());
+		assertEquals(Month.APRIL, value1.getBorn().getMonth());
+		assertEquals(22, value1.getBorn().getDayOfMonth());
 		assertEquals("Alien", value1.getSpecies());
 
 		final RestApiResult result1b = RestApiConnection.with(
@@ -185,6 +189,7 @@ public class ServerRunnerTest {
 				.post("{" +
 						"\"owner\":\"/api/owner/" + owner.getId() + "\"," +
 						"\"name\":\"Alf\"," +
+						"\"born\":\"2021-04-22\"," +
 						"\"species\":\"Alien\"" +
 						"}");
 		assertThat(result1b.getCode(),
@@ -195,6 +200,7 @@ public class ServerRunnerTest {
 				.put("{" +
 						"\"owner\":\"/api/owner/" + owner.getId() + "\"," +
 						"\"name\":\"Max\"," +
+						"\"born\":\"2021-04-22\"," +
 						"\"species\":\"Rat\"" +
 						"}");
 		assertThat(result2a.getCode(),
@@ -204,6 +210,9 @@ public class ServerRunnerTest {
 		assertEquals(1L, value2.getVersion());
 		assertNotNull(value2.getId());
 		assertEquals("Max", value2.getName());
+		assertEquals(2021, value2.getBorn().getYear());
+		assertEquals(Month.APRIL, value2.getBorn().getMonth());
+		assertEquals(22, value2.getBorn().getDayOfMonth());
 		assertEquals("Rat", value2.getSpecies());
 
 		final RestApiResult result3a = RestApiConnection.with(

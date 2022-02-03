@@ -149,16 +149,19 @@ public class ServerTestset implements CommandLineRunner {
         return Stream.of(
                         Pet.parseJson("{" +
                                         "\"name\": \"Tom\"," +
+                                        "\"born\": \"2021-04-01\"," +
                                         "\"species\": \"Cat\"" +
                                         "}")
                                 .setOwner(allOwner.get("Thomas Mann")),
                         Pet.parseJson("{" +
                                         "\"name\": \"Odi\"," +
+                                        "\"born\": \"2021-04-02\"," +
                                         "\"species\": \"Dog\"" +
                                         "}")
                                 .setOwner(allOwner.get("Thomas Mann")),
                         Pet.parseJson("{" +
                                         "\"name\": \"Fox\"," +
+                                        "\"born\": \"2021-04-03\"," +
                                         "\"species\": \"Rat\"" +
                                         "}")
                                 .setOwner(allOwner.get("Stefan Zweig")))

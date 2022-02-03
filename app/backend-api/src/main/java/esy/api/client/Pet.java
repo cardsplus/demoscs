@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -25,6 +26,11 @@ public final class Pet extends JsonJpaEntity<Pet> {
     @Getter
     @JsonProperty
     private String name;
+
+    @Column(name = "born")
+    @Getter
+    @JsonProperty
+    private LocalDate born;
 
     @Column(name = "species")
     @Getter
@@ -43,6 +49,7 @@ public final class Pet extends JsonJpaEntity<Pet> {
     Pet() {
         super();
         this.name = "";
+        this.born = LocalDate.of(2000, 1, 1);
         this.species = "";
         this.owner = null;
     }
@@ -50,6 +57,7 @@ public final class Pet extends JsonJpaEntity<Pet> {
     Pet(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.name = "";
+        this.born = LocalDate.of(2000, 1, 1);
         this.species = "";
         this.owner = null;
     }
@@ -68,6 +76,7 @@ public final class Pet extends JsonJpaEntity<Pet> {
             return false;
         }
         return this.name.equals(that.name) &&
+                this.born.equals(that.born) &&
                 this.species.equals(that.species) &&
                 Objects.equals(this.owner, that.owner);
     }
@@ -92,6 +101,7 @@ public final class Pet extends JsonJpaEntity<Pet> {
         }
         final Pet value = new Pet(getVersion(), id);
         value.name = this.name;
+        value.born = this.born;
         value.species = this.species;
         value.owner = this.owner;
         return value;
