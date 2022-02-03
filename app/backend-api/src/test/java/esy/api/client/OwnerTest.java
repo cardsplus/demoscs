@@ -13,7 +13,8 @@ public class OwnerTest {
 	static Owner createWithName(final String name) {
 		final String json = "{" +
 				"\"name\":\"" + name + "\"," +
-				"\"address\":\"Bergweg 1, 5400 Hallein\"" +
+				"\"address\":\"Bergweg 1, 5400 Hallein\"," +
+				"\"contact\":\"+43 660 5557683\"" +
 				"}";
 		return Owner.parseJson(json);
 	}
@@ -71,13 +72,15 @@ public class OwnerTest {
 		final String json = "{" +
 				"\"" + key + "\": \"" + name + "\"," +
 				"\"name\":\"" + name + "\"," +
-				"\"address\":\"Bergweg 1, 5400 Hallein\"" +
+				"\"address\":\"Bergweg 1, 5400 Hallein\"," +
+				"\"contact\":\"+43 660 5557683\"" +
 				"}";
 		final Owner value = Owner.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
 		assertFalse(value.getAddress().isBlank());
+		assertFalse(value.getContact().isBlank());
 	}
 
 	@Test
@@ -88,6 +91,7 @@ public class OwnerTest {
 		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
 		assertFalse(value.getAddress().isBlank());
+		assertFalse(value.getContact().isBlank());
 	}
 
 	@ParameterizedTest

@@ -81,7 +81,8 @@ class OwnerRestApiTest {
         mockMvc.perform(post("/api/owner")
                         .content("{" +
                                 "\"name\":\"" + name + "\"," +
-                                "\"address\":\"Bergweg 1, 5400 Hallein\"" +
+                                "\"address\":\"Bergweg 1, 5400 Hallein\"," +
+                                "\"contact\":\"+43 6452 4456\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -99,6 +100,8 @@ class OwnerRestApiTest {
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.address")
+                        .isNotEmpty())
+                .andExpect(jsonPath("$.contact")
                         .isNotEmpty());
     }
 
@@ -110,7 +113,8 @@ class OwnerRestApiTest {
         mockMvc.perform(post("/api/owner")
                         .content("{" +
                                 "\"name\":\"" + name + "\"," +
-                                "\"address\":\"Bergweg 1, 5400 Hallein\"" +
+                                "\"address\":\"Bergweg 1, 5400 Hallein\"," +
+                                "\"contact\":\"+43 6452 4456\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -128,7 +132,8 @@ class OwnerRestApiTest {
         mockMvc.perform(put("/api/owner/" + uuid)
                         .content("{" +
                                 "\"name\":\"" + name + "\"," +
-                                "\"address\":\"Bergweg 1, 5400 Hallein\"" +
+                                "\"address\":\"Bergweg 1, 5400 Hallein\"," +
+                                "\"contact\":\"+43 6452 4456\"" +
                                "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -146,6 +151,8 @@ class OwnerRestApiTest {
                 .andExpect(jsonPath("$.name")
                         .value(name))
                 .andExpect(jsonPath("$.address")
+                        .isNotEmpty())
+                .andExpect(jsonPath("$.contact")
                         .isNotEmpty());
     }
 
@@ -207,6 +214,36 @@ class OwnerRestApiTest {
                         .value(uuid))
                 .andExpect(jsonPath("$.address")
                         .value(address));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "me@we.com",
+            "+43 6452 4456"
+    })
+    @Order(33)
+    void patchApiOwnerContact(final String contact) throws Exception {
+        final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
+        assertTrue(ownerRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(patch("/api/owner/" + uuid)
+                        .content("{" +
+                                "\"contact\": \"" + contact + "\"" +
+                                "}")
+                        .contentType(MediaType.parseMediaType("application/merge-patch+json"))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(header()
+                        .exists("ETag"))
+                .andExpect(jsonPath("$.id")
+                        .value(uuid))
+                .andExpect(jsonPath("$.contact")
+                        .value(contact));
     }
 
     @Test
@@ -271,7 +308,7 @@ class OwnerRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"4\""))
+                        .string("ETag", "\"6\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
@@ -308,7 +345,7 @@ class OwnerRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"4\""))
+                        .string("ETag", "\"6\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
