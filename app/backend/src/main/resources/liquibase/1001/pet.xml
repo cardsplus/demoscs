@@ -15,6 +15,9 @@
             <column name="name" type="VARCHAR(512)">
                 <constraints nullable="false"/>
             </column>
+            <column name="born" type="DATE">
+                <constraints nullable="false"/>
+            </column>
             <column name="owner_id" type="UUID">
                 <constraints nullable="false"/>
             </column>

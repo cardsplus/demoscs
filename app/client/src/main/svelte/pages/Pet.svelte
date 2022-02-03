@@ -106,10 +106,10 @@
                     <span class="text-gray-600">Name</span>
                 </th>
                 <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
-                    <span class="text-gray-600">Species</span>
+                    <span class="text-gray-600">Born</span>
                 </th>
                 <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
-                    <span class="text-gray-600">Birth</span>
+                    <span class="text-gray-600">Species</span>
                 </th>
                 <th class="px-2 py-3 border-b-2 border-gray-300 w-16">
                     <Icon on:click={() => petEditorCreateClicked()}
@@ -141,10 +141,10 @@
                     </div>
                 </td>
                 <td class="px-2 py-3 text-left">
-                    <span>{pet.species}</span>
+                    <span>{pet.born}</span>
                 </td>
                 <td class="px-2 py-3 text-left">
-                    <span>tbd</span>
+                    <span>{pet.species}</span>
                 </td>
                 <td class="px-2 py-3">
                     <Icon on:click={() => petEditorUpdateClicked(pet)}

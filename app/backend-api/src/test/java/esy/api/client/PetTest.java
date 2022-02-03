@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.Month;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +14,8 @@ public class PetTest {
 	static Pet createWithName(final String name) {
 		final String json = "{" +
 				"\"name\":\"" + name + "\"," +
-				"\"species\":\"cat\"" +
+				"\"born\":\"2021-04-22\"," +
+				"\"species\":\"Cat\"" +
 				"}";
 		return Pet.parseJson(json);
 	}
@@ -71,13 +73,17 @@ public class PetTest {
 		final String json = "{" +
 				"\"" + key + "\": \"" + name + "\"," +
 				"\"name\":\"" + name + "\"," +
-				"\"species\":\"cat\"" +
+				"\"born\":\"2021-04-22\"," +
+				"\"species\":\"Cat\"" +
 				"}";
 		final Pet value = Pet.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
-		assertEquals("cat", value.getSpecies());
+		assertEquals(2021, value.getBorn().getYear());
+		assertEquals(Month.APRIL, value.getBorn().getMonth());
+		assertEquals(22, value.getBorn().getDayOfMonth());
+		assertEquals("Cat", value.getSpecies());
 	}
 
 	@Test
@@ -87,7 +93,10 @@ public class PetTest {
 		assertDoesNotThrow(value::verify);
 		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
-		assertEquals("cat", value.getSpecies());
+		assertEquals(2021, value.getBorn().getYear());
+		assertEquals(Month.APRIL, value.getBorn().getMonth());
+		assertEquals(22, value.getBorn().getDayOfMonth());
+		assertEquals("Cat", value.getSpecies());
 	}
 
 	@ParameterizedTest
