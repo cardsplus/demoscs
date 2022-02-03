@@ -91,7 +91,7 @@ für mehr Informationen.
 
 include::{projectDir}/app/backend/src/main/java/esy/app/plan/ProjektRestApi.adoc[leveloffset=+1]
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/plan/AufgabeRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 

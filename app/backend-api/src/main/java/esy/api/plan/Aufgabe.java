@@ -15,7 +15,7 @@ import java.util.*;
 @Table(name = "aufgabe", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"})
 })
-public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
+public final class Aufgabe extends JsonJpaEntity<Aufgabe> {
 
     /**
      * Beschreibung der Aufgabe.
@@ -45,14 +45,14 @@ public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Projekt projekt;
 
-    AufgabeValue() {
+    Aufgabe() {
         super();
         this.text = "";
         this.aktiv = true;
         this.projekt = null;
     }
 
-    AufgabeValue(@NonNull final Long version, @NonNull final UUID id) {
+    Aufgabe(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.text = "";
         this.aktiv = true;
@@ -65,7 +65,7 @@ public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
     }
 
     @Override
-    public boolean isEqual(final AufgabeValue that) {
+    public boolean isEqual(final Aufgabe that) {
         if (this == that) {
             return true;
         }
@@ -78,7 +78,7 @@ public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
     }
 
     @Override
-    public AufgabeValue verify() {
+    public Aufgabe verify() {
         if (text.isBlank()) {
             throw new IllegalArgumentException("text is blank");
         }
@@ -86,11 +86,11 @@ public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
     }
 
     @Override
-    public AufgabeValue withId(@NonNull final UUID id) {
+    public Aufgabe withId(@NonNull final UUID id) {
         if (Objects.equals(getId(), id)) {
             return this;
         }
-        final AufgabeValue value = new AufgabeValue(getVersion(), id);
+        final Aufgabe value = new Aufgabe(getVersion(), id);
         value.text = this.text;
         value.aktiv = this.aktiv;
         value.projekt = this.projekt;
@@ -106,7 +106,7 @@ public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
     }
 
     @JsonIgnore
-    public AufgabeValue setProjekt(final Projekt projekt) {
+    public Aufgabe setProjekt(final Projekt projekt) {
         this.projekt = projekt;
         return this;
     }
@@ -116,7 +116,7 @@ public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
         return new JsonMapper().writeJson(this);
     }
 
-    public static AufgabeValue parseJson(@NonNull final String json) {
-        return new JsonMapper().parseJson(json, AufgabeValue.class);
+    public static Aufgabe parseJson(@NonNull final String json) {
+        return new JsonMapper().parseJson(json, Aufgabe.class);
     }
 }

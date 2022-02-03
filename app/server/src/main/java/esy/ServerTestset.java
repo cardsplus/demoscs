@@ -2,11 +2,11 @@ package esy;
 
 
 import esy.api.info.EnumValue;
-import esy.api.plan.AufgabeValue;
+import esy.api.plan.Aufgabe;
 import esy.api.plan.Projekt;
 import esy.api.team.Nutzer;
 import esy.app.info.EnumValueRepository;
-import esy.app.plan.AufgabeValueRepository;
+import esy.app.plan.AufgabeRepository;
 import esy.app.plan.ProjektRepository;
 import esy.app.team.NutzerRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ public class ServerTestset implements CommandLineRunner {
     );
 
     @Autowired
-    private AufgabeValueRepository aufgabeValueRepository;
+    private AufgabeRepository aufgabeRepository;
 
     @Autowired
     private EnumValueRepository enumValueRepository;
@@ -64,7 +64,7 @@ public class ServerTestset implements CommandLineRunner {
         final Map<String, Projekt> allProjekt = createAllProjekt(allNutzer);
         allProjekt.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final List<AufgabeValue> allAufgabe = createAllAufgabe(allProjekt);
+        final List<Aufgabe> allAufgabe = createAllAufgabe(allProjekt);
         allAufgabe.forEach(e -> log.info("CREATED [{}]", e));
     }
 
@@ -176,16 +176,16 @@ public class ServerTestset implements CommandLineRunner {
                 .collect(Collectors.toMap(Projekt::getName, identity()));
     }
 
-    private AufgabeValue createLoremIpsumAufgabe(final int index) {
+    private Aufgabe createLoremIpsumAufgabe(final int index) {
         final String text = allLoremIpsum.get(index);
-        return AufgabeValue.parseJson("{" +
+        return Aufgabe.parseJson("{" +
                         "\"text\": \"" + text + "\"," +
                         "\"aktiv\": \"true\"" +
                         "}");
     }
 
     @Transactional
-    private List<AufgabeValue> createAllAufgabe(final Map<String, Projekt> allProjekt) {
+    private List<Aufgabe> createAllAufgabe(final Map<String, Projekt> allProjekt) {
         return Stream.of(
                         createLoremIpsumAufgabe(0)
                                 .setProjekt(allProjekt.get("Projekt Alpha")),
@@ -201,7 +201,7 @@ public class ServerTestset implements CommandLineRunner {
                                 .setProjekt(allProjekt.get("Projekt Alpha")),
                         createLoremIpsumAufgabe(6)
                                 .setProjekt(allProjekt.get("Projekt Alpha")),
-                        AufgabeValue.parseJson("{" +
+                        Aufgabe.parseJson("{" +
                                         "\"text\": \"" +
                                         "Bis 100:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
                                         "Bis 200:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
@@ -213,7 +213,7 @@ public class ServerTestset implements CommandLineRunner {
                                         "\"aktiv\": \"true\"" +
                                         "}")
                                 .setProjekt(allProjekt.get("Projekt Beta")))
-                .map(aufgabeValueRepository::save)
+                .map(aufgabeRepository::save)
                 .collect(Collectors.toList());
     }
 }

@@ -1,6 +1,6 @@
 package esy;
 
-import esy.api.plan.AufgabeValue;
+import esy.api.plan.Aufgabe;
 import esy.api.plan.Projekt;
 import esy.api.team.Nutzer;
 import esy.http.RestApiConnection;
@@ -283,7 +283,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result1a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
-		final AufgabeValue value1 = result1a.toObject(AufgabeValue.class);
+		final Aufgabe value1 = result1a.toObject(Aufgabe.class);
 		assertEquals(0L, value1.getVersion());
 		assertNotNull(value1.getId());
 		assertEquals(text, value1.getText());
@@ -295,7 +295,7 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result1b.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final List<AufgabeValue> allValue1 = result1b.toCollection(AufgabeValue.class);
+		final List<Aufgabe> allValue1 = result1b.toCollection(Aufgabe.class);
 		assertEquals(1, allValue1.size());
 		assertEquals(1, allValue1.stream()
 				.filter(e -> e.getId().equals(value1.getId()))
@@ -310,7 +310,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result2a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
-		final AufgabeValue value2 = result2a.toObject(AufgabeValue.class);
+		final Aufgabe value2 = result2a.toObject(Aufgabe.class);
 		assertEquals(0L, value2.getVersion());
 		assertNotNull(value2.getId());
 		assertEquals(text, value2.getText());
@@ -322,7 +322,7 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result2b.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final List<AufgabeValue> allValue2 = result2b.toCollection(AufgabeValue.class);
+		final List<Aufgabe> allValue2 = result2b.toCollection(Aufgabe.class);
 		assertEquals(2, allValue2.size());
 		assertEquals(1, allValue2.stream()
 				.filter(e -> e.getId().equals(value2.getId()))

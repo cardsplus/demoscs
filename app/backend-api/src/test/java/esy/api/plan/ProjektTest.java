@@ -141,7 +141,7 @@ public class ProjektTest {
 		assertEquals(name, value.getName());
 		assertEquals(0, value.getAllMitglied().size());
 
-		final AufgabeValue aufgabe = AufgabeValue.parseJson("{" +
+		final Aufgabe aufgabe = Aufgabe.parseJson("{" +
 				"\"version\": \"1\"," +
 				"\"text\": \"Lorem ipsum.\"," +
 				"\"aktiv\": \"false\"" +

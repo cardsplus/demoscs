@@ -8,10 +8,10 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AufgabeValueTest {
+public class AufgabeTest {
 
-	static AufgabeValue createWithText(final String text) {
-		return AufgabeValue.parseJson("{" +
+	static Aufgabe createWithText(final String text) {
+		return Aufgabe.parseJson("{" +
 				"\"version\": \"1\"," +
 				"\"text\": \"" + text + "\"," +
 				"\"aktiv\": \"false\"" +
@@ -21,20 +21,20 @@ public class AufgabeValueTest {
 	@Test
 	void equalsHashcodeToString() {
 		final String text = "Aufgabe A";
-		final AufgabeValue value = createWithText(text);
+		final Aufgabe value = createWithText(text);
 		// Identisches Objekt
 		assertEquals(value, value);
 		assertTrue(value.isEqual(value));
 		assertEquals(value.hashCode(), value.hashCode());
 		assertEquals(value.toString(), value.toString());
 		// Gleiches Objekt
-		final AufgabeValue clone = createWithText(text);
+		final Aufgabe clone = createWithText(text);
 		assertNotSame(clone, value);
 		assertTrue(clone.isEqual(value));
 		assertNotEquals(clone.hashCode(), value.hashCode());
 		assertNotEquals(clone.toString(), value.toString());
 		// Anderes Objekt
-		final AufgabeValue other = createWithText("X" + text);
+		final Aufgabe other = createWithText("X" + text);
 		assertNotSame(other, value);
 		assertNotEquals(other, value);
 		assertFalse(value.isEqual(other));
@@ -50,10 +50,10 @@ public class AufgabeValueTest {
 	@Test
 	void withId() {
 		final String text = "Aufgabe A";
-		final AufgabeValue value0 = createWithText(text);
-		final AufgabeValue value1 = value0.withId(value0.getId());
+		final Aufgabe value0 = createWithText(text);
+		final Aufgabe value1 = value0.withId(value0.getId());
 		assertSame(value0, value1);
-		final AufgabeValue value2 = value0.withId(UUID.randomUUID());
+		final Aufgabe value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
 	}
@@ -61,7 +61,7 @@ public class AufgabeValueTest {
 	@Test
 	void json() {
 		final String text = "Aufgabe A";
-		final AufgabeValue value = createWithText(text);
+		final Aufgabe value = createWithText(text);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
 		assertNotNull(value.getId());
@@ -76,14 +76,14 @@ public class AufgabeValueTest {
 			"{\"aktiv\": \"false\"}"
 	})
 	void jsonConstraints(final String json) {
-		final AufgabeValue value = AufgabeValue.parseJson(json);
+		final Aufgabe value = Aufgabe.parseJson(json);
 		assertThrows(IllegalArgumentException.class, value::verify);
 	}
 
 	@Test
 	public void jsonProjekt() {
 		final String text = "Aufgabe A";
-		final AufgabeValue value = createWithText(text);
+		final Aufgabe value = createWithText(text);
 		assertDoesNotThrow(value::verify);
 		assertNull(value.getProjekt());
 

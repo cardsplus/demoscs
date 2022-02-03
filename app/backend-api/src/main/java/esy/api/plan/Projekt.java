@@ -80,7 +80,7 @@ public final class Projekt extends JsonJpaEntity<Projekt> {
     )
     @Getter
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Set<AufgabeValue> allAufgabe;
+    private Set<Aufgabe> allAufgabe;
 
     Projekt() {
         super();
@@ -170,7 +170,7 @@ public final class Projekt extends JsonJpaEntity<Projekt> {
     }
 
     @JsonIgnore
-    public Projekt addAufgabe(@NonNull final AufgabeValue aufgabe) {
+    public Projekt addAufgabe(@NonNull final Aufgabe aufgabe) {
         allAufgabe.add(aufgabe);
         return this;
     }
