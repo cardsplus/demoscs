@@ -214,7 +214,7 @@
 			<tbody>
 				{#if ownerEditorCreate}
 				<tr>
-					<td colspan="6">
+					<td class="px-4" colspan="6">
 						<OwnerEditor
 							bind:visible={ownerEditorCreate} 
 							on:create={e => createOwner(e.detail)}/>

@@ -51,21 +51,25 @@
 	function reloadAllItem() {
 		loadAllValue('/api/enum/' + art)
 		.then(json => {
-			console.log(['reloadAllItem', json]);
+			console.log(['createItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(['reloadAllItem', err]);
+			console.log(['createItem', err]);
 			toast.push(err.toString());
 		});
 	};
 	function updateItem(item) {
 		updateValue('/api/enum/' + art + '/' + item.code, item)
 		.then(() => {
-			reloadAllItem();
+			return loadAllValue('/api/enum/' + art);
+		})
+		.then(json => {
+			console.log(['updateItem', json]);
+			allItem = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['updateItem', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -77,11 +81,11 @@
 			return loadAllValue('/api/enum/' + art);
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['removeItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['removeItem', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -162,7 +166,7 @@
 				{/if}
 				{:else}
 				<tr>
-					<td class="px-2 py-3" colspan="3">
+					<td class="px-2 py-3" colspan="4">
 						No items
 					</td>
 				</tr>

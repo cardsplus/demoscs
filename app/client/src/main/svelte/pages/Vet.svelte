@@ -136,7 +136,7 @@
 						<span class="text-gray-600">Name</span>
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-2/3">
-						<span class="text-gray-600">Skills</span>
+						<span class="text-gray-600">Special Skills</span>
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
 					</th>
@@ -151,7 +151,7 @@
 			<tbody>
 				{#if vetEditorCreate}
 				<tr>
-					<td colspan="3">
+					<td class="px-4" colspan="3">
 						<VetEditor
 							bind:visible={vetEditorCreate} 
 							on:create={e => createVet(e.detail)}/>
@@ -173,7 +173,7 @@
 							<span>{skill}</span>
 						</div>
 						{:else}
-						<span>No special skills</span>
+						<span>No skills</span>
 						{/each}
 					</td>
 					<td class="px-2 py-3">
@@ -202,7 +202,7 @@
 				{/if}
 				{#if vetEditorUpdate && vetId === vet.id}
 				<tr>
-					<td	colspan="3">
+					<td	class="px-4" colspan="3">
 						<VetEditor
 							bind:visible={vetEditorUpdate} 
 							on:update={e => updateVet(e.detail)}

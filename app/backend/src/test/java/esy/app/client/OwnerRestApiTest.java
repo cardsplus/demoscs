@@ -316,7 +316,6 @@ class OwnerRestApiTest {
     @Transactional
     @Rollback(false)
     void cleanup() {
-        assertEquals(1, ownerRepository.count());
-        ownerRepository.deleteAll();
+        assertDoesNotThrow(() -> ownerRepository.deleteAll());
     }
 }

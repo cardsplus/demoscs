@@ -12,18 +12,20 @@
     }
 </script>
 
-{#each [...allVisitByDate] as [k, l]}
-<details>
-    <summary>{k}</summary>
-    <div class="ml-4">
-    {#each l as e}
-    <TextField value={e.vetItem.text}
-        label="Veterinarian" 
-        disabled/>
-    <TextArea value={e.text}
-        label="Diagnosis" 
-        disabled/>
-    {/each}
-    </div>
-</details>
-{/each}
+<div class="flex flex-col gap-1 mt-4">
+    {#each [...allVisitByDate] as [title, l]}
+    <details>
+        <summary>{title}</summary>
+        <div class="ml-4">
+        {#each l as e}
+        <TextField value={e.vetItem.text}
+            label="Veterinarian" 
+            disabled/>
+        <TextArea value={e.text}
+            label="Diagnosis" 
+            disabled/>
+        {/each}
+        </div>
+    </details>
+    {/each}    
+</div>

@@ -16,7 +16,7 @@
     $: if (owner) onChange()
     function onChange() {
         showUpdate = true;
-        showRemove = !owner.aktiv;
+        showRemove = true;
         newOwner = {
             id: owner.id,
             name: owner.name
