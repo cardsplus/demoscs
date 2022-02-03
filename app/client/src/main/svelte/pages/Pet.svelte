@@ -7,8 +7,8 @@
 	import { createValue } from '../utils/rest.js';
 	import { updatePatch } from '../utils/rest.js';
 	import { removeValue } from '../utils/rest.js';
-    import { storedOwnerId } from '../store/owner.js';
-	import PetEditor from './PetEditor.svelte';
+    import { storedOwnerId } from '../stores/owner.js';
+    import PetEditor from './PetEditor.svelte';
 
     let allPet = []; 
     let petOwnerId = null; 
@@ -102,14 +102,14 @@
     <table class="table-fixed">
         <thead class="justify-between">
             <tr class="bg-gray-100">
+                <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
+                    <span class="text-gray-600">Species</span>
+                </th>
                 <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/2">
                     <span class="text-gray-600">Name</span>
                 </th>
                 <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
                     <span class="text-gray-600">Born</span>
-                </th>
-                <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
-                    <span class="text-gray-600">Species</span>
                 </th>
                 <th class="px-2 py-3 border-b-2 border-gray-300 w-16">
                     <Icon on:click={() => petEditorCreateClicked()}
@@ -122,7 +122,7 @@
         <tbody>
             {#if petEditorCreate}
             <tr>
-                <td colspan="4">
+                <td class="px-4" colspan="4">
                     <PetEditor
                         bind:visible={petEditorCreate} 
                         on:create={e => createPet(e.detail)}
@@ -136,15 +136,15 @@
                 title={pet.id}
                 class:ring={petIndexOf === (i)}>
                 <td class="px-2 py-3 text-left">
+                    <span>{pet.species}</span>
+                </td>
+                <td class="px-2 py-3 text-left">
                     <div class="text-sm underline text-blue-600">
                         <a href={'/pet/' + pet.id}>{pet.name}</a>
                     </div>
                 </td>
                 <td class="px-2 py-3 text-left">
                     <span>{pet.born}</span>
-                </td>
-                <td class="px-2 py-3 text-left">
-                    <span>{pet.species}</span>
                 </td>
                 <td class="px-2 py-3">
                     <Icon on:click={() => petEditorUpdateClicked(pet)}
@@ -155,7 +155,7 @@
             </tr>
             {#if petEditorUpdate && petId === pet.id}
             <tr>
-                <td	colspan="4">
+                <td	class="px-4" colspan="4">
                     <PetEditor
                         bind:visible={petEditorUpdate} 
                         on:update={e => updatePet(e.detail)}
