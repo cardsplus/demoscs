@@ -1,7 +1,7 @@
 package esy.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.NonNull;
 import org.springframework.context.annotation.*;
@@ -63,13 +63,13 @@ public class EndpointConfiguration {
 
     void applyJsonConfiguration(@NonNull final String packageName, @NonNull final RepositoryRestConfiguration configuration) {
         final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
-        provider.addIncludeFilter(new AssignableTypeFilter(JsonJpaValueBase.class));
+        provider.addIncludeFilter(new AssignableTypeFilter(JsonJpaEntity.class));
         provider.findCandidateComponents(packageName.replace(".", "/")).stream()
                 .map(bean -> {
                     try {
                         return Class.forName(bean.getBeanClassName());
                     } catch (final ClassNotFoundException e) {
-                        return JsonJpaValueBase.class;
+                        return JsonJpaEntity.class;
                     }
                 })
                 .forEach(configuration::exposeIdsFor);

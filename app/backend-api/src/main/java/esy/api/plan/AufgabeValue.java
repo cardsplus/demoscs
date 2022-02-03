@@ -3,7 +3,7 @@ package esy.api.plan;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
@@ -15,7 +15,7 @@ import java.util.*;
 @Table(name = "aufgabe", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"})
 })
-public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
+public final class AufgabeValue extends JsonJpaEntity<AufgabeValue> {
 
     /**
      * Beschreibung der Aufgabe.

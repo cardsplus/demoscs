@@ -2,7 +2,7 @@ package esy.api.team;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
@@ -15,7 +15,7 @@ import java.util.*;
         @UniqueConstraint(columnNames = {"id"}),
         @UniqueConstraint(columnNames = {"mail"})
 })
-public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
+public final class NutzerValue extends JsonJpaEntity<NutzerValue> {
 
     /**
      * Eindeutige E-Mail-Adresse des Nutzers.

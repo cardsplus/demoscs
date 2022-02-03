@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.api.team.NutzerItem;
 import esy.api.team.NutzerValue;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
         @UniqueConstraint(columnNames = {"id"}),
         @UniqueConstraint(columnNames = {"name"})
 })
-public final class ProjektValue extends JsonJpaValueBase<ProjektValue> {
+public final class ProjektValue extends JsonJpaEntity<ProjektValue> {
 
     /**
      * Eindeutiger Name des Projekts.
