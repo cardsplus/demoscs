@@ -1,6 +1,6 @@
 package esy.rest;
 
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import io.micrometer.core.lang.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Slf4j
-public abstract class JsonJpaRestControllerBase<V extends JsonJpaValueBase<V>> {
+public abstract class JsonJpaRestControllerBase<V extends JsonJpaEntity<V>> {
 
     private final ApplicationEventPublisher eventPublisher;
 
