@@ -15,13 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EnumValueTest {
 
     EnumValue createWithName(final String name) {
-        final String json = "{" +
+        return EnumValue.parseJson("{" +
                 "\"art\": \"QUELLE\"," +
                 "\"name\": \"" + name + "\"," +
                 "\"code\": \"2\"," +
                 "\"text\": \"A " + name + "\"" +
-                "}";
-        return EnumValue.parseJson(json);
+                "}");
     }
 
     @Test
@@ -33,18 +32,15 @@ public class EnumValueTest {
         assertTrue(value.isEqual(value));
         assertEquals(value.hashCode(), value.hashCode());
         assertEquals(value.toString(), value.toString());
-        // Gleiche UUID
-        final EnumValue clone = EnumValue.parseJson(value.writeJson());
+        // Gleiches Objekt
+        final EnumValue clone = createWithName(name);
+        assertNotSame(clone, value);
         assertTrue(clone.isEqual(value));
-        assertEquals(clone.hashCode(), value.hashCode());
-        assertEquals(clone.toString(), value.toString());
-        // Gleicher Text
-        assertNotEquals(createWithName(name), value);
-        assertTrue(value.isEqual(createWithName(name)));
-        assertNotEquals(createWithName(name).hashCode(), value.hashCode());
-        assertNotEquals(createWithName(name).toString(), value.toString());
-        // Anderer Text
+        assertNotEquals(clone.hashCode(), value.hashCode());
+        assertNotEquals(clone.toString(), value.toString());
+        // Anderes Objekt
         final EnumValue other = createWithName("ARIJ");
+        assertNotSame(other, value);
         assertNotEquals(other, value);
         assertFalse(value.isEqual(other));
         assertNotEquals(other.hashCode(), value.hashCode());
@@ -65,30 +61,6 @@ public class EnumValueTest {
         final EnumValue value2 = value0.withId(UUID.randomUUID());
         assertNotSame(value0, value2);
         assertTrue(value0.isEqual(value2));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "\"version\": \"1\"",
-            "\"created\": \"2019-04-22\"",
-            "\"garbage\": \"value\""
-    })
-    void jsonGarbage(final String line) {
-        final String name = "JIRA";
-        final String json = "{" +
-                "\"art\": \"QUELLE\"," +
-                "\"name\": \"" + name + "\"," +
-                "\"code\": \"2\"," +
-                "\"text\": \"A " + name + "\"," +
-                line +
-                "}";
-        final EnumValue value = EnumValue.parseJson(json);
-        assertDoesNotThrow(value::verify);
-        assertNotNull(value.getId());
-        assertEquals("QUELLE", value.getArt());
-        assertEquals(2L, value.getCode());
-        assertEquals(name, value.getName());
-        assertEquals("A " + name, value.getText());
     }
 
     @Test

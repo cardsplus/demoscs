@@ -12,17 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjektValueTest {
 
-	static ProjektValue createWithName(final String name) {
-		final String json = "{" +
+	ProjektValue createWithName(final String name) {
+		return ProjektValue.parseJson("{" +
 				"\"version\": \"1\"," +
 				"\"name\": \"" + name + "\"," +
 				"\"aktiv\": \"false\"," +
 				"\"sprache\": \"EN\"," +
 				"\"besitzer\": null," +
-				"\"allMitglied\": [" +
-				"]" +
-				"}";
-		return ProjektValue.parseJson(json);
+				"\"allMitglied\": []" +
+				"}");
 	}
 
 	@Test
@@ -35,20 +33,19 @@ public class ProjektValueTest {
 		assertEquals(value.hashCode(), value.hashCode());
 		assertEquals(value.toString(), value.toString());
 		// Gleiches Objekt
-		final ProjektValue clone = ProjektValue.parseJson(value.writeJson());
+		final ProjektValue clone = createWithName(name);
+		assertNotSame(clone, value);
+		assertNotEquals(clone, value);
 		assertTrue(clone.isEqual(value));
-		assertEquals(clone.hashCode(), value.hashCode());
-		assertEquals(clone.toString(), value.toString());
-		// Gleicher Text
-		assertNotEquals(createWithName(name), value);
-		assertTrue(value.isEqual(createWithName(name)));
-		assertNotEquals(createWithName(name).hashCode(), value.hashCode());
-		assertNotEquals(createWithName(name).toString(), value.toString());
-		// Anderer Text
-		assertNotEquals(createWithName("X" + name), value);
-		assertFalse(value.isEqual(createWithName("X" + name)));
-		assertNotEquals(createWithName("X" + name).hashCode(), value.hashCode());
-		assertNotEquals(createWithName("X" + name).toString(), value.toString());
+		assertNotEquals(clone.hashCode(), value.hashCode());
+		assertNotEquals(clone.toString(), value.toString());
+		// Anderes Objekt
+		final ProjektValue other = createWithName("X" + name);
+		assertNotSame(other, value);
+		assertNotEquals(other, value);
+		assertFalse(value.isEqual(other));
+		assertNotEquals(other.hashCode(), value.hashCode());
+		assertNotEquals(other.toString(), value.toString());
 		// Kein Objekt
 		assertNotEquals(value, null);
 		assertFalse(value.isEqual(null));
@@ -65,31 +62,6 @@ public class ProjektValueTest {
 		final ProjektValue value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
-	}
-
-	@ParameterizedTest
-	@ValueSource(strings = {
-			"metaId",
-			"metaCreated",
-			"garbage"
-	})
-	void jsonGarbage(final String key) {
-		final String name = "Projekt A";
-		final UUID uuid = UUID.randomUUID();
-		final String json = "{" +
-				"\"version\": \"1\"," +
-				"\"id\": \"" + uuid + "\"," +
-				"\"name\": \"" + name + "\"," +
-				"\"" + key + "\": \"" + name + "\"" +
-				"}";
-		final ProjektValue value = ProjektValue.parseJson(json);
-		assertDoesNotThrow(value::verify);
-		assertEquals(1L, value.getVersion());
-		assertNotNull(value.getId());
-		assertEquals(name, value.getName());
-		assertTrue(value.isAktiv());
-		assertNull(value.getBesitzer());
-		assertEquals(0, value.getAllMitglied().size());
 	}
 
 	@Test
@@ -112,87 +84,17 @@ public class ProjektValueTest {
 			"{\"name\": \"\"}",
 			"{\"aktiv\": \"false\"}"
 	})
-	void jsonNameConstraints(final String json) {
+	void jsonConstraints(final String json) {
 		final ProjektValue value = ProjektValue.parseJson(json);
 		assertThrows(IllegalArgumentException.class, value::verify);
-		assertTrue(value.getName().isBlank());
-	}
-
-	@Test
-	public void jsonName() {
-		final String name = "Projekt A";
-		final String json = "{" +
-				"\"name\": \"" + name + "\"" +
-				"}";
-		final ProjektValue value = ProjektValue.parseJson(json);
-		assertDoesNotThrow(value::verify);
-		assertEquals(name, value.getName());
-
-		assertThrows(NullPointerException.class, () -> value.setName(null));
-
-		value.setName("X" + name);
-		assertDoesNotThrow(value::verify);
-		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
-
-		value.setName(name);
-		assertDoesNotThrow(value::verify);
-		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
-	}
-
-	@Test
-	public void jsonAktiv() {
-		final String name = "Projekt A";
-		final String json = "{" +
-				"\"name\": \"" + name + "\"," +
-				"\"aktiv\": \"false\"" +
-				"}";
-		final ProjektValue value = ProjektValue.parseJson(json);
-		assertDoesNotThrow(value::verify);
-		assertEquals(name, value.getName());
-		assertFalse(value.isAktiv());
-
-		value.setAktiv(true);
-		assertDoesNotThrow(value::verify);
-		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
-
-		value.setAktiv(false);
-		assertDoesNotThrow(value::verify);
-		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
-	}
-
-	@Test
-	public void jsonSprache() {
-		final String name = "Projekt A";
-		final String json = "{" +
-				"\"name\": \"" + name + "\"," +
-				"\"sprache\": \"EN\"" +
-				"}";
-		final ProjektValue value = ProjektValue.parseJson(json);
-		assertDoesNotThrow(value::verify);
-		assertEquals(name, value.getName());
-		assertEquals(Sprache.EN.name(), value.getSprache());
-
-		value.setSprache(Sprache.DE.name());
-		assertDoesNotThrow(value::verify);
-		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
-
-		value.setSprache(Sprache.EN.name());
-		assertDoesNotThrow(value::verify);
-		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 	}
 
 	@Test
 	public void jsonBesitzer() {
-		final UUID uuid = UUID.randomUUID();
 		final String name = "Projekt A";
-		final String json = "{" +
-				"\"name\": \"" + name + "\"," +
-				"\"besitzer\": null" +
-				"}";
-		final ProjektValue value = ProjektValue.parseJson(json);
+		final ProjektValue value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertNull(value.getBesitzer());
-		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		final NutzerValue nutzer = NutzerValue.parseJson("{" +
 				"\"mail\": \"Max.Mustermann@a.de\"," +
@@ -201,27 +103,19 @@ public class ProjektValueTest {
 		value.setBesitzer(nutzer);
 		assertDoesNotThrow(value::verify);
 		assertSame(nutzer, value.getBesitzer());
-		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		value.setBesitzer(null);
 		assertDoesNotThrow(value::verify);
 		assertNull(value.getBesitzer());
-		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 	}
 
 	@Test
 	public void jsonMitglied() {
-		final UUID uuid = UUID.randomUUID();
 		final String name = "Projekt A";
-		final String json = "{" +
-				"\"name\": \"" + name + "\"," +
-				"\"allMitglied\": []" +
-				"}";
-		final ProjektValue value = ProjektValue.parseJson(json);
+		final ProjektValue value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertEquals(name, value.getName());
 		assertEquals(0, value.getAllMitglied().size());
-		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		final NutzerValue nutzer = NutzerValue.parseJson("{" +
 				"\"mail\": \"Max.Mustermann@a.de\"," +
@@ -233,10 +127,34 @@ public class ProjektValueTest {
 		assertEquals(1, value.getAllMitglied().stream()
 				.filter(e -> e.getId().equals(nutzer.getId()))
 				.count());
-		assertFalse(value.isEqual(ProjektValue.parseJson(json).verify()));
 
 		value.getAllMitglied().clear();
 		assertDoesNotThrow(value::verify);
-		assertTrue(value.isEqual(ProjektValue.parseJson(json).verify()));
+		assertEquals(0, value.getAllMitglied().size());
+	}
+
+	@Test
+	public void jsonAufgabe() {
+		final String name = "Projekt A";
+		final ProjektValue value = createWithName(name);
+		assertDoesNotThrow(value::verify);
+		assertEquals(name, value.getName());
+		assertEquals(0, value.getAllMitglied().size());
+
+		final AufgabeValue aufgabe = AufgabeValue.parseJson("{" +
+				"\"version\": \"1\"," +
+				"\"text\": \"Lorem ipsum.\"," +
+				"\"aktiv\": \"false\"" +
+				"}");
+		value.addAufgabe(aufgabe);
+		assertDoesNotThrow(value::verify);
+		assertEquals(1, value.getAllAufgabe().size());
+		assertEquals(1, value.getAllAufgabe().stream()
+				.filter(e -> e.getId().equals(aufgabe.getId()))
+				.count());
+
+		value.getAllAufgabe().clear();
+		assertDoesNotThrow(value::verify);
+		assertEquals(0, value.getAllAufgabe().size());
 	}
 }

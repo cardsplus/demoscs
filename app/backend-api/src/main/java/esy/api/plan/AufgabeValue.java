@@ -1,6 +1,7 @@
 package esy.api.plan;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.json.JsonJpaValueBase;
 import esy.json.JsonMapper;
@@ -10,9 +11,6 @@ import lombok.NonNull;
 import javax.persistence.*;
 import java.util.*;
 
-/**
- * Value-Objekt für eine Aufgabe.
- */
 @Entity
 @Table(name = "aufgabe", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"})
@@ -47,11 +45,6 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ProjektValue projekt;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     AufgabeValue() {
         super();
         this.text = "";
@@ -59,11 +52,6 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         this.projekt = null;
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     AufgabeValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.text = "";
@@ -117,16 +105,7 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         return allExtra;
     }
 
-    public AufgabeValue setText(@NonNull final String text) {
-        this.text = text;
-        return this;
-    }
-
-    public AufgabeValue setAktiv(final boolean aktiv) {
-        this.aktiv = aktiv;
-        return this;
-    }
-
+    @JsonIgnore
     public AufgabeValue setProjekt(final ProjektValue projekt) {
         this.projekt = projekt;
         return this;

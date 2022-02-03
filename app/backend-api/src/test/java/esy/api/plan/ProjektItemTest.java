@@ -9,41 +9,40 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProjektItemTest {
 
     ProjektValue createWithName(final String name) {
-        final String json = "{" +
-                "\"name\":\"" + name + "\"," +
-                "\"aktiv\": \"true\"" +
-                "}";
-        return ProjektValue.parseJson(json);
+        return ProjektValue.parseJson("{" +
+                "\"version\": \"1\"," +
+                "\"name\": \"" + name + "\"," +
+                "\"aktiv\": \"false\"," +
+                "\"sprache\": \"EN\"," +
+                "\"besitzer\": null," +
+                "\"allMitglied\": []" +
+                "}");
     }
 
     @Test
     void equalsHashcodeToString() {
         final String name = "Projekt A";
-        final ProjektValue value = createWithName(name);
-        final ProjektItem item0 = ProjektItem.fromValue(value);
+        final ProjektItem value = ProjektItem.fromValue(createWithName(name));
         // Identisches Objekt
-        assertEquals(item0, item0);
-        assertEquals(item0.hashCode(), item0.hashCode());
-        assertEquals(item0.toString(), item0.toString());
+        assertEquals(value, value);
+        assertEquals(value.hashCode(), value.hashCode());
+        assertEquals(value.toString(), value.toString());
         // Gleiches Objekt
-        final ProjektItem item1 = ProjektItem.fromValue(value);
-        assertEquals(item1, item0);
-        assertEquals(item1.hashCode(), item0.hashCode());
-        assertEquals(item1.toString(), item0.toString());
-        // Gleicher Name
-        final ProjektItem item2 = ProjektItem.fromValue(createWithName(name));
-        assertNotEquals(item2, item0);
-        assertNotEquals(item2.hashCode(), item0.hashCode());
-        assertEquals(item2.toString(), item0.toString());
-        // Anderer Name
-        final ProjektItem item3 = ProjektItem.fromValue(createWithName("X" + name));
-        assertNotEquals(item3, item0);
-        assertNotEquals(item3.hashCode(), item0.hashCode());
-        assertNotEquals(item3.toString(), item0.toString());
+        final ProjektItem clone = ProjektItem.fromValue(createWithName(name));
+        assertNotSame(clone, value);
+        assertNotEquals(clone, value);
+        assertNotEquals(clone.hashCode(), value.hashCode());
+        assertEquals(clone.toString(), value.toString());
+        // Anderes Objekt
+        final ProjektItem other = ProjektItem.fromValue(createWithName("X" + name));
+        assertNotSame(other, value);
+        assertNotEquals(other, value);
+        assertNotEquals(other.hashCode(), value.hashCode());
+        assertNotEquals(other.toString(), value.toString());
         // Kein Objekt
-        assertNotEquals(null, item0);
+        assertNotEquals(value, null);
         // Falsches Objekt
-        assertNotEquals(this, item0);
+        assertNotEquals(this, value);
     }
 
     @Test

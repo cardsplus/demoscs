@@ -15,9 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Value-Objekt für eine Aufzählung
- */
 @Entity
 @Table(name = "enum", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"}),
@@ -58,11 +55,6 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
     @JsonProperty
     private String text;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     EnumValue() {
         super();
         this.art = "";
@@ -71,11 +63,6 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
         this.text = "";
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     EnumValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.art = "";

@@ -9,43 +9,37 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EnumItemTest {
 
     EnumValue createWithName(final String name) {
-        final String json = "{" +
+        return EnumValue.parseJson("{" +
                 "\"art\": \"QUELLE\"," +
                 "\"name\": \"" + name + "\"," +
                 "\"code\": \"2\"," +
                 "\"text\": \"A " + name + "\"" +
-                "}";
-        return EnumValue.parseJson(json);
+                "}");
     }
 
     @Test
     void equalsHashcodeToString() {
         final String name = "JIRA";
-        final EnumValue value = createWithName(name);
-        final EnumItem item0 = EnumItem.fromValue(value);
+        final EnumItem value = EnumItem.fromValue(createWithName(name));
         // Identisches Objekt
-        assertEquals(item0, item0);
-        assertEquals(item0.hashCode(), item0.hashCode());
-        assertEquals(item0.toString(), item0.toString());
+        assertEquals(value, value);
+        assertEquals(value.hashCode(), value.hashCode());
+        assertEquals(value.toString(), value.toString());
         // Gleiches Objekt
-        final EnumItem item1 = EnumItem.fromValue(value);
-        assertEquals(item1, item0);
-        assertEquals(item1.hashCode(), item0.hashCode());
-        assertEquals(item1.toString(), item0.toString());
-        // Gleicher Name
-        final EnumItem item2 = EnumItem.fromValue(createWithName(name));
-        assertEquals(item2, item0);
-        assertEquals(item2.hashCode(), item0.hashCode());
-        assertEquals(item2.toString(), item0.toString());
-        // Anderer Name
-        final EnumItem item3 = EnumItem.fromValue(createWithName("X" + name));
-        assertNotEquals(item3, item0);
-        assertNotEquals(item3.hashCode(), item0.hashCode());
-        assertNotEquals(item3.toString(), item0.toString());
+        final EnumItem clone = EnumItem.fromValue(createWithName(name));
+        assertNotSame(clone, value);
+        assertEquals(clone.hashCode(), value.hashCode());
+        assertEquals(clone.toString(), value.toString());
+        // Anderes Objekt
+        final EnumItem other = EnumItem.fromValue(createWithName("ARIJ"));
+        assertNotSame(other, value);
+        assertNotEquals(other, value);
+        assertNotEquals(other.hashCode(), value.hashCode());
+        assertNotEquals(other.toString(), value.toString());
         // Kein Objekt
-        assertNotEquals(null, item0);
+        assertNotEquals(value, null);
         // Falsches Objekt
-        assertNotEquals(this, item0);
+        assertNotEquals(this, value);
     }
 
     @Test

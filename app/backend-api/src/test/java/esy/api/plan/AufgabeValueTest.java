@@ -1,5 +1,6 @@
 package esy.api.plan;
 
+import esy.api.team.NutzerValue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,39 +11,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AufgabeValueTest {
 
-	static AufgabeValue createWithName(final String name) {
-		final String json = "{" +
+	static AufgabeValue createWithText(final String text) {
+		return AufgabeValue.parseJson("{" +
 				"\"version\": \"1\"," +
-				"\"text\": \"" + name + "\"," +
+				"\"text\": \"" + text + "\"," +
 				"\"aktiv\": \"false\"" +
-				"}";
-		return AufgabeValue.parseJson(json);
+				"}");
 	}
 
 	@Test
 	void equalsHashcodeToString() {
-		final String name = "Team A";
-		final AufgabeValue value = createWithName(name);
+		final String text = "Aufgabe A";
+		final AufgabeValue value = createWithText(text);
 		// Identisches Objekt
 		assertEquals(value, value);
 		assertTrue(value.isEqual(value));
 		assertEquals(value.hashCode(), value.hashCode());
 		assertEquals(value.toString(), value.toString());
 		// Gleiches Objekt
-		final AufgabeValue clone = AufgabeValue.parseJson(value.writeJson());
+		final AufgabeValue clone = createWithText(text);
+		assertNotSame(clone, value);
 		assertTrue(clone.isEqual(value));
-		assertEquals(clone.hashCode(), value.hashCode());
-		assertEquals(clone.toString(), value.toString());
-		// Gleicher Text
-		assertNotEquals(createWithName(name), value);
-		assertTrue(value.isEqual(createWithName(name)));
-		assertNotEquals(createWithName(name).hashCode(), value.hashCode());
-		assertNotEquals(createWithName(name).toString(), value.toString());
-		// Anderer Text
-		assertNotEquals(createWithName("X" + name), value);
-		assertFalse(value.isEqual(createWithName("X" + name)));
-		assertNotEquals(createWithName("X" + name).hashCode(), value.hashCode());
-		assertNotEquals(createWithName("X" + name).toString(), value.toString());
+		assertNotEquals(clone.hashCode(), value.hashCode());
+		assertNotEquals(clone.toString(), value.toString());
+		// Anderes Objekt
+		final AufgabeValue other = createWithText("X" + text);
+		assertNotSame(other, value);
+		assertNotEquals(other, value);
+		assertFalse(value.isEqual(other));
+		assertNotEquals(other.hashCode(), value.hashCode());
+		assertNotEquals(other.toString(), value.toString());
 		// Kein Objekt
 		assertNotEquals(value, null);
 		assertFalse(value.isEqual(null));
@@ -52,8 +50,8 @@ public class AufgabeValueTest {
 
 	@Test
 	void withId() {
-		final String name = "Team A";
-		final AufgabeValue value0 = createWithName(name);
+		final String text = "Aufgabe A";
+		final AufgabeValue value0 = createWithText(text);
 		final AufgabeValue value1 = value0.withId(value0.getId());
 		assertSame(value0, value1);
 		final AufgabeValue value2 = value0.withId(UUID.randomUUID());
@@ -61,33 +59,10 @@ public class AufgabeValueTest {
 		assertTrue(value0.isEqual(value2));
 	}
 
-	@ParameterizedTest
-	@ValueSource(strings = {
-			"metaId",
-			"metaCreated",
-			"garbage"
-	})
-	void jsonGarbage(final String key) {
-		final String text = "Aufgabe A";
-		final UUID uuid = UUID.randomUUID();
-		final String json = "{" +
-				"\"version\": \"1\"," +
-				"\"id\": \"" + uuid + "\"," +
-				"\"text\": \"" + text + "\"," +
-				"\"" + key + "\": \"" + text + "\"" +
-				"}";
-		final AufgabeValue value = AufgabeValue.parseJson(json);
-		assertDoesNotThrow(value::verify);
-		assertEquals(1L, value.getVersion());
-		assertNotNull(value.getId());
-		assertEquals(text, value.getText());
-		assertTrue(value.isAktiv());
-	}
-
 	@Test
 	void json() {
 		final String text = "Aufgabe A";
-		final AufgabeValue value = createWithName(text);
+		final AufgabeValue value = createWithText(text);
 		assertDoesNotThrow(value::verify);
 		assertEquals(1L, value.getVersion());
 		assertNotNull(value.getId());
@@ -101,52 +76,27 @@ public class AufgabeValueTest {
 			"{\"text\": \"\"}",
 			"{\"aktiv\": \"false\"}"
 	})
-	void jsonTextConstraints(final String json) {
+	void jsonConstraints(final String json) {
 		final AufgabeValue value = AufgabeValue.parseJson(json);
 		assertThrows(IllegalArgumentException.class, value::verify);
-		assertTrue(value.getText().isBlank());
 	}
 
 	@Test
-	public void jsonText() {
+	public void jsonProjekt() {
 		final String text = "Aufgabe A";
-		final String json = "{" +
-				"\"text\": \"" + text + "\"" +
-				"}";
-		final AufgabeValue value = AufgabeValue.parseJson(json);
+		final AufgabeValue value = createWithText(text);
 		assertDoesNotThrow(value::verify);
-		assertEquals(text, value.getText());
-		assertTrue(value.isAktiv());
+		assertNull(value.getProjekt());
 
-		assertThrows(NullPointerException.class, () -> value.setText(null));
-
-		value.setText("X" + text);
+		final ProjektValue projekt = ProjektValue.parseJson("{" +
+				"\"name\": \"Projekt A\"" +
+				"}");
+		value.setProjekt(projekt);
 		assertDoesNotThrow(value::verify);
-		assertFalse(value.isEqual(AufgabeValue.parseJson(json).verify()));
+		assertSame(projekt, value.getProjekt());
 
-		value.setText(text);
+		value.setProjekt(null);
 		assertDoesNotThrow(value::verify);
-		assertTrue(value.isEqual(AufgabeValue.parseJson(json).verify()));
-	}
-
-	@Test
-	public void jsonAktiv() {
-		final String text = "Aufgabe A";
-		final String json = "{" +
-				"\"text\": \"" + text + "\"," +
-				"\"aktiv\": \"false\"" +
-				"}";
-		final AufgabeValue value = AufgabeValue.parseJson(json);
-		assertDoesNotThrow(value::verify);
-		assertEquals(text, value.getText());
-		assertFalse(value.isAktiv());
-
-		value.setAktiv(true);
-		assertDoesNotThrow(value::verify);
-		assertFalse(value.isEqual(AufgabeValue.parseJson(json).verify()));
-
-		value.setAktiv(false);
-		assertDoesNotThrow(value::verify);
-		assertTrue(value.isEqual(AufgabeValue.parseJson(json).verify()));
+		assertNull(value.getProjekt());
 	}
 }

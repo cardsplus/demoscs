@@ -10,9 +10,6 @@ import lombok.NonNull;
 import javax.persistence.*;
 import java.util.*;
 
-/**
- * Value-Objekt für einen Nutzer.
- */
 @Entity
 @Table(name = "nutzer", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"}),
@@ -58,11 +55,6 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     @JsonProperty
     private SortedSet<String> allSprache;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     NutzerValue() {
         super();
         this.mail = "";
@@ -71,11 +63,6 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         this.allSprache = new TreeSet<>();
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
     NutzerValue(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.mail = "";
@@ -105,12 +92,10 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
 
     @Override
     public NutzerValue verify() {
-        // Check if e-mail address is valid
-        if (mail.isBlank()) { // TODO check format
+        if (mail.isBlank()) {
             throw new IllegalArgumentException("mail is blank");
         }
-        // Check if name is valid
-        if (name.isBlank()) { // TODO check format
+        if (name.isBlank()) {
             throw new IllegalArgumentException("name is blank");
         }
         return this;
@@ -134,21 +119,6 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         final Map<String, Object> allExtra = new HashMap<>();
         allExtra.put("version", getVersion());
         return allExtra;
-    }
-
-    public NutzerValue setMail(@NonNull final String mail) {
-        this.mail = mail;
-        return this;
-    }
-
-    public NutzerValue setName(@NonNull final String name) {
-        this.name = name;
-        return this;
-    }
-
-    public NutzerValue setAktiv(final boolean aktiv) {
-        this.aktiv = aktiv;
-        return this;
     }
 
     @Override
