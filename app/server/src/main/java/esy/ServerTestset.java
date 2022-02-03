@@ -64,7 +64,7 @@ public class ServerTestset implements CommandLineRunner {
         allEnumSkill.values().forEach(e -> log.info("CREATED [{}]", e));
 
         final Map<String, EnumValue> allEnumSpecies = createAllEnumSpecies();
-        allEnumSkill.values().forEach(e -> log.info("CREATED [{}]", e));
+        allEnumSpecies.values().forEach(e -> log.info("CREATED [{}]", e));
 
         final Map<String, Owner> allOwner = createAllOwner();
         allOwner.values().forEach(e -> log.info("CREATED [{}]", e));
@@ -84,18 +84,18 @@ public class ServerTestset implements CommandLineRunner {
         return Stream.of(
                         Enum.parseJson("{" +
                                 "\"code\": 0," +
-                                "\"name\": \"radiology\"," +
-                                "\"text\": \"Radiology is the medical discipline that uses medical imaging to diagnose and treat diseases within the bodies of animals and humans\"" +
+                                "\"name\":\"Radiology\"," +
+                                "\"text\":\"Radiology is the medical discipline that uses medical imaging to diagnose and treat diseases within the bodies of animals and humans\"" +
                                 "}"),
                         Enum.parseJson("{" +
                                 "\"code\": 1," +
-                                "\"name\": \"dentistry\"," +
-                                "\"text\": \"Dentistry is a branch of medicine that consists of the study, diagnosis, prevention, and treatment of diseases, disorders, and conditions of the oral cavity (the mouth).\"" +
+                                "\"name\":\"Dentistry\"," +
+                                "\"text\":\"Dentistry is a branch of medicine that consists of the study, diagnosis, prevention, and treatment of diseases, disorders, and conditions of the oral cavity (the mouth).\"" +
                                 "}"),
                         Enum.parseJson("{" +
                                 "\"code\": 2," +
-                                "\"name\": \"surgery\"," +
-                                "\"text\": \"Surgery he branch of medical practice that treats injuries, diseases, and deformities by the physical removal, repair, or readjustment of organs and tissues.\"" +
+                                "\"name\":\"Surgery\"," +
+                                "\"text\":\"Surgery he branch of medical practice that treats injuries, diseases, and deformities by the physical removal, repair, or readjustment of organs and tissues.\"" +
                                 "}"))
                 .map(e -> e.setArt("skill"))
                 .map(enumValueRepository::save)
@@ -107,18 +107,18 @@ public class ServerTestset implements CommandLineRunner {
         return Stream.of(
                         EnumValue.parseJson("{" +
                                 "\"code\": 0," +
-                                "\"name\": \"Cat\"," +
-                                "\"text\": \"The cat (Felis catus) is a domestic species of a small carnivorous mammal.\"" +
+                                "\"name\":\"Cat\"," +
+                                "\"text\":\"The cat (Felis catus) is a domestic species of a small carnivorous mammal.\"" +
                                 "}"),
                         EnumValue.parseJson("{" +
                                 "\"code\": 1," +
-                                "\"name\": \"Dog\"," +
-                                "\"text\": \"The dog (Canis familiaris) is a domesticated descendant of the wolf.\"" +
+                                "\"name\":\"Dog\"," +
+                                "\"text\":\"The dog (Canis familiaris) is a domesticated descendant of the wolf.\"" +
                                 "}"),
                         EnumValue.parseJson("{" +
                                 "\"code\": 2," +
-                                "\"name\": \"Rat\"," +
-                                "\"text\": \"The rat (Rattus) is a family of various medium-sized, long-tailed rodents.\"" +
+                                "\"name\":\"Rat\"," +
+                                "\"text\":\"The rat (Rattus) is a family of various medium-sized, long-tailed rodents.\"" +
                                 "}"))
                 .map(e -> e.setArt("species"))
                 .map(enumValueRepository::save)
@@ -129,16 +129,16 @@ public class ServerTestset implements CommandLineRunner {
     private Map<String, Owner> createAllOwner() {
         return Stream.of(
                         Owner.parseJson("{" +
-                                "\"name\": \"Thomas Mann\"" +
+                                "\"name\":\"Thomas Mann\"" +
                                 "}"),
                         Owner.parseJson("{" +
-                                "\"name\": \"Stefan Zweig\"" +
+                                "\"name\":\"Stefan Zweig\"" +
                                 "}"),
                         Owner.parseJson("{" +
-                                "\"name\": \"Wolfgang A. Mozart\"" +
+                                "\"name\":\"Wolfgang A. Mozart\"" +
                                 "}"),
                         Owner.parseJson("{" +
-                                "\"name\": \"Arthur Conan Doyle\"" +
+                                "\"name\":\"Arthur Conan Doyle\"" +
                                 "}"))
                 .map(ownerRepository::save)
                 .collect(Collectors.toMap(Owner::getName, identity()));
@@ -148,21 +148,21 @@ public class ServerTestset implements CommandLineRunner {
     private Map<String, Pet> createAllPet(final Map<String, Owner> allOwner) {
         return Stream.of(
                         Pet.parseJson("{" +
-                                        "\"name\": \"Tom\"," +
-                                        "\"born\": \"2021-04-01\"," +
-                                        "\"species\": \"Cat\"" +
+                                        "\"name\":\"Tom\"," +
+                                        "\"born\":\"2021-04-01\"," +
+                                        "\"species\":\"Cat\"" +
                                         "}")
                                 .setOwner(allOwner.get("Thomas Mann")),
                         Pet.parseJson("{" +
-                                        "\"name\": \"Odi\"," +
-                                        "\"born\": \"2021-04-02\"," +
-                                        "\"species\": \"Dog\"" +
+                                        "\"name\":\"Odi\"," +
+                                        "\"born\":\"2021-04-02\"," +
+                                        "\"species\":\"Dog\"" +
                                         "}")
                                 .setOwner(allOwner.get("Thomas Mann")),
                         Pet.parseJson("{" +
-                                        "\"name\": \"Fox\"," +
-                                        "\"born\": \"2021-04-03\"," +
-                                        "\"species\": \"Rat\"" +
+                                        "\"name\":\"Fox\"," +
+                                        "\"born\":\"2021-04-03\"," +
+                                        "\"species\":\"Rat\"" +
                                         "}")
                                 .setOwner(allOwner.get("Stefan Zweig")))
                 .map(petRepository::save)
@@ -173,19 +173,24 @@ public class ServerTestset implements CommandLineRunner {
     private Map<String, Vet> createAllVet() {
         return Stream.of(
                         Vet.parseJson("{" +
-                                "\"name\": \"Graham Chapman\"" +
+                                "\"name\":\"Graham Chapman\"," +
+                                "\"allSkill\":[\"Surgery\",\"Radiology\"]" +
                                 "}"),
                         Vet.parseJson("{" +
-                                "\"name\": \"John Cleese\"" +
+                                "\"name\":\"John Cleese\"," +
+                                "\"allSkill\":[\"Surgery\"]" +
                                 "}"),
                         Vet.parseJson("{" +
-                                "\"name\": \"Terry Gilliam\"" +
+                                "\"name\":\"Terry Gilliam\"," +
+                                "\"allSkill\":[\"Dentistry\",\"Radiology\"]" +
                                 "}"),
                         Vet.parseJson("{" +
-                                "\"name\": \"Eric Idle\"" +
+                                "\"name\":\"Eric Idle\"," +
+                                "\"allSkill\":[\"Dentistry\"]" +
                                 "}"),
                         Vet.parseJson("{" +
-                                "\"name\": \"Terry Jones\"" +
+                                "\"name\":\"Terry Jones\"," +
+                                "\"allSkill\":[]" +
                                 "}"))
                 .map(vetRepository::save)
                 .collect(Collectors.toMap(Vet::getName, identity()));
@@ -195,38 +200,38 @@ public class ServerTestset implements CommandLineRunner {
     private List<Visit> createAllVisit(Map<String, Pet> allPet, Map<String, Vet> allVet) {
         return Stream.of(
                         Visit.parseJson("{" +
-                                        "\"date\": \"2021-04-21\"," +
-                                        "\"text\": \"" + allLoremIpsum.get(0) + "\"" +
+                                        "\"date\":\"2021-04-21\"," +
+                                        "\"text\":\"" + allLoremIpsum.get(0) + "\"" +
                                         "}")
                                 .setPet(allPet.get("Tom"))
                                 .setVet(allVet.get("Graham Chapman")),
                         Visit.parseJson("{" +
-                                        "\"date\": \"2021-04-21\"," +
-                                        "\"text\": \"" + allLoremIpsum.get(1) + "\"" +
+                                        "\"date\":\"2021-04-21\"," +
+                                        "\"text\":\"" + allLoremIpsum.get(1) + "\"" +
                                         "}")
                                 .setPet(allPet.get("Odi"))
                                 .setVet(allVet.get("Graham Chapman")),
                         Visit.parseJson("{" +
-                                        "\"date\": \"2021-04-22\"," +
-                                        "\"text\": \"" + allLoremIpsum.get(2) + "\"" +
+                                        "\"date\":\"2021-04-22\"," +
+                                        "\"text\":\"" + allLoremIpsum.get(2) + "\"" +
                                         "}")
                                 .setPet(allPet.get("Odi"))
                                 .setVet(allVet.get("John Cleese")),
                         Visit.parseJson("{" +
-                                        "\"date\": \"2021-04-23\"," +
-                                        "\"text\": \"" + allLoremIpsum.get(3) + "\"" +
+                                        "\"date\":\"2021-04-23\"," +
+                                        "\"text\":\"" + allLoremIpsum.get(3) + "\"" +
                                         "}")
                                 .setPet(allPet.get("Odi"))
                                 .setVet(allVet.get("Terry Gilliam")),
                         Visit.parseJson("{" +
-                                        "\"date\": \"2021-04-24\"," +
-                                        "\"text\": \"" + allLoremIpsum.get(4) + "\"" +
+                                        "\"date\":\"2021-04-24\"," +
+                                        "\"text\":\"" + allLoremIpsum.get(4) + "\"" +
                                         "}")
                                 .setPet(allPet.get("Odi"))
                                 .setVet(allVet.get("Eric Idle")),
                         Visit.parseJson("{" +
-                                        "\"date\": \"2021-04-24\"," +
-                                        "\"text\": \"" + allLoremIpsum.get(5) + "\"" +
+                                        "\"date\":\"2021-04-24\"," +
+                                        "\"text\":\"" + allLoremIpsum.get(5) + "\"" +
                                         "}")
                                 .setPet(allPet.get("Fox"))
                                 .setVet(allVet.get("Terry Jones"))

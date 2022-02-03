@@ -70,11 +70,11 @@
 			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['createVet', json]);
 			allVet = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['createVet', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -85,11 +85,11 @@
 			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['updateVet', json]);
 			allVet = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['updateVet', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -101,11 +101,11 @@
 			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['removeVet', json]);
 			allVet = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['removeVet', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -113,11 +113,11 @@
 	function reloadAllVisit(vet) {
 		loadAllValue('/api/visit/search/findAllByVet?vetId=' + vet.id)
 		.then(json => {
-			console.log(json);
+			console.log(['reloadAllVisit', json]);
 			allVisit = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['reloadAllVisit', err]);
 			toast.push(err.toString());
 		});
 	}
@@ -168,7 +168,13 @@
 						</div>
 					</td>
 					<td class="px-2 py-3 text-left">
-						<span>tbd</span>
+						{#each vet.allSkill as skill}
+						<div class="flex flex-col">
+							<span>{skill}</span>
+						</div>
+						{:else}
+						<span>No special skills</span>
+						{/each}
 					</td>
 					<td class="px-2 py-3">
 						<Icon on:click={() => visitViewerCreateClicked(vet)}

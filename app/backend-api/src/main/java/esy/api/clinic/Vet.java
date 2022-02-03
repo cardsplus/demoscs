@@ -1,20 +1,15 @@
 package esy.api.clinic;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "vet", uniqueConstraints = {
@@ -28,14 +23,27 @@ public final class Vet extends JsonJpaEntity<Vet> {
     @JsonProperty
     private String name;
 
+    @ElementCollection(
+            fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "vet_skill",
+            joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "skill")
+    @OrderBy
+    @Getter
+    @JsonProperty
+    private SortedSet<String> allSkill;
+
     Vet() {
         super();
         this.name = "";
+        this.allSkill = new TreeSet<>();
     }
 
     Vet(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.name = "";
+        this.allSkill = new TreeSet<>();
     }
 
     @Override
@@ -51,7 +59,8 @@ public final class Vet extends JsonJpaEntity<Vet> {
         if (that == null) {
             return false;
         }
-        return this.name.equals(that.name);
+        return this.name.equals(that.name)&&
+                this.allSkill.equals(that.allSkill);
     }
 
     @Override
@@ -70,6 +79,7 @@ public final class Vet extends JsonJpaEntity<Vet> {
         }
         final Vet value = new Vet(getVersion(), id);
         value.name = this.name;
+        value.allSkill = this.allSkill;
         return value;
     }
 
@@ -78,6 +88,18 @@ public final class Vet extends JsonJpaEntity<Vet> {
         final Map<String, Object> allExtra = new HashMap<>();
         allExtra.put("version", getVersion());
         return allExtra;
+    }
+
+    @JsonIgnore
+    public Vet addAllSkill(@NonNull final String... text) {
+        this.allSkill.addAll(List.of(text));
+        return this;
+    }
+
+    @JsonIgnore
+    public Vet addAllSkill(@NonNull final String text, @NonNull final String regex) {
+        this.allSkill.addAll(List.of(text.split(regex)));
+        return this;
     }
 
     @Override
