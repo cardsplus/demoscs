@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-<title>Test results - EnumValueTest</title>
+<title>Test results - NutzerTest</title>
 <link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
 <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <script src="../js/report.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="content">
-<h1>EnumValueTest</h1>
+<h1>NutzerTest</h1>
 <div class="breadcrumbs">
 <a href="../index.html">all</a> &gt; 
-<a href="../packages/esy.api.info.html">esy.api.info</a> &gt; EnumValueTest</div>
+<a href="../packages/esy.api.team.html">esy.api.team</a> &gt; NutzerTest</div>
 <div id="summary">
 <table>
 <tr>
@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">18</div>
+<div class="counter">14</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.184s</div>
+<div class="counter">0.082s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,109 +78,85 @@
 <tr>
 <td class="success">equalsHashcodeToString()</td>
 <td class="success">equalsHashcodeToString()</td>
-<td class="success">0.049s</td>
+<td class="success">0.013s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">json()</td>
 <td class="success">json()</td>
-<td class="success">0.057s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">jsonArt()</td>
-<td class="success">jsonArt()</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">jsonCode()</td>
-<td class="success">jsonCode()</td>
-<td class="success">0.006s</td>
+<td class="success">[10] json={&quot;name&quot;: &quot;\t&quot;, &quot;mail&quot;: &quot;me@a.de&quot;}</td>
+<td class="success">jsonConstraints(String)[10]</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[1] json={}</td>
 <td class="success">jsonConstraints(String)[1]</td>
-<td class="success">0.003s</td>
+<td class="success">0.008s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">[2] json={&quot;text&quot;: &quot;&quot;}</td>
+<td class="success">[2] json={&quot;aktiv&quot;: &quot;false&quot;}</td>
 <td class="success">jsonConstraints(String)[2]</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">[3] json={&quot;mail&quot;: &quot;&quot;}</td>
+<td class="success">jsonConstraints(String)[3]</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">[4] json={&quot;mail&quot;: &quot;&quot;, &quot;name&quot;: &quot;Me&quot;}</td>
+<td class="success">jsonConstraints(String)[4]</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">[5] json={&quot;mail&quot;: &quot; &quot;, &quot;name&quot;: &quot;Me&quot;}</td>
+<td class="success">jsonConstraints(String)[5]</td>
 <td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">[3] json={&quot;text&quot;: &quot;\t&quot;}</td>
-<td class="success">jsonConstraints(String)[3]</td>
+<td class="success">[6] json={&quot;mail&quot;: &quot;\t&quot;, &quot;name&quot;: &quot;Me&quot;}</td>
+<td class="success">jsonConstraints(String)[6]</td>
 <td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">[4] json={&quot;text&quot;: &quot; &quot;}</td>
-<td class="success">jsonConstraints(String)[4]</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">[1] name=Das ist ein Text.</td>
-<td class="success">jsonName(String)[1]</td>
-<td class="success">0.025s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">[2] name=TEXT</td>
-<td class="success">jsonName(String)[2]</td>
-<td class="success">0.004s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">[3] name=Text</td>
-<td class="success">jsonName(String)[3]</td>
-<td class="success">0.004s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">[4] name=text</td>
-<td class="success">jsonName(String)[4]</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">[5] name=Spaß</td>
-<td class="success">jsonName(String)[5]</td>
-<td class="success">0.004s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">[6] name=Ärger</td>
-<td class="success">jsonName(String)[6]</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">[7] name=Öfen</td>
-<td class="success">jsonName(String)[7]</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">[8] name=Übel</td>
-<td class="success">jsonName(String)[8]</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">jsonText()</td>
-<td class="success">jsonText()</td>
-<td class="success">0.004s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">withId()</td>
-<td class="success">withId()</td>
+<td class="success">[7] json={&quot;name&quot;: &quot;&quot;}</td>
+<td class="success">jsonConstraints(String)[7]</td>
 <td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">[8] json={&quot;name&quot;: &quot;&quot;, &quot;mail&quot;: &quot;me@a.de&quot;}</td>
+<td class="success">jsonConstraints(String)[8]</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">[9] json={&quot;name&quot;: &quot; &quot;, &quot;mail&quot;: &quot;me@a.de&quot;}</td>
+<td class="success">jsonConstraints(String)[9]</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">jsonSprache()</td>
+<td class="success">jsonSprache()</td>
+<td class="success">0.014s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">withId()</td>
+<td class="success">withId()</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 </table>

@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 import java.util.UUID;
 
 @Embeddable
-<span class="pc bpc" id="L15" title="11 of 22 branches missed.">@EqualsAndHashCode</span>
+<span class="pc bpc" id="L15" title="13 of 22 branches missed.">@EqualsAndHashCode</span>
 public class ProjektItem implements JsonJpaItem&lt;UUID&gt; {
 
     /**
@@ -36,7 +36,7 @@ public class ProjektItem implements JsonJpaItem&lt;UUID&gt; {
 <span class="fc" id="L36">        this.text = &quot;&quot;;</span>
 <span class="fc" id="L37">    }</span>
 
-<span class="pc bpc" id="L39" title="1 of 2 branches missed.">    ProjektItem(@NonNull final ProjektValue value) {</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">    ProjektItem(@NonNull final Projekt value) {</span>
 <span class="fc" id="L40">        this.value = value.getId();</span>
 <span class="fc" id="L41">        this.text = value.getName();</span>
 <span class="fc" id="L42">    }</span>
@@ -46,7 +46,7 @@ public class ProjektItem implements JsonJpaItem&lt;UUID&gt; {
 <span class="fc" id="L46">        return text;</span>
     }
 
-    public static ProjektItem fromValue(final ProjektValue value) {
+    public static ProjektItem fromValue(final Projekt value) {
 <span class="fc bfc" id="L50" title="All 2 branches covered.">        if (value != null) {</span>
 <span class="fc" id="L51">            return new ProjektItem(value);</span>
         } else {
