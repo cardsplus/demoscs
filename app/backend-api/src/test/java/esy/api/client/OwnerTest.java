@@ -79,7 +79,7 @@ public class OwnerTest {
 
 	@Test
 	void json() {
-		final String name = "Max.Mustermann";
+		final String name = "Max Mustermann";
 		final Owner value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertNotNull(value.getId());
@@ -90,13 +90,11 @@ public class OwnerTest {
 	@ValueSource(strings = {
 			"{}",
 			"{\"name\": \"\"}",
-			"{\"name\": \"\", \"mail\": \"Max.Mustermann@a.de\"}",
-			"{\"name\": \" \", \"mail\": \"Max.Mustermann@a.de\"}",
-			"{\"name\": \"\\t\", \"mail\": \"Max.Mustermann@a.de\"}"
+			"{\"name\": \" \"}",
+			"{\"name\": \"\\t\"}"
 	})
-	void jsonNameConstraints(final String json) {
+	void jsonConstraints(final String json) {
 		final Owner value = Owner.parseJson(json);
 		assertThrows(IllegalArgumentException.class, value::verify);
-		assertTrue(value.getName().isBlank());
 	}
 }

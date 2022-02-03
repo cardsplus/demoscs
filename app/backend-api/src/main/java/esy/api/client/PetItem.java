@@ -32,7 +32,7 @@ public class PetItem implements JsonJpaItem<UUID> {
 
     private PetItem(@NonNull final Pet value) {
         this.value = value.getId();
-        this.text = value.getName();
+        this.text = value.getSpecies() + " '" + value.getName() + "'";
     }
 
     @Override

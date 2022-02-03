@@ -58,11 +58,11 @@
 			return loadAllValue('/api/enum/' + art);
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['createItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['createItem', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -73,11 +73,11 @@
 			return loadAllValue('/api/enum/' + art);
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['updateItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['updateItem', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -89,11 +89,11 @@
 			return loadAllValue('/api/enum/' + art);
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['removeItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['removeItem', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -128,7 +128,7 @@
 			<tbody>
 				{#if itemEditorCreate}
 				<tr>
-					<td	colspan="3">
+					<td	class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorCreate}
 							on:create={e => createItem(e.detail)}/>
@@ -157,7 +157,7 @@
 				</tr>
 				{#if itemEditorUpdate && itemCode === item.code}
 				<tr>
-					<td colspan="3">
+					<td class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorUpdate}
 							on:update={e => updateItem(e.detail)}
@@ -168,7 +168,7 @@
 				{/if}
 				{:else}
 				<tr>
-					<td class="px-2 py-3" colspan="3">
+					<td class="px-2 py-3" colspan="4">
 						No items
 					</td>
 				</tr>

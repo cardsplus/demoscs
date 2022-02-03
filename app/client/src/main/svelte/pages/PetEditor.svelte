@@ -56,6 +56,13 @@
 
 <div class="flex flex-col">
     <div class="flex flex-col lg:flex-row gap-1">
+        <div class="w-full lg:w-1/4">
+            <Select 
+                bind:value={newPet.species}
+                items={allSpeciesEnum} 
+                label="Species"
+                placeholder="Choose species"/>
+        </div>
         <div class="w-full lg:w-2/4">
             <TextField bind:value={newPet.name} 
                 label="Name"		
@@ -66,13 +73,6 @@
                 type="date"
                 label="Born"		
                 placeholder="Insert a date"/>
-        </div>
-        <div class="w-full lg:w-1/4">
-            <Select 
-                bind:value={newPet.species}
-                items={allSpeciesEnum} 
-                label="Species"
-                placeholder="Choose species"/>
         </div>
     </div>
 </div>

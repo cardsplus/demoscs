@@ -10,14 +10,16 @@ public class PetItemTest {
 
     Pet createWithName(final String name) {
         final String json = "{" +
-                "\"name\":\"" + name + "\"" +
+                "\"name\":\"" + name + "\"," +
+                "\"born\":\"2021-04-22\"," +
+                "\"species\":\"Cat\"" +
                 "}";
         return Pet.parseJson(json);
     }
 
     @Test
     void equalsHashcodeToString() {
-        final String name = "Pet A";
+        final String name = "Tom";
         final Pet value = createWithName(name);
         final PetItem item0 = PetItem.fromValue(value);
         // Identisches Objekt
@@ -57,11 +59,11 @@ public class PetItemTest {
 
     @Test
     void ofValue() {
-        final String name = "Pet A";
+        final String name = "Tom";
         final Pet value = createWithName(name);
         final PetItem item = PetItem.fromValue(value);
-        assertEquals(item.getValue(), value.getId());
-        assertEquals(item.getText(), value.getName());
+        assertEquals(value.getId(), item.getValue());
+        assertEquals("Cat 'Tom'", item.getText());
         assertFalse(item.isCreate());
         assertTrue(item.isUpdate());
         assertFalse(item.isDelete());

@@ -17,7 +17,7 @@ public class OwnerItemTest {
 
     @Test
     void equalsHashcodeToString() {
-        final String name = "Owner A";
+        final String name = "Max Mustermann";
         final Owner value = createWithName(name);
         final OwnerItem item0 = OwnerItem.fromValue(value);
         // Identisches Objekt
@@ -57,11 +57,11 @@ public class OwnerItemTest {
 
     @Test
     void ofValue() {
-        final String name = "Owner A";
+        final String name = "Max Mustermann";
         final Owner value = createWithName(name);
         final OwnerItem item = OwnerItem.fromValue(value);
-        assertEquals(item.getValue(), value.getId());
-        assertEquals(item.getText(), value.getName());
+        assertEquals(value.getId(), item.getValue());
+        assertEquals(value.getName(), item.getText());
         assertFalse(item.isCreate());
         assertTrue(item.isUpdate());
         assertFalse(item.isDelete());

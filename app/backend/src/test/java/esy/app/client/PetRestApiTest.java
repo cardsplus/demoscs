@@ -123,7 +123,7 @@ class PetRestApiTest {
                                 "\"owner\": \"/api/owner/b1111111-1111-beef-dead-beefdeadbeef\"," +
                                 "\"name\":\"" + name + "\"," +
                                 "\"born\":\"" + born + "\"," +
-                                "\"species\":\"rat\"" +
+                                "\"species\":\"Rat\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -346,9 +346,9 @@ class PetRestApiTest {
                 .andExpect(jsonPath("$.content")
                         .isArray())
                 .andExpect(jsonPath("$.content[0].text")
-                        .value("Anita"))
+                        .value("Rat 'Anita'"))
                 .andExpect(jsonPath("$.content[1].text")
-                        .value("Roger"))
+                        .value("Rat 'Roger'"))
                 .andExpect(jsonPath("$.content[2]")
                         .doesNotExist());
     }
@@ -473,9 +473,7 @@ class PetRestApiTest {
     @Transactional
     @Rollback(false)
     void cleanup() {
-        assertEquals(1, petRepository.count());
-        petRepository.deleteAll();
-        assertEquals(2, ownerRepository.count());
-        ownerRepository.deleteAll();
+        assertDoesNotThrow(() -> petRepository.deleteAll());
+        assertDoesNotThrow(() -> ownerRepository.deleteAll());
     }
 }

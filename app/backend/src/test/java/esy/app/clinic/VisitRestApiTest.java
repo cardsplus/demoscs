@@ -152,7 +152,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.petItem.value")
                         .value("c1111111-1111-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.petItem.text")
-                        .value("Odi"))
+                        .value("Dog 'Odi'"))
                 .andExpect(jsonPath("$.vetItem.value")
                         .value("d1111111-1111-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.vetItem.text")
@@ -189,7 +189,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.petItem.value")
                         .value("c1111111-1111-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.petItem.text")
-                        .value("Odi"))
+                        .value("Dog 'Odi'"))
                 .andExpect(jsonPath("$.vetItem.value")
                         .value("d1111111-1111-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.vetItem.text")
@@ -224,7 +224,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.petItem.value")
                         .value("c1111111-1111-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.petItem.text")
-                        .value("Odi"))
+                        .value("Dog 'Odi'"))
                 .andExpect(jsonPath("$.vetItem.value")
                         .value("d1111111-1111-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.vetItem.text")
@@ -260,7 +260,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.petItem.value")
                         .value("c2222222-2222-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.petItem.text")
-                        .value("Tom"))
+                        .value("Cat 'Tom'"))
                 .andExpect(jsonPath("$.vetItem.value")
                         .value("d1111111-1111-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.vetItem.text")
@@ -312,7 +312,7 @@ class VisitRestApiTest {
                 .andExpect(jsonPath("$.petItem.value")
                         .value("c2222222-2222-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.petItem.text")
-                        .value("Tom"))
+                        .value("Cat 'Tom'"))
                 .andExpect(jsonPath("$.vetItem.value")
                         .value("d2222222-2222-beef-dead-beefdeadbeef"))
                 .andExpect(jsonPath("$.vetItem.text")
@@ -499,13 +499,9 @@ class VisitRestApiTest {
     @Transactional
     @Rollback(false)
     void cleanup() {
-        assertEquals(3, visitRepository.count());
-        visitRepository.deleteAll();
-        assertEquals(2, vetRepository.count());
-        vetRepository.deleteAll();
-        assertEquals(2, petRepository.count());
-        petRepository.deleteAll();
-        assertEquals(2, ownerRepository.count());
-        ownerRepository.deleteAll();
+        assertDoesNotThrow(() -> visitRepository.deleteAll());
+        assertDoesNotThrow(() -> vetRepository.deleteAll());
+        assertDoesNotThrow(() -> petRepository.deleteAll());
+        assertDoesNotThrow(() -> ownerRepository.deleteAll());
     }
 }

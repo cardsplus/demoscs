@@ -17,7 +17,7 @@ public class VetItemTest {
 
     @Test
     void equalsHashcodeToString() {
-        final String name = "Vet A";
+        final String name = "Max Mustermann";
         final Vet value = createWithName(name);
         final VetItem item0 = VetItem.fromValue(value);
         // Identisches Objekt
@@ -57,11 +57,11 @@ public class VetItemTest {
 
     @Test
     void ofValue() {
-        final String name = "Vet A";
+        final String name = "Max Mustermann";
         final Vet value = createWithName(name);
         final VetItem item = VetItem.fromValue(value);
-        assertEquals(item.getValue(), value.getId());
-        assertEquals(item.getText(), value.getName());
+        assertEquals(value.getId(), item.getValue());
+        assertEquals(value.getName(), item.getText());
         assertFalse(item.isCreate());
         assertTrue(item.isUpdate());
         assertFalse(item.isDelete());
