@@ -87,10 +87,6 @@ public final class Visit extends JsonJpaEntity<Visit> {
 
     @Override
     public Visit verify() {
-        // Check if text is valid
-        if (text.isBlank()) {
-            throw new IllegalArgumentException("text is blank");
-        }
         return this;
     }
 

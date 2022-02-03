@@ -25,7 +25,7 @@
     let newPetId = null;
     let newVetId = null;
 
-    $: disabled = !newVisit.date || !newVisit.text || !newPetId || !newVetId;
+    $: disabled = !newVisit.date || !newPetId || !newVetId;
     $: if (visit) onChange()
     function onChange() {
         showUpdate = true;

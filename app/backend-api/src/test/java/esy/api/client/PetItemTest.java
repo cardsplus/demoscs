@@ -9,43 +9,39 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PetItemTest {
 
     Pet createWithName(final String name) {
-        final String json = "{" +
+        return Pet.parseJson("{" +
                 "\"name\":\"" + name + "\"," +
                 "\"born\":\"2021-04-22\"," +
                 "\"species\":\"Cat\"" +
-                "}";
-        return Pet.parseJson(json);
+                "}");
     }
 
     @Test
     void equalsHashcodeToString() {
         final String name = "Tom";
-        final Pet value = createWithName(name);
-        final PetItem item0 = PetItem.fromValue(value);
+        final PetItem value = PetItem.fromValue(createWithName(name));
         // Identisches Objekt
-        assertEquals(item0, item0);
-        assertEquals(item0.hashCode(), item0.hashCode());
-        assertEquals(item0.toString(), item0.toString());
+        assertEquals(value, value);
+        assertEquals(value.hashCode(), value.hashCode());
+        assertEquals(value.toString(), value.toString());
         // Gleiches Objekt
-        final PetItem item1 = PetItem.fromValue(value);
-        assertEquals(item1, item0);
-        assertEquals(item1.hashCode(), item0.hashCode());
-        assertEquals(item1.toString(), item0.toString());
-        // Gleicher Name
-        final PetItem item2 = PetItem.fromValue(createWithName(name));
-        assertNotEquals(item2, item0);
-        assertNotEquals(item2.hashCode(), item0.hashCode());
-        assertEquals(item2.toString(), item0.toString());
-        // Anderer Name
-        final PetItem item3 = PetItem.fromValue(createWithName("X" + name));
-        assertNotEquals(item3, item0);
-        assertNotEquals(item3.hashCode(), item0.hashCode());
-        assertNotEquals(item3.toString(), item0.toString());
+        final PetItem clone = PetItem.fromValue(createWithName(name));
+        assertNotSame(value, clone);
+        assertNotEquals(clone, value);
+        assertNotEquals(clone.hashCode(), value.hashCode());
+        assertEquals(clone.toString(), value.toString());
+        // Anderes Objekt
+        final PetItem other = PetItem.fromValue(createWithName("X" + name));
+        assertNotSame(value, other);
+        assertNotEquals(other, value);
+        assertNotEquals(other.hashCode(), value.hashCode());
+        assertNotEquals(other.toString(), value.toString());
         // Kein Objekt
-        assertNotEquals(null, item0);
+        assertNotEquals(value, null);
         // Falsches Objekt
-        assertNotEquals(this, item0);
+        assertNotEquals(this, value);
     }
+
 
     @Test
     void ofNull() {

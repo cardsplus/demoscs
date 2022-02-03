@@ -12,16 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class VetTest {
 
-	static Vet createWithName(final String name) {
-		final String json = "{" +
+	Vet createWithName(final String name) {
+		return Vet.parseJson("{" +
 				"\"name\":\"" + name + "\"" +
-				"}";
-		return Vet.parseJson(json);
+				"}");
 	}
 
 	@Test
 	void equalsHashcodeToString() {
-		final String name = "Max Mustermann";
+		final String name = "Tom";
 		final Vet value = createWithName(name);
 		// Identisches Objekt
 		assertEquals(value, value);
@@ -29,20 +28,19 @@ public class VetTest {
 		assertEquals(value.hashCode(), value.hashCode());
 		assertEquals(value.toString(), value.toString());
 		// Gleiches Objekt
-		final Vet clone = Vet.parseJson(value.writeJson());
-		assertTrue(clone.isEqual(value));
-		assertEquals(clone.hashCode(), value.hashCode());
-		assertEquals(clone.toString(), value.toString());
-		// Gleicher Text
-		assertNotEquals(createWithName(name), value);
-		assertTrue(value.isEqual(createWithName(name)));
-		assertNotEquals(createWithName(name).hashCode(), value.hashCode());
-		assertNotEquals(createWithName(name).toString(), value.toString());
-		// Anderer Text
-		assertNotEquals(createWithName("X" + name), value);
-		assertFalse(value.isEqual(createWithName("X" + name)));
-		assertNotEquals(createWithName("X" + name).hashCode(), value.hashCode());
-		assertNotEquals(createWithName("X" + name).toString(), value.toString());
+		final Vet clone = createWithName(name);
+		assertNotSame(value, clone);
+		assertNotEquals(clone, value);
+		assertTrue(value.isEqual(clone));
+		assertNotEquals(clone.hashCode(), value.hashCode());
+		assertNotEquals(clone.toString(), value.toString());
+		// Anderes Objekt
+		final Vet other = createWithName("X" + name);
+		assertNotSame(value, other);
+		assertNotEquals(other, value);
+		assertFalse(value.isEqual(other));
+		assertNotEquals(other.hashCode(), value.hashCode());
+		assertNotEquals(other.toString(), value.toString());
 		// Kein Objekt
 		assertNotEquals(value, null);
 		assertFalse(value.isEqual(null));
@@ -59,24 +57,6 @@ public class VetTest {
 		final Vet value2 = value0.withId(UUID.randomUUID());
 		assertNotSame(value0, value2);
 		assertTrue(value0.isEqual(value2));
-	}
-
-	@ParameterizedTest
-	@ValueSource(strings = {
-			"metaId",
-			"metaCreated",
-			"garbage"
-	})
-	void jsonGarbage(final String key) {
-		final String name = "Max Mustermann";
-		final String json = "{" +
-				"\"" + key + "\": \"" + name + "\"," +
-				"\"name\":\"" + name + "\"" +
-				"}";
-		final Vet value = Vet.parseJson(json);
-		assertDoesNotThrow(value::verify);
-		assertNotNull(value.getId());
-		assertEquals(name, value.getName());
 	}
 
 	@Test

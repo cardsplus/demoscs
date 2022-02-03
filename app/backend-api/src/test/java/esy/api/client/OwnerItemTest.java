@@ -9,40 +9,37 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OwnerItemTest {
 
     Owner createWithName(final String name) {
-        final String json = "{" +
-                "\"name\":\"" + name + "\"" +
-                "}";
-        return Owner.parseJson(json);
+        return Owner.parseJson("{" +
+                "\"name\":\"" + name + "\"," +
+                "\"address\":\"Bergweg 1, 5400 Hallein\"," +
+                "\"contact\":\"+43 660 5557683\"" +
+                "}");
     }
 
     @Test
     void equalsHashcodeToString() {
-        final String name = "Max Mustermann";
-        final Owner value = createWithName(name);
-        final OwnerItem item0 = OwnerItem.fromValue(value);
+        final String name = "Tom";
+        final OwnerItem value = OwnerItem.fromValue(createWithName(name));
         // Identisches Objekt
-        assertEquals(item0, item0);
-        assertEquals(item0.hashCode(), item0.hashCode());
-        assertEquals(item0.toString(), item0.toString());
+        assertEquals(value, value);
+        assertEquals(value.hashCode(), value.hashCode());
+        assertEquals(value.toString(), value.toString());
         // Gleiches Objekt
-        final OwnerItem item1 = OwnerItem.fromValue(value);
-        assertEquals(item1, item0);
-        assertEquals(item1.hashCode(), item0.hashCode());
-        assertEquals(item1.toString(), item0.toString());
-        // Gleicher Name
-        final OwnerItem item2 = OwnerItem.fromValue(createWithName(name));
-        assertNotEquals(item2, item0);
-        assertNotEquals(item2.hashCode(), item0.hashCode());
-        assertEquals(item2.toString(), item0.toString());
-        // Anderer Name
-        final OwnerItem item3 = OwnerItem.fromValue(createWithName("X" + name));
-        assertNotEquals(item3, item0);
-        assertNotEquals(item3.hashCode(), item0.hashCode());
-        assertNotEquals(item3.toString(), item0.toString());
+        final OwnerItem clone = OwnerItem.fromValue(createWithName(name));
+        assertNotSame(value, clone);
+        assertNotEquals(clone, value);
+        assertNotEquals(clone.hashCode(), value.hashCode());
+        assertEquals(clone.toString(), value.toString());
+        // Anderes Objekt
+        final OwnerItem other = OwnerItem.fromValue(createWithName("X" + name));
+        assertNotSame(value, other);
+        assertNotEquals(other, value);
+        assertNotEquals(other.hashCode(), value.hashCode());
+        assertNotEquals(other.toString(), value.toString());
         // Kein Objekt
-        assertNotEquals(null, item0);
+        assertNotEquals(value, null);
         // Falsches Objekt
-        assertNotEquals(this, item0);
+        assertNotEquals(this, value);
     }
 
     @Test
