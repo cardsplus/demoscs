@@ -86,7 +86,8 @@ class PetRestApiTest {
         mockMvc.perform(post("/api/pet")
                         .content("{" +
                                 "\"owner\": \"/api/owner/b1111111-1111-beef-dead-beefdeadbeef\"," +
-                                "\"name\":\"" + name + "\"" +
+                                "\"name\":\"" + name + "\"," +
+                                "\"species\":\"rat\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -102,7 +103,9 @@ class PetRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.species")
+                        .value("rat"));
     }
 
     @Test
@@ -113,7 +116,8 @@ class PetRestApiTest {
         mockMvc.perform(post("/api/pet")
                         .content("{" +
                                 "\"owner\": \"/api/owner/b1111111-1111-beef-dead-beefdeadbeef\"," +
-                                "\"name\":\"" + name + "\"" +
+                                "\"name\":\"" + name + "\"," +
+                                "\"species\":\"rat\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -131,7 +135,8 @@ class PetRestApiTest {
         mockMvc.perform(put("/api/pet/" + uuid)
                         .content("{" +
                                 "\"owner\": \"/api/owner/b1111111-1111-beef-dead-beefdeadbeef\"," +
-                                "\"name\":\"" + name + "\"" +
+                                "\"name\":\"" + name + "\"," +
+                                "\"species\":\"rat\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -151,7 +156,9 @@ class PetRestApiTest {
                 .andExpect(jsonPath("$.ownerItem.text")
                         .value("Toby Elsden"))
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.species")
+                        .value("rat"));
     }
 
     @ParameterizedTest
@@ -188,8 +195,44 @@ class PetRestApiTest {
                         .value(name));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "pig",
+            "rat"
+    })
     @Order(32)
+    void patchApiPeSpecies(final String species) throws Exception {
+        final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
+        assertTrue(petRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(patch("/api/pet/" + uuid)
+                        .content("{" +
+                                "\"species\": \"" + species + "\"" +
+                                "}")
+                        .contentType(MediaType.parseMediaType("application/merge-patch+json"))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(header()
+                        .exists("ETag"))
+                .andExpect(jsonPath("$.id")
+                        .value(uuid))
+                .andExpect(jsonPath("$.ownerItem.value")
+                        .value("b1111111-1111-beef-dead-beefdeadbeef"))
+                .andExpect(jsonPath("$.ownerItem.text")
+                        .value("Toby Elsden"))
+                .andExpect(jsonPath("$.name")
+                        .value("Anita"))
+                .andExpect(jsonPath("$.species")
+                        .value(species));
+    }
+
+    @Test
+    @Order(33)
     void patchApiPetOwner() throws Exception {
         final String name = "Anita";
         final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
@@ -208,7 +251,7 @@ class PetRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"3\""))
+                        .string("ETag", "\"5\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.ownerItem.value")
@@ -216,11 +259,13 @@ class PetRestApiTest {
                 .andExpect(jsonPath("$.ownerItem.text")
                         .value("Emma Milner"))
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.species")
+                        .value("rat"));
     }
 
     @Test
-    @Order(33)
+    @Order(34)
     void getApiPetOwner() throws Exception {
         final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
         assertTrue(petRepository.findById(UUID.fromString(uuid)).isPresent());
@@ -299,7 +344,7 @@ class PetRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"3\""))
+                        .string("ETag", "\"5\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
@@ -334,7 +379,7 @@ class PetRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"3\""))
+                        .string("ETag", "\"5\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")

@@ -72,6 +72,16 @@ public class ServerRunnerTest {
 	}
 
 	@Test
+	@Order(4)
+	void apiEnumSpecies() throws Exception {
+		final RestApiResult result = RestApiConnection.with(
+				toBackendUrl("/api/enum/species")).get();
+		assertThat(result.getCode(),
+				equalTo(HttpStatus.OK.value()));
+		assertEquals(3, result.toCollection(EnumValue.class).size());
+	}
+
+	@Test
 	@Order(10)
 	void apiOwner() throws Exception {
 		final String name = "Mustermann";
@@ -159,7 +169,8 @@ public class ServerRunnerTest {
 						toBackendUrl("/api/pet"))
 				.post("{" +
 						"\"owner\":\"/api/owner/" + owner.getId() + "\"," +
-						"\"name\":\"Alf\"" +
+						"\"name\":\"Alf\"," +
+						"\"species\":\"Alien\"" +
 						"}");
 		assertThat(result1a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
@@ -167,12 +178,14 @@ public class ServerRunnerTest {
 		assertEquals(0L, value1.getVersion());
 		assertNotNull(value1.getId());
 		assertEquals("Alf", value1.getName());
+		assertEquals("Alien", value1.getSpecies());
 
 		final RestApiResult result1b = RestApiConnection.with(
 						toBackendUrl("/api/pet"))
 				.post("{" +
 						"\"owner\":\"/api/owner/" + owner.getId() + "\"," +
-						"\"name\":\"Alf\"" +
+						"\"name\":\"Alf\"," +
+						"\"species\":\"Alien\"" +
 						"}");
 		assertThat(result1b.getCode(),
 				equalTo(HttpStatus.CONFLICT.value()));
@@ -181,7 +194,8 @@ public class ServerRunnerTest {
 						toBackendUrl("/api/pet/" + value1.getId()))
 				.put("{" +
 						"\"owner\":\"/api/owner/" + owner.getId() + "\"," +
-						"\"name\":\"Max\"" +
+						"\"name\":\"Max\"," +
+						"\"species\":\"Rat\"" +
 						"}");
 		assertThat(result2a.getCode(),
 				equalTo(HttpStatus.OK.value()));
@@ -190,6 +204,7 @@ public class ServerRunnerTest {
 		assertEquals(1L, value2.getVersion());
 		assertNotNull(value2.getId());
 		assertEquals("Max", value2.getName());
+		assertEquals("Rat", value2.getSpecies());
 
 		final RestApiResult result3a = RestApiConnection.with(
 						toBackendUrl("/api/pet/" + value2.getId()))

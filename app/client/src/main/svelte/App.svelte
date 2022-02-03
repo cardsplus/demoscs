@@ -44,6 +44,7 @@
 				<div class="flex flex-col p-4 text-gray-600 gap-1">
 					<a on:click={() => menuVisible = false} href="/vet">Vet</a>
 					<a on:click={() => menuVisible = false} href="/enum/skill">Skill</a>
+					<a on:click={() => menuVisible = false} href="/enum/species">Species</a>
 				</div>
 			</div>
 		</Menu>
@@ -68,6 +69,8 @@
 				component="{VetViewer}" />
 			<Route path="/enum/skill" 
 				component="{Enum}" art="skill" />
+			<Route path="/enum/species" 
+				component="{Enum}" art="species" />
 			<RouteNotFound>
 				<h1>Ups!</h1>
 			</RouteNotFound>

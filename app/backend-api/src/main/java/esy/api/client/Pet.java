@@ -26,6 +26,11 @@ public final class Pet extends JsonJpaEntity<Pet> {
     @JsonProperty
     private String name;
 
+    @Column(name = "species")
+    @Getter
+    @JsonProperty
+    private String species;
+
     @ManyToOne(
             fetch = FetchType.EAGER,
             optional = false
@@ -38,12 +43,14 @@ public final class Pet extends JsonJpaEntity<Pet> {
     Pet() {
         super();
         this.name = "";
+        this.species = "";
         this.owner = null;
     }
 
     Pet(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.name = "";
+        this.species = "";
         this.owner = null;
     }
 
@@ -61,6 +68,7 @@ public final class Pet extends JsonJpaEntity<Pet> {
             return false;
         }
         return this.name.equals(that.name) &&
+                this.species.equals(that.species) &&
                 Objects.equals(this.owner, that.owner);
     }
 
@@ -69,6 +77,10 @@ public final class Pet extends JsonJpaEntity<Pet> {
         // Check if name is valid
         if (name.isBlank()) {
             throw new IllegalArgumentException("name is blank");
+        }
+        // Check if species is valid
+        if (species.isBlank()) {
+            throw new IllegalArgumentException("species is blank");
         }
         return this;
     }
@@ -80,6 +92,7 @@ public final class Pet extends JsonJpaEntity<Pet> {
         }
         final Pet value = new Pet(getVersion(), id);
         value.name = this.name;
+        value.species = this.species;
         value.owner = this.owner;
         return value;
     }
