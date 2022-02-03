@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("fast")
 public class EnumItemTest {
 
-    EnumValue createWithName(final String name) {
-        return EnumValue.parseJson("{" +
+    Enum createWithName(final String name) {
+        return Enum.parseJson("{" +
                 "\"art\": \"QUELLE\"," +
                 "\"name\": \"" + name + "\"," +
                 "\"code\": \"2\"," +
@@ -57,7 +57,7 @@ public class EnumItemTest {
     @Test
     void ofValue() {
         final String name = "JIRA";
-        final EnumValue value = createWithName(name);
+        final Enum value = createWithName(name);
         final EnumItem item = EnumItem.fromValue(value);
         assertEquals(name, item.getValue());
         assertEquals(value.getName(), item.getName());

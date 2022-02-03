@@ -34,7 +34,7 @@ public class EnumItem implements JsonJpaItem<String>  {
         this.code = 0L;
     }
 
-    public EnumItem(@NonNull final EnumValue value) {
+    public EnumItem(@NonNull final Enum value) {
         this.name = value.getName();
         this.text = value.getText();
         this.code = value.getCode();
@@ -51,7 +51,7 @@ public class EnumItem implements JsonJpaItem<String>  {
         return text;
     }
 
-    public static EnumItem fromValue(final EnumValue value) {
+    public static EnumItem fromValue(final Enum value) {
         if (value != null) {
             return new EnumItem(value);
         } else {

@@ -1,7 +1,7 @@
 package esy.app.info;
 
 import esy.api.info.EnumItem;
-import esy.api.info.EnumValue;
+import esy.api.info.Enum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 @RestController
 @BasePathAwareController
 @RequiredArgsConstructor
-public class EnumValueRestController {
+public class EnumRestController {
 
-    private final EnumValueRepository enumValueRepository;
+    private final EnumRepository enumRepository;
 
     @GetMapping("/enum/{art}")
     public ResponseEntity<CollectionModel<EnumItem>> enumOf(@PathVariable final String art) {
-        var allEnum = enumValueRepository.findAll(art)
+        var allEnum = enumRepository.findAll(art)
                 .stream()
                 .map(EnumItem::new)
                 .collect(Collectors.toList());
@@ -30,8 +30,8 @@ public class EnumValueRestController {
 
     @PostMapping("/enum/{art}")
     public ResponseEntity<EnumItem> createOf(@PathVariable final String art, @RequestBody final EnumItem body) {
-        var value = enumValueRepository.save(
-                EnumValue.parseJson("{}")
+        var value = enumRepository.save(
+                Enum.parseJson("{}")
                         .setArt(art)
                         .setCode(body.getCode())
                         .setName(body.getName())
@@ -41,10 +41,10 @@ public class EnumValueRestController {
 
     @PutMapping("/enum/{art}/{code}")
     public ResponseEntity<EnumItem> updateOf(@PathVariable final String art, @PathVariable final Long code, @RequestBody final EnumItem body) {
-        var value = enumValueRepository.save(
-                enumValueRepository.findByCode(art, code)
+        var value = enumRepository.save(
+                enumRepository.findByCode(art, code)
                         .orElseThrow(() ->
-                                new DataRetrievalFailureException("EnumValue(" + art + ", " + code + ") not found"))
+                                new DataRetrievalFailureException("Enum(" + art + ", " + code + ") not found"))
                         .setName(body.getName())
                         .setText(body.getText()));
         return ResponseEntity.status(HttpStatus.OK).body(new EnumItem(value));

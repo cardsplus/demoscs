@@ -1,11 +1,11 @@
 package esy;
 
 
-import esy.api.info.EnumValue;
+import esy.api.info.Enum;
 import esy.api.plan.Aufgabe;
 import esy.api.plan.Projekt;
 import esy.api.team.Nutzer;
-import esy.app.info.EnumValueRepository;
+import esy.app.info.EnumRepository;
 import esy.app.plan.AufgabeRepository;
 import esy.app.plan.ProjektRepository;
 import esy.app.team.NutzerRepository;
@@ -40,7 +40,7 @@ public class ServerTestset implements CommandLineRunner {
     private AufgabeRepository aufgabeRepository;
 
     @Autowired
-    private EnumValueRepository enumValueRepository;
+    private EnumRepository enumRepository;
 
     @Autowired
     private NutzerRepository nutzerRepository;
@@ -55,7 +55,7 @@ public class ServerTestset implements CommandLineRunner {
             return;
         }
 
-        final Map<String, EnumValue> allEnumSprache = createAllEnumSprache();
+        final Map<String, Enum> allEnumSprache = createAllEnumSprache();
         allEnumSprache.values().forEach(e -> log.info("CREATED [{}]", e));
 
         final Map<String, Nutzer> allNutzer = createAllNutzer();
@@ -69,31 +69,31 @@ public class ServerTestset implements CommandLineRunner {
     }
 
     @Transactional
-    private Map<String, EnumValue> createAllEnumSprache() {
+    private Map<String, Enum> createAllEnumSprache() {
         return Stream.of(
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 0," +
                                 "\"name\": \"DE\"," +
                                 "\"text\": \"Deutsch\"" +
                                 "}"),
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 1," +
                                 "\"name\": \"EN\"," +
                                 "\"text\": \"Englisch\"" +
                                 "}"),
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 2," +
                                 "\"name\": \"IT\"," +
                                 "\"text\": \"Italienisch\"" +
                                 "}"),
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 3," +
                                 "\"name\": \"FR\"," +
                                 "\"text\": \"Französisch\"" +
                                 "}"))
                 .map(e -> e.setArt("sprache"))
-                .map(enumValueRepository::save)
-                .collect(Collectors.toMap(EnumValue::getName, identity()));
+                .map(enumRepository::save)
+                .collect(Collectors.toMap(Enum::getName, identity()));
     }
 
     @Transactional

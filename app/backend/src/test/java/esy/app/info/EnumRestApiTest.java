@@ -1,6 +1,5 @@
 package esy.app.info;
 
-import esy.app.EndpointConfiguration;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({MockitoExtension.class, RestDocumentationExtension.class})
-class EnumValueRestApiTest {
+class EnumRestApiTest {
 
     static final String ENUM_ART = "TEST";
 
@@ -40,7 +38,7 @@ class EnumValueRestApiTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private EnumValueRepository enumValueRepository;
+    private EnumRepository enumRepository;
 
     @BeforeEach
     void setUp(final WebApplicationContext webApplicationContext,
@@ -231,9 +229,9 @@ class EnumValueRestApiTest {
     @Transactional
     @Rollback(false)
     void cleanup() {
-        assertEquals(3, enumValueRepository.count(ENUM_ART));
-        enumValueRepository.findAll(ENUM_ART).forEach(e ->
-                enumValueRepository.delete(e));
-        enumValueRepository.deleteAll();
+        assertEquals(3, enumRepository.count(ENUM_ART));
+        enumRepository.findAll(ENUM_ART).forEach(e ->
+                enumRepository.delete(e));
+        enumRepository.deleteAll();
     }
 }
