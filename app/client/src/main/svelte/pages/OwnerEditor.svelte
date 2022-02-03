@@ -9,7 +9,8 @@
     let showUpdate;
     let showRemove;
     let newOwner = {
-        name: undefined
+        name: undefined,
+        address: undefined
     }
 
     $: disabled = !newOwner.name;
@@ -19,7 +20,8 @@
         showRemove = true;
         newOwner = {
             id: owner.id,
-            name: owner.name
+            name: owner.name,
+            address: owner.address
         }
         console.log(['onChange', newOwner]);
     }
@@ -50,6 +52,11 @@
         <TextField bind:value={newOwner.name} 
             label="Name"		
             placeholder="Insert a name"/>
+    </div>
+    <div class="w-full">
+        <TextField bind:value={newOwner.address} 
+            label="Address"		
+            placeholder="Insert an address"/>
     </div>
 </div>
 
