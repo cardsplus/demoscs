@@ -31,10 +31,18 @@
 
     let allOwnerItem = [];
 
+    let allSpeciesEnum = [];
+
     onMount(async () => {
         try {
 			allOwnerItem = await loadAllValue('/api/owner/search/findAllItem');
             console.log(['onMount', allOwnerItem]);
+			allSpeciesEnum = await loadAllValue('/api/enum/species');
+            allSpeciesEnum = allSpeciesEnum.map(e => ({
+                value: e.value,
+                text: e.name
+            }))
+            console.log(['onMount', allSpeciesEnum]);
         } catch(err) {
 			console.log(['onMount', err]);
 			toast.push(err.toString());
@@ -44,28 +52,23 @@
 
     $: petOwnerId, reloadAllPet();
     function reloadAllPet() {
-        if (petOwnerId) {
+        if (!petOwnerId) return;
+        loadAllValue('/api/pet/search/findAllByOwner?ownerId=' + petOwnerId)
+        .then(json => {
+            console.log(['reloadAllPet', json]);
             $storedOwnerId = petOwnerId;
-            loadAllValue('/api/pet/search/findAllByOwner?ownerId=' + petOwnerId)
-            .then(json => {
-                console.log(json);
-                allPet = json;
-            })
-            .catch(err => {
-                console.log(err);
-                toast.push(err.toString());
-            });
-        }
+            allPet = json;
+        })
+        .catch(err => {
+            console.log(['reloadAllPet', err]);
+            toast.push(err.toString());
+        });
     }
     
     function createPet(pet) {
         createValue('/api/pet', pet)
         .then(() => {
             reloadAllPet();
-        })
-        .catch(err => {
-            console.log(err);
-            toast.push(err.toString());
         });
     };
 
@@ -73,10 +76,6 @@
         updatePatch('/api/pet/' + pet.id, pet)
         .then(() => {
             reloadAllPet();
-        })
-        .catch(err => {
-            console.log(err);
-            toast.push(err.toString());
         });
     };
 
@@ -85,10 +84,6 @@
         removeValue('/api/pet/' + pet.id)
         .then(() => {
             return reloadAllPet();
-        })
-        .catch(err => {
-            console.log(err);
-            toast.push(err.toString());
         });
     };
 </script>
@@ -131,6 +126,7 @@
                     <PetEditor
                         bind:visible={petEditorCreate} 
                         on:create={e => createPet(e.detail)}
+                        {allSpeciesEnum}
                         ownerId={petOwnerId}/>
                 <td>
             </tr>
@@ -145,7 +141,7 @@
                     </div>
                 </td>
                 <td class="px-2 py-3 text-left">
-                    <span>tbd</span>
+                    <span>{pet.species}</span>
                 </td>
                 <td class="px-2 py-3 text-left">
                     <span>tbd</span>
@@ -164,6 +160,7 @@
                         bind:visible={petEditorUpdate} 
                         on:update={e => updatePet(e.detail)}
                         on:remove={e => removePet(e.detail)}
+                        {allSpeciesEnum}
                         ownerId={pet.ownerItem.value}
                         {pet}/>
                 <td>

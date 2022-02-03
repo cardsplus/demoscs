@@ -18,6 +18,9 @@
             <column name="owner_id" type="UUID">
                 <constraints nullable="false"/>
             </column>
+            <column name="species" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <addUniqueConstraint
                 constraintName="uk_pet"

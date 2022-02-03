@@ -1,26 +1,30 @@
 <script>
     import { createEventDispatcher } from 'svelte';
 	import Button from '../components/Button';
+	import Select from '../components/Select';
 	import TextField from '../components/TextField';
     
     export let visible = false;
     export let pet = undefined;
     export let ownerId;
+    export let allSpeciesEnum;
 
     let showUpdate;
     let showRemove;
     let newPet = {
-        name: undefined
+        name: undefined,
+        species: undefined
     }
 
-    $: disabled = !newPet.name;
+    $: disabled = !newPet.name || !newPet.species;
     $: if (pet) onChange()
     function onChange() {
         showUpdate = true;
-        showRemove = !pet.aktiv;
+        showRemove = true;
         newPet = {
             id: pet.id,
-            name: pet.name
+            name: pet.name,
+            species: pet.species
         }
         console.log(['onChange', newPet]);
     }
@@ -49,10 +53,19 @@
 </script>
 
 <div class="flex flex-col">
-    <div class="w-full">
-        <TextField bind:value={newPet.name} 
-            label="Name"		
-            placeholder="Insert a name"/>
+    <div class="flex flex-col lg:flex-row gap-1">
+        <div class="w-full">
+            <TextField bind:value={newPet.name} 
+                label="Name"		
+                placeholder="Insert a name"/>
+        </div>
+        <div class="w-full lg:w-1/2">
+            <Select 
+                bind:value={newPet.species}
+                items={allSpeciesEnum} 
+                label="Species"
+                placeholder="Choose species"/>
+        </div>
     </div>
 </div>
 

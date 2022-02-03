@@ -63,6 +63,9 @@ public class ServerTestset implements CommandLineRunner {
         final Map<String, EnumValue> allEnumSkill = createAllEnumSkill();
         allEnumSkill.values().forEach(e -> log.info("CREATED [{}]", e));
 
+        final Map<String, EnumValue> allEnumSpecies = createAllEnumSpecies();
+        allEnumSkill.values().forEach(e -> log.info("CREATED [{}]", e));
+
         final Map<String, Owner> allOwner = createAllOwner();
         allOwner.values().forEach(e -> log.info("CREATED [{}]", e));
 
@@ -100,6 +103,29 @@ public class ServerTestset implements CommandLineRunner {
     }
 
     @Transactional
+    private Map<String, EnumValue> createAllEnumSpecies() {
+        return Stream.of(
+                        EnumValue.parseJson("{" +
+                                "\"code\": 0," +
+                                "\"name\": \"Cat\"," +
+                                "\"text\": \"The cat (Felis catus) is a domestic species of a small carnivorous mammal.\"" +
+                                "}"),
+                        EnumValue.parseJson("{" +
+                                "\"code\": 1," +
+                                "\"name\": \"Dog\"," +
+                                "\"text\": \"The dog (Canis familiaris) is a domesticated descendant of the wolf.\"" +
+                                "}"),
+                        EnumValue.parseJson("{" +
+                                "\"code\": 2," +
+                                "\"name\": \"Rat\"," +
+                                "\"text\": \"The rat (Rattus) is a family of various medium-sized, long-tailed rodents.\"" +
+                                "}"))
+                .map(e -> e.setArt("species"))
+                .map(enumValueRepository::save)
+                .collect(Collectors.toMap(EnumValue::getName, identity()));
+    }
+
+    @Transactional
     private Map<String, Owner> createAllOwner() {
         return Stream.of(
                         Owner.parseJson("{" +
@@ -122,15 +148,18 @@ public class ServerTestset implements CommandLineRunner {
     private Map<String, Pet> createAllPet(final Map<String, Owner> allOwner) {
         return Stream.of(
                         Pet.parseJson("{" +
-                                        "\"name\": \"Tom\"" +
+                                        "\"name\": \"Tom\"," +
+                                        "\"species\": \"Cat\"" +
                                         "}")
                                 .setOwner(allOwner.get("Thomas Mann")),
                         Pet.parseJson("{" +
-                                        "\"name\": \"Odi\"" +
+                                        "\"name\": \"Odi\"," +
+                                        "\"species\": \"Dog\"" +
                                         "}")
                                 .setOwner(allOwner.get("Thomas Mann")),
                         Pet.parseJson("{" +
-                                        "\"name\": \"Fox\"" +
+                                        "\"name\": \"Fox\"," +
+                                        "\"species\": \"Rat\"" +
                                         "}")
                                 .setOwner(allOwner.get("Stefan Zweig")))
                 .map(petRepository::save)

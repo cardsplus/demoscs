@@ -57,12 +57,20 @@
 
 	let allVetItem = [];
 
+	let allSpeciesEnum = [];
+
     onMount(async () => {
         try {
             allOwner = await loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
             console.log(['onMount', allOwner]);
             allVetItem = await loadAllValue('/api/vet/search/findAllItem');
             console.log(['onMount', allVetItem]);
+			allSpeciesEnum = await loadAllValue('/api/enum/species');
+            allSpeciesEnum = allSpeciesEnum.map(e => ({
+                value: e.value,
+                text: e.name
+            }))
+            console.log(['onMount', allSpeciesEnum]);
         } catch(err) {
 			console.log(['onMount', err]);
 			toast.push(err.toString());
@@ -90,11 +98,11 @@
 			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['createOwner', json]);
 			allOwner = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['createOwner', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -105,11 +113,11 @@
 			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['updateOwner', json]);
 			allOwner = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['updateOwner', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -121,11 +129,11 @@
 			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['removeOwner', json]);
 			allOwner = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['removeOwner', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -136,11 +144,11 @@
 			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['createPet', json]);
 			allOwner = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['createPet', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -151,11 +159,11 @@
 			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['createVisit', json]);
 			allOwner = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['createVisit', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -163,11 +171,11 @@
 	function reloadAllVisit(owner) {
 		loadAllValue('/api/visit/search/findAllByOwner?ownerId=' + owner.id)
 		.then(json => {
-			console.log(json);
+			console.log(['reloadAllVisit', json]);
 			allVisit = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['reloadAllVisit', err]);
 			toast.push(err.toString());
 		});
 	}
@@ -288,6 +296,7 @@
 						<PetEditor
 							bind:visible={petEditorCreate} 
 							on:create={e => createPet(e.detail)}
+							{allSpeciesEnum}
 							ownerId={owner.id}/>
 					<td>
 				</tr>

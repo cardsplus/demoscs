@@ -12,7 +12,8 @@ public class PetTest {
 
 	static Pet createWithName(final String name) {
 		final String json = "{" +
-				"\"name\":\"" + name + "\"" +
+				"\"name\":\"" + name + "\"," +
+				"\"species\":\"cat\"" +
 				"}";
 		return Pet.parseJson(json);
 	}
@@ -69,34 +70,40 @@ public class PetTest {
 		final String name = "Tom";
 		final String json = "{" +
 				"\"" + key + "\": \"" + name + "\"," +
-				"\"name\":\"" + name + "\"" +
+				"\"name\":\"" + name + "\"," +
+				"\"species\":\"cat\"" +
 				"}";
 		final Pet value = Pet.parseJson(json);
 		assertDoesNotThrow(value::verify);
 		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
+		assertEquals("cat", value.getSpecies());
 	}
 
 	@Test
 	void json() {
-		final String name = "Max.Mustermann";
+		final String name = "Tom";
 		final Pet value = createWithName(name);
 		assertDoesNotThrow(value::verify);
 		assertNotNull(value.getId());
 		assertEquals(name, value.getName());
+		assertEquals("cat", value.getSpecies());
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {
 			"{}",
-			"{\"name\": \"\"}",
-			"{\"name\": \"\", \"mail\": \"Max.Mustermann@a.de\"}",
-			"{\"name\": \" \", \"mail\": \"Max.Mustermann@a.de\"}",
-			"{\"name\": \"\\t\", \"mail\": \"Max.Mustermann@a.de\"}"
+			"{\"name\":\"\", \"species\":\"cat\"}",
+			"{\"name\":\" \", \"species\":\"cat\"}",
+			"{\"name\":\"\\t\", \"species\":\"cat\"}",
+			"{\"name\":\"\\n\", \"species\":\"cat\"}",
+			"{\"species\":\"\", \"name\":\"Tom\"}",
+			"{\"species\":\" \", \"name\":\"Tom\"}",
+			"{\"species\":\"\\t\", \"name\":\"Tom\"}",
+			"{\"species\":\"\\n\", \"name\":\"Tom\"}"
 	})
-	void jsonNameConstraints(final String json) {
+	void jsonConstraints(final String json) {
 		final Pet value = Pet.parseJson(json);
 		assertThrows(IllegalArgumentException.class, value::verify);
-		assertTrue(value.getName().isBlank());
 	}
 }
