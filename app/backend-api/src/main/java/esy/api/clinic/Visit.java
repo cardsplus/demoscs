@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import esy.api.client.Pet;
 import esy.api.client.PetItem;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @Table(name = "visit", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"})
 })
-public final class Visit extends JsonJpaValueBase<Visit> {
+public final class Visit extends JsonJpaEntity<Visit> {
 
     @Column(name = "date")
     @Getter

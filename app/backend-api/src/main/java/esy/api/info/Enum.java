@@ -22,7 +22,7 @@ import java.util.UUID;
         @UniqueConstraint(columnNames = {"art", "code"}),
         @UniqueConstraint(columnNames = {"art", "name"})
 })
-public final class Enum extends JsonJpaEntity<Enum> {
+public final class EnumValue extends JsonJpaEntity<EnumValue> {
 
     /**
      * Art der Aufzählung (Diskriminitor)

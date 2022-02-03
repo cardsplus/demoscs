@@ -2,7 +2,7 @@ package esy.api.clinic;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
@@ -21,7 +21,7 @@ import java.util.UUID;
         @UniqueConstraint(columnNames = {"id"}),
         @UniqueConstraint(columnNames = {"name"})
 })
-public final class Vet extends JsonJpaValueBase<Vet> {
+public final class Vet extends JsonJpaEntity<Vet> {
 
     @Column(name = "name")
     @Getter

@@ -15,17 +15,11 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class PetItem implements JsonJpaItem<UUID> {
 
-    /**
-     * Eindeutige UUID des Projekts.
-     */
     @Transient
     @Getter
     @JsonProperty
     private final UUID value;
 
-    /**
-     * Eindeutiger Name des Projekts.
-     */
     @Column(name = "text")
     @Getter
     @JsonProperty
