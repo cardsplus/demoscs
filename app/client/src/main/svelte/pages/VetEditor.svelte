@@ -9,17 +9,19 @@
     let showUpdate;
     let showRemove;
     let newVet = {
-        name: undefined
+        name: undefined,
+        allSkill: []
     }
 
     $: disabled = !newVet.name;
     $: if (vet) onChange()
     function onChange() {
         showUpdate = true;
-        showRemove = !vet.aktiv;
+        showRemove = true;
         newVet = {
             id: vet.id,
-            name: vet.name
+            name: vet.name,
+            allSkill: vet.allSkill
         }
         console.log(['onChange', newVet]);
     }

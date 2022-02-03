@@ -173,6 +173,32 @@ class VetRestApiTest {
     }
 
     @Test
+    @Order(32)
+    void patchApiVetSkill() throws Exception {
+        final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
+        assertTrue(vetRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(patch("/api/vet/" + uuid)
+                        .content("{" +
+                                "\"allSkill\": [\"Z\",\"A\"]" +
+                                "}")
+                        .contentType(MediaType.parseMediaType("application/merge-patch+json"))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(header()
+                        .exists("ETag"))
+                .andExpect(jsonPath("$.id")
+                        .value(uuid))
+                .andExpect(jsonPath("$.allSkill")
+                        .isArray());
+    }
+
+    @Test
     @Order(40)
     void getApiVet() throws Exception {
         assertEquals(2, vetRepository.count());
@@ -234,11 +260,17 @@ class VetRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"2\""))
+                        .string("ETag", "\"3\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.allSkill[0]")
+                        .value("A"))
+                .andExpect(jsonPath("$.allSkill[1]")
+                        .value("Z"))
+                .andExpect(jsonPath("$.allSkill[2]")
+                        .doesNotExist());
     }
 
     @Test
@@ -269,11 +301,17 @@ class VetRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"2\""))
+                        .string("ETag", "\"3\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.allSkill[0]")
+                        .value("A"))
+                .andExpect(jsonPath("$.allSkill[1]")
+                        .value("Z"))
+                .andExpect(jsonPath("$.allSkill[2]")
+                        .doesNotExist());
     }
 
     @Test
@@ -316,7 +354,6 @@ class VetRestApiTest {
     @Transactional
     @Rollback(false)
     void cleanup() {
-        assertEquals(1, vetRepository.count());
-        vetRepository.deleteAll();
+        assertDoesNotThrow(() -> vetRepository.deleteAll());
     }
 }

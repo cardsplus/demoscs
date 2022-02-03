@@ -12,5 +12,6 @@
     <include file="1001/owner.xml" relativeToChangelogFile="true"/>
     <include file="1001/pet.xml" relativeToChangelogFile="true"/>
     <include file="1002/vet.xml" relativeToChangelogFile="true"/>
+    <include file="1002/vet_skill.xml" relativeToChangelogFile="true"/>
     <include file="1002/visit.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
