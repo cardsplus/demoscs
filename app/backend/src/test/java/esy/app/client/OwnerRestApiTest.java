@@ -80,7 +80,8 @@ class OwnerRestApiTest {
         assertFalse(ownerRepository.findByName(name).isPresent());
         mockMvc.perform(post("/api/owner")
                         .content("{" +
-                                "\"name\":\"" + name + "\"" +
+                                "\"name\":\"" + name + "\"," +
+                                "\"address\":\"Bergweg 1, 5400 Hallein\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -96,7 +97,9 @@ class OwnerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.address")
+                        .isNotEmpty());
     }
 
     @Test
@@ -106,7 +109,8 @@ class OwnerRestApiTest {
         assertTrue(ownerRepository.findByName(name).isPresent());
         mockMvc.perform(post("/api/owner")
                         .content("{" +
-                                "\"name\":\"" + name + "\"" +
+                                "\"name\":\"" + name + "\"," +
+                                "\"address\":\"Bergweg 1, 5400 Hallein\"" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -123,8 +127,9 @@ class OwnerRestApiTest {
         assertFalse(ownerRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(put("/api/owner/" + uuid)
                         .content("{" +
-                                "\"name\":\"" + name + "\"" +
-                                "}")
+                                "\"name\":\"" + name + "\"," +
+                                "\"address\":\"Bergweg 1, 5400 Hallein\"" +
+                               "}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -139,7 +144,9 @@ class OwnerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.address")
+                        .isNotEmpty());
     }
 
     @ParameterizedTest
@@ -170,6 +177,36 @@ class OwnerRestApiTest {
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
                         .value(name));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "Domplatz 2, 5020 Salzburg",
+            "Bergweg 1, 5400 Hallein"
+    })
+    @Order(32)
+    void patchApiOwnerAddress(final String address) throws Exception {
+        final String uuid = "a1111111-1111-beef-dead-beefdeadbeef";
+        assertTrue(ownerRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(patch("/api/owner/" + uuid)
+                        .content("{" +
+                                "\"address\": \"" + address + "\"" +
+                                "}")
+                        .contentType(MediaType.parseMediaType("application/merge-patch+json"))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(header()
+                        .exists("ETag"))
+                .andExpect(jsonPath("$.id")
+                        .value(uuid))
+                .andExpect(jsonPath("$.address")
+                        .value(address));
     }
 
     @Test
@@ -234,11 +271,13 @@ class OwnerRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"2\""))
+                        .string("ETag", "\"4\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.address")
+                        .isNotEmpty());
     }
 
     @Test
@@ -269,11 +308,13 @@ class OwnerRestApiTest {
                 .andExpect(header()
                         .exists("Vary"))
                 .andExpect(header()
-                        .string("ETag", "\"2\""))
+                        .string("ETag", "\"4\""))
                 .andExpect(jsonPath("$.id")
                         .value(uuid))
                 .andExpect(jsonPath("$.name")
-                        .value(name));
+                        .value(name))
+                .andExpect(jsonPath("$.address")
+                        .isNotEmpty());
     }
 
     @Test

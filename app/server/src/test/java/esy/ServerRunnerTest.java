@@ -89,7 +89,8 @@ public class ServerRunnerTest {
 		final RestApiResult result1a = RestApiConnection.with(
 				toBackendUrl("/api/owner"))
 				.post("{" +
-						"\"name\":\"Alf " + name + "\"" +
+						"\"name\":\"Alf " + name + "\"," +
+						"\"address\":\"110 Space Way\"" +
 						"}");
 		assertThat(result1a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
@@ -101,7 +102,8 @@ public class ServerRunnerTest {
 		final RestApiResult result1b = RestApiConnection.with(
 				toBackendUrl("/api/owner"))
 				.post("{" +
-						"\"name\":\"Alf " + name + "\"" +
+						"\"name\":\"Alf " + name + "\"," +
+						"\"address\":\"110 Space Way\"" +
 						"}");
 		assertThat(result1b.getCode(),
 				equalTo(HttpStatus.CONFLICT.value()));
@@ -109,7 +111,8 @@ public class ServerRunnerTest {
 		final RestApiResult result2a = RestApiConnection.with(
 				toBackendUrl("/api/owner/" + value1.getId()))
 				.put("{" +
-						"\"name\":\"Max " + name + "\"" +
+						"\"name\":\"Max " + name + "\"," +
+						"\"address\":\"2749 Blackhawk Trail\"" +
 						"}");
 		assertThat(result2a.getCode(),
 				equalTo(HttpStatus.OK.value()));

@@ -15,6 +15,9 @@
             <column name="name" type="VARCHAR(512)">
                 <constraints nullable="false"/>
             </column>
+            <column name="address" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <addUniqueConstraint
                 constraintName="uk_owner"

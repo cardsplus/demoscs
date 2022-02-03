@@ -23,6 +23,11 @@ public final class Owner extends JsonJpaEntity<Owner> {
     @JsonProperty
     private String name;
 
+    @Column(name = "address")
+    @Getter
+    @JsonProperty
+    private String address;
+
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "owner",
@@ -36,12 +41,14 @@ public final class Owner extends JsonJpaEntity<Owner> {
     Owner() {
         super();
         this.name = "";
+        this.address = "";
         this.allPet = new LinkedHashSet<>();
     }
 
     Owner(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.name = "";
+        this.address = "";
         this.allPet = new LinkedHashSet<>();
     }
 
@@ -59,6 +66,7 @@ public final class Owner extends JsonJpaEntity<Owner> {
             return false;
         }
         return this.name.equals(that.name) &&
+                this.address.equals(that.address) &&
                 this.allPet.equals(that.allPet);
     }
 
@@ -67,6 +75,10 @@ public final class Owner extends JsonJpaEntity<Owner> {
         // Check if name is valid
         if (name.isBlank()) {
             throw new IllegalArgumentException("name is blank");
+        }
+        // Check if address is valid
+        if (address.isBlank()) {
+            throw new IllegalArgumentException("address is blank");
         }
         return this;
     }
@@ -78,6 +90,7 @@ public final class Owner extends JsonJpaEntity<Owner> {
         }
         final Owner value = new Owner(getVersion(), id);
         value.name = this.name;
+        value.address = this.address;
         value.allPet = this.allPet;
         return value;
     }
