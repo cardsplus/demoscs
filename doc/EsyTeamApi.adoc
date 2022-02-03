@@ -41,7 +41,7 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 hide members
 show attributes
 package "team" {
-  class NutzerValue<JsonJpaValueBase> {
+  class Nutzer<JPA> {
     mail
   }
 }

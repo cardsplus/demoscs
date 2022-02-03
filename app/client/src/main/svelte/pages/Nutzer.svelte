@@ -10,7 +10,7 @@
 	import { removeValue } from '../utils/rest.js';
 	import NutzerEditor from './NutzerEditor.svelte';
 
-	let allNutzerValue = [];
+	let allNutzer = [];
 	let nutzerIndexOf = undefined;
 	function onNutzerClicked(index) {
 		nutzerIndexOf = index;
@@ -32,8 +32,8 @@
 
     onMount(async () => {
         try {
-            allNutzerValue = await loadAllValue('/api/nutzer/search/findAllByOrderByMailAsc');
-            console.log(['onMount', allNutzerValue]);
+            allNutzer = await loadAllValue('/api/nutzer/search/findAllByOrderByMailAsc');
+            console.log(['onMount', allNutzer]);
 			allSpracheItem = await loadAllValue('/api/enum/sprache');
             console.log(['onMount', allSpracheItem]);
         } catch(err) {
@@ -58,7 +58,7 @@
             return false;
 		})
 	}
-	$: allNutzerValueFiltered = filterNutzer(filterPrefix,allNutzerValue);
+	$: allNutzerFiltered = filterNutzer(filterPrefix,allNutzer);
  
 	function createNutzer(nutzer) {
 		createValue('/api/nutzer', nutzer)
@@ -67,7 +67,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allNutzerValue = json;
+			allNutzer = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -82,7 +82,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allNutzerValue = json;
+			allNutzer = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -98,7 +98,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allNutzerValue = json;
+			allNutzer = json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -117,7 +117,7 @@
 			label="Filter" 
 			placeholder="Bitte Filterkriterien eingeben"/>
 		<h4 title="Liste der Nutzer, ggfs. gefiltert, jedes Element editierbar">
-			Aktuelle Nutzer <small>({allNutzerValueFiltered.length})</small>
+			Aktuelle Nutzer <small>({allNutzerFiltered.length})</small>
 		</h4>
 		<table class="table-fixed">
 			<thead class="justify-between">
@@ -152,7 +152,7 @@
 					<td>
 				</tr>
 				{/if}
-				{#each allNutzerValueFiltered as nutzer, i}
+				{#each allNutzerFiltered as nutzer, i}
 				<tr on:click={e => onNutzerClicked(i)}
 					title={nutzer.id}
 					class:ring={nutzerIndexOf === i}>

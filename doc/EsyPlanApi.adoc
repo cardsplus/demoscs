@@ -44,18 +44,18 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 !pragma layout smetana
 hide members
 show attributes
-class NutzerValue<JsonJpaValueBase> {
+class Nutzer<JPA> {
 }
 package "plan" {
-  class AufgabeValue<JsonJpaValueBase> {
+  class Aufgabe<JPA> {
     text
   }
-  class ProjektValue<JsonJpaValueBase> {
+  class Projekt<JPA> {
     name
   }
-  ProjektValue "1" *-- "*" AufgabeValue
-  ProjektValue "1" --> "1" NutzerValue : besitzer
-  ProjektValue "1" --> "*" NutzerValue : mitglied
+  Projekt "1" *-- "*" Aufgabe
+  Projekt "1" --> "1" Nutzer : besitzer
+  Projekt "1" --> "*" Nutzer : mitglied
 }
 ----
 

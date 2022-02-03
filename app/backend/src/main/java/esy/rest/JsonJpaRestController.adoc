@@ -106,7 +106,7 @@ Die Operation gibt in einer konkreten Implementierung eine Callback-Methode für
 Die Callback-Methode wird *vor* dem Speichern eines neuen Datensatzes ausgeführt.
 Die Methode kann den eingehenden Datensatz verändern.
 
-.Beispiel aus ProjektValueRestController
+.Beispiel aus ProjektRestController
 [source,java,options="nowrap"]
 ----
 protected Optional<TransactionCallback<Void>> beforeCreateTransaction(@NonNull final V value) {
@@ -145,10 +145,10 @@ Die Operation gibt in einer konkreten Implementierung eine Callback-Methode für
 Die Callback-Methode wird *vor* dem Speichern eines bereits existierenden Datensatzes ausgeführt.
 Die Methode kann den eingehenden Datensatz verändern.
 
-.Beispiel aus ProjektValueRestController
+.Beispiel aus ProjektRestController
 [source,java,options="nowrap"]
 ----
-protected Optional<TransactionCallback<Void>> beforeSaveTransaction(@NonNull final ProjektValue value) {
+protected Optional<TransactionCallback<Void>> beforeSaveTransaction(@NonNull final Projekt value) {
     return Optional.of(status -> {
         projektSeqRepository.findByRefId(value.getId())
                 .filter(seq -> seq.getSeqId().equals(value.getCode())) <1>
@@ -226,10 +226,10 @@ include::JsonJpaRestControllerBase.java[tags=beforeLinkDeleteTransaction, indent
 Die Operation gibt in einer konkreten Implementierung eine Callback-Methode für ein `TransactionTemplate` zurück.
 Die Callback-Methode wird *vor* dem Löschen einer Relation in diesem Datensatz ausgeführt.
 
-.Beispiel aus ProjektValueRestController
+.Beispiel aus ProjektRestController
 [source,java,options="nowrap"]
 ----
-protected Optional<TransactionCallback<Void>> beforeLinkDeleteTransaction(final ProjektValue value, final Object rel) {
+protected Optional<TransactionCallback<Void>> beforeLinkDeleteTransaction(final Projekt value, final Object rel) {
     if (value.getBesitzer() == null) { <1>
         throw new DataIntegrityViolationException("besitzer is null");
     }
