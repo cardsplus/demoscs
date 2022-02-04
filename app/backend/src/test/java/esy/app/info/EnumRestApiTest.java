@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({MockitoExtension.class, RestDocumentationExtension.class})
-class EnumValueRestApiTest {
+class EnumRestApiTest {
 
     static final String ENUM_ART = "TEST";
 
@@ -41,7 +41,7 @@ class EnumValueRestApiTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private EnumValueRepository enumValueRepository;
+    private EnumRepository enumRepository;
 
     @BeforeEach
     void setUp(final WebApplicationContext webApplicationContext,
@@ -232,9 +232,9 @@ class EnumValueRestApiTest {
     @Transactional
     @Rollback(false)
     void cleanup() {
-        assertEquals(3, enumValueRepository.count(ENUM_ART));
-        enumValueRepository.findAll(ENUM_ART).forEach(e ->
-                enumValueRepository.delete(e));
-        enumValueRepository.deleteAll();
+        assertEquals(3, enumRepository.count(ENUM_ART));
+        enumRepository.findAll(ENUM_ART).forEach(e ->
+                enumRepository.delete(e));
+        enumRepository.deleteAll();
     }
 }

@@ -1,6 +1,6 @@
 package esy.app.info;
 
-import esy.api.info.EnumValue;
+import esy.api.info.Enum;
 import esy.app.DatabaseConfiguration;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 @Rollback(false)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class EnumValueRepositoryTest {
+public class EnumRepositoryTest {
 
     @Autowired
     private DataSource dataSource;
@@ -43,7 +43,7 @@ public class EnumValueRepositoryTest {
     private TransactionTemplate transactionTemplate;
 
     @Autowired
-    private EnumValueRepository enumValueRepository;
+    private EnumRepository enumRepository;
 
     @Test
     @Order(0)
@@ -52,19 +52,19 @@ public class EnumValueRepositoryTest {
         assertNotNull(jdbcTemplate);
         assertNotNull(entityManager);
         assertNotNull(transactionTemplate);
-        assertNotNull(enumValueRepository);
+        assertNotNull(enumRepository);
     }
 
     static final String ENUM_ART = "TEST";
 
-    EnumValue createWithName(final String name, final Long code) {
+    Enum createWithName(final String name, final Long code) {
         final String json = "{" +
                 "\"art\": \"" + ENUM_ART + "\"," +
                 "\"code\": \"" + code + "\","+
                 "\"name\": \"" + name + "\"," +
                 "\"text\": \"A " + name + "\"" +
                 "}";
-        return EnumValue.parseJson(json);
+        return Enum.parseJson(json);
     }
 
     @ParameterizedTest
@@ -79,8 +79,8 @@ public class EnumValueRepositoryTest {
     })
     @Order(1)
     void saveEnum(final String name) {
-        final Long code = enumValueRepository.count(ENUM_ART);
-        final EnumValue value0 = createWithName(name, code);
+        final Long code = enumRepository.count(ENUM_ART);
+        final Enum value0 = createWithName(name, code);
         assertFalse(value0.isPersisted());
         assertEquals(0L, value0.getVersion());
         assertEquals(ENUM_ART, value0.getArt());
@@ -88,8 +88,8 @@ public class EnumValueRepositoryTest {
         assertEquals(name, value0.getName());
         assertEquals("A " + name, value0.getText());
 
-        final EnumValue value1 = transactionTemplate.execute(status ->
-                enumValueRepository.save(value0));
+        final Enum value1 = transactionTemplate.execute(status ->
+                enumRepository.save(value0));
         assertNotNull(value1);
         assertTrue(value1.isPersisted());
         assertEquals(0L, value1.getVersion());
@@ -100,39 +100,39 @@ public class EnumValueRepositoryTest {
     @Test
     @Order(2)
     void saveEnumUniqueKeyConstraint() {
-        assertEquals(7, enumValueRepository.count(ENUM_ART));
+        assertEquals(7, enumRepository.count(ENUM_ART));
         assertThrows(DataIntegrityViolationException.class, () ->
                 transactionTemplate.execute(status ->
-                        enumValueRepository.save(createWithName("JIRA", 8L))));
+                        enumRepository.save(createWithName("JIRA", 8L))));
         assertThrows(DataIntegrityViolationException.class, () ->
                 transactionTemplate.execute(status ->
-                        enumValueRepository.save(createWithName("ARIJ", 1L))));
+                        enumRepository.save(createWithName("ARIJ", 1L))));
     }
 
     @Test
     @Order(3)
     void findEnum() {
-        assertEquals(7, enumValueRepository.count(ENUM_ART));
-        final EnumValue value = enumValueRepository.findAll(ENUM_ART).get(0);
-        assertEquals(value, enumValueRepository.findByCode(ENUM_ART, 0L).orElseThrow());
-        assertEquals(value, enumValueRepository.findByName(ENUM_ART, "JIRA").orElseThrow());
-        assertTrue(enumValueRepository.existsById(value.getId()));
-        assertTrue(enumValueRepository.findById(value.getId()).orElseThrow().isEqual(value));
+        assertEquals(7, enumRepository.count(ENUM_ART));
+        final Enum value = enumRepository.findAll(ENUM_ART).get(0);
+        assertEquals(value, enumRepository.findByCode(ENUM_ART, 0L).orElseThrow());
+        assertEquals(value, enumRepository.findByName(ENUM_ART, "JIRA").orElseThrow());
+        assertTrue(enumRepository.existsById(value.getId()));
+        assertTrue(enumRepository.findById(value.getId()).orElseThrow().isEqual(value));
     }
 
     @Test
     @Order(4)
     void findEnumNoElement() {
         final UUID uuid = UUID.randomUUID();
-        assertFalse(enumValueRepository.existsById(uuid));
-        assertFalse(enumValueRepository.findById(uuid).isPresent());
+        assertFalse(enumRepository.existsById(uuid));
+        assertFalse(enumRepository.findById(uuid).isPresent());
     }
 
     @Test
     @Order(5)
     void findAll() {
-        assertEquals(7, enumValueRepository.count(ENUM_ART));
-        final List<EnumValue> allValue = enumValueRepository.findAll(ENUM_ART);
+        assertEquals(7, enumRepository.count(ENUM_ART));
+        final List<Enum> allValue = enumRepository.findAll(ENUM_ART);
         assertEquals(7, allValue.size());
         assertEquals("JIRA", allValue.get(0).getName());
         assertEquals("JIRA Cloud", allValue.get(1).getName());
@@ -141,16 +141,16 @@ public class EnumValueRepositoryTest {
         assertEquals("Öl", allValue.get(4).getName());
         assertEquals("Übel", allValue.get(5).getName());
         assertEquals("Spaß", allValue.get(6).getName());
-        assertTrue(allValue.removeAll(enumValueRepository.findAll()));
+        assertTrue(allValue.removeAll(enumRepository.findAll()));
         assertTrue(allValue.isEmpty());
     }
 
     @Test
     @Order(99)
     void deleteAll() {
-        assertEquals(7, enumValueRepository.count(ENUM_ART));
-        enumValueRepository.findAll(ENUM_ART).forEach(e ->
-                enumValueRepository.delete(e));
-        assertEquals(0, enumValueRepository.count(ENUM_ART));
+        assertEquals(7, enumRepository.count(ENUM_ART));
+        enumRepository.findAll(ENUM_ART).forEach(e ->
+                enumRepository.delete(e));
+        assertEquals(0, enumRepository.count(ENUM_ART));
     }
 }

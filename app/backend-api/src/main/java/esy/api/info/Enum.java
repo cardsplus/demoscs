@@ -21,7 +21,7 @@ import java.util.UUID;
         @UniqueConstraint(columnNames = {"art", "code"}),
         @UniqueConstraint(columnNames = {"art", "name"})
 })
-public final class EnumValue extends JsonJpaEntity<EnumValue> {
+public final class Enum extends JsonJpaEntity<Enum> {
 
     /**
      * Art der Aufzählung (Diskriminitor)
@@ -60,7 +60,7 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
      * Instanz ist nicht gültig, d.h. der Aufruf von
      * {@link #verify()} ist nicht erfolgreich.
      */
-    EnumValue() {
+    Enum() {
         super();
         this.art = "";
         this.code = 0L;
@@ -73,7 +73,7 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
      * Instanz ist nicht gültig, d.h. der Aufruf von
      * {@link #verify()} ist nicht erfolgreich.
      */
-    EnumValue(@NonNull final Long version, @NonNull final UUID id) {
+    Enum(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.art = "";
         this.code = 0L;
@@ -87,7 +87,7 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
     }
 
     @Override
-    public boolean isEqual(final EnumValue that) {
+    public boolean isEqual(final Enum that) {
         if (this == that) {
             return true;
         }
@@ -101,7 +101,7 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
     }
 
     @Override
-    public EnumValue verify() {
+    public Enum verify() {
         if (name.isBlank()) {
             throw new IllegalArgumentException("name is blank");
         }
@@ -112,11 +112,11 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
     }
 
     @Override
-    public EnumValue withId(@NonNull final UUID id) {
+    public Enum withId(@NonNull final UUID id) {
         if (getId().equals(id)) {
             return this;
         }
-        final EnumValue value = new EnumValue(getVersion(), id);
+        final Enum value = new Enum(getVersion(), id);
         value.art = this.art;
         value.code = this.code;
         value.name = this.name;
@@ -131,22 +131,22 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
         return allExtra;
     }
 
-    public EnumValue setArt(@NonNull final String art) {
+    public Enum setArt(@NonNull final String art) {
         this.art = art;
         return this;
     }
 
-    public EnumValue setCode(@NonNull final Long code) {
+    public Enum setCode(@NonNull final Long code) {
         this.code = code;
         return this;
     }
 
-    public EnumValue setName(@NonNull final String name) {
+    public Enum setName(@NonNull final String name) {
         this.name = name;
         return this;
     }
 
-    public EnumValue setText(@NonNull final String text) {
+    public Enum setText(@NonNull final String text) {
         this.text = text;
         return this;
     }
@@ -156,7 +156,7 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
         return new JsonMapper().writeJson(this);
     }
 
-    public static EnumValue parseJson(@NonNull final String json) {
-        return new JsonMapper().parseJson(json, EnumValue.class);
+    public static Enum parseJson(@NonNull final String json) {
+        return new JsonMapper().parseJson(json, Enum.class);
     }
 }

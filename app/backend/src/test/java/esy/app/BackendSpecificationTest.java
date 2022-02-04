@@ -4,7 +4,7 @@ import esy.api.client.Owner;
 import esy.api.client.Pet;
 import esy.api.clinic.Vet;
 import esy.api.clinic.Visit;
-import esy.api.info.EnumValue;
+import esy.api.info.Enum;
 import esy.api.info.Version;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ public class BackendSpecificationTest {
     @Test
     void service() {
         // check existence of all adoc files for doc/service.adoc
-        assertTrue(Files.exists(restApiFor(EnumValue.class)));
+        assertTrue(Files.exists(restApiFor(Enum.class)));
         assertTrue(Files.exists(restApiFor(Version.class)));
         assertTrue(Files.exists(restApiFor(Owner.class)));
         assertTrue(Files.exists(restApiFor(Pet.class)));

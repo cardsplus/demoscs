@@ -1,6 +1,6 @@
 package esy.app.info;
 
-import esy.api.info.EnumValue;
+import esy.api.info.Enum;
 import esy.rest.JsonJpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RepositoryRestResource(path = "enum", collectionResourceRel = "allEnum")
-public interface EnumValueRepository extends JsonJpaRepository<EnumValue> {
+public interface EnumRepository extends JsonJpaRepository<Enum> {
 
     /**
      * Returns all persisted values of given discriminator.
@@ -17,10 +17,10 @@ public interface EnumValueRepository extends JsonJpaRepository<EnumValue> {
      * @param art discriminator
      * @return persisted values
      */
-    @Query("SELECT e FROM EnumValue e " +
+    @Query("SELECT e FROM Enum e " +
             "WHERE e.art = ?1 " +
             "ORDER BY e.art ASC, e.code")
-    List<EnumValue> findAll(String art);
+    List<Enum> findAll(String art);
 
     /**
      * Returns all persisted values of given discriminator
@@ -31,11 +31,11 @@ public interface EnumValueRepository extends JsonJpaRepository<EnumValue> {
      * @param code unique code
      * @return persisted values
      */
-    @Query("SELECT e FROM EnumValue e " +
+    @Query("SELECT e FROM Enum e " +
             "WHERE e.art = ?1 " +
             "AND e.code = ?2 " +
             "ORDER BY e.art ASC, e.code")
-    Optional<EnumValue> findByCode(String art, Long code);
+    Optional<Enum> findByCode(String art, Long code);
 
     /**
      * Returns all persisted values of given discriminator
@@ -46,11 +46,11 @@ public interface EnumValueRepository extends JsonJpaRepository<EnumValue> {
      * @param name unique name
      * @return persisted values
      */
-    @Query("SELECT e FROM EnumValue e " +
+    @Query("SELECT e FROM Enum e " +
             "WHERE e.art = ?1 " +
             "AND e.name = ?2 " +
             "ORDER BY e.art ASC, e.code")
-    Optional<EnumValue> findByName(String art, String name);
+    Optional<Enum> findByName(String art, String name);
 
     /**
      * Returns the number of persisted values of given discriminator.
@@ -58,7 +58,7 @@ public interface EnumValueRepository extends JsonJpaRepository<EnumValue> {
      * @param art discriminator
      * @return the number of values
      */
-    @Query("SELECT COUNT(e) FROM EnumValue e " +
+    @Query("SELECT COUNT(e) FROM Enum e " +
             "WHERE e.art = ?1")
     long count(String art);
 }
