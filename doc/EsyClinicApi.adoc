@@ -43,10 +43,16 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 hide members
 show attributes
 enum SKILL
+enum SPECIES
 package "client" {
-    class Pet<JPA> {
+    class Owner<JPA> {
         name
     }
+    class Pet<JsonJpaBase> {
+        name
+    }
+    Pet "1" *-- "*" Owner
+    Pet -- SPECIES
 }
 package "clinic" {
     class Vet<JPA> {

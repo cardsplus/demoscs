@@ -36,12 +36,12 @@ für mehr Informationen.
 
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
-
-[plantuml,Client,png]
+[plantuml,EsyClient,png]
 ----
 !pragma layout smetana
 hide members
 show attributes
+enum SKILL
 enum SPECIES
 package "client" {
     class Owner<JPA> {
@@ -54,9 +54,14 @@ package "client" {
     Pet -- SPECIES
 }
 package "clinic" {
+    class Vet<JPA> {
+        name
+    }
     class Visit<JPA> {
         date, text
     }
+    Vet "1" *-- "*" Visit
+    Vet -- SKILL
     Pet "1" *-- "*" Visit
 }
 ----
