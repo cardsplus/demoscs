@@ -83,7 +83,7 @@
 	};
 
 	function removeItem(item) {
-		if (!confirm("Enum '" + item.name + "' wirklich löschen?")) return;
+		if (!confirm("Really delete '" +  item.name + "'?")) return;
 		removeValue('/api/enum/' + art + '/' + item.code)
 		.then(() => {
 			return loadAllValue('/api/enum/' + art);

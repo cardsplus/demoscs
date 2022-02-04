@@ -60,18 +60,18 @@
         <TextField bind:value={newItem.code} 
             type=number
             label="Code"		
-            placeholder="Bitte den Code eingeben"/>
+            placeholder="Insert a unique code"/>
         {/if}
     </div>
     <div class="w-full lg:w-1/4">
         <TextField bind:value={newItem.name} 
             label="Name"		
-            placeholder="Bitte den Namen eingeben"/>
+            placeholder="Insert a unique name"/>
     </div>
     <div class="w-full lg:w-1/2">
         <TextField bind:value={newItem.text} 
             label="Text"		
-            placeholder="Bitte den Text eingeben"/>
+            placeholder="Insert a text"/>
     </div>
 </div>
 
