@@ -124,8 +124,7 @@
 					<td	class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorCreate}
-							on:create={e => reloadAllItem()}
-							{art}
+							on:create={e => createItem(e.detail)}
 							code={allItem.length}/>
 					<td>
 				</tr>
@@ -156,9 +155,8 @@
 					<td class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorUpdate}
-							on:update={e => reloadAllItem()}
-							on:remove={e => reloadAllItem()}
-							{art}
+							on:update={e => updateItem(e.detail)}
+							on:remove={e => removeItem(e.detail)}
 							code={item.code}
 							{item}/>
 					<td>

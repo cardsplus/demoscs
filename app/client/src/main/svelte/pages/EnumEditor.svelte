@@ -10,19 +10,19 @@
     
     export let visible = false;
     export let item = undefined;
-    export let art;
     export let code;
 
     let showUpdate;
     let showRemove;
     let newItem = {
         code: code,
-        name: '',
-        text: ''
+        name: undefined,
+        text: undefined
     }
 
-    $: if (item) onChangeItem()
-    function onChangeItem() {
+    $: disabled = !newItem.name || !newItem.text;
+    $: if (item) onChange()
+    function onChange() {
         showUpdate = true;
         showRemove = false;
         newItem = {

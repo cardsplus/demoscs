@@ -78,7 +78,7 @@ public class ServerRunnerTest {
 				toBackendUrl("/api/enum/species")).get();
 		assertThat(result.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertEquals(3, result.toCollection(Enum.class).size());
+		assertEquals(5, result.toCollection(Enum.class).size());
 	}
 
 	@Test
