@@ -131,7 +131,8 @@
 					<td	class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorCreate}
-							on:create={e => createItem(e.detail)}/>
+							on:create={e => createItem(e.detail)}
+							code={allItem.length}/>
 					<td>
 				</tr>
 				{/if}
@@ -162,6 +163,7 @@
 							bind:visible={itemEditorUpdate}
 							on:update={e => updateItem(e.detail)}
 							on:remove={e => removeItem(e.detail)}
+							code={item.code}
 							{item}/>
 					<td>
 				</tr>

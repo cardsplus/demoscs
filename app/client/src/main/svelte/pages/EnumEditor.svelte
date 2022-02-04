@@ -5,22 +5,23 @@
     
     export let visible = false;
     export let item = undefined;
+    export let code;
 
     let showUpdate;
     let showRemove;
     let newItem = {
-        code: undefined,
+        code: code,
         name: undefined,
         text: undefined
     }
 
-    $: disabled = !newItem.code || !newItem.name || !newItem.text;
+    $: disabled = !newItem.name || !newItem.text;
     $: if (item) onChange()
     function onChange() {
         showUpdate = true;
         showRemove = false;
         newItem = {
-            code: item.code,
+            code: code,
             name: item.name,
             text: item.text
         }

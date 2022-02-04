@@ -108,17 +108,27 @@ public class ServerTestset implements CommandLineRunner {
                         Enum.parseJson("{" +
                                 "\"code\": 0," +
                                 "\"name\":\"Cat\"," +
-                                "\"text\":\"The cat (Felis catus) is a domestic species of a small carnivorous mammal.\"" +
+                                "\"text\":\"A cat (tax. felis catus) is a domestic species of a small carnivorous mammal.\"" +
                                 "}"),
                         Enum.parseJson("{" +
                                 "\"code\": 1," +
                                 "\"name\":\"Dog\"," +
-                                "\"text\":\"The dog (Canis familiaris) is a domesticated descendant of the wolf.\"" +
+                                "\"text\":\"A dog (tax. canis familiaris) is a domesticated descendant of the wolf.\"" +
                                 "}"),
                         Enum.parseJson("{" +
                                 "\"code\": 2," +
                                 "\"name\":\"Rat\"," +
-                                "\"text\":\"The rat (Rattus) is a family of various medium-sized, long-tailed rodents.\"" +
+                                "\"text\":\"A rat (tax. rattus) is a family of various medium-sized, long-tailed rodents.\"" +
+                                "}"),
+                        Enum.parseJson("{" +
+                                "\"code\": 3," +
+                                "\"name\":\"Pig\"," +
+                                "\"text\":\"A pig (tax. sus domesticus) is an omnivorous, domesticated even-toed hoofed mammal.\"" +
+                                "}"),
+                        Enum.parseJson("{" +
+                                "\"code\": 4," +
+                                "\"name\":\"Bird\"," +
+                                "\"text\":\"A bird (tax. aves) is a class of various feathered anmimals.\"" +
                                 "}"))
                 .map(e -> e.setArt("species"))
                 .map(enumRepository::save)
