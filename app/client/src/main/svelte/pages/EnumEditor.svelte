@@ -80,28 +80,29 @@
     }
 </script>
 
-<div class="flex flex-col gap-1">
-    <div class="w-full flex flex-row gap-1 items-baseline">
-        <div class="w-1/6">
-            <TextField 
-                bind:value={newItem.code}
-                type=number
-                label="Code"		
-                placeholder="Bitte den Code eingeben"		
-                disabled={showUpdate}/>
-        </div>
-        <div class="w-full">
-            <TextField
-                bind:value={newItem.name} 
-                label="Name"		
-                placeholder="Bitte den Namen eingeben"/>
-        </div>
+<div class="flex flex-col lg:flex-row gap-1 items-baseline">
+    <div class="w-full lg:w-1/4">
+        {#if showUpdate}
+        <TextField bind:value={newItem.code}
+            type=number
+            label="Code"		
+            disabled/>
+        {:else}
+        <TextField bind:value={newItem.code} 
+            type=number
+            label="Code"		
+            placeholder="Insert a unique code"/>
+        {/if}
     </div>
-    <div class="w-full">
-        <TextArea 
-            bind:value={newItem.text} 
+    <div class="w-full lg:w-1/4">
+        <TextField bind:value={newItem.name} 
+            label="Name"		
+            placeholder="Insert a unique name"/>
+    </div>
+    <div class="w-full lg:w-1/2">
+        <TextField bind:value={newItem.text} 
             label="Text"		
-            placeholder="Bitte den Text eingeben"/>
+            placeholder="Insert a text"/>
     </div>
 </div>
 
