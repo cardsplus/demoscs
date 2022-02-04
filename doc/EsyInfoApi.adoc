@@ -34,12 +34,15 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,model,png]
+[plantuml,EsyInfo,png]
 ----
 !pragma layout smetana
 hide members
 show attributes
 package "info" {
+  class Enum<JPA> {
+    code,name,text
+  }
   class Version {
     major:minor
   }

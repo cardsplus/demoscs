@@ -39,7 +39,7 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,Plan,png]
+[plantuml,EsyPlan,png]
 ----
 !pragma layout smetana
 hide members
