@@ -5,7 +5,7 @@
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
 	import { createValue } from '../utils/rest.js';
-	import { updatePatch } from '../utils/rest.js';
+	import { updateValue } from '../utils/rest.js';
 	import { removeValue } from '../utils/rest.js';
 	import EnumEditor from './EnumEditor.svelte';
 
@@ -13,21 +13,21 @@
 
 	let allItem = [];
 	let itemIndexOf = undefined;
+	let itemCode = undefined;
 	function onItemClicked(index) {
 		itemIndexOf = index;
 	}
 
 	let itemEditorCreate = false;
+	let itemEditorUpdate = false;
+	$: itemEditorDisabled = itemEditorCreate || itemEditorUpdate;
 	function itemEditorCreateClicked() {
 		itemEditorCreate = true;
 	}
-	let itemEditorUpdate = false;
-	let itemEditorUpdateCode = undefined;
-	function itemEditorUpdateClicked(code) {
-		itemEditorUpdateCode = code;
+	function itemEditorUpdateClicked(item) {
 		itemEditorUpdate = true;
+		itemCode = item.code;
 	}
-	$: itemEditorDisabled = itemEditorCreate || itemEditorUpdate;
 
     onMount(async () => {
         try {
@@ -40,6 +40,7 @@
 	});
 
 	let filterPrefix = '';
+	$: allItemFiltered = filterEnum(filterPrefix, allItem);
 	function filterEnum(prefix,allValue) {
 		itemIndexOf = undefined;
 		if (!filterPrefix) return allValue;
@@ -50,7 +51,6 @@
 			return false;
 		})
 	}
-	$: allItemFiltered = filterEnum(filterPrefix, allItem);
 
 	function createItem(item) {
 		createValue('/api/enum/' + art, item)
@@ -58,59 +58,53 @@
 			return loadAllValue('/api/enum/' + art);
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['createItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['createItem', err]);
 			toast.push(err.toString());
 		});
 	};
 
 	function updateItem(item) {
-		updatePatch('/api/enum/' + art + '/' + item.id, item)
+		updateValue('/api/enum/' + art + '/' + item.code, item)
 		.then(() => {
 			return loadAllValue('/api/enum/' + art);
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['updateItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['updateItem', err]);
 			toast.push(err.toString());
 		});
 	};
 
 	function removeItem(item) {
 		if (!confirm("Enum '" + item.name + "' wirklich löschen?")) return;
-		removeValue('/api/enum/' + art + '/' + item.id)
+		removeValue('/api/enum/' + art + '/' + item.code)
 		.then(() => {
 			return loadAllValue('/api/enum/' + art);
 		})
 		.then(json => {
-			console.log(json);
+			console.log(['removeItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(err);
+			console.log(['removeItem', err]);
 			toast.push(err.toString());
 		});
 	};
 </script>
 
-<h1>{art.toUpperCase()}</h1>
+<h1>{art.toUpperCase()} <span class="text-sm">({allItemFiltered.length})</span></h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
-		<h4 title="Filter für die Werte, nicht case-sensitiv">
-			Aktueller Filter
-		</h4>
 		<TextField bind:value={filterPrefix}
 			label="Filter"
-			placeholder="Bitte Filterkriterien eingeben"/>
-		<h4 title="Liste der Werte, ggfs. gefiltert, jedes Element editierbar">
-			Aktuelle Werte <small>({allItemFiltered.length})</small>
-		</h4>
+			placeholder="Insert a criteria"/>
 		<table class="table-fixed">
 			<thead class="justify-between">
 				<tr class="bg-gray-100">
@@ -134,10 +128,11 @@
 			<tbody>
 				{#if itemEditorCreate}
 				<tr>
-					<td	colspan="3">
+					<td	class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorCreate}
-							on:create={e => createItem(e.detail)}/>
+							on:create={e => createItem(e.detail)}
+							code={allItem.length}/>
 					<td>
 				</tr>
 				{/if}
@@ -155,19 +150,20 @@
 						<span>{item.text}</span>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => itemEditorUpdateClicked(item.code)}
+						<Icon on:click={() => itemEditorUpdateClicked(item)}
 							disabled={itemEditorDisabled}
 							name="edit"
                             outlined/>
 					</td>
 				</tr>
-				{#if itemEditorUpdate && itemEditorUpdateCode === item.code}
+				{#if itemEditorUpdate && itemCode === item.code}
 				<tr>
-					<td colspan="3">
+					<td class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorUpdate}
 							on:update={e => updateItem(e.detail)}
 							on:remove={e => removeItem(e.detail)}
+							code={item.code}
 							{item}/>
 					<td>
 				</tr>
@@ -175,7 +171,7 @@
 				{:else}
 				<tr>
 					<td class="px-2 py-3" colspan="4">
-						Keine Werte
+						No items
 					</td>
 				</tr>
 				{/each}
