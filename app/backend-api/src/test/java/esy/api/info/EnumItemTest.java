@@ -9,18 +9,20 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EnumItemTest {
 
     Enum createWithName(final String name) {
-        return Enum.parseJson("{" +
+        final String json = "{" +
                 "\"art\": \"QUELLE\"," +
                 "\"name\": \"" + name + "\"," +
                 "\"code\": \"2\"," +
                 "\"text\": \"A " + name + "\"" +
-                "}");
+                "}";
+        return Enum.parseJson(json);
     }
 
     @Test
     void equalsHashcodeToString() {
         final String name = "JIRA";
-        final EnumItem value = EnumItem.fromValue(createWithName(name));
+        final Enum value = createWithName(name);
+        final EnumItem item0 = EnumItem.fromValue(value);
         // Identisches Objekt
         assertEquals(value, value);
         assertEquals(value.hashCode(), value.hashCode());

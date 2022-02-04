@@ -22,7 +22,7 @@ import java.util.UUID;
         @UniqueConstraint(columnNames = {"art", "code"}),
         @UniqueConstraint(columnNames = {"art", "name"})
 })
-public final class EnumValue extends JsonJpaEntity<EnumValue> {
+public final class Enum extends JsonJpaEntity<Enum> {
 
     /**
      * Art der Aufzählung (Diskriminitor)
@@ -56,6 +56,11 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
     @JsonProperty
     private String text;
 
+    /**
+     * Erzeugt eine Instanz mit Standardwerten. Die
+     * Instanz ist nicht gültig, d.h. der Aufruf von
+     * {@link #verify()} ist nicht erfolgreich.
+     */
     Enum() {
         super();
         this.art = "";
@@ -64,6 +69,11 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
         this.text = "";
     }
 
+    /**
+     * Erzeugt eine Instanz mit Standardwerten. Die
+     * Instanz ist nicht gültig, d.h. der Aufruf von
+     * {@link #verify()} ist nicht erfolgreich.
+     */
     Enum(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.art = "";
@@ -122,25 +132,21 @@ public final class EnumValue extends JsonJpaEntity<EnumValue> {
         return allExtra;
     }
 
-    @JsonIgnore
     public Enum setArt(@NonNull final String art) {
         this.art = art;
         return this;
     }
 
-    @JsonIgnore
     public Enum setCode(@NonNull final Long code) {
         this.code = code;
         return this;
     }
 
-    @JsonIgnore
     public Enum setName(@NonNull final String name) {
         this.name = name;
         return this;
     }
 
-    @JsonIgnore
     public Enum setText(@NonNull final String text) {
         this.text = text;
         return this;

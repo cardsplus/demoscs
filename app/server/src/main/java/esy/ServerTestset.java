@@ -5,12 +5,12 @@ import esy.api.client.Owner;
 import esy.api.client.Pet;
 import esy.api.clinic.Vet;
 import esy.api.clinic.Visit;
-import esy.api.info.EnumValue;
+import esy.api.info.Enum;
 import esy.app.client.OwnerRepository;
 import esy.app.client.PetRepository;
 import esy.app.clinic.VetRepository;
 import esy.app.clinic.VisitRepository;
-import esy.app.info.EnumValueRepository;
+import esy.app.info.EnumRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -60,10 +60,10 @@ public class ServerTestset implements CommandLineRunner {
             return;
         }
 
-        final Map<String, EnumValue> allEnumSkill = createAllEnumSkill();
+        final Map<String, Enum> allEnumSkill = createAllEnumSkill();
         allEnumSkill.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final Map<String, EnumValue> allEnumSpecies = createAllEnumSpecies();
+        final Map<String, Enum> allEnumSpecies = createAllEnumSpecies();
         allEnumSpecies.values().forEach(e -> log.info("CREATED [{}]", e));
 
         final Map<String, Owner> allOwner = createAllOwner();
@@ -80,7 +80,7 @@ public class ServerTestset implements CommandLineRunner {
     }
 
     @Transactional
-    private Map<String, EnumValue> createAllEnumSkill() {
+    private Map<String, Enum> createAllEnumSkill() {
         return Stream.of(
                         Enum.parseJson("{" +
                                 "\"code\": 0," +
@@ -98,31 +98,31 @@ public class ServerTestset implements CommandLineRunner {
                                 "\"text\":\"Surgery he branch of medical practice that treats injuries, diseases, and deformities by the physical removal, repair, or readjustment of organs and tissues.\"" +
                                 "}"))
                 .map(e -> e.setArt("skill"))
-                .map(enumValueRepository::save)
-                .collect(Collectors.toMap(EnumValue::getName, identity()));
+                .map(enumRepository::save)
+                .collect(Collectors.toMap(Enum::getName, identity()));
     }
 
     @Transactional
-    private Map<String, EnumValue> createAllEnumSpecies() {
+    private Map<String, Enum> createAllEnumSpecies() {
         return Stream.of(
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 0," +
                                 "\"name\":\"Cat\"," +
                                 "\"text\":\"The cat (Felis catus) is a domestic species of a small carnivorous mammal.\"" +
                                 "}"),
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 1," +
                                 "\"name\":\"Dog\"," +
                                 "\"text\":\"The dog (Canis familiaris) is a domesticated descendant of the wolf.\"" +
                                 "}"),
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 2," +
                                 "\"name\":\"Rat\"," +
                                 "\"text\":\"The rat (Rattus) is a family of various medium-sized, long-tailed rodents.\"" +
                                 "}"))
                 .map(e -> e.setArt("species"))
-                .map(enumValueRepository::save)
-                .collect(Collectors.toMap(EnumValue::getName, identity()));
+                .map(enumRepository::save)
+                .collect(Collectors.toMap(Enum::getName, identity()));
     }
 
     @Transactional
