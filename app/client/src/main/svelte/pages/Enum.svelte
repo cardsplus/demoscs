@@ -4,9 +4,7 @@
 	import TextField from '../components/TextField';
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
-	import { createValue } from '../utils/rest.js';
 	import { updateValue } from '../utils/rest.js';
-	import { removeValue } from '../utils/rest.js';
 	import EnumEditor from './EnumEditor.svelte';
 
 	export let art;
@@ -18,6 +16,7 @@
 	}
 	
 	let itemEditorCreate = false;
+	let itemEditorUpdate = false;
 	function itemEditorCreateClicked() {
 		itemEditorCreate = true;
 	}
@@ -51,52 +50,40 @@
 	function reloadAllItem() {
 		loadAllValue('/api/enum/' + art)
 		.then(json => {
-			console.log(['createItem', json]);
+			console.log(['reloadAllItem', json]);
 			allItem = json;
 		})
 		.catch(err => {
-			console.log(['createItem', err]);
+			console.log(['reloadAllItem', err]);
 			toast.push(err.toString());
 		});
 	};
 	function updateItem(item) {
 		updateValue('/api/enum/' + art + '/' + item.code, item)
 		.then(() => {
-			return loadAllValue('/api/enum/' + art);
-		})
-		.then(json => {
-			console.log(['updateItem', json]);
-			allItem = json;
+			reloadAllItem();
 		})
 		.catch(err => {
 			console.log(['updateItem', err]);
 			toast.push(err.toString());
 		});
 	};
-
-	function removeItem(item) {
-		if (!confirm("Really delete '" +  item.name + "'?")) return;
-		removeValue('/api/enum/' + art + '/' + item.code)
-		.then(() => {
-			return loadAllValue('/api/enum/' + art);
-		})
-		.then(json => {
-			console.log(['removeItem', json]);
-			allItem = json;
-		})
-		.catch(err => {
-			console.log(['removeItem', err]);
-			toast.push(err.toString());
-		});
-	};
 </script>
 
-<h1>{art.toUpperCase()} <span class="text-sm">({allItemFiltered.length})</span></h1>
+<h1>{art.toUpperCase()}</h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
-		<TextField bind:value={filterPrefix}
+		<h4 title="Filter für die Werte, nicht case-sensitiv">
+			Aktueller Filter
+		</h4>
+		<TextField 
+			bind:value={filterPrefix}
 			label="Filter"
-			placeholder="Insert a criteria"/>
+			placeholder="Bitte Filterkriterien eingeben"
+			disabled={itemEditorDisabled}/>
+		<h4 title="Liste der Werte, ggfs. gefiltert, jedes Element editierbar">
+			Aktuelle Werte <small>({allItemFiltered.length})</small>
+		</h4>
 		<table class="table-fixed">
 			<thead class="justify-between">
 				<tr class="bg-gray-100">
@@ -124,7 +111,8 @@
 					<td	class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorCreate}
-							on:create={e => createItem(e.detail)}
+							on:create={e => reloadAllItem()}
+							{art}
 							code={allItem.length}/>
 					<td>
 				</tr>
@@ -155,8 +143,9 @@
 					<td class="px-4" colspan="4">
 						<EnumEditor
 							bind:visible={itemEditorUpdate}
-							on:update={e => updateItem(e.detail)}
-							on:remove={e => removeItem(e.detail)}
+							on:update={e => reloadAllItem()}
+							on:remove={e => reloadAllItem()}
+							{art}
 							code={item.code}
 							{item}/>
 					<td>
@@ -165,7 +154,7 @@
 				{:else}
 				<tr>
 					<td class="px-2 py-3" colspan="4">
-						No items
+						Keine Werte
 					</td>
 				</tr>
 				{/each}
