@@ -1,13 +1,10 @@
 <script>
 	import { onMount } from 'svelte';
-	import Icon from '../components/Icon';
-	import Select from '../components/Select';
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
-	import { createValue } from '../utils/rest.js';
-	import { updatePatch } from '../utils/rest.js';
-	import { removeValue } from '../utils/rest.js';
     import { storedOwnerId } from '../stores/owner.js';
+	import Icon from '../components/Icon';
+	import Select from '../components/Select';
     import PetEditor from './PetEditor.svelte';
 
     let allPet = []; 
@@ -64,28 +61,6 @@
             toast.push(err.toString());
         });
     }
-    
-    function createPet(pet) {
-        createValue('/api/pet', pet)
-        .then(() => {
-            reloadAllPet();
-        });
-    };
-
-    function updatePet(pet) {
-        updatePatch('/api/pet/' + pet.id, pet)
-        .then(() => {
-            reloadAllPet();
-        });
-    };
-
-    function removePet(pet) {
-        if (!confirm("Really delete '" + pet.name + "'?")) return;
-        removeValue('/api/pet/' + pet.id)
-        .then(() => {
-            return reloadAllPet();
-        });
-    };
 </script>
 
 <h1>Pet</h1>
@@ -112,7 +87,8 @@
                     <span class="text-gray-600">Born</span>
                 </th>
                 <th class="px-2 py-3 border-b-2 border-gray-300 w-16">
-                    <Icon on:click={() => petEditorCreateClicked()}
+                    <Icon 
+                        on:click={() => petEditorCreateClicked()}
                         disabled={petEditorDisabled}
                         name="edit"
                         outlined/>
@@ -125,7 +101,7 @@
                 <td class="px-4" colspan="4">
                     <PetEditor
                         bind:visible={petEditorCreate} 
-                        on:create={e => createPet(e.detail)}
+                        on:create={e => reloadAllPet()}
                         {allSpeciesEnum}
                         ownerId={petOwnerId}/>
                 <td>
@@ -147,7 +123,8 @@
                     <span>{pet.born}</span>
                 </td>
                 <td class="px-2 py-3">
-                    <Icon on:click={() => petEditorUpdateClicked(pet)}
+                    <Icon 
+                        on:click={() => petEditorUpdateClicked(pet)}
                         disabled={petEditorDisabled}
                         name="edit"
                         outlined/>
@@ -158,8 +135,8 @@
                 <td	class="px-4" colspan="4">
                     <PetEditor
                         bind:visible={petEditorUpdate} 
-                        on:update={e => updatePet(e.detail)}
-                        on:remove={e => removePet(e.detail)}
+                        on:update={e => reloadAllPet()}
+                        on:remove={e => reloadAllPet()}
                         {allSpeciesEnum}
                         ownerId={pet.ownerItem.value}
                         {pet}/>

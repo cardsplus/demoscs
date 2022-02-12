@@ -1,5 +1,9 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+	import { toast } from '../components/Toast';
+	import { createValue } from '../utils/rest.js';
+	import { updatePatch } from '../utils/rest.js';
+	import { removeValue } from '../utils/rest.js';
 	import Button from '../components/Button';
 	import Select from '../components/Select';
 	import TextField from '../components/TextField';
@@ -12,14 +16,13 @@
     let showUpdate;
     let showRemove;
     let newPet = {
-        name: undefined,
+        name: '',
         born: null,
-        species: undefined
+        species: null
     }
 
-    $: disabled = !newPet.name || !newPet.species;
-    $: if (pet) onChange()
-    function onChange() {
+    $: if (pet) onChangePet()
+    function onChangePet() {
         showUpdate = true;
         showRemove = true;
         newPet = {
@@ -28,26 +31,52 @@
             born: pet.born,
             species: pet.species
         }
-        console.log(['onChange', newPet]);
+        console.log(['onChangePet', newPet]);
     }
 
+    $: disabled = !newPet.name || !newPet.species;
+
     const dispatch = createEventDispatcher();
-    function onCreate() {
-        visible = false;
+    function onCreatePet() {
         newPet.owner = '/api/owner/' + ownerId;
-        console.log(['create', newPet]);
-        dispatch('create', newPet);
+        createValue('/api/pet', newPet)
+        .then(json => {
+            console.log(['onCreatePet', newPet, json]);
+            visible = false;
+            dispatch('create', newPet);
+        })
+        .catch(err => {
+            console.log(['onCreatePet', newPet, err]);
+            toast.push(err.toString());
+        });;
     }
-    function onUpdate() {
-        visible = false;
+    function onUpdatePet() {
         newPet.owner = '/api/owner/' + ownerId;
-        console.log(['update', newPet]);
-        dispatch('update', newPet);
+        updatePatch('/api/pet' + '/' + newPet.id, newPet)
+        .then(json => {
+            console.log(['onUpdatePet', newPet, json]);
+            visible = false;
+            dispatch('update', newPet);
+        })
+        .catch(err => {
+            console.log(['onUpdatePet', newPet, err]);
+            toast.push(err.toString());
+        });;
     }
-    function onRemove() {
-        visible = false;
-        console.log(['remove', newPet]);
-        dispatch('remove', newPet);
+    function onRemovePet() {
+        const text = newPet.name;
+        const hint = text.length > 20 ? text.substring(0, 20) + '...' : text;
+		if (!confirm("Really delete '" + hint + "'?")) return;
+        removeValue('/api/pet' + '/' + newPet.id)
+        .then(() => {
+            console.log(['onRemovePet', newPet]);
+            visible = false;
+            dispatch('remove', newPet);
+        })
+        .catch(err => {
+            console.log(['onRemovePet', newPet, err]);
+            toast.push(err.toString());
+        });;
     }
     function onCancel() {
         visible = false;
@@ -64,12 +93,14 @@
                 placeholder="Choose species"/>
         </div>
         <div class="w-full lg:w-2/4">
-            <TextField bind:value={newPet.name} 
+            <TextField 
+                bind:value={newPet.name} 
                 label="Name"		
                 placeholder="Insert a name"/>
         </div>
         <div class="w-full lg:w-1/4">
-            <TextField bind:value={newPet.born}
+            <TextField 
+                bind:value={newPet.born}
                 type="date"
                 label="Born"		
                 placeholder="Insert a date"/>
@@ -79,16 +110,16 @@
 
 <div class="py-4">
     {#if showUpdate}
-    <Button on:click={() => onUpdate()} {disabled}>
+    <Button on:click={() => onUpdatePet()} {disabled}>
         Ok
     </Button>
     {:else}
-    <Button on:click={() => onCreate()} {disabled}>
+    <Button on:click={() => onCreatePet()} {disabled}>
         Ok
     </Button>
     {/if}
     {#if showRemove}
-    <Button on:click={() => onRemove()}>
+    <Button on:click={() => onRemovePet()}>
         Löschen
     </Button>
     {/if}

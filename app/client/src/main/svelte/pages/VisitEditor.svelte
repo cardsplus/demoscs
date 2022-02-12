@@ -1,5 +1,9 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+	import { toast } from '../components/Toast';
+	import { createValue } from '../utils/rest.js';
+	import { updatePatch } from '../utils/rest.js';
+	import { removeValue } from '../utils/rest.js';
 	import Button from '../components/Button';
 	import Select from '../components/Select';
 	import TextArea from '../components/TextArea';
@@ -16,18 +20,19 @@
         date: null,
         text: undefined,
         petItem: {
-            value: null
+            value: null,
+            text: ''
         },
         vetItem: {
-            value: null
+            value: null,
+            text: ''
         }
     }
     let newPetId = null;
     let newVetId = null;
 
-    $: disabled = !newVisit.date || !newPetId || !newVetId;
-    $: if (visit) onChange()
-    function onChange() {
+    $: if (visit) onChangeVisit()
+    function onChangeVisit() {
         showUpdate = true;
         showRemove = true;
         newVisit = {
@@ -36,28 +41,54 @@
         }
         newPetId = null;
         newVetId = null;
-        console.log(['onChange', newVisit]);
+        console.log(['onChangeVisit', newVisit]);
     }
 
+    $: disabled = !newVisit.date || !newPetId || !newVetId;
+
     const dispatch = createEventDispatcher();
-    function onCreate() {
-        visible = false;
+    function onCreateVisit() {
         newVisit.pet = '/api/pet/' + newPetId; 
         newVisit.vet = '/api/vet/' + newVetId; 
-        console.log(['create', newVisit]);
-        dispatch('create', newVisit);
+        createValue('/api/visit', newVisit)
+        .then(json => {
+            console.log(['onCreateVisit', newVisit, json]);
+            visible = false;
+            dispatch('create', newVisit);
+        })
+        .catch(err => {
+            console.log(['onCreateVisit', newVisit, err]);
+            toast.push(err.toString());
+        });;
     }
-    function onUpdate() {
-        visible = false;
+    function onUpdateVisit() {
         newVisit.pet = '/api/pet/' + newPetId; 
         newVisit.vet = '/api/vet/' + newVetId; 
-        console.log(['update', newVisit]);
-        dispatch('update', newVisit);
+        updatePatch('/api/visit' + '/' + newVisit.id, newVisit)
+        .then(json => {
+            console.log(['onUpdateVisit', newVisit, json]);
+            visible = false;
+            dispatch('update', newVisit);
+        })
+        .catch(err => {
+            console.log(['onUpdateVisit', newVisit, err]);
+            toast.push(err.toString());
+        });;
     }
-    function onRemove() {
-        visible = false;
-        console.log(['remove', newVisit]);
-        dispatch('remove', newVisit);
+    function onRemoveVisit() {
+        const text = newVisit.name;
+        const hint = text.length > 20 ? text.substring(0, 20) + '...' : text;
+		if (!confirm("Really delete '" + hint + "'?")) return;
+        removeValue('/api/visit' + '/' + newVisit.id)
+        .then(() => {
+            console.log(['onRemoveVisit', newVisit]);
+            visible = false;
+            dispatch('remove', newVisit);
+        })
+        .catch(err => {
+            console.log(['onRemoveVisit', newVisit, err]);
+            toast.push(err.toString());
+        });;
     }
     function onCancel() {
         visible = false;
@@ -106,16 +137,16 @@
 
 <div class="py-4">
     {#if showUpdate}
-    <Button on:click={() => onUpdate()} {disabled}>
+    <Button on:click={() => onUpdateVisit()} {disabled}>
         Ok
     </Button>
     {:else}
-    <Button on:click={() => onCreate()} {disabled}>
+    <Button on:click={() => onCreateVisit()} {disabled}>
         Ok
     </Button>
     {/if}
     {#if showRemove}
-    <Button on:click={() => onRemove()}>
+    <Button on:click={() => onRemoveVisit()}>
         Löschen
     </Button>
     {/if}

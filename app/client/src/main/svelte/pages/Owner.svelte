@@ -1,12 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import Icon from '../components/Icon';
-	import TextField from '../components/TextField';
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
-	import { createValue } from '../utils/rest.js';
-	import { updatePatch } from '../utils/rest.js';
-	import { removeValue } from '../utils/rest.js';
+	import Icon from '../components/Icon';
+	import TextField from '../components/TextField';
 	import OwnerEditor from './OwnerEditor.svelte';
 	import PetEditor from './PetEditor.svelte';
 	import VisitEditor from './VisitEditor.svelte';
@@ -61,8 +58,6 @@
 
     onMount(async () => {
         try {
-            allOwner = await loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
-            console.log(['onMount', allOwner]);
             allVetItem = await loadAllValue('/api/vet/search/findAllItem');
             console.log(['onMount', allVetItem]);
 			allSpeciesEnum = await loadAllValue('/api/enum/species');
@@ -75,6 +70,7 @@
 			console.log(['onMount', err]);
 			toast.push(err.toString());
         };
+		reloadAllOwner();
 	});
 
 	let filterPrefix = '';
@@ -90,80 +86,16 @@
 			}
             return false;
 		})
-	}
- 
-	function createOwner(owner) {
-		createValue('/api/owner', owner)
-		.then(() => {
-			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
-		})
-		.then(json => {
-			console.log(['createOwner', json]);
-			allOwner = json;
-		})
-		.catch(err => {
-			console.log(['createOwner', err]);
-			toast.push(err.toString());
-		});
 	};
 
-	function updateOwner(owner) {
-		updatePatch('/api/owner/' + owner.id, owner)
-		.then(() => {
-			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
-		})
+	function reloadAllOwner() {
+		loadAllValue('/api/owner/search/findAllByOrderByNameAsc')
 		.then(json => {
-			console.log(['updateOwner', json]);
+			console.log(['reloadAllOwner', json]);
 			allOwner = json;
 		})
 		.catch(err => {
-			console.log(['updateOwner', err]);
-			toast.push(err.toString());
-		});
-	};
-
-	function removeOwner(owner) {
-		if (!confirm("Really delete '" + owner.name + "'?")) return;
-		removeValue('/api/owner/' + owner.id)
-		.then(() => {
-			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
-		})
-		.then(json => {
-			console.log(['removeOwner', json]);
-			allOwner = json;
-		})
-		.catch(err => {
-			console.log(['removeOwner', err]);
-			toast.push(err.toString());
-		});
-	};
-	
-	function createPet(pet) {
-		createValue('/api/pet', pet)
-		.then(() => {
-			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
-		})
-		.then(json => {
-			console.log(['createPet', json]);
-			allOwner = json;
-		})
-		.catch(err => {
-			console.log(['createPet', err]);
-			toast.push(err.toString());
-		});
-	};
-	
-	function createVisit(visit) {
-		createValue('/api/visit', visit)
-		.then(() => {
-			return loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
-		})
-		.then(json => {
-			console.log(['createVisit', json]);
-			allOwner = json;
-		})
-		.catch(err => {
-			console.log(['createVisit', err]);
+			console.log(['reloadAllOwner', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -203,7 +135,8 @@
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
-						<Icon on:click={() => ownerEditorCreateClicked()}
+						<Icon 
+							on:click={() => ownerEditorCreateClicked()}
 							title="Add a new owner"
 							disabled={ownerEditorDisabled}
 							name="edit"
@@ -217,7 +150,7 @@
 					<td class="px-4" colspan="6">
 						<OwnerEditor
 							bind:visible={ownerEditorCreate} 
-							on:create={e => createOwner(e.detail)}/>
+							on:create={e => reloadAllOwner()}/>
 					<td>
 				</tr>
 				{/if}
@@ -242,28 +175,32 @@
 						</div>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => visitViewerCreateClicked(owner)}
+						<Icon 
+							on:click={() => visitViewerCreateClicked(owner)}
 							title="Show all visits"
 							disabled={ownerEditorDisabled}
 							name="list"
                             outlined/>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => visitEditorCreateClicked(owner)}
+						<Icon 
+							on:click={() => visitEditorCreateClicked(owner)}
 							title="Add a new visit"
 							disabled={ownerEditorDisabled}
 							name="event"
                             outlined/>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => petEditorCreateClicked(owner)}
+						<Icon 
+							on:click={() => petEditorCreateClicked(owner)}
 							title="Add a new pet"
 							disabled={ownerEditorDisabled}
 							name="pets"
                             outlined/>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => ownerEditorUpdateClicked(owner)}
+						<Icon 
+							on:click={() => ownerEditorUpdateClicked(owner)}
 							title="Edit owner details"
 							disabled={ownerEditorDisabled}
 							name="edit"
@@ -284,7 +221,7 @@
 					<td class="px-4" colspan="6">
 						<VisitEditor
 							bind:visible={visitEditorCreate} 
-							on:create={e => createVisit(e.detail)}
+							on:create={e => reloadAllOwner()}
 							allPetItem={owner.allPetItem}
 							allVetItem={allVetItem}/>
 					<td>
@@ -295,7 +232,7 @@
 					<td class="px-4" colspan="6">
 						<PetEditor
 							bind:visible={petEditorCreate} 
-							on:create={e => createPet(e.detail)}
+							on:create={e => reloadAllOwner()}
 							{allSpeciesEnum}
 							ownerId={owner.id}/>
 					<td>
@@ -306,8 +243,8 @@
 					<td class="px-4" colspan="6">
 						<OwnerEditor
 							bind:visible={ownerEditorUpdate} 
-							on:update={e => updateOwner(e.detail)}
-							on:remove={e => removeOwner(e.detail)}
+							on:update={e => reloadAllOwner()}
+							on:remove={e => reloadAllOwner()}
 							{owner}/>
 					<td>
 				</tr>

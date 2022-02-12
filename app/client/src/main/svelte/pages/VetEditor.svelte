@@ -1,5 +1,9 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+	import { toast } from '../components/Toast';
+	import { createValue } from '../utils/rest.js';
+	import { updatePatch } from '../utils/rest.js';
+	import { removeValue } from '../utils/rest.js';
 	import Button from '../components/Button';
 	import TextField from '../components/TextField';
     
@@ -9,38 +13,63 @@
     let showUpdate;
     let showRemove;
     let newVet = {
-        name: undefined,
+        name: '',
         allSkill: []
     }
 
-    $: disabled = !newVet.name;
-    $: if (vet) onChange()
-    function onChange() {
+    $: if (vet) onChangeVet()
+    function onChangeVet() {
         showUpdate = true;
         showRemove = true;
         newVet = {
             id: vet.id,
             name: vet.name,
-            allSkill: vet.allSkill
+            allSkill: [...vet.allSkill]
         }
-        console.log(['onChange', newVet]);
+        console.log(['onChangeVet', newVet]);
     }
 
+    $: disabled = !newVet.name;
+
     const dispatch = createEventDispatcher();
-    function onCreate() {
-        visible = false;
-        console.log(['create', newVet]);
-        dispatch('create', newVet);
+    function onCreateVet() {
+        createValue('/api/vet', newVet)
+        .then(json => {
+            console.log(['onCreateVet', newVet, json]);
+            visible = false;
+            dispatch('create', newVet);
+        })
+        .catch(err => {
+            console.log(['onCreateVet', newVet, err]);
+            toast.push(err.toString());
+        });;
     }
-    function onUpdate() {
-        visible = false;
-        console.log(['update', newVet]);
-        dispatch('update', newVet);
+    function onUpdateVet() {
+        updatePatch('/api/vet' + '/' + newVet.id, newVet)
+        .then(json => {
+            console.log(['onUpdateVet', newVet, json]);
+            visible = false;
+            dispatch('update', newVet);
+        })
+        .catch(err => {
+            console.log(['onUpdateVet', newVet, err]);
+            toast.push(err.toString());
+        });;
     }
-    function onRemove() {
-        visible = false;
-        console.log(['remove', newVet]);
-        dispatch('remove', newVet);
+    function onRemoveVet() {
+        const text = newVet.name;
+        const hint = text.length > 20 ? text.substring(0, 20) + '...' : text;
+		if (!confirm("Really delete '" + hint + "'?")) return;
+        removeValue('/api/vet' + '/' + newVet.id)
+        .then(() => {
+            console.log(['onRemoveVet', newVet]);
+            visible = false;
+            dispatch('remove', newVet);
+        })
+        .catch(err => {
+            console.log(['onRemoveVet', newVet, err]);
+            toast.push(err.toString());
+        });;
     }
     function onCancel() {
         visible = false;
@@ -49,7 +78,8 @@
 
 <div class="flex flex-col">
     <div class="w-full">
-        <TextField bind:value={newVet.name} 
+        <TextField 
+            bind:value={newVet.name} 
             label="Name"		
             placeholder="Insert a name"/>
     </div>
@@ -57,16 +87,16 @@
 
 <div class="py-4">
     {#if showUpdate}
-    <Button on:click={() => onUpdate()} {disabled}>
+    <Button on:click={() => onUpdateVet()} {disabled}>
         Ok
     </Button>
     {:else}
-    <Button on:click={() => onCreate()} {disabled}>
+    <Button on:click={() => onCreateVet()} {disabled}>
         Ok
     </Button>
     {/if}
     {#if showRemove}
-    <Button on:click={() => onRemove()}>
+    <Button on:click={() => onRemoveVet()}>
         Löschen
     </Button>
     {/if}
