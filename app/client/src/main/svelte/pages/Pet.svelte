@@ -94,7 +94,7 @@
         <div class="w-full lg:w-96">
             <Select 
                 bind:value={petOwnerId} 
-                items={allOwnerItem} 
+                allItem={allOwnerItem} 
                 label="Owner"
                 placeholder="Choose owner"/>
         </div>

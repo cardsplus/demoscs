@@ -72,7 +72,7 @@
                     bind:value={newPetId} 
                     bind:valueItem={newVisit.petItem}
                     required
-                    items={allPetItem} 
+                    allItem={allPetItem} 
                     label="Pet"
                     placeholder="Insert pet"/>
             </div>
@@ -81,7 +81,7 @@
                     bind:value={newVetId} 
                     bind:valueItem={newVisit.vetItem}            
                     required
-                    items={allVetItem} 
+                    allItem={allVetItem} 
                     label="Veterinarian"
                     placeholder="Insert veterinarian"/>
             </div>

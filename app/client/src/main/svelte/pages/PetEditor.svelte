@@ -59,7 +59,7 @@
         <div class="w-full lg:w-1/4">
             <Select 
                 bind:value={newPet.species}
-                items={allSpeciesEnum} 
+                allItem={allSpeciesEnum} 
                 label="Species"
                 placeholder="Choose species"/>
         </div>
