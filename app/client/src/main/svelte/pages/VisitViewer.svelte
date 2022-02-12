@@ -27,5 +27,7 @@
         {/each}
         </div>
     </details>
-    {/each}    
+    {:else}
+    No visits
+    {/each}
 </div>

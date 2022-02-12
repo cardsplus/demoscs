@@ -9,10 +9,9 @@
 
     let allPet = []; 
     let petOwnerId = null; 
-	let petIndexOf = undefined;
 	let petId = undefined;
-	function onPetClicked(index) {
-		petIndexOf = index;
+	function onPetClicked(pet) {
+		petId = pet.id;
 	}
 
 	let petEditorCreate = false;
@@ -107,10 +106,10 @@
                 <td>
             </tr>
             {/if}
-            {#each allPet as pet, i}
-            <tr on:click={e => onPetClicked(i)}
+            {#each allPet as pet}
+            <tr on:click={e => onPetClicked(pet)}
                 title={pet.id}
-                class:ring={petIndexOf === (i)}>
+                class:ring={petId === pet.id}>
                 <td class="px-2 py-3 text-left">
                     <span>{pet.species}</span>
                 </td>
