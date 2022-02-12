@@ -73,7 +73,7 @@
 
 <style>
   ._toastItem {
-    width: 16rem;
+    width: 20rem;
     height: auto;
     min-height: 3.5rem;
     margin: 0 0 0.5rem 0;
@@ -91,6 +91,8 @@
   ._toastMsg {
     padding: 0.75rem 0.5rem;
     flex: 1 1 0%;
+    white-space: pre-line;
+    word-break: break-all;
   }
   ._toastBtn {
     width: 2rem;

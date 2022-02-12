@@ -19,7 +19,7 @@
   <span
     class="pb-2 px-4 pt-2 text-xs absolute left-0 top-0"
     class:text-gray-600={!focused}
-    class:text-primary-600={focused}
+    class:text-primary-500={focused}
   >
     {label}
   </span>

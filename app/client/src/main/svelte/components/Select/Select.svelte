@@ -2,13 +2,12 @@
   import filterProps from "../filterProps.js";
   const props = filterProps([
     'disabled',
-    'items',
     'label',
     'value',
     'title'
   ], $$props);
+  export let allItem = [];
   export let disabled = false;
-  export let items = [];
   export let label;
   export let value;
   export let valueItem = undefined;
@@ -25,7 +24,7 @@
     }
   }
 
-  $: itemsProcessed = items.map(processItem);
+  $: allItemProcessed = allItem.map(processItem);
   function processItem(e) {
     if (typeof e !== "object") {
       return {
@@ -41,7 +40,7 @@
   }
 
   function onChange({ target }) {
-    valueItem = items[target.selectedIndex-1];
+    valueItem = allItem[target.selectedIndex-1];
     if (typeof valueItem !== "object") {
       value = valueItem;
     } else {
@@ -57,7 +56,7 @@
     {title}
     class="pb-2 px-4 pt-2 text-xs absolute left-0 top-0"
     class:text-gray-600={!focused}
-    class:text-primary-600={focused}
+    class:text-primary-500={focused}
   >
     {label}
   </span>
@@ -82,7 +81,7 @@
     on:blur
   >
     <option disabled value={null}>{valueNull}</option>
-    {#each itemsProcessed as item}
+    {#each allItemProcessed as item}
     <option value={item.value}>
       {item.text}
     </option>

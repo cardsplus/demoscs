@@ -18,7 +18,7 @@ declare const _SelectProps: {
     /** 
      * Array of Items.
      */
-    items?: ({value:string, text: string}|string)[];
+    allItem?: ({value:string, text: string}|string)[];
 
     /** 
      * Selected value.

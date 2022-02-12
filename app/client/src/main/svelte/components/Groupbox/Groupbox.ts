@@ -17,7 +17,7 @@ declare const _GroupboxProps: {
     /** 
      * Array of Items.
      */
-    items?: ({value:string, text: string}|string)[];
+    allItem?: ({value:string, text: string}|string)[];
 
     /**
      * Title for tooltip
