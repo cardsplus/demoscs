@@ -96,7 +96,9 @@
 <h1>Vet <span class="text-sm">({allVetFiltered.length})</span></h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
-		<TextField bind:value={filterPrefix}
+		<TextField 
+			bind:value={filterPrefix}
+			disabled={vetEditorDisabled}
 			label="Filter" 
 			placeholder="Insert a criteria"/>
 		<table class="table-fixed">

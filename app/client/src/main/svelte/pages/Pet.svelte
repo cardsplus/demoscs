@@ -69,6 +69,7 @@
             <Select 
                 bind:value={petOwnerId} 
                 allItem={allOwnerItem} 
+                disabled={petEditorDisabled}
                 label="Owner"
                 placeholder="Choose owner"/>
         </div>

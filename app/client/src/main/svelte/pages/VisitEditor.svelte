@@ -18,7 +18,7 @@
     let showRemove;
     let newVisit = {
         date: null,
-        text: undefined,
+        text: '',
         petItem: {
             value: null,
             text: ''
@@ -28,8 +28,6 @@
             text: ''
         }
     }
-    let newPetId = null;
-    let newVetId = null;
 
     $: if (visit) onChangeVisit()
     function onChangeVisit() {
@@ -37,19 +35,26 @@
         showRemove = true;
         newVisit = {
             id: visit.id,
-            text: visit.name
+            date: visit.date,
+            text: visit.text,
+            petItem: {
+                value: visit.petItem.value,
+                text: visit.petItem.text
+            },
+            vetItem: {
+                value: visit.vetItem.value,
+                text: visit.vetItem.text
+            }
         }
-        newPetId = null;
-        newVetId = null;
         console.log(['onChangeVisit', newVisit]);
     }
 
-    $: disabled = !newVisit.date || !newPetId || !newVetId;
+    $: disabled = !newVisit.date || !newVisit.petItem || !newVisit.vetItem;
 
     const dispatch = createEventDispatcher();
     function onCreateVisit() {
-        newVisit.pet = '/api/pet/' + newPetId; 
-        newVisit.vet = '/api/vet/' + newVetId; 
+        newVisit.pet = '/api/pet/' + newVisit.petItem.value; 
+        newVisit.vet = '/api/vet/' + newVisit.vetItem.value; 
         createValue('/api/visit', newVisit)
         .then(json => {
             console.log(['onCreateVisit', newVisit, json]);
@@ -62,8 +67,8 @@
         });;
     }
     function onUpdateVisit() {
-        newVisit.pet = '/api/pet/' + newPetId; 
-        newVisit.vet = '/api/vet/' + newVetId; 
+        newVisit.pet = '/api/pet/' + newVisit.petItem.value; 
+        newVisit.vet = '/api/vet/' + newVisit.vetItem.value; 
         updatePatch('/api/visit' + '/' + newVisit.id, newVisit)
         .then(json => {
             console.log(['onUpdateVisit', newVisit, json]);
@@ -76,9 +81,9 @@
         });;
     }
     function onRemoveVisit() {
-        const text = newVisit.name;
+        const text = newVisit.petItem.text;
         const hint = text.length > 20 ? text.substring(0, 20) + '...' : text;
-		if (!confirm("Really delete '" + hint + "'?")) return;
+		if (!confirm("Really delete visit for '" + hint + "'?")) return;
         removeValue('/api/visit' + '/' + newVisit.id)
         .then(() => {
             console.log(['onRemoveVisit', newVisit]);
@@ -100,19 +105,17 @@
         <div class="flex flex-col lg:flex-row gap-1">
             <div class="w-full lg:w-2/5">
                 <Select 
-                    bind:value={newPetId} 
-                    bind:valueItem={newVisit.petItem}
+                    bind:value={newVisit.petItem.value}
+                    allItem={allPetItem}
                     required
-                    allItem={allPetItem} 
                     label="Pet"
                     placeholder="Insert pet"/>
             </div>
             <div class="w-full lg:w-2/5">
                 <Select 
-                    bind:value={newVetId} 
-                    bind:valueItem={newVisit.vetItem}            
+                    bind:value={newVisit.vetItem.value}
+                    allItem={allVetItem}
                     required
-                    allItem={allVetItem} 
                     label="Veterinarian"
                     placeholder="Insert veterinarian"/>
             </div>

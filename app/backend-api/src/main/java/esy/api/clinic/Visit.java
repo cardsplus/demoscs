@@ -3,6 +3,7 @@ package esy.api.clinic;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.client.OwnerItem;
 import esy.api.client.Pet;
 import esy.api.client.PetItem;
 import esy.json.JsonJpaEntity;
@@ -107,6 +108,7 @@ public final class Visit extends JsonJpaEntity<Visit> {
     private Map<String, Object> extraJson() {
         final Map<String, Object> allExtra = new HashMap<>();
         allExtra.put("version", getVersion());
+        allExtra.put("ownerItem", OwnerItem.fromValue(pet));
         allExtra.put("petItem", PetItem.fromValue(pet));
         allExtra.put("vetItem", VetItem.fromValue(vet));
         return allExtra;

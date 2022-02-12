@@ -45,7 +45,8 @@ public class PetItemTest {
 
     @Test
     void ofNull() {
-        final PetItem item = PetItem.fromValue(null);
+        final Pet value = null;
+        final PetItem item = PetItem.fromValue(value);
         assertNull(item.getValue());
         assertTrue(item.getText().isEmpty());
         assertFalse(item.isCreate());
