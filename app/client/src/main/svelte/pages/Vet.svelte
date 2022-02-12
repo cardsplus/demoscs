@@ -35,7 +35,20 @@
 		visitViewerCreate = !visitViewerCreate;
 	}
 
+	let allSkillEnum = [];
+
     onMount(async () => {
+        try {
+			allSkillEnum = await loadAllValue('/api/enum/skill');
+            allSkillEnum = allSkillEnum.map(e => ({
+                value: e.value,
+                text: e.name
+            }))
+            console.log(['onMount', allSkillEnum]);
+        } catch(err) {
+			console.log(['onMount', err]);
+			toast.push(err.toString());
+        };
         reloadAllVet()
 	});
 
@@ -167,6 +180,7 @@
 							bind:visible={vetEditorUpdate} 
 							on:update={e => reloadAllVet()}
 							on:remove={e => reloadAllVet()}
+							{allSkillEnum}
 							{vet}/>
 					<td>
 				</tr>

@@ -6,9 +6,11 @@
 	import { removeValue } from '../utils/rest.js';
 	import Button from '../components/Button';
 	import TextField from '../components/TextField';
+	import Toggle from '../components/Toggle';
     
     export let visible = false;
     export let vet = undefined;
+    export let allSkillEnum;
 
     let showUpdate;
     let showRemove;
@@ -82,6 +84,13 @@
             bind:value={newVet.name} 
             label="Name"		
             placeholder="Insert a name"/>
+    </div>
+    <div class="w-full">
+        <Toggle 
+            bind:allValue={newVet.allSkill}
+            allItem={allSkillEnum} 
+            label="Skills"            		
+            placeholder="Insert skills"/>
     </div>
 </div>
 
