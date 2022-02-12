@@ -1,23 +1,28 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+	import { toast } from '../components/Toast';
+	import { createValue } from '../utils/rest.js';
+	import { updateValue } from '../utils/rest.js';
+	import { removeValue } from '../utils/rest.js';
     import Button from '../components/Button';
     import TextField from '../components/TextField';
+    import TextArea from '../components/TextArea';
     
     export let visible = false;
     export let item = undefined;
+    export let art;
     export let code;
 
     let showUpdate;
     let showRemove;
     let newItem = {
         code: code,
-        name: undefined,
-        text: undefined
+        name: '',
+        text: ''
     }
 
-    $: disabled = !newItem.name || !newItem.text;
-    $: if (item) onChange()
-    function onChange() {
+    $: if (item) onChangeItem()
+    function onChangeItem() {
         showUpdate = true;
         showRemove = false;
         newItem = {
@@ -25,68 +30,93 @@
             name: item.name,
             text: item.text
         }
-        console.log(['onChange', newItem]);
+        console.log(['onChangeItem', newItem]);
     }
 
+    $: disabled = !newItem.name || !newItem.text;
+
     const dispatch = createEventDispatcher();
-    function onCreate() {
-        visible = false;
-        console.log(['create', newItem]);
-        dispatch('create', newItem);
+    function onCreateItem() {
+        createValue('/api/enum/' + art, newItem)
+        .then(json => {
+            console.log(['onCreateItem', newItem, json]);
+            visible = false;
+            dispatch('create', newItem);
+        })
+        .catch(err => {
+            console.log(['onCreateItem', newItem, err]);
+            toast.push(err.toString());
+        });;
     }
-    function onUpdate() {
-        visible = false;
-        console.log(['update', newItem]);
-        dispatch('update', newItem);
+    function onUpdateItem() {
+        updateValue('/api/enum/' + art + '/' + newItem.code, newItem)
+        .then(json => {
+            console.log(['onUpdateItem', newItem, json]);
+            visible = false;
+            dispatch('update', newItem);
+        })
+        .catch(err => {
+            console.log(['onUpdateItem', newItem, err]);
+            toast.push(err.toString());
+        });;
     }
-    function onRemove() {
-        visible = false;
-        console.log(['remove', newItem]);
-        dispatch('remove', newItem);
+    function onRemoveItem() {
+        const text = newItem.text;
+        const hint = text.length > 20 ? text.substring(0, 20) + '...' : text;
+        if (!confirm("Item '" + hint + "' wirklich löschen?")) return;
+        removeValue('/api/enum/' + art + '/' + newItem.code)
+        .then(() => {
+            console.log(['onRemoveItem', newItem]);
+            visible = false;
+            dispatch('remove', newItem);
+        })
+        .catch(err => {
+            console.log(['onRemoveItem', newItem, err]);
+            toast.push(err.toString());
+        });;
     }
     function onCancel() {
         visible = false;
     }
 </script>
 
-<div class="flex flex-col lg:flex-row gap-1 items-baseline">
-    <div class="w-full lg:w-1/4">
-        {#if showUpdate}
-        <TextField bind:value={newItem.code}
-            type=number
-            label="Code"		
-            disabled/>
-        {:else}
-        <TextField bind:value={newItem.code} 
-            type=number
-            label="Code"		
-            placeholder="Insert a unique code"/>
-        {/if}
+<div class="flex flex-col gap-1">
+    <div class="w-full flex flex-row gap-1 items-baseline">
+        <div class="w-1/6">
+            <TextField 
+                bind:value={newItem.code}
+                type=number
+                label="Code"		
+                placeholder="Bitte den Code eingeben"		
+                disabled={showUpdate}/>
+        </div>
+        <div class="w-full">
+            <TextField
+                bind:value={newItem.name} 
+                label="Name"		
+                placeholder="Bitte den Namen eingeben"/>
+        </div>
     </div>
-    <div class="w-full lg:w-1/4">
-        <TextField bind:value={newItem.name} 
-            label="Name"		
-            placeholder="Insert a unique name"/>
-    </div>
-    <div class="w-full lg:w-1/2">
-        <TextField bind:value={newItem.text} 
+    <div class="w-full">
+        <TextArea 
+            bind:value={newItem.text} 
             label="Text"		
-            placeholder="Insert a text"/>
+            placeholder="Bitte den Text eingeben"/>
     </div>
 </div>
 
 <div class="py-4">
     {#if showUpdate}
-    <Button on:click={() => onUpdate()} {disabled}>
+    <Button on:click={() => onUpdateItem()} {disabled}>
         Ok
     </Button>
     {:else}
-    <Button on:click={() => onCreate()} {disabled}>
+    <Button on:click={() => onCreateItem()} {disabled}>
         Ok
     </Button>
     {/if}
     {#if showRemove}
-    <Button on:click={() => onRemove()}>
+    <Button on:click={() => onRemoveItem()}>
         Löschen
     </Button>
     {/if}
@@ -95,7 +125,7 @@
     </Button>
 </div>
 
-<details>
+<details tabindex="-1">
     <summary>JSON</summary>
     <pre>{JSON.stringify(newItem, null, 2)}</pre>
 </details>
