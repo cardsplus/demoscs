@@ -1,12 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import Icon from '../components/Icon';
-	import TextField from '../components/TextField';
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
-	import { createValue } from '../utils/rest.js';
-	import { updatePatch } from '../utils/rest.js';
-	import { removeValue } from '../utils/rest.js';
+	import Icon from '../components/Icon';
+	import TextField from '../components/TextField';
 	import VetEditor from './VetEditor.svelte';
 	import VisitViewer from './VisitViewer.svelte';
 
@@ -40,13 +37,7 @@
 	}
 
     onMount(async () => {
-        try {
-            allVet = await loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
-            console.log(['onMount', allVet]);
-        } catch(err) {
-			console.log(['onMount', err]);
-			toast.push(err.toString());
-        };
+        reloadAllVet()
 	});
 
 	let filterPrefix = '';
@@ -63,49 +54,15 @@
             return false;
 		})
 	}
- 
-	function createVet(vet) {
-		createValue('/api/vet', vet)
-		.then(() => {
-			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
-		})
-		.then(json => {
-			console.log(['createVet', json]);
-			allVet = json;
-		})
-		.catch(err => {
-			console.log(['createVet', err]);
-			toast.push(err.toString());
-		});
-	};
 
-	function updateVet(vet) {
-		updatePatch('/api/vet/' + vet.id, vet)
-		.then(() => {
-			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
-		})
+	function reloadAllVet() {
+		loadAllValue('/api/vet/search/findAllByOrderByNameAsc')
 		.then(json => {
-			console.log(['updateVet', json]);
+			console.log(['reloadAllVet', json]);
 			allVet = json;
 		})
 		.catch(err => {
-			console.log(['updateVet', err]);
-			toast.push(err.toString());
-		});
-	};
-
-	function removeVet(vet) {
-		if (!confirm("Really delete '" + vet.name + "'?")) return;
-		removeValue('/api/vet/' + vet.id)
-		.then(() => {
-			return loadAllValue('/api/vet/search/findAllByOrderByNameAsc');
-		})
-		.then(json => {
-			console.log(['removeVet', json]);
-			allVet = json;
-		})
-		.catch(err => {
-			console.log(['removeVet', err]);
+			console.log(['reloadAllVet', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -141,7 +98,8 @@
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
-						<Icon on:click={() => vetEditorCreateClicked()}
+						<Icon 
+						on:click={() => vetEditorCreateClicked()}
 							disabled={vetEditorDisabled}
 							name="edit"
                             outlined/>
@@ -154,7 +112,7 @@
 					<td class="px-4" colspan="3">
 						<VetEditor
 							bind:visible={vetEditorCreate} 
-							on:create={e => createVet(e.detail)}/>
+							on:create={e => reloadAllVet()}/>
 					<td>
 				</tr>
 				{/if}
@@ -177,14 +135,16 @@
 						{/each}
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => visitViewerCreateClicked(vet)}
+						<Icon 
+							on:click={() => visitViewerCreateClicked(vet)}
 							title="Show all visits"
 							disabled={vetEditorDisabled}
 							name="list"
                             outlined/>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => vetEditorUpdateClicked(vet)}
+						<Icon 
+							on:click={() => vetEditorUpdateClicked(vet)}
 							title="Edit vet details"
 							disabled={vetEditorDisabled}
 							name="edit"
@@ -205,8 +165,8 @@
 					<td	class="px-4" colspan="3">
 						<VetEditor
 							bind:visible={vetEditorUpdate} 
-							on:update={e => updateVet(e.detail)}
-							on:remove={e => removeVet(e.detail)}
+							on:update={e => reloadAllVet()}
+							on:remove={e => reloadAllVet()}
 							{vet}/>
 					<td>
 				</tr>
