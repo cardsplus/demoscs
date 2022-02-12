@@ -10,11 +10,10 @@
 	import VisitViewer from './VisitViewer.svelte';
 
 	let allOwner = [];
-	let ownerIndexOf = undefined;
 	let ownerId = undefined;
-	function onOwnerClicked(index) {
-		ownerIndexOf = index;
-		reloadAllVisit(allOwner[index]);
+	function onOwnerClicked(owner) {
+		ownerId = owner.id;
+		reloadAllVisit();
 	}
 
 	let ownerEditorCreate = false;
@@ -74,9 +73,8 @@
 	});
 
 	let filterPrefix = '';
-	$: allOwnerFiltered = filterOwner(filterPrefix,allOwner);
+	$: allOwnerFiltered = filterOwner(filterPrefix, allOwner);
 	function filterOwner(prefix,allValue) {
-		ownerIndexOf = undefined;
 		if (!filterPrefix) return allValue;
 		return allValue.filter(e => {
 			for (const s of e.name.split(" ")) {
@@ -100,8 +98,10 @@
 		});
 	};
 
-	function reloadAllVisit(owner) {
-		loadAllValue('/api/visit/search/findAllByOwner?ownerId=' + owner.id)
+	function reloadAllVisit() {
+		allVisit = [];
+		if (!ownerId) return;
+		loadAllValue('/api/visit/search/findAllByOwner?ownerId=' + ownerId)
 		.then(json => {
 			console.log(['reloadAllVisit', json]);
 			allVisit = json;
@@ -154,10 +154,10 @@
 					<td>
 				</tr>
 				{/if}
-				{#each allOwnerFiltered as owner, i}
-				<tr on:click={e => onOwnerClicked(i)}
+				{#each allOwnerFiltered as owner}
+				<tr on:click={e => onOwnerClicked(owner)}
 					title={owner.id}
-					class:ring={ownerIndexOf === i}>
+					class:ring={ownerId === owner.id}>
 					<td class="px-2 py-3 text-left">
 						<div class="text-sm underline text-blue-600">
 							<a href={'/owner/' + owner.id}>{owner.name}</a>

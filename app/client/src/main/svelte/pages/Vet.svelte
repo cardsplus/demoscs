@@ -8,11 +8,10 @@
 	import VisitViewer from './VisitViewer.svelte';
 
 	let allVet = [];
-	let vetIndexOf = undefined;
 	let vetId = undefined;
-	function onVetClicked(index) {
-		vetIndexOf = index;		
-		reloadAllVisit(allVet[index]);
+	function onVetClicked(vet) {
+		vetId = vet.id;		
+		reloadAllVisit();
 	}
 
 	let vetEditorCreate = false;
@@ -43,7 +42,6 @@
 	let filterPrefix = '';
 	$: allVetFiltered = filterVet(filterPrefix,allVet);
 	function filterVet(prefix,allValue) {
-		vetIndexOf = undefined;
 		if (!filterPrefix) return allValue;
 		return allValue.filter(e => {
 			for (const s of e.name.split(" ")) {
@@ -67,8 +65,10 @@
 		});
 	};
 
-	function reloadAllVisit(vet) {
-		loadAllValue('/api/visit/search/findAllByVet?vetId=' + vet.id)
+	function reloadAllVisit() {
+		allVisit = [];
+		if (!vetId) return;
+		loadAllValue('/api/visit/search/findAllByVet?vetId=' + vetId)
 		.then(json => {
 			console.log(['reloadAllVisit', json]);
 			allVisit = json;
@@ -116,10 +116,10 @@
 					<td>
 				</tr>
 				{/if}
-				{#each allVetFiltered as vet, i}
-				<tr on:click={e => onVetClicked(i)}
+				{#each allVetFiltered as vet}
+				<tr on:click={e => onVetClicked(vet)}
 					title={vet.id}
-					class:ring={vetIndexOf === i}>
+					class:ring={vetId === vet.id}>
 					<td class="px-2 py-3 text-left">
 						<div class="text-sm underline text-blue-600">
 							<a href={'/vet/' + vet.id}>{vet.name}</a>
