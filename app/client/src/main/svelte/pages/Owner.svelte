@@ -116,7 +116,9 @@
 <h1>Owner <span class="text-sm">({allOwnerFiltered.length})</span></h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
-		<TextField bind:value={filterPrefix}
+		<TextField 
+			bind:value={filterPrefix}
+			disabled={ownerEditorDisabled}
 			label="Filter" 
 			placeholder="Insert a criteria"/>
 		<table class="table-fixed">

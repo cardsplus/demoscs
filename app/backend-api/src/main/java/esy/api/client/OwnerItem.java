@@ -47,4 +47,12 @@ public class OwnerItem implements JsonJpaItem<UUID> {
             return new OwnerItem();
         }
     }
+
+    public static OwnerItem fromValue(final Pet value) {
+        if (value != null && value.getOwner() != null) {
+            return new OwnerItem(value.getOwner());
+        } else {
+            return new OwnerItem();
+        }
+    }
 }

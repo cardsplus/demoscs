@@ -16,6 +16,7 @@
 	import PetViewer from './pages/PetViewer.svelte';
 	import Vet from './pages/Vet.svelte';
 	import VetViewer from './pages/VetViewer.svelte';
+	import Visit from './pages/Visit.svelte';
 	let menuVisible = false;
 </script>
 
@@ -42,6 +43,7 @@
 			<div class="flex flex-col p-2 text-gray-600 gap-1">
 				<span class="text-lg text-gray-900 capitalize">Clinic</span>
 				<div class="flex flex-col p-4 text-gray-600 gap-1">
+					<a on:click={() => menuVisible = false} href="/visit">Visit</a>
 					<a on:click={() => menuVisible = false} href="/vet">Vet</a>
 					<a on:click={() => menuVisible = false} href="/enum/skill">Skill</a>
 					<a on:click={() => menuVisible = false} href="/enum/species">Species</a>
@@ -63,6 +65,8 @@
 				component="{Pet}" />
 			<Route path="/pet/:id"
 				component="{PetViewer}" />
+			<Route path="/visit" 
+				component="{Visit}" />
 			<Route path="/vet" 
 				component="{Vet}" />
 			<Route path="/vet/:id"

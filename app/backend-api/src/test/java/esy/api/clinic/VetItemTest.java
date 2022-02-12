@@ -42,7 +42,8 @@ public class VetItemTest {
 
     @Test
     void ofNull() {
-        final VetItem item = VetItem.fromValue(null);
+        final Vet value = null;
+        final VetItem item = VetItem.fromValue(value);
         assertNull(item.getValue());
         assertTrue(item.getText().isEmpty());
         assertFalse(item.isCreate());

@@ -84,7 +84,7 @@
     on:blur={() => focused = false}
     on:blur
   >
-    <option disabled value={null}>{valueNull}</option>
+    <option disabled={!nullable} value={null}>{valueNull}</option>
     {#each allItemProcessed as item}
     <option value={item.value}>
       {item.text}

@@ -44,7 +44,8 @@ public class OwnerItemTest {
 
     @Test
     void ofNull() {
-        final OwnerItem item = OwnerItem.fromValue(null);
+        final Owner value = null;
+        final OwnerItem item = OwnerItem.fromValue(value);
         assertNull(item.getValue());
         assertTrue(item.getText().isEmpty());
         assertFalse(item.isCreate());
