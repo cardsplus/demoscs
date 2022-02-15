@@ -24,7 +24,7 @@ Die Operation meldet `Created` bzw. den Code 201, wenn das Objekt erfolgreich an
 
 Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
 
-Die Operation meldet `Conflict` bzw. den Code 409, wenn die Daten bereits existieren.
+Die Operation meldet `Conflict` bzw. den Code 409, wenn die Daten bereits existieren, nicht vollständig oder gültig sind.
 
 == `PUT /api/owner/{id}`
 
@@ -49,6 +49,8 @@ Die Operation meldet `Created` bzw. den Code 201, wenn das Objekt erfolgreich an
 
 Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
 
+Die Operation meldet `Conflict` bzw. den Code 409, wenn die Daten nicht vollständig oder gültig sind.
+
 == `PATCH /api/owner/{id}`
 
 Die Operation aktualisiert ein existierendes _Owner_-Objekt.
@@ -69,6 +71,8 @@ include::{restdocDir}/patch-api-owner-name/response-body.adoc[]
 Die Operation meldet `Ok` bzw. den Code 200, wenn das Objekt erfolgreich aktualisiert wurde.
 
 Die Operation meldet `Bad Request` bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.
+
+Die Operation meldet `Conflict` bzw. den Code 409, wenn die Daten nicht vollständig oder gültig sind.
 
 == `GET /api/owner`
 
