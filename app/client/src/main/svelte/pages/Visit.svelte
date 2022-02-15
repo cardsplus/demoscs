@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { toast } from '../components/Toast';
 	import { loadAllValue } from '../utils/rest.js';
+	import { mapify } from '../utils/list.js';
 	import Icon from '../components/Icon';
 	import Select from '../components/Select';
 	import VisitEditor from './VisitEditor.svelte';
@@ -61,6 +62,11 @@
             return false;
 		})
 	}
+	
+    $: allVisitByDate = mapify(allVisitFiltered, visitKey);
+    function visitKey(e) {
+        return e.date;
+    }
 
 	function reloadAllVisit() {
 		loadAllValue('/api/visit/search/findAllByOrderByDateDesc')
@@ -85,12 +91,13 @@
 			nullable="true"
 			label="Filter"
 			placeholder="Choose species"/>
+	</div>
+	<div class="flex-grow">
+		{#each [...allVisitByDate] as [date, allVisitOfDate], i}
+		<h4>{date} <small>({allVisitOfDate.length})</small></h4>
 		<table class="table-fixed">
 			<thead class="justify-between">
 				<tr class="bg-gray-100">
-					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-48">
-						<span class="text-gray-600">Date</span>
-					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 text-left w-2/6">
 						<span class="text-gray-600">Owner</span>
 					</th>
@@ -105,7 +112,7 @@
 							on:click={() => visitEditorCreateClicked()}
 							disabled={visitEditorDisabled}
 							name="edit"
-                            outlined/>
+							outlined/>
 					</th>
 				</tr>
 			</thead>
@@ -116,18 +123,16 @@
 						<VisitEditor
 							bind:visible={visitEditorCreate} 
 							on:create={e => reloadAllVisit()}
+							{date}
 							{allPetItem}
 							{allVetItem}/>
 					<td>
 				</tr>
 				{/if}
-				{#each allVisitFiltered as visit}
+				{#each allVisitOfDate as visit}
 				<tr on:click={e => onVisitClicked(visit)}
 					title={visit.id}
 					class:ring={visitId === visit.id}>
-					<td class="px-2 py-3 text-left">
-						{visit.date}
-					</td>
 					<td class="px-2 py-3 text-left">
 						{visit.ownerItem.text}
 					</td>
@@ -143,16 +148,17 @@
 							title="Edit visit details"
 							disabled={visitEditorDisabled}
 							name="edit"
-                            outlined/>
+							outlined/>
 					</td>
 				</tr>
 				{#if visitEditorUpdate && visitId === visit.id}
 				<tr>
-					<td	class="px-4" colspan="5">
+					<td	class="px-4" colspan="4">
 						<VisitEditor
 							bind:visible={visitEditorUpdate} 
 							on:update={e => reloadAllVisit()}
 							on:remove={e => reloadAllVisit()}
+							{date}
 							{allPetItem}
 							{allVetItem}
 							{visit}/>
@@ -161,12 +167,19 @@
 				{/if}
 				{:else}
 				<tr>
-					<td class="px-2 py-3" colspan="5">
+					<td class="px-2 py-3" colspan="4">
 						No visits
 					</td>
 				</tr>
 				{/each}
 			</tbody>
 		</table>
+		{:else}
+		<tr>
+			<td class="px-2 py-3" colspan="6">
+				No visits
+			</td>
+		</tr>
+		{/each}
 	</div>
 </div>

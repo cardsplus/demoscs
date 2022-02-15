@@ -13,11 +13,12 @@
     export let visit = undefined;
     export let allPetItem;
     export let allVetItem;
+    export let date = null;
 
     let showUpdate;
     let showRemove;
     let newVisit = {
-        date: null,
+        date: date,
         text: '',
         petItem: {
             value: null,
