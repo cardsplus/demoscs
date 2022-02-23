@@ -19,7 +19,7 @@
                 Javascript
             </a>
             <br/>
-            <a href="https://nodejs.org/api/" target="_blank">
+            <a href="https://nodejs.org/api" target="_blank">
                 Node.js API
             </a>        
             <br/>
@@ -37,6 +37,10 @@
             <br/>
             <a href="https://material.io/resources/icons" target="_blank">
                 Material Icons
+            </a>
+            <br/>
+            <a href="https://vitejs.dev" target="_blank">
+                Vite Build Tool
             </a>
             <br/>
         </div>

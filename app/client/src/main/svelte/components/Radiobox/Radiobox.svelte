@@ -4,12 +4,12 @@
       'disabled',
       'title'
     ], $$props);
+    export let allItem = [];
     export let disabled = false;
     export let group;
-    export let items = [];
     export let title = undefined;
 
-    $: itemsProcessed = items.map(processItem);
+    $: allItemProcessed = allItem.map(processItem);
     function processItem(e) {
         if (typeof e !== "object") {
             return {
@@ -26,7 +26,7 @@
   </script>
   
   <div class="relative w-auto h-auto flex flex-col">
-    {#each itemsProcessed as item}
+    {#each allItemProcessed as item}
     <label {title} class="inline-flex items-center p-2 cursor-pointer">
       <input
         {...props}

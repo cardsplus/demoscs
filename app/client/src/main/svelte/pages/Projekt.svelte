@@ -1,19 +1,17 @@
 <script>
 	import { onMount } from 'svelte';
+	import { toast } from '../components/Toast';
+	import { loadAllValue } from '../utils/rest.js';
+	import { updatePatch } from '../utils/rest.js';
 	import Icon from '../components/Icon';
 	import Checkbox from '../components/Checkbox';
 	import TextField from '../components/TextField';
-	import { toast } from '../components/Toast';
-	import { loadAllValue } from '../utils/rest.js';
-	import { createValue } from '../utils/rest.js';
-	import { updatePatch } from '../utils/rest.js';
-	import { removeValue } from '../utils/rest.js';
 	import ProjektEditor from './ProjektEditor.svelte';
 
 	let allProjekt = [];
-	let projektIndexOf = undefined;
-	function onProjektClicked(index) {
-		projektIndexOf = index;
+	let projektId = undefined;
+	function onProjektClicked(projekt) {
+		projektId = projekt.id;
 	}
 
 	let projektEditorCreate = false;
@@ -21,21 +19,18 @@
 		projektEditorCreate = true;
 	}	 
 	let projektEditorUpdate = false;
-	let projektEditorUpdateId = undefined;
-	function projektEditorUpdateClicked(id) {
-		projektEditorUpdateId = id;
+	function projektEditorUpdateClicked(projekt) {
+		projektId = projekt.id;
 		projektEditorUpdate = true;
 	}
 	$: projektEditorDisabled = projektEditorCreate || projektEditorUpdate;
 
-	let allNutzerItem = [];
-
 	let allSpracheItem = [];
+
+	let allNutzerItem = [];
 
     onMount(async () => {
         try {
-			allProjekt = await loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
-            console.log(['onMount', allProjekt]);
 			allNutzerItem = await loadAllValue('/api/nutzer/search/findAllItem');
             console.log(['onMount', allNutzerItem]);
 			allSpracheItem = await loadAllValue('/api/enum/sprache');
@@ -44,11 +39,11 @@
 			console.log(['onMount', err]);
 			toast.push(err.toString());
         };
+		reloadAllProjekt();
 	});
 
 	let filterPrefix = '';
 	function filterProjekt(prefix,allValue) {
-		projektIndexOf = undefined;
 		if (!filterPrefix) return allValue;
 		return allValue.filter(e => {
 			for (const s of e.name.split(" ")) {
@@ -59,19 +54,16 @@
             return false;
 		})
 	}
-	$: allProjektFiltered = filterProjekt(filterPrefix,allProjekt);
- 
-	function createProjekt(projekt) {
-		createValue('/api/projekt', projekt)
-		.then(() => {
-			return loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
-		})
+	$: allProjektFiltered = filterProjekt(filterPrefix, allProjekt);
+
+	function reloadAllProjekt() {
+		loadAllValue('/api/projekt/search/findAllByOrderByNameAsc')
 		.then(json => {
-			console.log(json);
+			console.log(['reloadAllNutzer', json]);
 			allProjekt = json;
 		})
 		.catch(err => {
-            console.log(err);
+			console.log(['reloadAllNutzer', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -79,30 +71,10 @@
 	function updateProjekt(projekt) {
 		updatePatch('/api/projekt/' + projekt.id, projekt)
 		.then(() => {
-			return loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
-		})
-		.then(json => {
-			console.log(json);
-			allProjekt = json;
+			reloadAllProjekt();
 		})
 		.catch(err => {
-            console.log(err);
-			toast.push(err.toString());
-		});
-	};
-
-	function removeProjekt(projekt) {
-		if (!confirm("Projekt '" + projekt.name + "' wirklich löschen?")) return;
-		removeValue('/api/projekt/' + projekt.id)
-		.then(() => {
-			return loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
-		})
-		.then(json => {
-			console.log(json);
-			allProjekt = json;
-		})
-		.catch(err => {
-            console.log(err);
+			console.log(['updateProjekt', err]);
 			toast.push(err.toString());
 		});
 	};
@@ -114,9 +86,11 @@
 		<h4 title="Filter für die Projekt, nicht case-sensitiv">
 			Aktueller Filter
 		</h4>
-		<TextField bind:value={filterPrefix}
+		<TextField 
+			bind:value={filterPrefix}
 			label="Filter" 
-			placeholder="Bitte Filterkriterien eingeben"/>
+			placeholder="Bitte Filterkriterien eingeben"
+			disabled={projektEditorDisabled}/>
 		<h4 title="Liste der Projekt, ggfs. gefiltert, jedes Element editierbar">
 			Aktuelle Projekte <small>({allProjektFiltered.length})</small>
 		</h4>
@@ -133,7 +107,8 @@
 						<span class="text-gray-600">Team</span>
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
-						<Icon on:click={() => projektEditorCreateClicked()}
+						<Icon 
+							on:click={() => projektEditorCreateClicked()}
 							disabled={projektEditorDisabled}
 							name="edit"
                             outlined/>
@@ -145,21 +120,22 @@
 				<tr>
 					<td>
 					</td>
-					<td	colspan="3">
+					<td	colspan="2">
 						<ProjektEditor
 							bind:visible={projektEditorCreate} 
-							on:create={e => createProjekt(e.detail)}
-							{allNutzerItem}
-							{allSpracheItem}/>
+							on:create={e => reloadAllProjekt()}
+							{allSpracheItem}
+							{allNutzerItem}/>
 					<td>
 				</tr>
 				{/if}
 				{#each allProjektFiltered as projekt, i}
-				<tr on:click={e => onProjektClicked(i)}
+				<tr on:click={e => onProjektClicked(projekt)}
 					title={projekt.id}
-					class:ring={projektIndexOf === i}>
+					class:ring={projektId === projekt.id}>
 					<td class="px-2 py-3">
-						<Checkbox bind:checked={projekt.aktiv}
+						<Checkbox 
+							bind:checked={projekt.aktiv}
 							on:change={() => updateProjekt(projekt)} />
 					</td>
 					<td  class="px-2 py-3 text-left">
@@ -179,24 +155,25 @@
 						</div>
 					</td>
 					<td class="px-2 py-3">
-						<Icon on:click={() => projektEditorUpdateClicked(projekt.id)}
+						<Icon 
+							on:click={() => projektEditorUpdateClicked(projekt)}
 							disabled={projektEditorDisabled}
 							name="edit"
                             outlined/>
 					</td>
 				</tr>
-				{#if projektEditorUpdate && projektEditorUpdateId === projekt.id}
+				{#if projektEditorUpdate && projektId === projekt.id}
 				<tr>
 					<td>
 					</td>
-					<td	colspan="3">
+					<td	colspan="2">
 						<ProjektEditor
 							bind:visible={projektEditorUpdate} 
-							on:update={e => updateProjekt(e.detail)}
-							on:remove={e => removeProjekt(e.detail)}
+							on:update={e => reloadAllProjekt()}
+							on:remove={e => reloadAllProjekt()}
 							{projekt}
-							{allNutzerItem}
-							{allSpracheItem}/>
+							{allSpracheItem}
+							{allNutzerItem}/>
 					<td>
 				</tr>
 				{/if}

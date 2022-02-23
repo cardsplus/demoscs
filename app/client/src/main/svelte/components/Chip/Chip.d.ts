@@ -1,15 +1,15 @@
-import { SvelteTypedComponent , SvelteAllProps } from 'svelte-typed-component';
+import { SvelteTypedComponent, SvelteAllProps } from 'svelte-typed-component';
 
 export default class Chip extends SvelteTypedComponent<ChipProps, ChipEvents, ChipSlots> {
 }
 
 declare const _ChipProps: {
-    
+
     /** 
      * Disabled state. 
      */
     disabled?: boolean;
-    
+
     /** 
      * Material icon name.
      */
@@ -36,4 +36,5 @@ declare const _ChipSlots: {
 export declare type ChipProps = typeof _ChipProps;
 export declare type ChipEvents = typeof _ChipEvents;
 export declare type ChipSlots = typeof _ChipSlots;
-export {};
+export {
+};

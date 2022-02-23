@@ -6,12 +6,12 @@
       'disabled',
       'title'
     ], $$props);
+    export let allItem = [];
     export let disabled = false;
     export let group;
-    export let items = [];
     export let title = undefined;
 
-    $: itemsProcessed = items.map(processItem);
+    $: allItemProcessed = allItem.map(processItem);
     function processItem(e) {
         if (typeof e !== "object") {
             return {
@@ -27,7 +27,7 @@
     }
 </script>
 
-{#each itemsProcessed as item}
+{#each allItemProcessed as item}
 <Option
     {...props}
     {disabled}
