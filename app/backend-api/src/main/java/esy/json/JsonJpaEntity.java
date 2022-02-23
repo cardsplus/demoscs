@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @MappedSuperclass
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> implements JsonWithId<SELF> {
+public abstract class JsonJpaEntity<SELF extends JsonJpaEntity<?>> implements JsonWithId<SELF> {
 
     /**
      * Aktuelle Version der Daten.
@@ -42,13 +42,13 @@ public abstract class JsonJpaValueBase<SELF extends JsonJpaValueBase<?>> impleme
     @JsonIgnore
     private boolean persisted = false;
 
-    protected JsonJpaValueBase() {
+    protected JsonJpaEntity() {
         this.version = 0L;
         this.id = UUID.randomUUID();
     }
 
-    protected JsonJpaValueBase(@NonNull final Long version,
-                               @NonNull final UUID id) {
+    protected JsonJpaEntity(@NonNull final Long version,
+                            @NonNull final UUID id) {
         this.version = version;
         this.id = id;
     }

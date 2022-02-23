@@ -34,12 +34,15 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,model,png]
+[plantuml,EsyInfo,png]
 ----
 !pragma layout smetana
 hide members
 show attributes
 package "info" {
+  class Enum<JPA> {
+    code,name,text
+  }
   class Version {
     major:minor
   }
@@ -80,7 +83,7 @@ include::{projectDir}/app/backend/src/main/java/esy/app/info/HealthRestApi.adoc[
 
 include::{projectDir}/app/backend/src/main/java/esy/app/info/VersionRestApi.adoc[leveloffset=+1]
 
-include::{projectDir}/app/backend/src/main/java/esy/app/info/EnumValueRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/info/EnumRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 

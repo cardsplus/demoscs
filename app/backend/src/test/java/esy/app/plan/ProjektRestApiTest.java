@@ -1,8 +1,8 @@
 package esy.app.plan;
 
-import esy.api.plan.ProjektValue;
-import esy.api.team.NutzerValue;
-import esy.app.team.NutzerValueRepository;
+import esy.api.plan.Projekt;
+import esy.api.team.Nutzer;
+import esy.app.team.NutzerRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,16 +36,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({MockitoExtension.class, RestDocumentationExtension.class})
-public class ProjektValueRestApiTest {
+public class ProjektRestApiTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private NutzerValueRepository nutzerValueRepository;
+    private NutzerRepository nutzerRepository;
 
     @Autowired
-    private ProjektValueRepository projektValueRepository;
+    private ProjektRepository projektRepository;
 
     @BeforeEach
     void setUp(final WebApplicationContext webApplicationContext,
@@ -100,7 +100,7 @@ public class ProjektValueRestApiTest {
     @Test
     @Order(10)
     void getApiProjektNoElement() throws Exception {
-        projektValueRepository.deleteAll();
+        projektRepository.deleteAll();
         mockMvc.perform(get("/api/projekt")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -120,7 +120,7 @@ public class ProjektValueRestApiTest {
     @Order(20)
     void postApiProjekt() throws Exception {
         final String name = "Projekt A";
-        assertFalse(projektValueRepository.findByName(name).isPresent());
+        assertFalse(projektRepository.findByName(name).isPresent());
         mockMvc.perform(post("/api/projekt")
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
@@ -146,7 +146,7 @@ public class ProjektValueRestApiTest {
                         .value("true"))
                 .andExpect(jsonPath("$.sprache")
                         .value("EN"));
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        assertTrue(projektRepository.findByName(name).isPresent());
     }
 
     @ParameterizedTest
@@ -154,7 +154,7 @@ public class ProjektValueRestApiTest {
     @Order(21)
     void postApiProjektConflict(final boolean aktiv) throws Exception {
         final String name = "Projekt A";
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        assertTrue(projektRepository.findByName(name).isPresent());
         mockMvc.perform(post("/api/projekt")
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
@@ -172,7 +172,7 @@ public class ProjektValueRestApiTest {
     @Order(22)
     void postApiProjektDefault() throws Exception {
         final String name = "Projekt B";
-        assertFalse(projektValueRepository.findByName(name).isPresent());
+        assertFalse(projektRepository.findByName(name).isPresent());
         mockMvc.perform(post("/api/projekt")
                 .content("{" +
                         "\"name\":\"" + name + "\"" +
@@ -196,7 +196,7 @@ public class ProjektValueRestApiTest {
                         .value("true"))
                 .andExpect(jsonPath("$.sprache")
                         .value(""));
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        assertTrue(projektRepository.findByName(name).isPresent());
     }
 
     @Test
@@ -204,8 +204,8 @@ public class ProjektValueRestApiTest {
     void putApiProjekt() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String name = "Projekt C";
-        assertFalse(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
-        assertFalse(projektValueRepository.findByName(name).isPresent());
+        assertFalse(projektRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertFalse(projektRepository.findByName(name).isPresent());
         mockMvc.perform(put("/api/projekt/" + uuid)
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
@@ -231,7 +231,7 @@ public class ProjektValueRestApiTest {
                         .value("false"))
                 .andExpect(jsonPath("$.sprache")
                         .value("EN"));
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        assertTrue(projektRepository.findByName(name).isPresent());
     }
 
     @RepeatedTest(5)
@@ -239,8 +239,8 @@ public class ProjektValueRestApiTest {
     void putApiProjektAgain(final RepetitionInfo info) throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String name = "Projekt C";
-        assertTrue(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        assertTrue(projektRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(projektRepository.findByName(name).isPresent());
         mockMvc.perform(put("/api/projekt/" + uuid)
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
@@ -273,8 +273,8 @@ public class ProjektValueRestApiTest {
     void putApiProjektDefault() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String name = "Projekt C";
-        assertTrue(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        assertTrue(projektRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(projektRepository.findByName(name).isPresent());
         mockMvc.perform(put("/api/projekt/" + uuid)
                 .content("{" +
                         "\"name\":\"" + name + "\"" +
@@ -305,8 +305,8 @@ public class ProjektValueRestApiTest {
     void putApiProjektAktiv() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String name = "Projekt C";
-        assertTrue(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        assertTrue(projektRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(projektRepository.findByName(name).isPresent());
         mockMvc.perform(put("/api/projekt/" + uuid)
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
@@ -339,8 +339,8 @@ public class ProjektValueRestApiTest {
     void putApiProjektSprache() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String name = "Projekt C";
-        assertTrue(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
-        assertTrue(projektValueRepository.findByName(name).isPresent());
+        assertTrue(projektRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(projektRepository.findByName(name).isPresent());
         mockMvc.perform(put("/api/projekt/" + uuid)
                 .content("{" +
                         "\"name\":\"" + name + "\"," +
@@ -371,10 +371,10 @@ public class ProjektValueRestApiTest {
     @Test
     @Order(35)
     void putApiProjektBesitzer() throws Exception {
-        final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
+        final Nutzer nutzer = nutzerRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
+        final Projekt projekt = projektRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertNull(projekt.getBesitzer());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
@@ -390,10 +390,10 @@ public class ProjektValueRestApiTest {
     @Test
     @Order(36)
     void deleteApiProjektBesitzerConflict() throws Exception {
-        final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
+        final Nutzer nutzer = nutzerRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
+        final Projekt projekt = projektRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertTrue(nutzer.isEqual(projekt.getBesitzer()));
         // https://github.com/spring-projects/spring-data-rest/issues/1426
@@ -408,10 +408,10 @@ public class ProjektValueRestApiTest {
     @Transactional
     @Rollback(false)
     void putApiProjektMitglied() throws Exception {
-        final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
+        final Nutzer nutzer = nutzerRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
+        final Projekt projekt = projektRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertEquals(0, projekt.getAllMitglied().size());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
@@ -429,10 +429,10 @@ public class ProjektValueRestApiTest {
     @Transactional
     @Rollback(false)
     void deleteApiProjektMitglied() throws Exception {
-        final NutzerValue nutzer = nutzerValueRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
+        final Nutzer nutzer = nutzerRepository.findById(UUID.fromString("a1111111-6ee8-4335-b12a-ef84794bd27a"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
+        final Projekt projekt = projektRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertEquals(1, projekt.getAllMitglied().size());
         assertEquals(1, projekt.getAllMitglied().stream()
@@ -452,7 +452,7 @@ public class ProjektValueRestApiTest {
     void getApiProjektById() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String name = "Projekt C";
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString(uuid))
+        final Projekt projekt = projektRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertNotNull(projekt.getBesitzer());
         assertEquals(0, projekt.getAllMitglied().size());
@@ -481,7 +481,7 @@ public class ProjektValueRestApiTest {
     @Order(41)
     void getApiProjektByIdNotFound() throws Exception {
         final String uuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
-        assertFalse(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertFalse(projektRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(get("/api/projekt/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -495,7 +495,7 @@ public class ProjektValueRestApiTest {
     @Rollback(false)
     void getApiProjektByName() throws Exception {
         final String name = "Projekt C";
-        final ProjektValue projekt = projektValueRepository.findByName(name)
+        final Projekt projekt = projektRepository.findByName(name)
                 .orElseThrow();
         assertNotNull(projekt.getBesitzer());
         assertEquals(0, projekt.getAllMitglied().size());
@@ -525,7 +525,7 @@ public class ProjektValueRestApiTest {
     @Order(43)
     void getApiProjektByNameNotFound() throws Exception {
         final String name = "Unbekannt";
-        assertFalse(projektValueRepository.findByName(name).isPresent());
+        assertFalse(projektRepository.findByName(name).isPresent());
         mockMvc.perform(get("/api/projekt/search/findByName")
                 .param("name", name)
                 .accept(MediaType.APPLICATION_JSON))
@@ -537,7 +537,7 @@ public class ProjektValueRestApiTest {
     @Test
     @Order(44)
     void getApiProjektItem() throws Exception {
-        assertEquals(3, projektValueRepository.findAll().size());
+        assertEquals(3, projektRepository.findAll().size());
         mockMvc.perform(get("/api/projekt/search/findAllItem")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -563,7 +563,7 @@ public class ProjektValueRestApiTest {
     @Order(50)
     void deleteApiProjekt() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        assertTrue(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(projektRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(delete("/api/projekt/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -575,7 +575,7 @@ public class ProjektValueRestApiTest {
     @Order(51)
     void deleteApiProjektNotFound() throws Exception {
         final String uuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
-        assertFalse(projektValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertFalse(projektRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(delete("/api/projekt/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -603,9 +603,9 @@ public class ProjektValueRestApiTest {
                         .exists())
                 .andExpect(jsonPath("$.content[2]")
                         .doesNotExist());
-        assertEquals(2, projektValueRepository.count());
-        projektValueRepository.deleteAll();
-        assertEquals(2, nutzerValueRepository.count());
-        nutzerValueRepository.deleteAll();
+        assertEquals(2, projektRepository.count());
+        projektRepository.deleteAll();
+        assertEquals(2, nutzerRepository.count());
+        nutzerRepository.deleteAll();
     }
 }

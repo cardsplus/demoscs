@@ -1,14 +1,14 @@
 package esy;
 
 
-import esy.api.info.EnumValue;
-import esy.api.plan.AufgabeValue;
-import esy.api.plan.ProjektValue;
-import esy.api.team.NutzerValue;
-import esy.app.info.EnumValueRepository;
-import esy.app.plan.AufgabeValueRepository;
-import esy.app.plan.ProjektValueRepository;
-import esy.app.team.NutzerValueRepository;
+import esy.api.info.Enum;
+import esy.api.plan.Aufgabe;
+import esy.api.plan.Projekt;
+import esy.api.team.Nutzer;
+import esy.app.info.EnumRepository;
+import esy.app.plan.AufgabeRepository;
+import esy.app.plan.ProjektRepository;
+import esy.app.team.NutzerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -37,125 +37,125 @@ public class ServerTestset implements CommandLineRunner {
     );
 
     @Autowired
-    private AufgabeValueRepository aufgabeValueRepository;
+    private AufgabeRepository aufgabeRepository;
 
     @Autowired
-    private EnumValueRepository enumValueRepository;
+    private EnumRepository enumRepository;
 
     @Autowired
-    private NutzerValueRepository nutzerValueRepository;
+    private NutzerRepository nutzerRepository;
 
     @Autowired
-    private ProjektValueRepository projektValueRepository;
+    private ProjektRepository projektRepository;
 
     @Override
     @Transactional
     public void run(final String... args) throws Exception {
-        if (nutzerValueRepository.count() != 0) {
+        if (nutzerRepository.count() != 0) {
             return;
         }
 
-        final Map<String, EnumValue> allEnumSprache = createAllEnumSprache();
+        final Map<String, Enum> allEnumSprache = createAllEnumSprache();
         allEnumSprache.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final Map<String, NutzerValue> allNutzer = createAllNutzer();
+        final Map<String, Nutzer> allNutzer = createAllNutzer();
         allNutzer.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final Map<String, ProjektValue> allProjekt = createAllProjekt(allNutzer);
+        final Map<String, Projekt> allProjekt = createAllProjekt(allNutzer);
         allProjekt.values().forEach(e -> log.info("CREATED [{}]", e));
 
-        final List<AufgabeValue> allAufgabe = createAllAufgabe(allProjekt);
+        final List<Aufgabe> allAufgabe = createAllAufgabe(allProjekt);
         allAufgabe.forEach(e -> log.info("CREATED [{}]", e));
     }
 
     @Transactional
-    private Map<String, EnumValue> createAllEnumSprache() {
+    private Map<String, Enum> createAllEnumSprache() {
         return Stream.of(
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 0," +
                                 "\"name\": \"DE\"," +
                                 "\"text\": \"Deutsch\"" +
                                 "}"),
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 1," +
                                 "\"name\": \"EN\"," +
                                 "\"text\": \"Englisch\"" +
                                 "}"),
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 2," +
                                 "\"name\": \"IT\"," +
                                 "\"text\": \"Italienisch\"" +
                                 "}"),
-                        EnumValue.parseJson("{" +
+                        Enum.parseJson("{" +
                                 "\"code\": 3," +
                                 "\"name\": \"FR\"," +
                                 "\"text\": \"Französisch\"" +
                                 "}"))
                 .map(e -> e.setArt("sprache"))
-                .map(enumValueRepository::save)
-                .collect(Collectors.toMap(EnumValue::getName, identity()));
+                .map(enumRepository::save)
+                .collect(Collectors.toMap(Enum::getName, identity()));
     }
 
     @Transactional
-    private Map<String, NutzerValue> createAllNutzer() {
+    private Map<String, Nutzer> createAllNutzer() {
         return Stream.of(
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"bruckbauer@gmx.at" + "\"," +
                                         "\"name\": \"Robert Bruckbauer\"," +
                                         "\"allSprache\": [\"DE\", \"EN\"]," +
                                         "\"aktiv\": \"true\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"brombertje@gmail.com" + "\"," +
                                         "\"name\": \"Bertram Bär\"," +
                                         "\"allSprache\": [\"DE\", \"EN\"]," +
                                         "\"aktiv\": \"true\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"max.mustermann@firma.de" + "\"," +
                                         "\"name\": \"Max Mustermann\"," +
                                         "\"allSprache\": [\"DE\", \"EN\"]," +
                                         "\"aktiv\": \"true\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"mia.musterfrau@firma.de" + "\"," +
                                         "\"name\": \"Mia Musterfrau\"," +
                                         "\"allSprache\": [\"DE\", \"IT\"]," +
                                         "\"aktiv\": \"true\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"szweig@gmail.com" + "\"," +
                                         "\"name\": \"Stefan Zweig\"," +
                                         "\"allSprache\": [\"DE\"]," +
                                         "\"aktiv\": \"false\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"mozart@gmail.com" + "\"," +
                                         "\"name\": \"Wolfgang A. Mozart\"," +
                                         "\"allSprache\": [\"DE\"]," +
                                         "\"aktiv\": \"false\"" +
                                         "}"),
-                        NutzerValue.parseJson("{" +
+                        Nutzer.parseJson("{" +
                                         "\"mail\": \"doyle@gmail.com" + "\"," +
                                         "\"name\": \"Arthur Conan Doyle\"," +
                                         "\"allSprache\": [\"EN\"]," +
                                         "\"aktiv\": \"false\"" +
                                         "}"))
-                .map(nutzerValueRepository::save)
-                .collect(Collectors.toMap(NutzerValue::getMail, identity()));
+                .map(nutzerRepository::save)
+                .collect(Collectors.toMap(Nutzer::getMail, identity()));
     }
 
     @Transactional
-    private Map<String, ProjektValue> createAllProjekt(final Map<String, NutzerValue> allNutzer) {
+    private Map<String, Projekt> createAllProjekt(final Map<String, Nutzer> allNutzer) {
         return Stream.of(
-                        ProjektValue.parseJson("{" +
+                        Projekt.parseJson("{" +
                                         "\"name\": \"Projekt Alpha\"," +
                                         "\"sprache\": \"DE\"," +
                                         "\"aktiv\": \"true\"" +
                                         "}")
                                 .setBesitzer(allNutzer.get("max.mustermann@firma.de"))
                                 .addMitglied(allNutzer.get("max.mustermann@firma.de")),
-                        ProjektValue.parseJson("{" +
+                        Projekt.parseJson("{" +
                                         "\"name\": \"Projekt Beta\"," +
                                         "\"sprache\": \"DE\"," +
                                         "\"aktiv\": \"true\"" +
@@ -166,26 +166,26 @@ public class ServerTestset implements CommandLineRunner {
                                 .addMitglied(allNutzer.get("szweig@gmail.com"))
                                 .addMitglied(allNutzer.get("mozart@gmail.com"))
                                 .addMitglied(allNutzer.get("doyle@gmail.com")),
-                        ProjektValue.parseJson("{" +
+                        Projekt.parseJson("{" +
                                         "\"name\": \"Projekt Gamma\"," +
                                         "\"sprache\": \"EN\"," +
                                         "\"aktiv\": \"true\"" +
                                         "}")
                                 .setBesitzer(allNutzer.get("bruckbauer@gmx.at")))
-                .map(projektValueRepository::save)
-                .collect(Collectors.toMap(ProjektValue::getName, identity()));
+                .map(projektRepository::save)
+                .collect(Collectors.toMap(Projekt::getName, identity()));
     }
 
-    private AufgabeValue createLoremIpsumAufgabe(final int index) {
+    private Aufgabe createLoremIpsumAufgabe(final int index) {
         final String text = allLoremIpsum.get(index);
-        return AufgabeValue.parseJson("{" +
+        return Aufgabe.parseJson("{" +
                         "\"text\": \"" + text + "\"," +
                         "\"aktiv\": \"true\"" +
                         "}");
     }
 
     @Transactional
-    private List<AufgabeValue> createAllAufgabe(final Map<String, ProjektValue> allProjekt) {
+    private List<Aufgabe> createAllAufgabe(final Map<String, Projekt> allProjekt) {
         return Stream.of(
                         createLoremIpsumAufgabe(0)
                                 .setProjekt(allProjekt.get("Projekt Alpha")),
@@ -201,7 +201,7 @@ public class ServerTestset implements CommandLineRunner {
                                 .setProjekt(allProjekt.get("Projekt Alpha")),
                         createLoremIpsumAufgabe(6)
                                 .setProjekt(allProjekt.get("Projekt Alpha")),
-                        AufgabeValue.parseJson("{" +
+                        Aufgabe.parseJson("{" +
                                         "\"text\": \"" +
                                         "Bis 100:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
                                         "Bis 200:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n" +
@@ -213,7 +213,7 @@ public class ServerTestset implements CommandLineRunner {
                                         "\"aktiv\": \"true\"" +
                                         "}")
                                 .setProjekt(allProjekt.get("Projekt Beta")))
-                .map(aufgabeValueRepository::save)
+                .map(aufgabeRepository::save)
                 .collect(Collectors.toList());
     }
 }

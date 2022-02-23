@@ -39,23 +39,23 @@ für mehr Informationen.
 Das Modell ist Teil der gemeinsamen Sprache.
 Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konsequent wichtige Begriffe der Domäne aus einem Glossar auch im Code verwendet. Technische Ausdrücke bleiben jedoch wie gewohnt in englischer Sprache.
 
-[plantuml,Plan,png]
+[plantuml,EsyPlan,png]
 ----
 !pragma layout smetana
 hide members
 show attributes
-class NutzerValue<JsonJpaValueBase> {
+class Nutzer<JPA> {
 }
 package "plan" {
-  class AufgabeValue<JsonJpaValueBase> {
+  class Aufgabe<JPA> {
     text
   }
-  class ProjektValue<JsonJpaValueBase> {
+  class Projekt<JPA> {
     name
   }
-  ProjektValue "1" *-- "*" AufgabeValue
-  ProjektValue "1" --> "1" NutzerValue : besitzer
-  ProjektValue "1" --> "*" NutzerValue : mitglied
+  Projekt "1" *-- "*" Aufgabe
+  Projekt "1" --> "1" Nutzer : besitzer
+  Projekt "1" --> "*" Nutzer : mitglied
 }
 ----
 
@@ -89,9 +89,9 @@ TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/ProjektValueRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/plan/ProjektRestApi.adoc[leveloffset=+1]
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/AufgabeValueRestApi.adoc[leveloffset=+1]
+include::{projectDir}/app/backend/src/main/java/esy/app/plan/AufgabeRestApi.adoc[leveloffset=+1]
 
 == Konfiguration
 

@@ -1,7 +1,7 @@
 package esy.app.plan;
 
-import esy.api.plan.AufgabeValue;
-import esy.api.plan.ProjektValue;
+import esy.api.plan.Aufgabe;
+import esy.api.plan.Projekt;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,16 +33,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({MockitoExtension.class, RestDocumentationExtension.class})
-public class AufgabeValueRestApiTest {
+public class AufgabeRestApiTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private AufgabeValueRepository aufgabeValueRepository;
+    private AufgabeRepository aufgabeRepository;
 
     @Autowired
-    private ProjektValueRepository projektValueRepository;
+    private ProjektRepository projektRepository;
 
     @BeforeEach
     void setUp(final WebApplicationContext webApplicationContext,
@@ -97,7 +97,7 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(10)
     void getApiAufgabeNoElement() throws Exception {
-        aufgabeValueRepository.deleteAll();
+        aufgabeRepository.deleteAll();
         mockMvc.perform(get("/api/aufgabe")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -116,10 +116,10 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(20)
     void postApiAufgabe() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String text = "Aufgabe A";
-        assertEquals(0, aufgabeValueRepository.findAll().stream()
+        assertEquals(0, aufgabeRepository.findAll().stream()
                 .filter(e -> e.getText().equals(text))
                 .count());
         mockMvc.perform(post("/api/aufgabe")
@@ -145,7 +145,7 @@ public class AufgabeValueRestApiTest {
                         .value(text))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"));
-        assertEquals(1, aufgabeValueRepository.findAll().stream()
+        assertEquals(1, aufgabeRepository.findAll().stream()
                 .filter(e -> e.getText().equals(text))
                 .count());
     }
@@ -153,10 +153,10 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(21)
     void postApiAufgabeAgain() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String text = "Aufgabe A";
-        assertEquals(1, aufgabeValueRepository.findAll().stream()
+        assertEquals(1, aufgabeRepository.findAll().stream()
                 .filter(e -> e.getText().equals(text))
                 .count());
         mockMvc.perform(post("/api/aufgabe")
@@ -182,7 +182,7 @@ public class AufgabeValueRestApiTest {
                         .value(text))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"));
-        assertEquals(2, aufgabeValueRepository.findAll().stream()
+        assertEquals(2, aufgabeRepository.findAll().stream()
                 .filter(e -> e.getText().equals(text))
                 .count());
     }
@@ -190,10 +190,10 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(22)
     void postApiAufgabeDefault() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String text = "Aufgabe B";
-        assertEquals(0, aufgabeValueRepository.findAll().stream()
+        assertEquals(0, aufgabeRepository.findAll().stream()
                 .filter(e -> e.getText().equals(text))
                 .count());
         mockMvc.perform(post("/api/aufgabe")
@@ -218,7 +218,7 @@ public class AufgabeValueRestApiTest {
                         .value(text))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"));
-        assertEquals(1, aufgabeValueRepository.findAll().stream()
+        assertEquals(1, aufgabeRepository.findAll().stream()
                 .filter(e -> e.getText().equals(text))
                 .count());
     }
@@ -226,11 +226,11 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(30)
     void putApiAufgabe() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
-        assertFalse(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertFalse(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(put("/api/aufgabe/" + uuid)
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
@@ -254,17 +254,17 @@ public class AufgabeValueRestApiTest {
                         .value(text))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"));
-        assertTrue(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
     }
 
     @RepeatedTest(5)
     @Order(31)
     void putApiAufgabeAgain(final RepetitionInfo info) throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
-        assertTrue(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(put("/api/aufgabe/" + uuid)
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
@@ -293,11 +293,11 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(32)
     void putApiAufgabeDefault() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
-        assertTrue(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(put("/api/aufgabe/" + uuid)
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
@@ -325,11 +325,11 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(33)
     void putApiAufgabeAktiv() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("a1111111-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
-        assertTrue(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(put("/api/aufgabe/" + uuid)
                 .content("{" +
                         "\"text\":\"" + text + "\"," +
@@ -358,10 +358,10 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(34)
     void putApiAufgabeProjekt() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("b2222222-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("b2222222-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final AufgabeValue aufgabe0 = aufgabeValueRepository.findById(UUID.fromString(uuid))
+        final Aufgabe aufgabe0 = aufgabeRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertNotEquals(projekt.getId(), aufgabe0.getProjekt().getId());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
@@ -372,7 +372,7 @@ public class AufgabeValueRestApiTest {
                 .andDo(print())
                 .andExpect(status()
                         .isNoContent());
-        final AufgabeValue aufgabe1 = aufgabeValueRepository.findById(UUID.fromString(uuid))
+        final Aufgabe aufgabe1 = aufgabeRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertEquals(projekt.getId(), aufgabe1.getProjekt().getId());
     }
@@ -380,10 +380,10 @@ public class AufgabeValueRestApiTest {
     @Test
     @Order(35)
     void deleteApiAufgabeProjekt() throws Exception {
-        final ProjektValue projekt = projektValueRepository.findById(UUID.fromString("b2222222-5cc7-3115-a010-de73703ac17f"))
+        final Projekt projekt = projektRepository.findById(UUID.fromString("b2222222-5cc7-3115-a010-de73703ac17f"))
                 .orElseThrow();
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        final AufgabeValue aufgabe0 = aufgabeValueRepository.findById(UUID.fromString(uuid))
+        final Aufgabe aufgabe0 = aufgabeRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertEquals(projekt.getId(), aufgabe0.getProjekt().getId());
         // https://github.com/spring-projects/spring-data-rest/issues/1426
@@ -391,7 +391,7 @@ public class AufgabeValueRestApiTest {
                 .andDo(print())
                 .andExpect(status()
                         .isConflict());
-        final AufgabeValue aufgabe1 = aufgabeValueRepository.findById(UUID.fromString(uuid))
+        final Aufgabe aufgabe1 = aufgabeRepository.findById(UUID.fromString(uuid))
                 .orElseThrow();
         assertEquals(projekt.getId(), aufgabe1.getProjekt().getId());
     }
@@ -401,7 +401,7 @@ public class AufgabeValueRestApiTest {
     void getApiAufgabeById() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
         final String text = "Aufgabe C";
-        assertTrue(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(get("/api/aufgabe/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -425,7 +425,7 @@ public class AufgabeValueRestApiTest {
     @Order(41)
     void getApiAufgabeByIdNotFound() throws Exception {
         final String uuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
-        assertFalse(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertFalse(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(get("/api/aufgabe/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -437,7 +437,7 @@ public class AufgabeValueRestApiTest {
     @Order(50)
     void deleteApiAufgabe() throws Exception {
         final String uuid = "c3333333-3bb4-2113-a010-cd42452ab140";
-        assertTrue(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(delete("/api/aufgabe/" + uuid))
                 .andDo(print())
                 .andExpect(status()
@@ -448,7 +448,7 @@ public class AufgabeValueRestApiTest {
     @Order(51)
     void deleteApiAufgabeNotFound() throws Exception {
         final String uuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
-        assertFalse(aufgabeValueRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertFalse(aufgabeRepository.findById(UUID.fromString(uuid)).isPresent());
         mockMvc.perform(delete("/api/aufgabe/" + uuid))
                 .andDo(print())
                 .andExpect(status()
@@ -477,7 +477,7 @@ public class AufgabeValueRestApiTest {
                         .exists())
                 .andExpect(jsonPath("$.content[3]")
                         .doesNotExist());
-        assertEquals(3, aufgabeValueRepository.count());
-        aufgabeValueRepository.deleteAll();
+        assertEquals(3, aufgabeRepository.count());
+        aufgabeRepository.deleteAll();
     }
 }

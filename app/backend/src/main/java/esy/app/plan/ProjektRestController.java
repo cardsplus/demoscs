@@ -1,7 +1,7 @@
 package esy.app.plan;
 
+import esy.api.plan.Projekt;
 import esy.api.plan.ProjektItem;
-import esy.api.plan.ProjektValue;
 import esy.rest.JsonJpaRestControllerBase;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +22,21 @@ import java.util.Optional;
 
 @RepositoryEventHandler
 @BasePathAwareController
-public class ProjektValueRestController extends JsonJpaRestControllerBase<ProjektValue> {
+public class ProjektRestController extends JsonJpaRestControllerBase<Projekt> {
 
-    private final ProjektValueRepository projektValueRepository;
+    private final ProjektRepository projektRepository;
 
     @Autowired
-    public ProjektValueRestController(
+    public ProjektRestController(
             @NonNull final ApplicationEventPublisher eventPublisher,
             @NonNull final TransactionTemplate transactionTemplate,
-            @NonNull final ProjektValueRepository projektValueRepository) {
+            @NonNull final ProjektRepository projektRepository) {
         super(eventPublisher, transactionTemplate);
-        this.projektValueRepository = projektValueRepository;
+        this.projektRepository = projektRepository;
     }
 
     @Override
-    protected Optional<TransactionCallback<Void>> beforeLinkDeleteTransaction(final ProjektValue value, final Object rel) {
+    protected Optional<TransactionCallback<Void>> beforeLinkDeleteTransaction(final Projekt value, final Object rel) {
         if (value.getBesitzer() == null) {
             throw new DataIntegrityViolationException("besitzer is null");
         }
@@ -46,7 +46,7 @@ public class ProjektValueRestController extends JsonJpaRestControllerBase<Projek
     @GetMapping("/projekt/search/findAllItem")
     public ResponseEntity<CollectionModel<ProjektItem>> findAllItem() {
         final List<ProjektItem> allItem = new ArrayList<>();
-        for (final ProjektValue value : projektValueRepository.findAllByOrderByNameAsc()) {
+        for (final Projekt value : projektRepository.findAllByOrderByNameAsc()) {
             allItem.add(ProjektItem.fromValue(value));
         }
         return ResponseEntity.status(HttpStatus.OK).body(CollectionModel.of(allItem));

@@ -10,7 +10,7 @@
 	import { removeValue } from '../utils/rest.js';
 	import ProjektEditor from './ProjektEditor.svelte';
 
-	let allProjektValue = [];
+	let allProjekt = [];
 	let projektIndexOf = undefined;
 	function onProjektClicked(index) {
 		projektIndexOf = index;
@@ -34,8 +34,8 @@
 
     onMount(async () => {
         try {
-			allProjektValue = await loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
-            console.log(['onMount', allProjektValue]);
+			allProjekt = await loadAllValue('/api/projekt/search/findAllByOrderByNameAsc');
+            console.log(['onMount', allProjekt]);
 			allNutzerItem = await loadAllValue('/api/nutzer/search/findAllItem');
             console.log(['onMount', allNutzerItem]);
 			allSpracheItem = await loadAllValue('/api/enum/sprache');
@@ -59,7 +59,7 @@
             return false;
 		})
 	}
-	$: allProjektValueFiltered = filterProjekt(filterPrefix,allProjektValue);
+	$: allProjektFiltered = filterProjekt(filterPrefix,allProjekt);
  
 	function createProjekt(projekt) {
 		createValue('/api/projekt', projekt)
@@ -68,7 +68,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allProjektValue = json;
+			allProjekt = json;
 		})
 		.catch(err => {
             console.log(err);
@@ -83,7 +83,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allProjektValue = json;
+			allProjekt = json;
 		})
 		.catch(err => {
             console.log(err);
@@ -99,7 +99,7 @@
 		})
 		.then(json => {
 			console.log(json);
-			allProjektValue = json;
+			allProjekt = json;
 		})
 		.catch(err => {
             console.log(err);
@@ -118,7 +118,7 @@
 			label="Filter" 
 			placeholder="Bitte Filterkriterien eingeben"/>
 		<h4 title="Liste der Projekt, ggfs. gefiltert, jedes Element editierbar">
-			Aktuelle Projekte <small>({allProjektValueFiltered.length})</small>
+			Aktuelle Projekte <small>({allProjektFiltered.length})</small>
 		</h4>
 		<table class="table-fixed">
 			<thead class="justify-between">
@@ -154,7 +154,7 @@
 					<td>
 				</tr>
 				{/if}
-				{#each allProjektValueFiltered as projekt, i}
+				{#each allProjektFiltered as projekt, i}
 				<tr on:click={e => onProjektClicked(i)}
 					title={projekt.id}
 					class:ring={projektIndexOf === i}>

@@ -1,8 +1,9 @@
 package esy.api.plan;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
@@ -10,14 +11,11 @@ import lombok.NonNull;
 import javax.persistence.*;
 import java.util.*;
 
-/**
- * Value-Objekt für eine Aufgabe.
- */
 @Entity
 @Table(name = "aufgabe", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"})
 })
-public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
+public final class Aufgabe extends JsonJpaEntity<Aufgabe> {
 
     /**
      * Beschreibung der Aufgabe.
@@ -45,26 +43,16 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     @JoinColumn(name = "projekt_id", referencedColumnName = "id")
     @Getter
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private ProjektValue projekt;
+    private Projekt projekt;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    AufgabeValue() {
+    Aufgabe() {
         super();
         this.text = "";
         this.aktiv = true;
         this.projekt = null;
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    AufgabeValue(@NonNull final Long version, @NonNull final UUID id) {
+    Aufgabe(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.text = "";
         this.aktiv = true;
@@ -77,7 +65,7 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     }
 
     @Override
-    public boolean isEqual(final AufgabeValue that) {
+    public boolean isEqual(final Aufgabe that) {
         if (this == that) {
             return true;
         }
@@ -90,7 +78,7 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     }
 
     @Override
-    public AufgabeValue verify() {
+    public Aufgabe verify() {
         if (text.isBlank()) {
             throw new IllegalArgumentException("text is blank");
         }
@@ -98,11 +86,11 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
     }
 
     @Override
-    public AufgabeValue withId(@NonNull final UUID id) {
+    public Aufgabe withId(@NonNull final UUID id) {
         if (Objects.equals(getId(), id)) {
             return this;
         }
-        final AufgabeValue value = new AufgabeValue(getVersion(), id);
+        final Aufgabe value = new Aufgabe(getVersion(), id);
         value.text = this.text;
         value.aktiv = this.aktiv;
         value.projekt = this.projekt;
@@ -117,17 +105,8 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         return allExtra;
     }
 
-    public AufgabeValue setText(@NonNull final String text) {
-        this.text = text;
-        return this;
-    }
-
-    public AufgabeValue setAktiv(final boolean aktiv) {
-        this.aktiv = aktiv;
-        return this;
-    }
-
-    public AufgabeValue setProjekt(final ProjektValue projekt) {
+    @JsonIgnore
+    public Aufgabe setProjekt(final Projekt projekt) {
         this.projekt = projekt;
         return this;
     }
@@ -137,7 +116,7 @@ public final class AufgabeValue extends JsonJpaValueBase<AufgabeValue> {
         return new JsonMapper().writeJson(this);
     }
 
-    public static AufgabeValue parseJson(@NonNull final String json) {
-        return new JsonMapper().parseJson(json, AufgabeValue.class);
+    public static Aufgabe parseJson(@NonNull final String json) {
+        return new JsonMapper().parseJson(json, Aufgabe.class);
     }
 }

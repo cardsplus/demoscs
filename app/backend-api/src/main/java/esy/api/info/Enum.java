@@ -1,8 +1,9 @@
 package esy.api.info;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
@@ -15,16 +16,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Value-Objekt für eine Aufzählung
- */
 @Entity
 @Table(name = "enum", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"}),
         @UniqueConstraint(columnNames = {"art", "code"}),
         @UniqueConstraint(columnNames = {"art", "name"})
 })
-public final class EnumValue extends JsonJpaValueBase<EnumValue> {
+public final class Enum extends JsonJpaEntity<Enum> {
 
     /**
      * Art der Aufzählung (Diskriminitor)
@@ -58,12 +56,7 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
     @JsonProperty
     private String text;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    EnumValue() {
+    Enum() {
         super();
         this.art = "";
         this.code = 0L;
@@ -71,12 +64,7 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
         this.text = "";
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    EnumValue(@NonNull final Long version, @NonNull final UUID id) {
+    Enum(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.art = "";
         this.code = 0L;
@@ -90,7 +78,7 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
     }
 
     @Override
-    public boolean isEqual(final EnumValue that) {
+    public boolean isEqual(final Enum that) {
         if (this == that) {
             return true;
         }
@@ -104,7 +92,7 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
     }
 
     @Override
-    public EnumValue verify() {
+    public Enum verify() {
         if (name.isBlank()) {
             throw new IllegalArgumentException("name is blank");
         }
@@ -115,11 +103,11 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
     }
 
     @Override
-    public EnumValue withId(@NonNull final UUID id) {
+    public Enum withId(@NonNull final UUID id) {
         if (getId().equals(id)) {
             return this;
         }
-        final EnumValue value = new EnumValue(getVersion(), id);
+        final Enum value = new Enum(getVersion(), id);
         value.art = this.art;
         value.code = this.code;
         value.name = this.name;
@@ -134,22 +122,26 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
         return allExtra;
     }
 
-    public EnumValue setArt(@NonNull final String art) {
+    @JsonIgnore
+    public Enum setArt(@NonNull final String art) {
         this.art = art;
         return this;
     }
 
-    public EnumValue setCode(@NonNull final Long code) {
+    @JsonIgnore
+    public Enum setCode(@NonNull final Long code) {
         this.code = code;
         return this;
     }
 
-    public EnumValue setName(@NonNull final String name) {
+    @JsonIgnore
+    public Enum setName(@NonNull final String name) {
         this.name = name;
         return this;
     }
 
-    public EnumValue setText(@NonNull final String text) {
+    @JsonIgnore
+    public Enum setText(@NonNull final String text) {
         this.text = text;
         return this;
     }
@@ -159,7 +151,7 @@ public final class EnumValue extends JsonJpaValueBase<EnumValue> {
         return new JsonMapper().writeJson(this);
     }
 
-    public static EnumValue parseJson(@NonNull final String json) {
-        return new JsonMapper().parseJson(json, EnumValue.class);
+    public static Enum parseJson(@NonNull final String json) {
+        return new JsonMapper().parseJson(json, Enum.class);
     }
 }

@@ -2,7 +2,7 @@ package esy.api.team;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import esy.json.JsonJpaValueBase;
+import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
@@ -10,15 +10,12 @@ import lombok.NonNull;
 import javax.persistence.*;
 import java.util.*;
 
-/**
- * Value-Objekt für einen Nutzer.
- */
 @Entity
 @Table(name = "nutzer", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"}),
         @UniqueConstraint(columnNames = {"mail"})
 })
-public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
+public final class Nutzer extends JsonJpaEntity<Nutzer> {
 
     /**
      * Eindeutige E-Mail-Adresse des Nutzers.
@@ -58,12 +55,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     @JsonProperty
     private SortedSet<String> allSprache;
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    NutzerValue() {
+    Nutzer() {
         super();
         this.mail = "";
         this.name = "";
@@ -71,12 +63,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         this.allSprache = new TreeSet<>();
     }
 
-    /**
-     * Erzeugt eine Instanz mit Standardwerten. Die
-     * Instanz ist nicht gültig, d.h. der Aufruf von
-     * {@link #verify()} ist nicht erfolgreich.
-     */
-    NutzerValue(@NonNull final Long version, @NonNull final UUID id) {
+    Nutzer(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.mail = "";
         this.name = "";
@@ -90,7 +77,7 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     }
 
     @Override
-    public boolean isEqual(final NutzerValue that) {
+    public boolean isEqual(final Nutzer that) {
         if (this == that) {
             return true;
         }
@@ -104,24 +91,22 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
     }
 
     @Override
-    public NutzerValue verify() {
-        // Check if e-mail address is valid
-        if (mail.isBlank()) { // TODO check format
+    public Nutzer verify() {
+        if (mail.isBlank()) {
             throw new IllegalArgumentException("mail is blank");
         }
-        // Check if name is valid
-        if (name.isBlank()) { // TODO check format
+        if (name.isBlank()) {
             throw new IllegalArgumentException("name is blank");
         }
         return this;
     }
 
     @Override
-    public NutzerValue withId(@NonNull final UUID id) {
+    public Nutzer withId(@NonNull final UUID id) {
         if (Objects.equals(getId(), id)) {
             return this;
         }
-        final NutzerValue value = new NutzerValue(getVersion(), id);
+        final Nutzer value = new Nutzer(getVersion(), id);
         value.mail = this.mail;
         value.name = this.name;
         value.aktiv = this.aktiv;
@@ -136,27 +121,12 @@ public final class NutzerValue extends JsonJpaValueBase<NutzerValue> {
         return allExtra;
     }
 
-    public NutzerValue setMail(@NonNull final String mail) {
-        this.mail = mail;
-        return this;
-    }
-
-    public NutzerValue setName(@NonNull final String name) {
-        this.name = name;
-        return this;
-    }
-
-    public NutzerValue setAktiv(final boolean aktiv) {
-        this.aktiv = aktiv;
-        return this;
-    }
-
     @Override
     public String writeJson() {
         return new JsonMapper().writeJson(this);
     }
 
-    public static NutzerValue parseJson(@NonNull final String json) {
-        return new JsonMapper().parseJson(json, NutzerValue.class);
+    public static Nutzer parseJson(@NonNull final String json) {
+        return new JsonMapper().parseJson(json, Nutzer.class);
     }
 }

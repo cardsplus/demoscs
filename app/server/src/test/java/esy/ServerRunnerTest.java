@@ -1,9 +1,8 @@
 package esy;
 
-import esy.api.plan.AufgabeValue;
-import esy.api.plan.ProjektValue;
-import esy.api.team.NutzerValue;
-import esy.api.team.Sprache;
+import esy.api.plan.Aufgabe;
+import esy.api.plan.Projekt;
+import esy.api.team.Nutzer;
 import esy.http.RestApiConnection;
 import esy.http.RestApiResult;
 import org.junit.jupiter.api.*;
@@ -13,11 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
-import java.net.URI;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -68,7 +65,7 @@ public class ServerRunnerTest {
 				toBackendUrl("/api/enum/sprache")).get();
 		assertThat(result.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertEquals(4, result.toCollection(NutzerValue.class).size());
+		assertEquals(4, result.toCollection(Nutzer.class).size());
 	}
 
 	@Test
@@ -87,7 +84,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result1a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
-		final NutzerValue value1 = result1a.toObject(NutzerValue.class);
+		final Nutzer value1 = result1a.toObject(Nutzer.class);
 		assertEquals(1L, value1.getVersion());
 		assertNotNull(value1.getId());
 		assertEquals(mail, value1.getMail());
@@ -114,8 +111,8 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result2a.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final NutzerValue value2 = result2a.toObject(NutzerValue.class);
-		assertFalse(value1.isEqual(result2a.toObject(NutzerValue.class)));
+		final Nutzer value2 = result2a.toObject(Nutzer.class);
+		assertFalse(value1.isEqual(result2a.toObject(Nutzer.class)));
 		assertEquals(2L, value2.getVersion());
 		assertNotNull(value2.getId());
 		assertEquals(mail, value2.getMail());
@@ -128,21 +125,21 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result3a.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertTrue(value2.isEqual(result3a.toObject(NutzerValue.class)));
+		assertTrue(value2.isEqual(result3a.toObject(Nutzer.class)));
 
 		final RestApiResult result3b = RestApiConnection.with(
 				toBackendUrl("/api/nutzer/search/findByMail?mail=" + URLEncoder.encode(mail, UTF_8)))
 				.get();
 		assertThat(result3b.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertTrue(value2.isEqual(result3b.toObject(NutzerValue.class)));
+		assertTrue(value2.isEqual(result3b.toObject(Nutzer.class)));
 
 		final RestApiResult result3c = RestApiConnection.with(
 				toBackendUrl("/api/nutzer?size=99"))
 				.get();
 		assertThat(result3c.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final List<NutzerValue> allValue2a = result3c.toCollection(NutzerValue.class);
+		final List<Nutzer> allValue2a = result3c.toCollection(Nutzer.class);
 		assertEquals(8, allValue2a.size());
 		assertEquals(1, allValue2a.stream()
 				.filter(e -> e.getId().equals(value1.getId()))
@@ -167,10 +164,10 @@ public class ServerRunnerTest {
 		final String name = "Projekt A";
 		final String mail = "max.mustermann@firma.de";
 
-		final NutzerValue nutzer1 = RestApiConnection.with(
+		final Nutzer nutzer1 = RestApiConnection.with(
 						toBackendUrl("/api/nutzer/search/findByMail?mail=" + URLEncoder.encode(mail, UTF_8)))
 				.get()
-				.toObject(NutzerValue.class);
+				.toObject(Nutzer.class);
 
 		final RestApiResult result1a = RestApiConnection.with(
 				toBackendUrl("/api/projekt"))
@@ -182,7 +179,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result1a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
-		final ProjektValue value1 = result1a.toObject(ProjektValue.class);
+		final Projekt value1 = result1a.toObject(Projekt.class);
 		assertEquals(1L, value1.getVersion());
 		assertNotNull(value1.getId());
 		assertEquals(name, value1.getName());
@@ -204,7 +201,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result2a.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final ProjektValue value2 = result2a.toObject(ProjektValue.class);
+		final Projekt value2 = result2a.toObject(Projekt.class);
 		assertEquals(2L, value2.getVersion());
 		assertNotNull(value2.getId());
 		assertEquals(name, value2.getName());
@@ -215,7 +212,7 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result3a.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final List<ProjektValue> allValue2a = result3a.toCollection(ProjektValue.class);
+		final List<Projekt> allValue2a = result3a.toCollection(Projekt.class);
 		assertEquals(4, allValue2a.size());
 		assertEquals(1, allValue2a.stream()
 				.filter(e -> value2.getId().equals(e.getId()))
@@ -226,28 +223,28 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result3b.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertTrue(value2.isEqual(result3b.toObject(ProjektValue.class)));
+		assertTrue(value2.isEqual(result3b.toObject(Projekt.class)));
 
 		final RestApiResult result3c = RestApiConnection.with(
 				toBackendUrl("/api/projekt/search/findByName?name=" + URLEncoder.encode(name, UTF_8)))
 				.get();
 		assertThat(result3c.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertTrue(value2.isEqual(result3c.toObject(ProjektValue.class)));
+		assertTrue(value2.isEqual(result3c.toObject(Projekt.class)));
 
 		final RestApiResult result3d = RestApiConnection.with(
 				toBackendUrl("/api/projekt/" + value2.getId() + "/besitzer"))
 				.get();
 		assertThat(result3d.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		assertTrue(nutzer1.isEqual(result3d.toObject(NutzerValue.class)));
+		assertTrue(nutzer1.isEqual(result3d.toObject(Nutzer.class)));
 
 		final RestApiResult result3e = RestApiConnection.with(
 				toBackendUrl("/api/projekt/" + value2.getId()) + "/allMitglied")
 				.get();
 		assertThat(result3e.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final List<NutzerValue> allValue2e = result3e.toCollection(NutzerValue.class);
+		final List<Nutzer> allValue2e = result3e.toCollection(Nutzer.class);
 		assertEquals(1, allValue2e.size());
 		assertEquals(1, allValue2e.stream()
 				.filter(e -> nutzer1.getId().equals(e.getId()))
@@ -272,10 +269,10 @@ public class ServerRunnerTest {
 		final String name = "Projekt Gamma";
 		final String text = "Aufgabe A";
 
-		final ProjektValue projekt = RestApiConnection.with(
+		final Projekt projekt = RestApiConnection.with(
 				toBackendUrl("/api/projekt/search/findByName?name=" + URLEncoder.encode(name, UTF_8)))
 				.get()
-				.toObject(ProjektValue.class);
+				.toObject(Projekt.class);
 
 		final RestApiResult result1a = RestApiConnection.with(
 				toBackendUrl("/api/aufgabe"))
@@ -286,7 +283,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result1a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
-		final AufgabeValue value1 = result1a.toObject(AufgabeValue.class);
+		final Aufgabe value1 = result1a.toObject(Aufgabe.class);
 		assertEquals(0L, value1.getVersion());
 		assertNotNull(value1.getId());
 		assertEquals(text, value1.getText());
@@ -298,7 +295,7 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result1b.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final List<AufgabeValue> allValue1 = result1b.toCollection(AufgabeValue.class);
+		final List<Aufgabe> allValue1 = result1b.toCollection(Aufgabe.class);
 		assertEquals(1, allValue1.size());
 		assertEquals(1, allValue1.stream()
 				.filter(e -> e.getId().equals(value1.getId()))
@@ -313,7 +310,7 @@ public class ServerRunnerTest {
 						"}");
 		assertThat(result2a.getCode(),
 				equalTo(HttpStatus.CREATED.value()));
-		final AufgabeValue value2 = result2a.toObject(AufgabeValue.class);
+		final Aufgabe value2 = result2a.toObject(Aufgabe.class);
 		assertEquals(0L, value2.getVersion());
 		assertNotNull(value2.getId());
 		assertEquals(text, value2.getText());
@@ -325,7 +322,7 @@ public class ServerRunnerTest {
 				.get();
 		assertThat(result2b.getCode(),
 				equalTo(HttpStatus.OK.value()));
-		final List<AufgabeValue> allValue2 = result2b.toCollection(AufgabeValue.class);
+		final List<Aufgabe> allValue2 = result2b.toCollection(Aufgabe.class);
 		assertEquals(2, allValue2.size());
 		assertEquals(1, allValue2.stream()
 				.filter(e -> e.getId().equals(value2.getId()))

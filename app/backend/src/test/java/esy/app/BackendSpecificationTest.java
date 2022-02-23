@@ -1,9 +1,9 @@
 package esy.app;
 
 import esy.api.info.Version;
-import esy.api.team.NutzerValue;
-import esy.api.plan.AufgabeValue;
-import esy.api.plan.ProjektValue;
+import esy.api.team.Nutzer;
+import esy.api.plan.Aufgabe;
+import esy.api.plan.Projekt;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -26,9 +26,9 @@ public class BackendSpecificationTest {
     @Test
     void service() {
         // check existence of all adoc files for doc/service.adoc
-        assertTrue(Files.exists(restApiFor(AufgabeValue.class)));
-        assertTrue(Files.exists(restApiFor(NutzerValue.class)));
-        assertTrue(Files.exists(restApiFor(ProjektValue.class)));
+        assertTrue(Files.exists(restApiFor(Aufgabe.class)));
+        assertTrue(Files.exists(restApiFor(Nutzer.class)));
+        assertTrue(Files.exists(restApiFor(Projekt.class)));
         assertTrue(Files.exists(restApiFor(Version.class)));
     }
 }

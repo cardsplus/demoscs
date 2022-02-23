@@ -30,13 +30,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({MockitoExtension.class, RestDocumentationExtension.class})
-public class NutzerValueRestApiTest {
+public class NutzerRestApiTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private NutzerValueRepository nutzerValueRepository;
+    private NutzerRepository nutzerRepository;
 
     @BeforeEach
     void setUp(final WebApplicationContext webApplicationContext,
@@ -90,7 +90,7 @@ public class NutzerValueRestApiTest {
     @Test
     @Order(10)
     void getApiNutzerNoElement() throws Exception {
-        nutzerValueRepository.deleteAll();
+        nutzerRepository.deleteAll();
         mockMvc.perform(get("/api/nutzer")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -112,7 +112,7 @@ public class NutzerValueRestApiTest {
         final String nutzerName = "Mia Musterfrau";
         final String profilName = "Mia";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertFalse(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertFalse(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(post("/api/nutzer")
                 .content("{" +
                         "\"mail\":\"" + nutzerMail + "\"," +
@@ -145,7 +145,7 @@ public class NutzerValueRestApiTest {
                         .value("EN"))
                 .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
     }
 
     @ParameterizedTest
@@ -154,7 +154,7 @@ public class NutzerValueRestApiTest {
     void postApiNutzerConflict(final boolean aktiv) throws Exception {
         final String nutzerName = "Mia Musterfrau";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(post("/api/nutzer")
                 .content("{" +
                         "\"mail\":\"" + nutzerMail + "\"," +
@@ -173,7 +173,7 @@ public class NutzerValueRestApiTest {
     void postApiNutzerDefault() throws Exception {
         final String nutzerName = "Bea Musterfrau";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertFalse(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertFalse(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(post("/api/nutzer")
                 .content("{" +
                         "\"mail\":\"" + nutzerMail + "\"," +
@@ -202,7 +202,7 @@ public class NutzerValueRestApiTest {
                         .isArray())
                 .andExpect(jsonPath("$.allSprache[0]")
                         .doesNotExist());
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
     }
 
     @Test
@@ -212,8 +212,8 @@ public class NutzerValueRestApiTest {
         final String profilName = "Max";
         final String nutzerName = "Max Mustermann";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertFalse(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertFalse(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertFalse(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
+        assertFalse(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(put("/api/nutzer/" + nutzerUuid)
                 .content("{" +
                         "\"mail\":\"" + nutzerMail + "\"," +
@@ -248,7 +248,7 @@ public class NutzerValueRestApiTest {
                         .value("EN"))
                 .andExpect(jsonPath("$.allSprache[2]")
                         .doesNotExist());
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
     }
 
     @RepeatedTest(5)
@@ -257,8 +257,8 @@ public class NutzerValueRestApiTest {
         final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
         final String nutzerName = "Max Mustermann";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(put("/api/nutzer/" + nutzerUuid)
                 .content("{" +
                         "\"mail\":\"" + nutzerMail + "\"," +
@@ -301,8 +301,8 @@ public class NutzerValueRestApiTest {
         final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
         final String nutzerName = "Max Mustermann";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(put("/api/nutzer/" + nutzerUuid)
                 .content("{" +
                         "\"mail\":\"" + nutzerMail + "\"," +
@@ -339,8 +339,8 @@ public class NutzerValueRestApiTest {
         final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
         final String nutzerName = "Max Mustermann";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(put("/api/nutzer/" + nutzerUuid)
                 .content("{" +
                         "\"mail\":\"" + nutzerMail + "\"," +
@@ -378,8 +378,8 @@ public class NutzerValueRestApiTest {
         final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
         final String nutzerName = "Max Mustermann";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(get("/api/nutzer/" + nutzerUuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -409,7 +409,7 @@ public class NutzerValueRestApiTest {
     @Order(41)
     void getApiNutzerByIdNotFound() throws Exception {
         final String nutzerUuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
-        assertFalse(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
+        assertFalse(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
         mockMvc.perform(get("/api/nutzer/" + nutzerUuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -422,7 +422,7 @@ public class NutzerValueRestApiTest {
     void getApiNutzerByMail() throws Exception {
         final String nutzerName = "Max Mustermann";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(get("/api/nutzer/search/findByMail")
                 .param("mail", nutzerMail)
                 .accept(MediaType.APPLICATION_JSON))
@@ -454,7 +454,7 @@ public class NutzerValueRestApiTest {
     void getApiNutzerByMailNotFound() throws Exception {
         final String nutzerName = "Unbekannt";
         final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertFalse(nutzerValueRepository.findByMail(nutzerMail).isPresent());
+        assertFalse(nutzerRepository.findByMail(nutzerMail).isPresent());
         mockMvc.perform(get("/api/nutzer/search/findByMail")
                 .param("mail", nutzerMail)
                 .accept(MediaType.APPLICATION_JSON))
@@ -466,7 +466,7 @@ public class NutzerValueRestApiTest {
     @Test
     @Order(44)
     void getApiNutzerItem() throws Exception {
-        assertEquals(3, nutzerValueRepository.findAll().size());
+        assertEquals(3, nutzerRepository.findAll().size());
         mockMvc.perform(get("/api/nutzer/search/findAllItem")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -492,7 +492,7 @@ public class NutzerValueRestApiTest {
     @Order(50)
     void deleteApiNutzer() throws Exception {
         final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
-        assertTrue(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
+        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
         mockMvc.perform(delete("/api/nutzer/" + nutzerUuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -504,7 +504,7 @@ public class NutzerValueRestApiTest {
     @Order(51)
     void deleteApiNutzerNotFound() throws Exception {
         final String nutzerUuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
-        assertFalse(nutzerValueRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
+        assertFalse(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
         mockMvc.perform(delete("/api/nutzer/" + nutzerUuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -532,7 +532,7 @@ public class NutzerValueRestApiTest {
                         .exists())
                 .andExpect(jsonPath("$.content[2]")
                         .doesNotExist());
-        assertEquals(2, nutzerValueRepository.count());
-        nutzerValueRepository.deleteAll();
+        assertEquals(2, nutzerRepository.count());
+        nutzerRepository.deleteAll();
     }
 }

@@ -11,7 +11,7 @@
     import { removeValue } from '../utils/rest.js';
 
     let allProjektItem = [];    
-    let allAufgabeValue = [];
+    let allAufgabe = [];
     let aufgabeText = undefined;
     let aufgabeProjektId = null;
 
@@ -30,7 +30,7 @@
         loadAllValue('/api/aufgabe/search/findAllByProjekt?projektId=' + aufgabeProjektId)
         .then(json => {
 			console.log(json);
-            allAufgabeValue = json;
+            allAufgabe = json;
         })
         .catch(err => {
 			console.log(err);
@@ -49,7 +49,7 @@
 		})        
         .then(json => {
 			console.log(json);
-            allAufgabeValue = json;
+            allAufgabe = json;
             aufgabeText = undefined;
         })
         .catch(err => {
@@ -65,7 +65,7 @@
 		})        
         .then(json => {
 			console.log(json);
-            allAufgabeValue = json;
+            allAufgabe = json;
         })
         .catch(err => {
 			console.log(err);
@@ -81,7 +81,7 @@
 		})        
         .then(json => {
 			console.log(json);
-            allAufgabeValue = json;
+            allAufgabe = json;
         })
         .catch(err => {
 			console.log(err);
@@ -112,7 +112,7 @@
         </div>
     </div>
     <ul>
-        {#each allAufgabeValue as aufgabe}
+        {#each allAufgabe as aufgabe}
         <li>
             <div class="flex flex-row py-1">
                 <div class="flex-grow">
