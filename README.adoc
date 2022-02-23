@@ -88,19 +88,41 @@ https://helm.sh
 ./gradlew app:server:bootRun
 ----
 
+Der Befehl startet den Server als Java-Anwendung.
+Die Anwendung wird im Browser mit `localhost:8080` aufgerufen.
+
 Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_TYPE` kann die Ausgabe von Typinformationen gesteuert werden.
 Mit dem Wert `TRACE` werden bspw. die aktuellen Parameter von Statements ausgegeben.
 
 Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_STAT` kann die Ausgabe von Statistiken gesteuert werden.
 Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
 
+[source, gradle]
+----
+./gradlew app:server:dockerRun
+----
+
+Der Befehl startet den Server als Docker-Container.
+Die Anwendung wird im Browser mit `localhost:8080` aufgerufen.
+
 [[_f5]]
 === Svelte-Client lokal starten
 
+[source, npm]
+----
+npm run dev
+----
+
+Der Befehl startet den Client als Node-Anwendung.
+Die Anwendung wird im Browser mit `localhost:5000` aufgerufen.
+
 [source, gradle]
 ----
-./gradlew app:client:nodeRun
+./gradlew app:client:dockerRun
 ----
+
+Der Befehl startet den Client als Docker-Container.
+Die Anwendung wird im Browser mit `localhost:5000` aufgerufen.
 
 [[_f6]]
 === Dokumentation lokal bauen
@@ -114,7 +136,7 @@ Die Dokumentation befindet sich im `pages`-Ordner.
 
 === Kubernetes-Cluster lokal einrichten
 
-Mit Docker-Desktop wird der lokale Kubernetes-Cluster eingerichtet.
+Docker-Desktop richtet auf `localhost` einen Kubernetes-Cluster ein.
 
 === Kubernetes-Ingress lokal einrichten
 
@@ -132,7 +154,7 @@ Der Ingress-Service wird installiert und gestartet.
 ./gradlew deployDashboard
 ----
 
-Das Dashboard wird mit der angezeigten URL aufgerufen.
+Das Dashboard wird installiert und gestartet.
 Beim ersten Aufruf muss ein Token eingegeben werden.
 Das Token ist zeitlich befristet.
 Ein gültiges Token wird mit mit dem Aufruf von
@@ -144,12 +166,13 @@ Ein gültiges Token wird mit mit dem Aufruf von
 
 erstellt.
 
-Das Dashboard braucht den Proxy auf dem lokalen Host.
-
 [source, kubectl]
 ----
 kubectl proxy
 ----
+
+Der Befehl startet den Proxy auf dem lokalen Host.
+Das Dashboard wird im Browser mit der zuvor angezeigte URL aufgerufen.
 
 === Kubernetes-Deployment lokal ausführen
 
@@ -158,7 +181,7 @@ kubectl proxy
 ./gradlew deploy
 ----
 
-Die Anwendung wird mit `localhost` aufgerufen.
+Die Anwendung wird im Browser mit `localhost` aufgerufen.
 
 === Kubernetes-Deployment lokal entfernen
 
