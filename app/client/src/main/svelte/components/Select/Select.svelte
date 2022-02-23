@@ -2,14 +2,14 @@
   import filterProps from "../filterProps.js";
   const props = filterProps([
     'disabled',
-    'items',
     'label',
     'value',
     'title'
   ], $$props);
+  export let allItem = [];
   export let disabled = false;
-  export let items = [];
   export let label;
+  export let nullable = false;
   export let value;
   export let valueItem = undefined;
   export let valueNull = '';
@@ -25,7 +25,7 @@
     }
   }
 
-  $: itemsProcessed = items.map(processItem);
+  $: allItemProcessed = allItem.map(processItem);
   function processItem(e) {
     if (typeof e !== "object") {
       return {
@@ -41,7 +41,7 @@
   }
 
   function onChange({ target }) {
-    valueItem = items[target.selectedIndex-1];
+    valueItem = allItem[target.selectedIndex-1];
     if (typeof valueItem !== "object") {
       value = valueItem;
     } else {
@@ -53,19 +53,22 @@
 <div
   class="mt-2 mb-6 relative"
 >
+  {#if label}  
   <span
     {title}
     class="pb-2 px-4 pt-2 text-xs absolute left-0 top-0"
     class:text-gray-600={!focused}
-    class:text-primary-600={focused}
+    class:text-primary-500={focused}
   >
     {label}
   </span>
+  {/if}
   <select
     {...props}
     {title}
     {disabled}
-    class="disabled:opacity-50 w-full pb-2 px-4 pt-6 text-black bg-gray-100"
+    class="disabled:opacity-50 w-full pb-2 px-4 text-black bg-gray-100"
+    class:pt-6={label}
     class:border-0={!focused}
     aria-label={label}
     value={valueProcessed}
@@ -81,17 +84,21 @@
     on:blur={() => focused = false}
     on:blur
   >
-    <option disabled value={null}>{valueNull}</option>
-    {#each itemsProcessed as item}
+    <option disabled={!nullable} value={null}>
+      {valueNull}
+    </option>
+    {#each allItemProcessed as item}
     <option value={item.value}>
       {item.text}
     </option>
     {/each}  
   </select>
+  {#if label}
   <div class="w-full bg-gray-600 absolute left-0 bottom-0">
     <div 
       class="mx-auto w-0" 
       style="height: 1px; transition: width 0.2s ease 0s;"
     />
   </div>
+  {/if}
 </div>

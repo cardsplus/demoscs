@@ -6,12 +6,11 @@
   export let options = {};
   export let target = "default";
   $: toast._init(target, options);
-  let items;
-  $: items = $toast.filter((i) => i.target === target);
+  $: allItem = $toast.filter((i) => i.target === target);
 </script>
 
 <ul class="_toastContainer">
-  {#each items as item (item.id)}
+  {#each allItem as item (item.id)}
     <li in:fly={{ x: 256 }} out:fade animate:flip={{ duration: 200 }}>
       <ToastItem {item} />
     </li>

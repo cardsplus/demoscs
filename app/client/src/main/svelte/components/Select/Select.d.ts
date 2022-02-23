@@ -1,50 +1,55 @@
-import { SvelteTypedComponent , SvelteAllProps } from 'svelte-typed-component';
+import { SvelteTypedComponent, SvelteAllProps } from 'svelte-typed-component';
 
 export default class Select extends SvelteTypedComponent<SelectProps, SelectEvents, SelectSlots> {
 }
 
 declare const _SelectProps: {
 
-    /** 
-     * Disabled state.
-     */
-    disabled?: boolean;
+  /** 
+   * Array of Items.
+   */
+  allItem?: ({ value: string, text: string } | string)[];
 
-    /** 
-     * Input label
-     */
-    label?: string;
+  /** 
+   * Disabled state.
+   */
+  disabled?: boolean;
 
-    /** 
-     * Array of Items.
-     */
-    items?: ({value:string, text: string}|string)[];
+  /** 
+   * Input label
+   */
+  label?: string;
 
-    /** 
-     * Selected value.
-     */
-    value?: string;
+  /** 
+   * Nullable value.
+   */
+  nullable?: boolean;
 
-     /** 
-      * Selected value item.
-      */
-    valueItem?: object;
+  /** 
+   * Selected value.
+   */
+  value?: string;
 
-     /** 
-      * Null value.
-      */
-    valueNull?: object;
+  /** 
+   * Selected value item.
+   */
+  valueItem?: object;
 
-    /**
-     * Title for tooltip
-     */
-    title?: string
-    
+  /** 
+   * Null value.
+   */
+  valueNull?: object;
+
+  /**
+   * Title for tooltip
+   */
+  title?: string
+
 } & SvelteAllProps;
 
 declare const _SelectEvents: {
-    click: any;
-    change: any;
+  click: any;
+  change: any;
 };
 
 declare const _SelectSlots: {
@@ -53,4 +58,4 @@ declare const _SelectSlots: {
 export declare type SelectProps = typeof _SelectProps;
 export declare type SelectEvents = typeof _SelectEvents;
 export declare type SelectSlots = typeof _SelectSlots;
-export {};
+export { };
