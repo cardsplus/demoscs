@@ -81,7 +81,7 @@
 	};
 </script>
 
-<h1>Visit <span class="text-sm">({allVisitFiltered.length})</span></h1>
+<h1>Visit</h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
 		<Select 
