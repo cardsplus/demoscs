@@ -6,7 +6,7 @@ plugins {
     id 'base'
     id 'eclipse'
     id 'idea'
-    id 'com.diffplug.spotless' version '6.2.0'
+    id 'com.diffplug.spotless' version '6.3.0'
     id 'com.palantir.git-version' version '0.12.3'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'org.asciidoctor.jvm.pdf' version '3.3.2'
@@ -47,7 +47,7 @@ repositories {
 }
 
 dependencies {
-    asciidoctorGems 'rubygems:rouge:3.26.0'
+    asciidoctorGems 'rubygems:rouge:3.28.0'
 }
 
 allprojects {
@@ -144,10 +144,10 @@ asciidoctorj {
   requires 'rouge'
   modules {
     diagram { 
-      version '2.2.0'
+      version '2.2.1'
     }
     pdf { 
-      version '1.6.0'
+      version '1.6.2'
     }
   }
   logLevel 'INFO'
