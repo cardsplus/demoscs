@@ -113,7 +113,7 @@
 	}
 </script>
 
-<h1>Owner <span class="text-sm">({allOwnerFiltered.length})</span></h1>
+<h1>Owner</h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
 		<TextField 

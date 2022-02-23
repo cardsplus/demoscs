@@ -93,7 +93,7 @@
 	}
 </script>
 
-<h1>Vet <span class="text-sm">({allVetFiltered.length})</span></h1>
+<h1>Vet</h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
 		<TextField 
