@@ -81,14 +81,9 @@ subprojects {
     }
 }
 
-ext.HTMLTOOL_IMAGE = 'registry.gitlab.emundo.eu/erd/cardsplus/integration/cardsplus-toolkit:v2.22'
+ext.HTMLTOOL_IMAGE = 'registry.gitlab.emundo.eu/erd/cardsplus/integration/cardsplus-toolkit:v2.23'
 task cardsplusBuild {
     dependsOn build
-    onlyIf {
-        System.env['HTMLTOOL_WIKI_USER'] != null
-        System.env['HTMLTOOL_WIKI_URI'] != null
-        System.env['HTMLTOOL_JIRA_URI'] != null
-    }
     doLast {
         exec {
             commandLine 'docker', 'run', \
@@ -144,10 +139,10 @@ asciidoctorj {
   requires 'rouge'
   modules {
     diagram { 
-      version '2.2.0'
+      version '2.2.1'
     }
     pdf { 
-      version '1.6.0'
+      version '1.6.2'
     }
   }
   logLevel 'INFO'
