@@ -1,24 +1,24 @@
-import { SvelteTypedComponent , SvelteAllProps } from 'svelte-typed-component';
+import { SvelteTypedComponent, SvelteAllProps } from 'svelte-typed-component';
 export default class Goto extends SvelteTypedComponent<GotoProps, GotoEvents, GotoSlots> {
 }
 
 declare const _GotoProps: {
-    
+
     /** 
      * Disabled state. 
      */
     disabled?: boolean;
-    
+
     /** 
      * Material icon name.
      */
     icon?: string;
-    
+
     /** 
      * Page target.
      */
     page?: string;
-    
+
     /** 
      * Outlined variant.
      */
@@ -44,4 +44,5 @@ declare const _GotoSlots: {
 export declare type GotoProps = typeof _GotoProps;
 export declare type GotoEvents = typeof _GotoEvents;
 export declare type GotoSlots = typeof _GotoSlots;
-export {};
+export {
+};

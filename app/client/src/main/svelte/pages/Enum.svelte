@@ -16,11 +16,12 @@
 	}
 	
 	let itemEditorCreate = false;
-	let itemEditorUpdate = false;
 	function itemEditorCreateClicked() {
 		itemEditorCreate = true;
 	}
-	function itemEditorUpdateClicked(item) {
+	let itemEditorUpdate = false;
+	function itemEditorUpdateClicked(code) {
+		itemEditorUpdateCode = code;
 		itemEditorUpdate = true;
 		itemCode = item.code;
 	}

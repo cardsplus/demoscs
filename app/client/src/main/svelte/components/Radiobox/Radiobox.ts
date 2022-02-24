@@ -1,9 +1,9 @@
-import { SvelteTypedComponent , SvelteAllProps } from 'svelte-typed-component';
+import { SvelteTypedComponent, SvelteAllProps } from 'svelte-typed-component';
 export default class Radiobox extends SvelteTypedComponent<RadioboxProps, RadioboxEvents, RadioboxSlots> {
 }
 
 declare const _RadioboxProps: {
-    
+
     /** 
      * Disabled state.
      */
@@ -36,4 +36,5 @@ declare const _RadioboxSlots: {
 export declare type RadioboxProps = typeof _RadioboxProps;
 export declare type RadioboxEvents = typeof _RadioboxEvents;
 export declare type RadioboxSlots = typeof _RadioboxSlots;
-export {};
+export {
+};

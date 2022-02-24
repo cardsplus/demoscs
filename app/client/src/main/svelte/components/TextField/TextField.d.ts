@@ -1,4 +1,4 @@
-import { SvelteTypedComponent , SvelteAllProps } from 'svelte-typed-component';
+import { SvelteTypedComponent, SvelteAllProps } from 'svelte-typed-component';
 
 export default class TextField extends SvelteTypedComponent<TextFieldProps, TextFieldEvents, TextFieldSlots> {
 }
@@ -41,4 +41,5 @@ declare const _TextFieldSlots: {
 export declare type TextFieldProps = typeof _TextFieldProps;
 export declare type TextFieldEvents = typeof _TextFieldEvents;
 export declare type TextFieldSlots = typeof _TextFieldSlots;
-export {};
+export {
+};

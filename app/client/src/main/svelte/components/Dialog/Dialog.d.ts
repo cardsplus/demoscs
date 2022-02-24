@@ -1,4 +1,4 @@
-import { SvelteTypedComponent , SvelteAllProps } from 'svelte-typed-component';
+import { SvelteTypedComponent, SvelteAllProps } from 'svelte-typed-component';
 
 export default class Dialog extends SvelteTypedComponent<DialogProps, DialogEvents, DialogSlots> {
 }
@@ -23,4 +23,5 @@ declare const _DialogSlots: {
 export declare type DialogProps = typeof _DialogProps;
 export declare type DialogEvents = typeof _DialogEvents;
 export declare type DialogSlots = typeof _DialogSlots;
-export {};
+export {
+};
