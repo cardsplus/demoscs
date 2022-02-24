@@ -20,8 +20,8 @@
 	}    
 	let nutzerEditorUpdate = false;
 	function nutzerEditorUpdateClicked(nutzer) {
-		nutzerId = nutzer.id;
 		nutzerEditorUpdate = true;
+		nutzerId = nutzer.id;
 	}
 	$: nutzerEditorDisabled = nutzerEditorCreate || nutzerEditorUpdate;
 

@@ -20,8 +20,8 @@
 	}	 
 	let projektEditorUpdate = false;
 	function projektEditorUpdateClicked(projekt) {
-		projektId = projekt.id;
 		projektEditorUpdate = true;
+		projektId = projekt.id;
 	}
 	$: projektEditorDisabled = projektEditorCreate || projektEditorUpdate;
 
