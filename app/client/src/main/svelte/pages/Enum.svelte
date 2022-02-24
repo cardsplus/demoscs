@@ -16,16 +16,16 @@
 	}
 	
 	let itemEditorCreate = false;
+	let itemEditorUpdate = false;
+	$: itemEditorDisabled = itemEditorCreate || itemEditorUpdate;
 	function itemEditorCreateClicked() {
 		itemEditorCreate = true;
 	}
-	let itemEditorUpdate = false;
 	function itemEditorUpdateClicked(code) {
+		itemCode = item.code;
 		itemEditorUpdateCode = code;
 		itemEditorUpdate = true;
-		itemCode = item.code;
 	}
-	$: itemEditorDisabled = itemEditorCreate || itemEditorUpdate;
 
     onMount(async () => {
 		reloadAllItem()
@@ -72,17 +72,11 @@
 <h1>{art.toUpperCase()}</h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
 	<div class="flex-grow">
-		<h4 title="Filter für die Werte, nicht case-sensitiv">
-			Aktueller Filter
-		</h4>
 		<TextField 
 			bind:value={filterPrefix}
+			disabled={itemEditorDisabled}
 			label="Filter"
-			placeholder="Bitte Filterkriterien eingeben"
-			disabled={itemEditorDisabled}/>
-		<h4 title="Liste der Werte, ggfs. gefiltert, jedes Element editierbar">
-			Aktuelle Werte <small>({allItemFiltered.length})</small>
-		</h4>
+			placeholder="Insert a criteria"/>
 		<table class="table-fixed">
 			<thead class="justify-between">
 				<tr class="bg-gray-100">
@@ -153,7 +147,7 @@
 				{:else}
 				<tr>
 					<td class="px-2 py-3" colspan="4">
-						Keine Werte
+						No items
 					</td>
 				</tr>
 				{/each}
