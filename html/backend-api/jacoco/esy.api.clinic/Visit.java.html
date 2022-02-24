@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Visit.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">backend-api</a> &gt; <a href="index.source.html" class="el_package">esy.api.clinic</a> &gt; <span class="el_source">Visit.java</span></div><h1>Visit.java</h1><pre class="source lang-java linenums">package esy.api.clinic;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.client.OwnerItem;
+import esy.api.client.Pet;
+import esy.api.client.PetItem;
+import esy.json.JsonJpaEntity;
+import esy.json.JsonMapper;
+import lombok.Getter;
+import lombok.NonNull;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+
+@Entity
+@Table(name = &quot;visit&quot;, uniqueConstraints = {
+        @UniqueConstraint(columnNames = {&quot;id&quot;}),
+        @UniqueConstraint(columnNames = {&quot;date&quot;,&quot;pet_id&quot;})
+})
+public final class Visit extends JsonJpaEntity&lt;Visit&gt; {
+
+    @Column(name = &quot;date&quot;)
+<span class="fc" id="L29">    @Getter</span>
+    @JsonProperty
+    private LocalDate date;
+
+    @Column(name = &quot;text&quot;)
+<span class="fc" id="L34">    @Getter</span>
+    @JsonProperty
+    private String text;
+
+    @ManyToOne(
+            fetch = FetchType.EAGER,
+            optional = true)
+    @JoinColumn(name = &quot;pet_id&quot;, referencedColumnName = &quot;id&quot;)
+<span class="nc" id="L42">    @Getter</span>
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Pet pet;
+
+    @ManyToOne(
+            fetch = FetchType.EAGER,
+            optional = true)
+    @JoinColumn(name = &quot;vet_id&quot;, referencedColumnName = &quot;id&quot;)
+<span class="nc" id="L50">    @Getter</span>
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Vet vet;
+
+    Visit() {
+<span class="fc" id="L55">        super();</span>
+<span class="fc" id="L56">        this.date = LocalDate.of(2000, 1, 1);</span>
+<span class="fc" id="L57">        this.text = &quot;&quot;;</span>
+<span class="fc" id="L58">        this.pet = null;</span>
+<span class="fc" id="L59">        this.vet = null;</span>
+<span class="fc" id="L60">    }</span>
+
+<span class="pc bpc" id="L62" title="2 of 4 branches missed.">    Visit(@NonNull final Long version, @NonNull final UUID id) {</span>
+<span class="fc" id="L63">        super(version, id);</span>
+<span class="fc" id="L64">        this.date = LocalDate.of(2000, 1, 1);</span>
+<span class="fc" id="L65">        this.text = &quot;&quot;;</span>
+<span class="fc" id="L66">        this.pet = null;</span>
+<span class="fc" id="L67">        this.vet = null;</span>
+<span class="fc" id="L68">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L72">        return super.toString() + &quot;,date='&quot; + date + &quot;'&quot;;</span>
+    }
+
+    @Override
+    public boolean isEqual(final Visit that) {
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (this == that) {</span>
+<span class="fc" id="L78">            return true;</span>
+        }
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (that == null) {</span>
+<span class="fc" id="L81">            return false;</span>
+        }
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        return this.date.equals(that.date) &amp;&amp;</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">                this.text.equals(that.text) &amp;&amp;</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">                Objects.equals(this.pet, that.pet) &amp;&amp;</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">                Objects.equals(this.vet, that.vet);</span>
+    }
+
+    @Override
+    public Visit verify() {
+<span class="fc" id="L91">        return this;</span>
+    }
+
+    @Override
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">    public Visit withId(@NonNull final UUID id) {</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (Objects.equals(getId(), id)) {</span>
+<span class="fc" id="L97">            return this;</span>
+        }
+<span class="fc" id="L99">        final Visit value = new Visit(getVersion(), id);</span>
+<span class="fc" id="L100">        value.date = this.date;</span>
+<span class="fc" id="L101">        value.text = this.text;</span>
+<span class="fc" id="L102">        value.pet = this.pet;</span>
+<span class="fc" id="L103">        value.vet = this.vet;</span>
+<span class="fc" id="L104">        return value;</span>
+    }
+
+    @JsonAnyGetter
+    private Map&lt;String, Object&gt; extraJson() {
+<span class="nc" id="L109">        final Map&lt;String, Object&gt; allExtra = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L110">        allExtra.put(&quot;version&quot;, getVersion());</span>
+<span class="nc" id="L111">        allExtra.put(&quot;ownerItem&quot;, OwnerItem.fromValue(pet));</span>
+<span class="nc" id="L112">        allExtra.put(&quot;petItem&quot;, PetItem.fromValue(pet));</span>
+<span class="nc" id="L113">        allExtra.put(&quot;vetItem&quot;, VetItem.fromValue(vet));</span>
+<span class="nc" id="L114">        return allExtra;</span>
+    }
+
+    @JsonIgnore
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">    public Visit setPet(@NonNull final Pet pet) {</span>
+<span class="fc" id="L119">        this.pet = pet;</span>
+<span class="fc" id="L120">        return this;</span>
+    }
+
+    @JsonIgnore
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">    public Visit setVet(@NonNull final Vet vet) {</span>
+<span class="fc" id="L125">        this.vet = vet;</span>
+<span class="fc" id="L126">        return this;</span>
+    }
+
+    @Override
+    public String writeJson() {
+<span class="nc" id="L131">        return new JsonMapper().writeJson(this);</span>
+    }
+
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">    public static Visit parseJson(@NonNull final String json) {</span>
+<span class="fc" id="L135">        return new JsonMapper().parseJson(json, Visit.class);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
