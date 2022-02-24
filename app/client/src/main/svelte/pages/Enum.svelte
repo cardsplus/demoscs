@@ -16,7 +16,6 @@
 	}
 	
 	let itemEditorCreate = false;
-	let itemEditorUpdate = false;
 	function itemEditorCreateClicked() {
 		itemEditorCreate = true;
 	}

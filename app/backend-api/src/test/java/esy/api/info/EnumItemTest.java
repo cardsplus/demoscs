@@ -21,8 +21,7 @@ public class EnumItemTest {
     @Test
     void equalsHashcodeToString() {
         final String name = "JIRA";
-        final Enum value = createWithName(name);
-        final EnumItem item0 = EnumItem.fromValue(value);
+        final EnumItem value = EnumItem.fromValue(createWithName(name));
         // Identisches Objekt
         assertEquals(value, value);
         assertEquals(value.hashCode(), value.hashCode());
