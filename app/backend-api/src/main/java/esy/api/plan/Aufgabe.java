@@ -3,6 +3,7 @@ package esy.api.plan;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.CardsplusEntity;
 import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
@@ -11,6 +12,10 @@ import lombok.NonNull;
 import javax.persistence.*;
 import java.util.*;
 
+/**
+ * Aufgabe in einem Projekt.
+ */
+@CardsplusEntity
 @Entity
 @Table(name = "aufgabe", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"})

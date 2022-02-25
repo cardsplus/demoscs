@@ -2,6 +2,7 @@ package esy.api.team;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.CardsplusEntity;
 import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
@@ -10,6 +11,10 @@ import lombok.NonNull;
 import javax.persistence.*;
 import java.util.*;
 
+/**
+ * Nutzer der Anwendung.
+ */
+@CardsplusEntity
 @Entity
 @Table(name = "nutzer", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"}),

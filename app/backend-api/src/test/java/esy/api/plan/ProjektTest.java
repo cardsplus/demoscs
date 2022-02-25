@@ -1,7 +1,7 @@
 package esy.api.plan;
 
 import esy.api.team.Nutzer;
-import esy.api.team.Sprache;
+import esy.api.info.Sprache;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

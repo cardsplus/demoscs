@@ -1,11 +1,16 @@
 package esy.api.info;
 
+import esy.api.CardsplusEntity;
 import lombok.Data;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Version nach SemVer.
+ */
+@CardsplusEntity
 @Data
 public class Version {
 

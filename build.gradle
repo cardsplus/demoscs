@@ -81,7 +81,7 @@ subprojects {
     }
 }
 
-ext.HTMLTOOL_IMAGE = 'registry.gitlab.emundo.eu/erd/cardsplus/integration/cardsplus-toolkit:v2.22'
+ext.HTMLTOOL_IMAGE = 'registry.gitlab.emundo.eu/erd/cardsplus/integration/cardsplus-toolkit:v2.23'
 task cardsplusBuild {
     dependsOn build
     onlyIf {
