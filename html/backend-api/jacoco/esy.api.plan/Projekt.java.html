@@ -3,6 +3,7 @@
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.CardsplusEntity;
 import esy.api.team.Nutzer;
 import esy.api.team.NutzerItem;
 import esy.json.JsonJpaEntity;
@@ -14,6 +15,10 @@ import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Projekt mit Aufgaben.
+ */
+@CardsplusEntity
 @Entity
 @Table(name = &quot;projekt&quot;, uniqueConstraints = {
         @UniqueConstraint(columnNames = {&quot;id&quot;}),
@@ -25,7 +30,7 @@ public final class Projekt extends JsonJpaEntity&lt;Projekt&gt; {
      * Eindeutiger Name des Projekts.
      */
     @Column(name = &quot;name&quot;)
-<span class="fc" id="L28">    @Getter</span>
+<span class="fc" id="L33">    @Getter</span>
     @JsonProperty
     private String name;
 
@@ -33,7 +38,7 @@ public final class Projekt extends JsonJpaEntity&lt;Projekt&gt; {
      * Projekt ist aktiv?
      */
     @Column(name = &quot;aktiv&quot;)
-<span class="fc" id="L36">    @Getter</span>
+<span class="fc" id="L41">    @Getter</span>
     @JsonProperty
     private boolean aktiv;
 
@@ -41,7 +46,7 @@ public final class Projekt extends JsonJpaEntity&lt;Projekt&gt; {
      * Projektsprache.
      */
     @Column(name = &quot;sprache&quot;)
-<span class="fc" id="L44">    @Getter</span>
+<span class="fc" id="L49">    @Getter</span>
     @JsonProperty
     private String sprache;
 
@@ -52,7 +57,7 @@ public final class Projekt extends JsonJpaEntity&lt;Projekt&gt; {
             fetch = FetchType.EAGER,
             optional = true)
     @JoinColumn(name = &quot;besitzer_id&quot;, referencedColumnName = &quot;id&quot;)
-<span class="fc" id="L55">    @Getter</span>
+<span class="fc" id="L60">    @Getter</span>
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Nutzer besitzer;
 
@@ -65,7 +70,7 @@ public final class Projekt extends JsonJpaEntity&lt;Projekt&gt; {
             name = &quot;projekt_mitglied&quot;,
             joinColumns = @JoinColumn(name = &quot;projekt_id&quot;, referencedColumnName = &quot;id&quot;),
             inverseJoinColumns = @JoinColumn(name = &quot;nutzer_id&quot;, referencedColumnName = &quot;id&quot;))
-<span class="fc" id="L68">    @Getter</span>
+<span class="fc" id="L73">    @Getter</span>
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set&lt;Nutzer&gt; allMitglied;
 
@@ -78,110 +83,110 @@ public final class Projekt extends JsonJpaEntity&lt;Projekt&gt; {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-<span class="fc" id="L81">    @Getter</span>
+<span class="fc" id="L86">    @Getter</span>
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set&lt;Aufgabe&gt; allAufgabe;
 
     Projekt() {
-<span class="fc" id="L86">        super();</span>
-<span class="fc" id="L87">        this.name = &quot;&quot;;</span>
-<span class="fc" id="L88">        this.aktiv = true;</span>
-<span class="fc" id="L89">        this.sprache = &quot;&quot;;</span>
-<span class="fc" id="L90">        this.besitzer = null;</span>
-<span class="fc" id="L91">        this.allMitglied = new LinkedHashSet&lt;&gt;();</span>
-<span class="fc" id="L92">        this.allAufgabe = new LinkedHashSet&lt;&gt;();</span>
-<span class="fc" id="L93">    }</span>
+<span class="fc" id="L91">        super();</span>
+<span class="fc" id="L92">        this.name = &quot;&quot;;</span>
+<span class="fc" id="L93">        this.aktiv = true;</span>
+<span class="fc" id="L94">        this.sprache = &quot;&quot;;</span>
+<span class="fc" id="L95">        this.besitzer = null;</span>
+<span class="fc" id="L96">        this.allMitglied = new LinkedHashSet&lt;&gt;();</span>
+<span class="fc" id="L97">        this.allAufgabe = new LinkedHashSet&lt;&gt;();</span>
+<span class="fc" id="L98">    }</span>
 
-<span class="pc bpc" id="L95" title="2 of 4 branches missed.">    Projekt(@NonNull final Long version, @NonNull final UUID id) {</span>
-<span class="fc" id="L96">        super(version, id);</span>
-<span class="fc" id="L97">        this.name = &quot;&quot;;</span>
-<span class="fc" id="L98">        this.aktiv = true;</span>
-<span class="fc" id="L99">        this.sprache = &quot;&quot;;</span>
-<span class="fc" id="L100">        this.besitzer = null;</span>
-<span class="fc" id="L101">        this.allMitglied = new LinkedHashSet&lt;&gt;();</span>
-<span class="fc" id="L102">        this.allAufgabe = new LinkedHashSet&lt;&gt;();</span>
-<span class="fc" id="L103">    }</span>
+<span class="pc bpc" id="L100" title="2 of 4 branches missed.">    Projekt(@NonNull final Long version, @NonNull final UUID id) {</span>
+<span class="fc" id="L101">        super(version, id);</span>
+<span class="fc" id="L102">        this.name = &quot;&quot;;</span>
+<span class="fc" id="L103">        this.aktiv = true;</span>
+<span class="fc" id="L104">        this.sprache = &quot;&quot;;</span>
+<span class="fc" id="L105">        this.besitzer = null;</span>
+<span class="fc" id="L106">        this.allMitglied = new LinkedHashSet&lt;&gt;();</span>
+<span class="fc" id="L107">        this.allAufgabe = new LinkedHashSet&lt;&gt;();</span>
+<span class="fc" id="L108">    }</span>
 
     @Override
     public String toString() {
-<span class="fc" id="L107">        return super.toString() + &quot;,name='&quot; + name;</span>
+<span class="fc" id="L112">        return super.toString() + &quot;,name='&quot; + name;</span>
     }
 
     @Override
     public boolean isEqual(final Projekt that) {
-<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (this == that) {</span>
-<span class="fc" id="L113">            return true;</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (this == that) {</span>
+<span class="fc" id="L118">            return true;</span>
         }
-<span class="fc bfc" id="L115" title="All 2 branches covered.">        if (that == null) {</span>
-<span class="fc" id="L116">            return false;</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (that == null) {</span>
+<span class="fc" id="L121">            return false;</span>
         }
-<span class="pc bpc" id="L118" title="1 of 4 branches missed.">        return this.name.equals(that.name) &amp;&amp;</span>
+<span class="pc bpc" id="L123" title="1 of 4 branches missed.">        return this.name.equals(that.name) &amp;&amp;</span>
                 this.aktiv == that.aktiv &amp;&amp;
-<span class="pc bpc" id="L120" title="1 of 2 branches missed.">                this.sprache.equals(that.sprache) &amp;&amp;</span>
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                Objects.equals(this.besitzer, that.besitzer) &amp;&amp;</span>
-<span class="pc bpc" id="L122" title="1 of 2 branches missed.">                this.allMitglied.equals(that.allMitglied) &amp;&amp;</span>
-<span class="pc bpc" id="L123" title="1 of 2 branches missed.">                this.allAufgabe.equals(that.allAufgabe);</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">                this.sprache.equals(that.sprache) &amp;&amp;</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">                Objects.equals(this.besitzer, that.besitzer) &amp;&amp;</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">                this.allMitglied.equals(that.allMitglied) &amp;&amp;</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">                this.allAufgabe.equals(that.allAufgabe);</span>
     }
 
     @Override
     public Projekt verify() {
-<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (name.isBlank()) {</span>
-<span class="fc" id="L129">            throw new IllegalArgumentException(&quot;name is blank&quot;);</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (name.isBlank()) {</span>
+<span class="fc" id="L134">            throw new IllegalArgumentException(&quot;name is blank&quot;);</span>
         }
-<span class="fc" id="L131">        return this;</span>
+<span class="fc" id="L136">        return this;</span>
     }
 
     @Override
-<span class="pc bpc" id="L135" title="1 of 2 branches missed.">    public Projekt withId(@NonNull final UUID id) {</span>
-<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (Objects.equals(getId(), id)) {</span>
-<span class="fc" id="L137">            return this;</span>
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">    public Projekt withId(@NonNull final UUID id) {</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">        if (Objects.equals(getId(), id)) {</span>
+<span class="fc" id="L142">            return this;</span>
         }
-<span class="fc" id="L139">        final Projekt value = new Projekt(getVersion(), id);</span>
-<span class="fc" id="L140">        value.name = this.name;</span>
-<span class="fc" id="L141">        value.aktiv = this.aktiv;</span>
-<span class="fc" id="L142">        value.sprache = this.sprache;</span>
-<span class="fc" id="L143">        value.besitzer = this.besitzer;</span>
-<span class="fc" id="L144">        value.allMitglied = this.allMitglied;</span>
-<span class="fc" id="L145">        value.allAufgabe = this.allAufgabe;</span>
-<span class="fc" id="L146">        return value;</span>
+<span class="fc" id="L144">        final Projekt value = new Projekt(getVersion(), id);</span>
+<span class="fc" id="L145">        value.name = this.name;</span>
+<span class="fc" id="L146">        value.aktiv = this.aktiv;</span>
+<span class="fc" id="L147">        value.sprache = this.sprache;</span>
+<span class="fc" id="L148">        value.besitzer = this.besitzer;</span>
+<span class="fc" id="L149">        value.allMitglied = this.allMitglied;</span>
+<span class="fc" id="L150">        value.allAufgabe = this.allAufgabe;</span>
+<span class="fc" id="L151">        return value;</span>
     }
 
     @JsonAnyGetter
     private Map&lt;String, Object&gt; extraJson() {
-<span class="nc" id="L151">        final Map&lt;String, Object&gt; allExtra = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L152">        allExtra.put(&quot;version&quot;, getVersion());</span>
-<span class="nc" id="L153">        allExtra.put(&quot;besitzerItem&quot;, NutzerItem.fromValue(besitzer));</span>
-<span class="nc" id="L154">        allExtra.put(&quot;allMitgliedItem&quot;, allMitglied.stream()</span>
-<span class="nc" id="L155">                .map(NutzerItem::fromValue)</span>
-<span class="nc" id="L156">                .collect(Collectors.toSet()));</span>
-<span class="nc" id="L157">        return allExtra;</span>
+<span class="nc" id="L156">        final Map&lt;String, Object&gt; allExtra = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L157">        allExtra.put(&quot;version&quot;, getVersion());</span>
+<span class="nc" id="L158">        allExtra.put(&quot;besitzerItem&quot;, NutzerItem.fromValue(besitzer));</span>
+<span class="nc" id="L159">        allExtra.put(&quot;allMitgliedItem&quot;, allMitglied.stream()</span>
+<span class="nc" id="L160">                .map(NutzerItem::fromValue)</span>
+<span class="nc" id="L161">                .collect(Collectors.toSet()));</span>
+<span class="nc" id="L162">        return allExtra;</span>
     }
 
     @JsonIgnore
     public Projekt setBesitzer(final Nutzer besitzer) {
-<span class="fc" id="L162">        this.besitzer = besitzer;</span>
-<span class="fc" id="L163">        return this;</span>
+<span class="fc" id="L167">        this.besitzer = besitzer;</span>
+<span class="fc" id="L168">        return this;</span>
     }
 
     @JsonIgnore
-<span class="pc bpc" id="L167" title="1 of 2 branches missed.">    public Projekt addMitglied(@NonNull final Nutzer mitglied) {</span>
-<span class="fc" id="L168">        allMitglied.add(mitglied);</span>
-<span class="fc" id="L169">        return this;</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">    public Projekt addMitglied(@NonNull final Nutzer mitglied) {</span>
+<span class="fc" id="L173">        allMitglied.add(mitglied);</span>
+<span class="fc" id="L174">        return this;</span>
     }
 
     @JsonIgnore
-<span class="pc bpc" id="L173" title="1 of 2 branches missed.">    public Projekt addAufgabe(@NonNull final Aufgabe aufgabe) {</span>
-<span class="fc" id="L174">        allAufgabe.add(aufgabe);</span>
-<span class="fc" id="L175">        return this;</span>
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">    public Projekt addAufgabe(@NonNull final Aufgabe aufgabe) {</span>
+<span class="fc" id="L179">        allAufgabe.add(aufgabe);</span>
+<span class="fc" id="L180">        return this;</span>
     }
 
     @Override
     public String writeJson() {
-<span class="nc" id="L180">        return new JsonMapper().writeJson(this);</span>
+<span class="nc" id="L185">        return new JsonMapper().writeJson(this);</span>
     }
 
-<span class="pc bpc" id="L183" title="1 of 2 branches missed.">    public static Projekt parseJson(@NonNull final String json) {</span>
-<span class="fc" id="L184">        return new JsonMapper().parseJson(json, Projekt.class);</span>
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">    public static Projekt parseJson(@NonNull final String json) {</span>
+<span class="fc" id="L189">        return new JsonMapper().parseJson(json, Projekt.class);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
