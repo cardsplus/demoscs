@@ -14,7 +14,7 @@
 </script>
 
 <div
-  class="mt-2 mb-6 relative"
+  class="mt-1 relative"
 >
   {#if label}
   <span

@@ -77,21 +77,6 @@
 			toast.push(err.toString());
 		});
 	};
-	
-	function openKatalog(format) {
-		window.open(docDownloadUrl('/nutzer/katalog' + format), '_blank');
-	}
-	
-	function mailKatalog(to) {
-		docMailTo('/nutzer/katalog', to)
-		.then(json => {
-			console.log(['mailKatalog', json]);
-		})
-		.catch(err => {
-			console.log(['mailKatalog', err]);
-			toast.push(err.toString());
-		});
-	}
 </script>
 
 <h1>Nutzer</h1>
@@ -135,9 +120,7 @@
 			<tbody>
 				{#if nutzerEditorCreate}
 				<tr>
-					<td>
-					</td>
-					<td colspan="2">
+					<td class="px-4" colspan="5">
 						<NutzerEditor
 							bind:visible={nutzerEditorCreate} 
 							on:create={e => reloadAllNutzer()}
@@ -181,9 +164,7 @@
 				</tr>
 				{#if nutzerEditorUpdate && nutzerId === nutzer.id}
 				<tr>
-					<td>
-					</td>
-					<td	colspan="2">
+					<td	class="px-4" colspan="5">
 						<NutzerEditor
 							bind:visible={nutzerEditorUpdate} 
 							on:update={e => reloadAllNutzer()}
@@ -195,7 +176,7 @@
 				{/if}
 				{:else}
 				<tr>
-					<td class="px-2 py-3" colspan="4">
+					<td class="px-2 py-3" colspan="5">
 						Keine Nutzer
 					</td>
 				</tr>

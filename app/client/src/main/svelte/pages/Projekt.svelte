@@ -118,9 +118,7 @@
 			<tbody>
 				{#if projektEditorCreate}
 				<tr>
-					<td>
-					</td>
-					<td	colspan="2">
+					<td	class="px-4" colspan="4">
 						<ProjektEditor
 							bind:visible={projektEditorCreate} 
 							on:create={e => reloadAllProjekt()}
@@ -164,9 +162,7 @@
 				</tr>
 				{#if projektEditorUpdate && projektId === projekt.id}
 				<tr>
-					<td>
-					</td>
-					<td	colspan="2">
+					<td	class="px-4" colspan="4">
 						<ProjektEditor
 							bind:visible={projektEditorUpdate} 
 							on:update={e => reloadAllProjekt()}
@@ -179,7 +175,7 @@
 				{/if}
 				{:else}
 				<tr>
-					<td class="px-2 py-3" colspan="5">
+					<td class="px-2 py-3" colspan="4">
 						Keine Projekte
 					</td>
 				</tr>
