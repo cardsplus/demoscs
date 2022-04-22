@@ -64,7 +64,7 @@
 </script>
 
 <div
-  class="mt-2 mb-6 relative"
+  class="mt-1 relative"
 >
   <div class="flex flex-col pb-2 px-4 pt-2 absolute left-0 top-0 pointer-events-none">
     <span
