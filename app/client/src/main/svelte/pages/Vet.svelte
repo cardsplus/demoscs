@@ -170,7 +170,6 @@
 				<tr>
 					<td class="px-4" colspan="6">
 						<VisitViewer
-							bind:visible={visitViewerCreate} 
 							{allVisit}/>
 					<td>
 				</tr>

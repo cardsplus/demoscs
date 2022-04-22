@@ -1,5 +1,5 @@
 export function mapify(l, key) {
-    console.log(['process', l]);
+    console.log(['mapify', l]);
     let m = new Map();
     l.forEach(e => {
         let k = key(e);		
@@ -10,6 +10,6 @@ export function mapify(l, key) {
             m.set(k, [e]);
         }
     });
-    console.log(['process', m]);
+    console.log(['mapify', m]);
     return m;
 }
