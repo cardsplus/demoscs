@@ -80,13 +80,6 @@ TIP: Siehe
 https://spring.io/projects/spring-data-rest
 für mehr Informationen.
 
-Optional kann jeder gespeicherte Datensatz auch als Nachricht in einem Datenstrom veröffentlicht werden.
-Für die Veröffentlichung der Daten in einem Datenstrom wird `spring-kafka` als Abstraktion eingesetzt.
-
-TIP: Siehe
-https://spring.io/projects/spring-kafka
-für mehr Informationen.
-
 == Anwendung
 
 Der Dienst hat eine reaktive browser-basierte Benutzeroberfläche.
