@@ -6,7 +6,7 @@
 
 === app/backend-api
 
-Datenmodell für das Backend.
+Datenmodell für den Spring-Boot-Server der Anwendung.
 
 https://projectlombok.org/
 
@@ -14,7 +14,7 @@ https://github.com/FasterXML/jackson-docs
 
 === app/backend
 
-REST-API für das Backend.
+REST-API für den Spring-Boot-Server der Anwendung.
 
 https://spring.io/projects/spring-framework
 
@@ -36,7 +36,7 @@ http://hsqldb.org
 
 === app/client
 
-Svelte-Client der Anwendung.
+Browser-basierter Svelte-Client der Anwendung.
 
 https://svelte.dev
 
