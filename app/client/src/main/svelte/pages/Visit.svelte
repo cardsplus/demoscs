@@ -13,29 +13,17 @@
 		visitId = visit.id;	
 	}
 
-	let visitEditorCreate = false;
 	let visitEditorUpdate = false;
-	$: visitEditorDisabled = visitEditorCreate || visitEditorUpdate;
-	function visitEditorCreateClicked() {
-		visitEditorCreate = true;
-	}    
+	$: visitEditorDisabled = visitEditorUpdate;
 	function visitEditorUpdateClicked(visit) {
 		visitId = visit.id;
 		visitEditorUpdate = true;
 	}
 
-	let allPetItem = [];
-
-	let allVetItem = [];
-
 	let allSpeciesEnum = [];
 
     onMount(async () => {
         try {
-            allPetItem = await loadAllValue('/api/pet/search/findAllItem');
-            console.log(['onMount', allPetItem]);
-            allVetItem = await loadAllValue('/api/vet/search/findAllItem');
-            console.log(['onMount', allVetItem]);
 			allSpeciesEnum = await loadAllValue('/api/enum/species');
             allSpeciesEnum = allSpeciesEnum.map(e => ({
                 value: e.value,
@@ -108,27 +96,10 @@
 						<span class="text-gray-600">Vet</span>
 					</th>
 					<th class="px-2 py-3 border-b-2 border-gray-300 w-16">
-						<Icon 
-							on:click={() => visitEditorCreateClicked()}
-							disabled={visitEditorDisabled}
-							name="edit"
-							outlined/>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				{#if visitEditorCreate}
-				<tr>
-					<td class="px-4" colspan="3">
-						<VisitEditor
-							bind:visible={visitEditorCreate} 
-							on:create={e => reloadAllVisit()}
-							{date}
-							{allPetItem}
-							{allVetItem}/>
-					<td>
-				</tr>
-				{/if}
 				{#each allVisitOfDate as visit}
 				<tr on:click={e => onVisitClicked(visit)}
 					title={visit.id}
@@ -159,8 +130,6 @@
 							on:update={e => reloadAllVisit()}
 							on:remove={e => reloadAllVisit()}
 							{date}
-							{allPetItem}
-							{allVetItem}
 							{visit}/>
 					<td>
 				</tr>

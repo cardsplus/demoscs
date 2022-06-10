@@ -5,14 +5,10 @@
 	import { updatePatch } from '../utils/rest.js';
 	import { removeValue } from '../utils/rest.js';
 	import Button from '../components/Button';
-	import Select from '../components/Select';
 	import TextArea from '../components/TextArea';
-	import TextField from '../components/TextField';
     
     export let visible = false;
     export let visit = undefined;
-    export let allPetItem;
-    export let allVetItem;
     export let date = null;
 
     let showUpdate;
@@ -103,32 +99,6 @@
 
 <div class="flex flex-col">
     <form class="w-full">
-        <div class="flex flex-col lg:flex-row gap-1">
-            <div class="w-full lg:w-2/5">
-                <Select 
-                    bind:value={newVisit.petItem.value}
-                    allItem={allPetItem}
-                    required
-                    label="Pet"
-                    placeholder="Insert pet"/>
-            </div>
-            <div class="w-full lg:w-2/5">
-                <Select 
-                    bind:value={newVisit.vetItem.value}
-                    allItem={allVetItem}
-                    required
-                    label="Veterinarian"
-                    placeholder="Insert veterinarian"/>
-            </div>
-            <div class="w-48 lg:w-1/5">
-                <TextField 
-                    bind:value={newVisit.date}
-                    required
-                    type="date"
-                    label="Date"
-                    placeholder="Insert date"/>
-            </div>                
-        </div>
         <div class="w-full">
             <TextArea 
                 bind:value={newVisit.text}
