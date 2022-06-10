@@ -2,6 +2,7 @@ package esy.api.info;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import esy.api.CardsplusEntity;
 import esy.json.JsonJpaEntity;
 import esy.json.JsonMapper;
 import lombok.Getter;
@@ -15,6 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Pflegbare Aufzählung.
+ */
+@CardsplusEntity
 @Entity
 @Table(name = "enum", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id"}),
