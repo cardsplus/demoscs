@@ -26,12 +26,19 @@
 	}
 
     let allOwnerItem = [];
+    function ownerToOwnerItem(owner) {
+        return {
+            value: owner.id,
+            text: owner.name + ", " + owner.address
+        }
+    }
 
     let allSpeciesEnum = [];
 
     onMount(async () => {
         try {
-			allOwnerItem = await loadAllValue('/api/owner/search/findAllItem');
+			allOwnerItem = await loadAllValue('/api/owner/search/findAllByOrderByNameAsc');
+            allOwnerItem = allOwnerItem.map(ownerToOwnerItem);
             console.log(['onMount', allOwnerItem]);
 			allSpeciesEnum = await loadAllValue('/api/enum/species');
             allSpeciesEnum = allSpeciesEnum.map(e => ({
@@ -64,15 +71,13 @@
 
 <h1>Pet</h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
-    <div class="flex flex-row gap-1">
-        <div class="w-full lg:w-96">
-            <Select 
-                bind:value={petOwnerId} 
-                allItem={allOwnerItem} 
-                disabled={petEditorDisabled}
-                label="Owner"
-                placeholder="Choose owner"/>
-        </div>
+	<div class="flex-grow">
+        <Select 
+            bind:value={petOwnerId} 
+            allItem={allOwnerItem} 
+            disabled={petEditorDisabled}
+            label="Owner"
+            placeholder="Choose owner"/>
     </div>
     <table class="table-fixed">
         <thead class="justify-between">
