@@ -1,8 +1,12 @@
 # https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 
-name: CI
+name: pages
 
-on: [push]
+on:
+  workflow_run:
+    workflows: ["build"]
+    types:
+      - completed
 
 jobs:
   pages:
