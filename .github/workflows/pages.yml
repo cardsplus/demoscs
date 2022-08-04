@@ -3,6 +3,7 @@
 name: pages
 
 on:
+  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
   workflow_run:
     workflows: ["build"]
     types:
@@ -11,6 +12,7 @@ on:
 jobs:
   pages:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
 
     # https://github.com/actions/checkout
@@ -31,7 +33,7 @@ jobs:
         restore-keys: ${{ runner.os }}-gradle
 
     # https://github.com/peaceiris/actions-gh-pages
-    - name: Deploy preview
+    - name: Publish documentation
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
