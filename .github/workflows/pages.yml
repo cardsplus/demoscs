@@ -1,23 +1,23 @@
-# https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+# https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 
-name: CI
+name: pages
 
-on: [push]
+on:
+  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
+  workflow_run:
+    workflows: ["build"]
+    types:
+      - completed
 
 jobs:
-  build:
+  pages:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
 
     # https://github.com/actions/checkout
     - name: Set up git
       uses: actions/checkout@v2
-
-    # https://github.com/actions/setup-java
-    - name: Set up java
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
 
     # https://github.com/actions/cache
     - name: Set up cache
@@ -32,15 +32,8 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
 
-    # https://github.com/gradle/gradle
-    - name: Build with Gradle
-      env:
-        JAVA_OPTS: '-Dorg.gradle.daemon=false'
-        GRADLE_USER_HOME: .gradle
-      run: chmod +x gradlew && ./gradlew eclipse build asciidoctor jacocoTestReport
-
     # https://github.com/peaceiris/actions-gh-pages
-    - name: Deploy preview
+    - name: Publish documentation
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
