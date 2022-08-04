@@ -1,0 +1,34 @@
+# https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
+
+name: CI
+
+on: [push]
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+
+    # https://github.com/actions/checkout
+    - name: Set up git
+      uses: actions/checkout@v2
+
+    # https://github.com/actions/cache
+    - name: Set up cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          .gradle
+          build
+          app/backend/build
+          app/backend-api/build
+          app/server/build
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: ${{ runner.os }}-gradle
+
+    # https://github.com/peaceiris/actions-gh-pages
+    - name: Deploy preview
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir:  pages
