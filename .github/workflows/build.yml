@@ -22,8 +22,7 @@ jobs:
         cache: 'gradle'
 
     # https://github.com/gradle/gradle
-    - name: Build with Gradle
-      run: |
+    - run: |
         chmod +x gradlew 
         ./gradlew eclipse
         ./gradlew build --parallel
@@ -31,8 +30,7 @@ jobs:
         ./gradlew jacocoTestReport
 
     # https://github.com/peaceiris/actions-gh-pages
-    - name: Publish documentation
-      uses: peaceiris/actions-gh-pages@v3
+    - uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir:  pages
