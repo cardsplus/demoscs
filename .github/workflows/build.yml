@@ -22,12 +22,11 @@ jobs:
         cache: 'gradle'
 
     # https://github.com/gradle/gradle
-    - run: |
-        chmod +x gradlew 
-        ./gradlew eclipse
-        ./gradlew build --parallel
-        ./gradlew asciidoctor
-        ./gradlew jacocoTestReport
+    - run: chmod +x gradlew 
+    - run: ./gradlew eclipse
+    - run: ./gradlew build --parallel
+    - run: ./gradlew asciidoctor
+    - run: ./gradlew jacocoTestReport
 
     # https://github.com/peaceiris/actions-gh-pages
     - if: ${{ github.event_name != 'push' }}
