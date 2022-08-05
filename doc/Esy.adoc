@@ -2,7 +2,7 @@
 :backendApi: {projectDir}/app/backend-api/src/main/java
 :backendDir: {projectDir}/app/backend/src/main/java
 :icons: font
-= EsySpec
+= Esy
 
 == Datenmodell
 
@@ -79,3 +79,33 @@ für mehr Informationen.
 Die Präsentation der Daten in einem SCS ist Aufgabe eines Svelte-Clients.
 Der Client liest die Daten aus der internen REST-Schnittstelle des Servers und präsentiert sie in einer Single-Page-Anwendung im Web-Browser.
 Nutzer können Daten, für die das SCS die Hoheit besitzt, bearbeiten und speichern.
+
+=== Implementierung
+
+tbd Svelte
+
+tbd TailwindCSS
+
+== Github
+
+=== Grundlagen
+
+tbd Gradle
+
+tbd Github Repository
+
+tbd Github Actions
+
+tbd Github Pages
+
+=== Entscheidungen
+
+tbd 
+
+=== Implementierung
+
+.github/workflows/build.yml
+[source,yaml,options="nowrap"]
+----
+include::../.github/workflows/build.yml[]
+----
