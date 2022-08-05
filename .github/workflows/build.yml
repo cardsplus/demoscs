@@ -11,33 +11,18 @@ jobs:
     steps:
 
     # https://github.com/actions/checkout
-    - name: Set up git
-      uses: actions/checkout@v2
-
-    # https://github.com/actions/cache
-    - name: Set up cache
-      uses: actions/cache@v2
-      with:
-        path: |
-          .gradle
-          build
-          app/backend/build
-          app/backend-api/build
-          app/server/build
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-        restore-keys: ${{ runner.os }}-gradle
+    - uses: actions/checkout@v3
 
     # https://github.com/actions/setup-java
-    - name: Set up java
-      uses: actions/setup-java@v1
+    # https://github.com/actions/cache
+    - uses: actions/setup-java@v3
       with:
-        java-version: 11
+        distribution: 'temurin'
+        java-version: '11'
+        cache: 'gradle'
 
     # https://github.com/gradle/gradle
     - name: Build with Gradle
-      env:
-        JAVA_OPTS: '-Dorg.gradle.daemon=false'
-        GRADLE_USER_HOME: .gradle
       run: |
         chmod +x gradlew 
         ./gradlew eclipse
