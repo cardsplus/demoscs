@@ -1273,13 +1273,29 @@ Nutzer können Daten, für die das SCS die Hoheit besitzt, bearbeiten und speich
     <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">./gradlew build --parallel</span>
     <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">./gradlew asciidoctor</span>
     <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">./gradlew jacocoTestReport</span>
+    <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">./gradlew dockerBuild</span>
+
+    <span class="c1"># https://github.com/features/packages</span>
+    <span class="pi">-</span> <span class="na">if</span><span class="pi">:</span> <span class="s">${{ github.ref == 'refs/heads/master' }}</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Update Packages (nur master)</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="s">echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin</span>
+        <span class="s">API=ghcr.io/${{ github.repository_owner }}</span>
+        <span class="s">TAG=`cat VERSION`</span>
+        <span class="s">CLIENT=demoscs/client</span>
+        <span class="s">docker tag $CLIENT:$TAG $API/$CLIENT:$TAG</span>
+        <span class="s">docker push $API/$CLIENT:$TAG</span>
+        <span class="s">SERVER=demoscs/server</span>
+        <span class="s">docker tag $SERVER:$TAG $API/$SERVER:$TAG</span>
+        <span class="s">docker push $API/$SERVER:$TAG</span>
 
     <span class="c1"># https://github.com/peaceiris/actions-gh-pages</span>
     <span class="pi">-</span> <span class="na">if</span><span class="pi">:</span> <span class="s">${{ github.ref == 'refs/heads/master' }}</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Update Pages (nur master)</span>
       <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v3</span>
       <span class="na">with</span><span class="pi">:</span>
         <span class="na">github_token</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
-        <span class="na">publish_dir</span><span class="pi">:</span>  <span class="s">pages</span></code></pre>
+        <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">pages</span></code></pre>
 </div>
 </div>
 </div>
@@ -1289,7 +1305,7 @@ Nutzer können Daten, für die das SCS die Hoheit besitzt, bearbeiten und speich
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2023-02-17 10:37:59 UTC
+Last updated 2023-02-17 15:51:30 UTC
 </div>
 </div>
 <style>
