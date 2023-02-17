@@ -14,9 +14,11 @@ spec:
         version: {{.Chart.Version}}
         component: server
     spec:
+      imagePullSecrets:
+        - name: {{.Values.image.secret}}
       containers:
         - name: server
-          image: "{{.Values.image.repository}}/{{.Values.image.serverImageName}}:{{.Values.image.tag}}"
+          image: "{{.Values.image.registry}}/{{.Values.image.serverImageName}}:{{.Values.image.tag}}"
           imagePullPolicy: IfNotPresent
           # tag::env[]
           env:

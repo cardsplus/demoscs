@@ -14,9 +14,11 @@ spec:
         version: {{.Chart.Version}}
         component: client
     spec:
+      imagePullSecrets:
+        - name: {{.Values.image.secret}}
       containers:
         - name: client
-          image: {{.Values.image.repository}}/{{.Values.image.clientImageName}}:{{.Values.image.tag}}
+          image: {{.Values.image.registry}}/{{.Values.image.clientImageName}}:{{.Values.image.tag}}
           imagePullPolicy: IfNotPresent
           # tag::env[]
           # No values

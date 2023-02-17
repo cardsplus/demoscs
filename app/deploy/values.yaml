@@ -7,10 +7,12 @@ ingress: nginx
 
 image:
   # Die URL für den Abruf der Docker-Images.
-  # Der Wert wird in der Gitlab-CI überschrieben.
-  repository: demoscs
+  registry: ghcr.io/cardsplus/demoscs
+  # Der Name des Secrets für den Zugriff auf
+  # das Repository.
+  # Typ ist kubernetes.io/dockerconfigjson.
+  secret: ghcr-login
   # Das Tag für den Abruf der Docker-Images.
-  # Der Wert wird in der Gitlab-CI überschrieben.
   tag: latest
   # Der Name des Docker-Images für den Client.
   clientImageName: client

@@ -1,6 +1,6 @@
 :icons: font
 :experimental: true
-= Self-Contained System mit Spring-Boot und Svelte-UI
+= README
 
 == Module
 
@@ -142,7 +142,7 @@ Der Ingress-Service wird mit `helm` gestoppt und entfernt.
 
 === Kubernetes-Deployment lokal installieren
 
-[source, kubectl]
+[source, gradle]
 ----
 ./gradlew deploy
 ----
@@ -151,7 +151,7 @@ Docker-Images für die Anwendung werden aktualisiert.
 Die Anwendung wird mit `helm` installiert und gestartet.
 Sie wird im Browser auf `localhost` aufgerufen.
 
-[source, kubectl]
+[source, gradle]
 ----
 ./gradlew install
 ----
@@ -162,7 +162,7 @@ Sie wird im Browser auf `localhost` aufgerufen.
 
 === Kubernetes-Deployment lokal entfernen
 
-[source, kubectl]
+[source, gradle]
 ----
 ./gradlew uninstall
 ----
