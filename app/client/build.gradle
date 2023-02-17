@@ -51,6 +51,7 @@ task dockerRun {
 }
 
 task versionCheck() {
+    group = 'versioning'
     build.dependsOn it
     assert new File("${projectDir}/package.json")
         .text

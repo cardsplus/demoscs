@@ -1,0 +1,20 @@
+application:
+  name: demoscs
+
+# https://kubernetes.github.io/ingress-nginx
+# https://doc.traefik.io/traefik/providers/kubernetes-ingress/
+ingress: nginx
+
+image:
+  # Die URL für den Abruf der Docker-Images.
+  # Der Wert wird in der Gitlab-CI überschrieben.
+  repository: demoscs
+  # Das Tag für den Abruf der Docker-Images.
+  # Der Wert wird in der Gitlab-CI überschrieben.
+  tag: latest
+  # Der Name des Docker-Images für den Client.
+  clientImageName: client
+  clientPort: 5000
+  # Der Name des Docker-Images für den Server.
+  serverImageName: server
+  serverPort: 8080  

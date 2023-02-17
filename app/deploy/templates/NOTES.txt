@@ -1,0 +1,7 @@
+release={{.Release.Name}}
+namespace={{.Release.Namespace}}
+version={{.Chart.Version}}
+repository={{.Values.image.repository}}
+tag={{.Values.image.tag}}
+clientImageName={{.Values.image.clientImageName}}
+serverImageName={{.Values.image.serverImageName}}

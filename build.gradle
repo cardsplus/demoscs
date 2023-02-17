@@ -134,6 +134,7 @@ task cardsplusUpload {
 
 ext.VERSION = new File("${rootDir}/VERSION").text
 task versionCheck() {
+    group = 'versioning'
     build.dependsOn it
     assert new File("${rootDir}/VERSION.md")
         .text

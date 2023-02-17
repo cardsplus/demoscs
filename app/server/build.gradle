@@ -65,5 +65,6 @@ task dockerRun {
 }
 
 task versionCheck() {
+    group = 'versioning'
     build.dependsOn it
 }

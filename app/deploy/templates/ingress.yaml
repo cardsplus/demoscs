@@ -1,11 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  namespace: {{.Release.Namespace}}
   name: ingress-service
-  annotations:
-    # https://kubernetes.github.io/ingress-nginx
-    kubernetes.io/ingress.class: "nginx"
 spec:
+  ingressClassName: {{.Values.ingress}}
   defaultBackend:
     service:
       name: server-cluster-ip
