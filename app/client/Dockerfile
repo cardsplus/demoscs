@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:lts-alpine
 WORKDIR /client
 COPY ./package.json ./
 RUN npm install
