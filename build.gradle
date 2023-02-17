@@ -6,11 +6,11 @@ plugins {
     id 'base'
     id 'eclipse'
     id 'idea'
-    id 'com.diffplug.spotless' version '6.3.0'
-    id 'com.palantir.git-version' version '0.15.0'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
-    id 'org.asciidoctor.jvm.pdf' version '3.3.2'
-    id 'org.asciidoctor.jvm.gems' version '3.3.2'
+    id 'com.diffplug.spotless'
+    id 'com.palantir.git-version'
+    id 'org.asciidoctor.jvm.convert'
+    id 'org.asciidoctor.jvm.pdf'
+    id 'org.asciidoctor.jvm.gems'
 }
 
 eclipse {
