@@ -22,10 +22,6 @@ task composeUp(type: Exec) {
     commandLine 'docker', 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'up', '--detach', '--no-build'
 }
 
-task composeStop(type: Exec) {
-    commandLine 'docker', 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'stop'
-}
-
 task composeDown(type: Exec) {
     commandLine 'docker', 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'down'
 }

@@ -60,7 +60,6 @@ https://helm.sh
 
 == Häufig gestellte Fragen
 
-[[_f1]]
 === Code bauen und testen
 
 [source, gradle]
@@ -68,7 +67,6 @@ https://helm.sh
 ./gradlew clean build
 ----
 
-[[_f2]]
 === Code formatieren
 
 [source, gradle]
@@ -76,38 +74,7 @@ https://helm.sh
 ./gradlew spotlessApply
 ----
 
-[[_f3]]
-=== Spring-Boot-Server lokal starten
-
-[source, gradle]
-----
-./gradlew bootRun
-----
-
-Der Befehl startet den Server im Vordergrund.
-Die Anwendung wird im Browser auf `localhost:8080` aufgerufen.
-Der Server muss mit `Ctrl-C` beendet werden.
-
-Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_TYPE` kann die Ausgabe von Typinformationen gesteuert werden.
-Mit dem Wert `TRACE` werden bspw. die aktuellen Parameter von Statements ausgegeben.
-
-Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_STAT` kann die Ausgabe von Statistiken gesteuert werden.
-Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
-
-[[_f5]]
-=== Svelte-Client lokal starten
-
-[source, npm]
-----
-npm --prefix app/client run dev
-----
-
-Der Befehl startet den Client im Vordergrund.
-Die Anwendung wird im Browser mit `localhost:5000` aufgerufen.
-Der Client muss mit `Ctrl-C` beendet werden.
-
-[[_f6]]
-=== Dokumentation lokal bauen
+=== Dokumentation bauen
 
 [source, gradle]
 ----
@@ -116,22 +83,76 @@ Der Client muss mit `Ctrl-C` beendet werden.
 
 Die Dokumentation befindet sich im `pages`-Ordner.
 
-=== Kubernetes-Cluster lokal einrichten
+=== Server lokal starten
+
+[source, gradle]
+----
+./gradlew bootRun
+----
+
+Der Befehl startet den Server im Vordergrund.
+Er ist im Browser unter `localhost:8080` erreichbar.
+Er muss mit `Ctrl-C` beendet werden.
+
+Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_TYPE` kann die Ausgabe von Typinformationen gesteuert werden.
+Mit dem Wert `TRACE` werden bspw. die aktuellen Parameter von Statements ausgegeben.
+
+Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_STAT` kann die Ausgabe von Statistiken gesteuert werden.
+Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
+
+=== Client lokal starten
+
+[source, npm]
+----
+npm --prefix app/client run dev
+----
+
+Der Befehl startet den Client im Vordergrund.
+Er ist im Browser unter `localhost:5000` erreichbar.
+Er muss mit `Ctrl-C` beendet werden.
+
+=== Docker-Registry einrichten
 
 Siehe https://www.docker.com/products/docker-desktop/
 
 Siehe https://rancherdesktop.io/
 
-=== Kubernetes-Ingress lokal installieren
+=== Docker-Images bauen und starten
+
+[source, gradle]
+----
+./gradlew composeUp
+----
+
+Client und Server werden mit `docker compose` installiert und im Hintergrund gestartet.
+Der Server ist im Browser unter `localhost:8080` erreichbar.
+Der Client ist im Browser unter `localhost:5000` erreichbar.
+
+=== Docker-Images entfernen
+
+[source, gradle]
+----
+./gradlew composeDown
+----
+
+Client und Server werden mit `docker compose` gestoppt und entfernt.
+
+=== Kubernetes-Cluster einrichten
+
+Siehe https://www.docker.com/products/docker-desktop/
+
+Siehe https://rancherdesktop.io/
+
+=== Kubernetes-Ingress installieren
 
 [source, gradle]
 ----
 ./gradlew installIngress
 ----
 
-Der Ingress-Service wird mit `helm` installiert und gestartet.
+Der Ingress-Service wird mit `helm` installiert und im Hintergrund gestartet.
 
-=== Kubernetes-Ingress lokal entfernen
+=== Kubernetes-Ingress entfernen
 
 [source, gradle]
 ----
@@ -140,7 +161,7 @@ Der Ingress-Service wird mit `helm` installiert und gestartet.
 
 Der Ingress-Service wird mit `helm` gestoppt und entfernt.
 
-=== Kubernetes-Deployment lokal installieren
+=== Kubernetes-Deployment installieren
 
 [source, gradle]
 ----
@@ -148,8 +169,8 @@ Der Ingress-Service wird mit `helm` gestoppt und entfernt.
 ----
 
 Docker-Images für die Anwendung werden aktualisiert.
-Die Anwendung wird mit `helm` installiert und gestartet.
-Sie wird im Browser auf `localhost` aufgerufen.
+Die Anwendung wird mit `helm` installiert und im Hintergrund gestartet.
+Sie ist im Browser unter `localhost` erreichbar.
 
 [source, gradle]
 ----
@@ -158,9 +179,9 @@ Sie wird im Browser auf `localhost` aufgerufen.
 
 Docker-Images für die Anwendung werden *nicht* aktualisiert.
 Die Anwendung wird mit `helm` installiert und gestartet.
-Sie wird im Browser auf `localhost` aufgerufen.
+Sie ist im Browser unter `localhost` erreichbar.
 
-=== Kubernetes-Deployment lokal entfernen
+=== Kubernetes-Deployment entfernen
 
 [source, gradle]
 ----
