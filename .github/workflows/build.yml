@@ -27,10 +27,26 @@ jobs:
     - run: ./gradlew build --parallel
     - run: ./gradlew asciidoctor
     - run: ./gradlew jacocoTestReport
+    - run: ./gradlew dockerBuild
+
+    # https://github.com/features/packages
+    - if: ${{ github.ref == 'refs/heads/master' }}
+      name: Update Packages (nur master)
+      run: |
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+        API=ghcr.io/${{ github.repository_owner }}
+        TAG=`cat VERSION`
+        CLIENT=demoscs/client
+        docker tag $CLIENT:$TAG $API/$CLIENT:$TAG
+        docker push $API/$CLIENT:$TAG
+        SERVER=demoscs/server
+        docker tag $SERVER:$TAG $API/$SERVER:$TAG
+        docker push $API/$SERVER:$TAG
 
     # https://github.com/peaceiris/actions-gh-pages
     - if: ${{ github.ref == 'refs/heads/master' }}
+      name: Update Pages (nur master)
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir:  pages
+        publish_dir: pages

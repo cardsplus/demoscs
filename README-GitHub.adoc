@@ -1,0 +1,47 @@
+:icons: font
+:experimental: true
+= README GitHub
+
+== Installation
+
+Keine.
+
+== Registrierung
+
+https://github.com/signup
+
+== Konfiguration
+
+=== Kubernetes-Cluster mit Container-Registry verbinden
+
+
+Dazu muss ein spezielles _Secret_ eingerichtet werden.
+
+[source, gradle]
+----
+kubectl create secret docker-registry ghcr-login --docker-server=https://ghcr.io --docker-username=<login>  --docker-email=<email> --docker-password=<token>
+----
+
+Der Name des _Secrets_ ist `ghcr-login`.
+
+TIP: Weiterlesen auf
+https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+
+Der Wert von `<login>` ist der Anmeldename für das _GitHub_-Konto.
+
+Der Wert von `<email>` ist die im _GitHub_-Konto hinterlegte E-Mail-Adresse.
+
+Der Wert von `<token>` ist ein _Personal Access Token_.
+Es muss mindestens den Scope `read:packages` haben.
+
+TIP: Weiterlesen auf
+https://github.com/settings/tokens/new
+
+Der Name des _Secrets_ wird in der `values.yaml` eingetragen.
+
+[source, yaml]
+----
+include::app/deploy/values.yaml[]
+----
+
+Bei der Installation mit `helm` wird der Name des _Secrets_ im Deployment in `imagePullSecrets` verwendet.

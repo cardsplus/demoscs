@@ -1,0 +1,8 @@
+release={{.Release.Name}}
+namespace={{.Release.Namespace}}
+version={{.Chart.Version}}
+registry={{.Values.image.registry}}
+secret={{.Values.image.secret}}
+tag={{.Values.image.tag}}
+clientImageName={{.Values.image.clientImageName}}
+serverImageName={{.Values.image.serverImageName}}

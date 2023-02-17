@@ -50,20 +50,34 @@ bootBuildImage {
     enabled = false
 }
 
-task dockerRun {
+import java.util.Optional;
+ext.SERVER_IMAGE = Optional.ofNullable(System.getenv("SERVER_IMAGE"))
+            .orElse(rootProject.name + "/" + project.name)
+ext.SERVER_TAG = Optional.ofNullable(System.getenv("SERVER_TAG"))
+            .orElse('latest')
+
+task dockerBuild {
+    enabled = true
     doLast {
-        def IMAGE = rootProject.name + '/' + project.name;
+        String image1 = SERVER_IMAGE + ":" + SERVER_TAG;
+        String image2 = SERVER_IMAGE + ":" + VERSION;
         exec {
             executable 'docker'
-            args 'build', '.', '-t', IMAGE
+            args 'build', '.', '-t', image1
         }
-        exec {
-            executable 'docker'
-            args 'run', '-d', '--rm', '-p', '8080:8080', IMAGE
+        if (image1 != image2) {
+            exec {
+                executable 'docker'
+                args 'tag', image1, image2
+            }
+            println 'Built and pushed image as ' + image1 + ", " + image2
+        } else {
+            println 'Built and pushed image as ' + image1
         }
     }
 }
 
 task versionCheck() {
+    group = 'versioning'
     build.dependsOn it
 }

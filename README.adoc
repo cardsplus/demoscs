@@ -1,8 +1,8 @@
 :icons: font
 :experimental: true
-= Self-Contained System mit Spring-Boot und Svelte-UI
+= README
 
-== Projekte
+== Module
 
 === app/backend-api
 
@@ -28,7 +28,7 @@ https://docs.liquibase.com/home.html
 
 === app/server
 
-Spring-Boot-Server der Anwendung mit einer HSQL-Datenbank.
+Spring-Boot-Server mit einer HSQL-Datenbank.
 
 https://spring.io/projects/spring-boot
 
@@ -36,7 +36,7 @@ http://hsqldb.org
 
 === app/client
 
-Svelte-Client der Anwendung.
+Svelte-Client mit TailwindCSS.
 
 https://svelte.dev
 
@@ -48,23 +48,18 @@ https://vitejs.dev
 
 === app/deploy
 
-Deployment der Anwendung in einem Kubernetes-Cluster.
+Deployment in einem Kubernetes-Cluster.
 
 https://kubernetes.io
-
-https://docs.docker.com/desktop/kubernetes
 
 https://github.com/kubernetes/kubectl
 
 https://github.com/kubernetes/ingress-nginx
 
-https://github.com/kubernetes/dashboard
-
 https://helm.sh
 
 == Häufig gestellte Fragen
 
-[[_f1]]
 === Code bauen und testen
 
 [source, gradle]
@@ -72,7 +67,6 @@ https://helm.sh
 ./gradlew clean build
 ----
 
-[[_f2]]
 === Code formatieren
 
 [source, gradle]
@@ -80,52 +74,7 @@ https://helm.sh
 ./gradlew spotlessApply
 ----
 
-[[_f3]]
-=== Spring-Boot-Server lokal starten
-
-[source, gradle]
-----
-./gradlew app:server:bootRun
-----
-
-Der Befehl startet den Server als Java-Anwendung.
-Die Anwendung wird im Browser mit `localhost:8080` aufgerufen.
-
-Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_TYPE` kann die Ausgabe von Typinformationen gesteuert werden.
-Mit dem Wert `TRACE` werden bspw. die aktuellen Parameter von Statements ausgegeben.
-
-Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_STAT` kann die Ausgabe von Statistiken gesteuert werden.
-Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
-
-[source, gradle]
-----
-./gradlew app:server:dockerRun
-----
-
-Der Befehl startet den Server als Docker-Container.
-Die Anwendung wird im Browser mit `localhost:8080` aufgerufen.
-
-[[_f5]]
-=== Svelte-Client lokal starten
-
-[source, npm]
-----
-npm run dev
-----
-
-Der Befehl startet den Client als Node-Anwendung.
-Die Anwendung wird im Browser mit `localhost:5000` aufgerufen.
-
-[source, gradle]
-----
-./gradlew app:client:dockerRun
-----
-
-Der Befehl startet den Client als Docker-Container.
-Die Anwendung wird im Browser mit `localhost:5000` aufgerufen.
-
-[[_f6]]
-=== Dokumentation lokal bauen
+=== Dokumentation bauen
 
 [source, gradle]
 ----
@@ -134,58 +83,109 @@ Die Anwendung wird im Browser mit `localhost:5000` aufgerufen.
 
 Die Dokumentation befindet sich im `pages`-Ordner.
 
-=== Kubernetes-Cluster lokal einrichten
-
-Docker-Desktop richtet auf `localhost` einen Kubernetes-Cluster ein.
-
-=== Kubernetes-Ingress lokal einrichten
+=== Server lokal starten
 
 [source, gradle]
 ----
-./gradlew deployIngress
+./gradlew bootRun
 ----
 
-Der Ingress-Service wird installiert und gestartet.
+Der Befehl startet den Server im Vordergrund.
+Er ist im Browser unter `localhost:8080` erreichbar.
+Er muss mit `Ctrl-C` beendet werden.
 
-=== Kubernetes-Dashboard lokal einrichten
+Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_TYPE` kann die Ausgabe von Typinformationen gesteuert werden.
+Mit dem Wert `TRACE` werden bspw. die aktuellen Parameter von Statements ausgegeben.
+
+Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_STAT` kann die Ausgabe von Statistiken gesteuert werden.
+Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
+
+=== Client lokal starten
+
+[source, npm]
+----
+npm --prefix app/client run dev
+----
+
+Der Befehl startet den Client im Vordergrund.
+Er ist im Browser unter `localhost:5000` erreichbar.
+Er muss mit `Ctrl-C` beendet werden.
+
+=== Docker-Registry einrichten
+
+Siehe https://www.docker.com/products/docker-desktop/
+
+Siehe https://rancherdesktop.io/
+
+=== Docker-Images bauen und starten
 
 [source, gradle]
 ----
-./gradlew deployDashboard
+./gradlew composeUp
 ----
 
-Das Dashboard wird installiert und gestartet.
-Beim ersten Aufruf muss ein Token eingegeben werden.
-Das Token ist zeitlich befristet.
-Ein gültiges Token wird mit mit dem Aufruf von
+Client und Server werden mit `docker compose` installiert und im Hintergrund gestartet.
+Der Server ist im Browser unter `localhost:8080` erreichbar.
+Der Client ist im Browser unter `localhost:5000` erreichbar.
+
+=== Docker-Images entfernen
 
 [source, gradle]
 ----
-./gradlew createDashboardToken
+./gradlew composeDown
 ----
 
-erstellt.
+Client und Server werden mit `docker compose` gestoppt und entfernt.
 
-[source, kubectl]
+=== Kubernetes-Cluster einrichten
+
+Siehe https://www.docker.com/products/docker-desktop/
+
+Siehe https://rancherdesktop.io/
+
+=== Kubernetes-Ingress installieren
+
+[source, gradle]
 ----
-kubectl proxy
+./gradlew installIngress
 ----
 
-Der Befehl startet den Proxy auf dem lokalen Host.
-Das Dashboard wird im Browser mit der zuvor angezeigte URL aufgerufen.
+Der Ingress-Service wird mit `helm` installiert und im Hintergrund gestartet.
 
-=== Kubernetes-Deployment lokal ausführen
+=== Kubernetes-Ingress entfernen
 
-[source, kubectl]
+[source, gradle]
+----
+./gradlew uninstallIngress
+----
+
+Der Ingress-Service wird mit `helm` gestoppt und entfernt.
+
+=== Kubernetes-Deployment installieren
+
+[source, gradle]
 ----
 ./gradlew deploy
 ----
 
-Die Anwendung wird im Browser mit `localhost` aufgerufen.
+Docker-Images für die Anwendung werden aktualisiert.
+Die Anwendung wird mit `helm` installiert und im Hintergrund gestartet.
+Sie ist im Browser unter `localhost` erreichbar.
 
-=== Kubernetes-Deployment lokal entfernen
+[source, gradle]
+----
+./gradlew install
+----
 
-[source, kubectl]
+Docker-Images für die Anwendung werden *nicht* aktualisiert.
+Die Anwendung wird mit `helm` installiert und gestartet.
+Sie ist im Browser unter `localhost` erreichbar.
+
+=== Kubernetes-Deployment entfernen
+
+[source, gradle]
 ----
-./gradlew undeploy
+./gradlew uninstall
 ----
+
+Die Anwendung wird mit `helm` gestoppt und entfernt.

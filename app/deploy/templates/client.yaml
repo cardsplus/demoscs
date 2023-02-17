@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{.Release.Namespace}}
+  name: client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: client
+  template:
+    metadata:
+      labels:
+        version: {{.Chart.Version}}
+        component: client
+    spec:
+      imagePullSecrets:
+        - name: {{.Values.image.secret}}
+      containers:
+        - name: client
+          image: {{.Values.image.registry}}/{{.Values.image.clientImageName}}:{{.Values.image.tag}}
+          imagePullPolicy: IfNotPresent
+          # tag::env[]
+          # No values
+          # end::env[]
+          # tag::ports[]
+          ports:
+            - containerPort: {{.Values.image.clientPort}}
+              name: http-port
+          # end::ports[]
+          # tag::resources[]
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "1"
+              memory: "128Mi"
+          # tag::resources[]
+          # tag::readiness[]
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 2
+            failureThreshold: 10
+            httpGet:
+              port: http-port
+              path: /home
+          # end::readiness[]
+          # tag::liveness[]
+          # No values
+          # end::liveness[]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{.Release.Namespace}}
+  name: client-cluster-ip
+spec:
+  type: ClusterIP
+  selector:
+    component: client
+  ports:
+    - port: {{.Values.image.clientPort}}
+      name: http-port
+      targetPort: http-port
