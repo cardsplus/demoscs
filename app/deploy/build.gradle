@@ -60,6 +60,10 @@ task composeDown {
 }
 
 task deploy {
+    onlyIf {
+        // No helm in CI-Job
+        System.env['CI'] == null
+    }
     doLast {    
         dockerBuild(SERVER_IMAGE, VERSION, 'server');
         dockerBuild(CLIENT_IMAGE, VERSION, 'client');
@@ -69,6 +73,10 @@ task deploy {
 }
 
 task install {
+    onlyIf {
+        // No helm in CI-Job
+        System.env['CI'] == null
+    }
     doLast {
         exec {
             executable 'helm'
@@ -79,6 +87,10 @@ task install {
 }
 
 task uninstall {
+    onlyIf {
+        // No helm in CI-Job
+        System.env['CI'] == null
+    }
     doLast {
         exec {
             ignoreExitValue true
@@ -105,8 +117,9 @@ task installIngress {
         }
         exec {
             executable 'helm'
-            args 'install', 'ingress-nginx', 'ingress-nginx/ingress-nginx'
+            args 'upgrade', '--install', '--wait', 'ingress-nginx', 'ingress-nginx/ingress-nginx'
         }
+        kubectlGet('pods')
     }
 }
 
@@ -118,8 +131,9 @@ task uninstallIngress {
     doLast {
         exec {
             executable 'helm'
-            args 'uninstall', 'ingress-nginx'
+            args 'uninstall', '--wait', 'ingress-nginx'
         }
+        kubectlGet('pods')
      }
 }
 
@@ -130,6 +144,24 @@ def kubectlGet(String type) {
         args 'get', type
     }
 }
+
+task describe {
+    doLast {
+        kubectlDescribePod('ingress');
+        kubectlDescribePod('client')
+        kubectlDescribePod('server')
+    }
+}
+
+def kubectlDescribePod(String name) {
+    println "\n"
+    exec {
+        ignoreExitValue true
+        executable 'kubectl'
+        args 'describe', 'pod', name
+    }
+}
+
 
 task versionCheck() {  
     group = 'versioning'  
