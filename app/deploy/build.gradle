@@ -2,6 +2,20 @@ plugins {
     id 'base'
 }
 
+task helmLint {
+    onlyIf {
+        // No helm in CI-Job
+        System.env['CI'] == null
+    }
+    build.dependsOn it
+    doLast {
+        exec {
+            executable 'helm'
+            args 'lint'
+        }
+    }
+}
+
 ext.SERVER_IMAGE = rootProject.name + "/server"                   
 ext.CLIENT_IMAGE = rootProject.name + "/client"
 
