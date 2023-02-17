@@ -16,60 +16,24 @@ task helmLint {
     }
 }
 
-ext.SERVER_IMAGE = rootProject.name + "/server"                   
-ext.CLIENT_IMAGE = rootProject.name + "/client"
-
-def dockerBuild(String image, String tag, String name) {
-    println "\nBuilding docker image '" + image + ":" + tag + "' ..."
-    exec {
-        workingDir "${projectDir}/../" + name 
-        executable 'docker'
-        args 'build', '.', \
-            '-t', image + ':latest', \
-            '-t', image + ':' + tag
-    }
-}  
-
-task composeUp {
-    doLast { 
-        dockerBuild(SERVER_IMAGE, 'latest', 'server');
-        dockerBuild(CLIENT_IMAGE, 'latest', 'client');
-        exec {
-            executable 'docker'
-            args 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'up', '--detach', '--no-build'
-        }
-    }
+task composeUp(type: Exec) {
+    dependsOn ':app:client:dockerBuild'
+    dependsOn ':app:server:dockerBuild'
+    commandLine 'docker', 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'up', '--detach', '--no-build'
 }
 
-task composeStop {
-    doLast {
-        exec {
-            executable 'docker'
-            args 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'stop'
-        }
-    }
+task composeStop(type: Exec) {
+    commandLine 'docker', 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'stop'
 }
 
-task composeDown {
-    doLast {
-        exec {
-            executable 'docker'
-            args 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'down'
-        }
-    }
+task composeDown(type: Exec) {
+    commandLine 'docker', 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'down'
 }
 
 task deploy {
-    onlyIf {
-        // No helm in CI-Job
-        System.env['CI'] == null
-    }
-    doLast {    
-        dockerBuild(SERVER_IMAGE, VERSION, 'server');
-        dockerBuild(CLIENT_IMAGE, VERSION, 'client');
-    }
+    dependsOn ':app:client:dockerBuild'
+    dependsOn ':app:server:dockerBuild'
     finalizedBy 'install'
-
 }
 
 task install {

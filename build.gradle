@@ -81,57 +81,6 @@ subprojects {
     }
 }
 
-ext.HTMLTOOL_IMAGE = 'registry.gitlab.emundo.eu/erd/cardsplus/integration/cardsplus-toolkit:v2.23'
-task cardsplusBuild {
-    dependsOn build
-    onlyIf {
-        System.env['HTMLTOOL_WIKI_USER'] != null
-        System.env['HTMLTOOL_WIKI_URI'] != null
-        System.env['HTMLTOOL_JIRA_URI'] != null
-    }
-    doLast {
-        exec {
-            commandLine 'docker', 'run', \
-                '--rm', \
-                '-v', "${project.gradle.gradleUserHomeDir}:/gradle", \
-                '-v', "${buildDir}:/out", \
-                '-v', "${rootDir}:/mnt", \
-                '-w', "/mnt", \
-                '-e', "HTMLTOOL_WIKI_URI", \
-                '-e', "HTMLTOOL_WIKI_USER", \
-                '-e', "HTMLTOOL_JIRA_URI", \
-                "${HTMLTOOL_IMAGE}", \
-                "plus", \
-                "--publish", \
-                "--message="+version 
-        }
-    }
-}
-task cardsplusUpload {
-    mustRunAfter cardsplusBuild
-    onlyIf {
-        System.env['HTMLTOOL_WIKI_USER'] != null
-        System.env['HTMLTOOL_WIKI_URI'] != null
-        System.env['HTMLTOOL_JIRA_URI'] != null
-        file('build/plus/cardsplus-upload.sh').exists()
-    }
-    doLast {
-        exec {
-            commandLine 'docker', 'run', \
-                '--rm', \
-                '-v', "${project.gradle.gradleUserHomeDir}:/gradle", \
-                '-v', "${buildDir}:/out", \
-                '-v', "${rootDir}:/mnt", \
-                '-w', "/mnt", \
-                '-e', "HTMLTOOL_WIKI_URI", \
-                '-e', "HTMLTOOL_WIKI_USER", \
-                '-e', "HTMLTOOL_JIRA_URI", \
-                "${HTMLTOOL_IMAGE}", \
-                "curl"
-        }
-    }
-}
-
 ext.VERSION = new File("${rootDir}/VERSION").text
 task versionCheck() {
     group = 'versioning'
