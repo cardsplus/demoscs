@@ -31,6 +31,7 @@ jobs:
 
     # https://github.com/features/packages
     - if: ${{ github.ref == 'refs/heads/master' }}
+      name: Update Packages
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
         API=ghcr.io/${{ github.repository_owner }}
@@ -44,6 +45,7 @@ jobs:
 
     # https://github.com/peaceiris/actions-gh-pages
     - if: ${{ github.ref == 'refs/heads/master' }}
+      name: Update Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
