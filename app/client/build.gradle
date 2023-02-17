@@ -36,20 +36,6 @@ task npmBuild {
     }
 }
 
-task dockerRun {
-    doLast {
-        def IMAGE = rootProject.name + '/' + project.name;
-        exec {
-            executable 'docker'
-            args 'build', '.', '-t', IMAGE
-        }
-        exec {
-            executable 'docker'
-            args 'run', '-d', '--rm', '-p', '5000:5000', IMAGE
-        }
-    }
-}
-
 task versionCheck() {
     group = 'versioning'
     build.dependsOn it

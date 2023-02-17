@@ -2,7 +2,7 @@
 :experimental: true
 = Self-Contained System mit Spring-Boot und Svelte-UI
 
-== Projekte
+== Module
 
 === app/backend-api
 
@@ -28,7 +28,7 @@ https://docs.liquibase.com/home.html
 
 === app/server
 
-Spring-Boot-Server der Anwendung mit einer HSQL-Datenbank.
+Spring-Boot-Server mit einer HSQL-Datenbank.
 
 https://spring.io/projects/spring-boot
 
@@ -36,7 +36,7 @@ http://hsqldb.org
 
 === app/client
 
-Svelte-Client der Anwendung.
+Svelte-Client mit TailwindCSS.
 
 https://svelte.dev
 
@@ -48,17 +48,13 @@ https://vitejs.dev
 
 === app/deploy
 
-Deployment der Anwendung in einem Kubernetes-Cluster.
+Deployment in einem Kubernetes-Cluster.
 
 https://kubernetes.io
-
-https://docs.docker.com/desktop/kubernetes
 
 https://github.com/kubernetes/kubectl
 
 https://github.com/kubernetes/ingress-nginx
-
-https://github.com/kubernetes/dashboard
 
 https://helm.sh
 
@@ -85,11 +81,12 @@ https://helm.sh
 
 [source, gradle]
 ----
-./gradlew app:server:bootRun
+./gradlew bootRun
 ----
 
-Der Befehl startet den Server als Java-Anwendung.
-Die Anwendung wird im Browser mit `localhost:8080` aufgerufen.
+Der Befehl startet den Server im Vordergrund.
+Die Anwendung wird im Browser auf `localhost:8080` aufgerufen.
+Der Server muss mit `Ctrl-C` beendet werden.
 
 Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_TYPE` kann die Ausgabe von Typinformationen gesteuert werden.
 Mit dem Wert `TRACE` werden bspw. die aktuellen Parameter von Statements ausgegeben.
@@ -97,32 +94,17 @@ Mit dem Wert `TRACE` werden bspw. die aktuellen Parameter von Statements ausgege
 Mit der Umgebungsvariable `LOGGING_LEVEL_ORG_HIBERNATE_STAT` kann die Ausgabe von Statistiken gesteuert werden.
 Mit dem Wert `DEBUG` werden bspw. die Kennzahlen von Statements ausgegeben.
 
-[source, gradle]
-----
-./gradlew app:server:dockerRun
-----
-
-Der Befehl startet den Server als Docker-Container.
-Die Anwendung wird im Browser mit `localhost:8080` aufgerufen.
-
 [[_f5]]
 === Svelte-Client lokal starten
 
 [source, npm]
 ----
-npm run dev
+npm --prefix app/client run dev
 ----
 
-Der Befehl startet den Client als Node-Anwendung.
+Der Befehl startet den Client im Vordergrund.
 Die Anwendung wird im Browser mit `localhost:5000` aufgerufen.
-
-[source, gradle]
-----
-./gradlew app:client:dockerRun
-----
-
-Der Befehl startet den Client als Docker-Container.
-Die Anwendung wird im Browser mit `localhost:5000` aufgerufen.
+Der Client muss mit `Ctrl-C` beendet werden.
 
 [[_f6]]
 === Dokumentation lokal bauen
@@ -136,56 +118,53 @@ Die Dokumentation befindet sich im `pages`-Ordner.
 
 === Kubernetes-Cluster lokal einrichten
 
-Docker-Desktop richtet auf `localhost` einen Kubernetes-Cluster ein.
+Siehe https://www.docker.com/products/docker-desktop/
 
-=== Kubernetes-Ingress lokal einrichten
+Siehe https://rancherdesktop.io/
 
-[source, gradle]
-----
-./gradlew deployIngress
-----
-
-Der Ingress-Service wird installiert und gestartet.
-
-=== Kubernetes-Dashboard lokal einrichten
+=== Kubernetes-Ingress lokal installieren
 
 [source, gradle]
 ----
-./gradlew deployDashboard
+./gradlew installIngress
 ----
 
-Das Dashboard wird installiert und gestartet.
-Beim ersten Aufruf muss ein Token eingegeben werden.
-Das Token ist zeitlich befristet.
-Ein gültiges Token wird mit mit dem Aufruf von
+Der Ingress-Service wird mit `helm` installiert und gestartet.
+
+=== Kubernetes-Ingress lokal entfernen
 
 [source, gradle]
 ----
-./gradlew createDashboardToken
+./gradlew uninstallIngress
 ----
 
-erstellt.
+Der Ingress-Service wird mit `helm` gestoppt und entfernt.
 
-[source, kubectl]
-----
-kubectl proxy
-----
-
-Der Befehl startet den Proxy auf dem lokalen Host.
-Das Dashboard wird im Browser mit der zuvor angezeigte URL aufgerufen.
-
-=== Kubernetes-Deployment lokal ausführen
+=== Kubernetes-Deployment lokal installieren
 
 [source, kubectl]
 ----
 ./gradlew deploy
 ----
 
-Die Anwendung wird im Browser mit `localhost` aufgerufen.
+Docker-Images für die Anwendung werden aktualisiert.
+Die Anwendung wird mit `helm` installiert und gestartet.
+Sie wird im Browser auf `localhost` aufgerufen.
+
+[source, kubectl]
+----
+./gradlew install
+----
+
+Docker-Images für die Anwendung werden *nicht* aktualisiert.
+Die Anwendung wird mit `helm` installiert und gestartet.
+Sie wird im Browser auf `localhost` aufgerufen.
 
 === Kubernetes-Deployment lokal entfernen
 
 [source, kubectl]
 ----
-./gradlew undeploy
+./gradlew uninstall
 ----
+
+Die Anwendung wird mit `helm` gestoppt und entfernt.
