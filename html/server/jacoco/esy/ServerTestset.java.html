@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ServerTestset.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">server</a> &gt; <a href="index.source.html" class="el_package">esy</a> &gt; <span class="el_source">ServerTestset.java</span></div><h1>ServerTestset.java</h1><pre class="source lang-java linenums">package esy;
+
+
+import esy.api.info.Enum;
+import esy.api.plan.Aufgabe;
+import esy.api.plan.Projekt;
+import esy.api.team.Nutzer;
+import esy.app.info.EnumRepository;
+import esy.app.plan.AufgabeRepository;
+import esy.app.plan.ProjektRepository;
+import esy.app.team.NutzerRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.function.Function.identity;
+
+<span class="fc" id="L25">@Slf4j</span>
+@Component
+<span class="fc" id="L27">public class ServerTestset implements CommandLineRunner {</span>
+
+<span class="fc" id="L29">    static final List&lt;String&gt; allLoremIpsum = List.of(</span>
+            &quot;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.&quot;,
+            &quot;At vero eos et accusam et justo duo dolores et ea rebum.&quot;,
+            &quot;Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&quot;,
+            &quot;Magni accusantium labore et id quis provident.&quot;,
+            &quot;Consectetur impedit quisquam qui deserunt non rerum consequuntur eius.&quot;,
+            &quot;Quia atque aliquam sunt impedit voluptatum rerum assumenda nisi.&quot;,
+            &quot;Cupiditate quos possimus corporis quisquam exercitationem beatae.&quot;
+    );
+
+    @Autowired
+    private AufgabeRepository aufgabeRepository;
+
+    @Autowired
+    private EnumRepository enumRepository;
+
+    @Autowired
+    private NutzerRepository nutzerRepository;
+
+    @Autowired
+    private ProjektRepository projektRepository;
+
+    @Override
+    @Transactional
+    public void run(final String... args) throws Exception {
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (nutzerRepository.count() != 0) {</span>
+<span class="nc" id="L55">            return;</span>
+        }
+
+<span class="fc" id="L58">        final Map&lt;String, Enum&gt; allEnumSprache = createAllEnumSprache();</span>
+<span class="fc" id="L59">        allEnumSprache.values().forEach(e -&gt; log.info(&quot;CREATED [{}]&quot;, e));</span>
+
+<span class="fc" id="L61">        final Map&lt;String, Nutzer&gt; allNutzer = createAllNutzer();</span>
+<span class="fc" id="L62">        allNutzer.values().forEach(e -&gt; log.info(&quot;CREATED [{}]&quot;, e));</span>
+
+<span class="fc" id="L64">        final Map&lt;String, Projekt&gt; allProjekt = createAllProjekt(allNutzer);</span>
+<span class="fc" id="L65">        allProjekt.values().forEach(e -&gt; log.info(&quot;CREATED [{}]&quot;, e));</span>
+
+<span class="fc" id="L67">        final List&lt;Aufgabe&gt; allAufgabe = createAllAufgabe(allProjekt);</span>
+<span class="fc" id="L68">        allAufgabe.forEach(e -&gt; log.info(&quot;CREATED [{}]&quot;, e));</span>
+<span class="fc" id="L69">    }</span>
+
+    @Transactional
+    private Map&lt;String, Enum&gt; createAllEnumSprache() {
+<span class="fc" id="L73">        return Stream.of(</span>
+<span class="fc" id="L74">                        Enum.parseJson(&quot;{&quot; +</span>
+                                &quot;\&quot;code\&quot;: 0,&quot; +
+                                &quot;\&quot;name\&quot;: \&quot;DE\&quot;,&quot; +
+                                &quot;\&quot;text\&quot;: \&quot;Deutsch\&quot;&quot; +
+                                &quot;}&quot;),
+<span class="fc" id="L79">                        Enum.parseJson(&quot;{&quot; +</span>
+                                &quot;\&quot;code\&quot;: 1,&quot; +
+                                &quot;\&quot;name\&quot;: \&quot;EN\&quot;,&quot; +
+                                &quot;\&quot;text\&quot;: \&quot;Englisch\&quot;&quot; +
+                                &quot;}&quot;),
+<span class="fc" id="L84">                        Enum.parseJson(&quot;{&quot; +</span>
+                                &quot;\&quot;code\&quot;: 2,&quot; +
+                                &quot;\&quot;name\&quot;: \&quot;IT\&quot;,&quot; +
+                                &quot;\&quot;text\&quot;: \&quot;Italienisch\&quot;&quot; +
+                                &quot;}&quot;),
+<span class="fc" id="L89">                        Enum.parseJson(&quot;{&quot; +</span>
+                                &quot;\&quot;code\&quot;: 3,&quot; +
+                                &quot;\&quot;name\&quot;: \&quot;FR\&quot;,&quot; +
+                                &quot;\&quot;text\&quot;: \&quot;Französisch\&quot;&quot; +
+                                &quot;}&quot;))
+<span class="fc" id="L94">                .map(e -&gt; e.setArt(&quot;sprache&quot;))</span>
+<span class="fc" id="L95">                .map(enumRepository::save)</span>
+<span class="fc" id="L96">                .collect(Collectors.toMap(Enum::getName, identity()));</span>
+    }
+
+    @Transactional
+    private Map&lt;String, Nutzer&gt; createAllNutzer() {
+<span class="fc" id="L101">        return Stream.of(</span>
+<span class="fc" id="L102">                        Nutzer.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;mail\&quot;: \&quot;bruckbauer@gmx.at&quot; + &quot;\&quot;,&quot; +
+                                        &quot;\&quot;name\&quot;: \&quot;Robert Bruckbauer\&quot;,&quot; +
+                                        &quot;\&quot;allSprache\&quot;: [\&quot;DE\&quot;, \&quot;EN\&quot;],&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                                        &quot;}&quot;),
+<span class="fc" id="L108">                        Nutzer.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;mail\&quot;: \&quot;brombertje@gmail.com&quot; + &quot;\&quot;,&quot; +
+                                        &quot;\&quot;name\&quot;: \&quot;Bertram Bär\&quot;,&quot; +
+                                        &quot;\&quot;allSprache\&quot;: [\&quot;DE\&quot;, \&quot;EN\&quot;],&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                                        &quot;}&quot;),
+<span class="fc" id="L114">                        Nutzer.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;mail\&quot;: \&quot;max.mustermann@firma.de&quot; + &quot;\&quot;,&quot; +
+                                        &quot;\&quot;name\&quot;: \&quot;Max Mustermann\&quot;,&quot; +
+                                        &quot;\&quot;allSprache\&quot;: [\&quot;DE\&quot;, \&quot;EN\&quot;],&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                                        &quot;}&quot;),
+<span class="fc" id="L120">                        Nutzer.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;mail\&quot;: \&quot;mia.musterfrau@firma.de&quot; + &quot;\&quot;,&quot; +
+                                        &quot;\&quot;name\&quot;: \&quot;Mia Musterfrau\&quot;,&quot; +
+                                        &quot;\&quot;allSprache\&quot;: [\&quot;DE\&quot;, \&quot;IT\&quot;],&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                                        &quot;}&quot;),
+<span class="fc" id="L126">                        Nutzer.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;mail\&quot;: \&quot;szweig@gmail.com&quot; + &quot;\&quot;,&quot; +
+                                        &quot;\&quot;name\&quot;: \&quot;Stefan Zweig\&quot;,&quot; +
+                                        &quot;\&quot;allSprache\&quot;: [\&quot;DE\&quot;],&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;false\&quot;&quot; +
+                                        &quot;}&quot;),
+<span class="fc" id="L132">                        Nutzer.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;mail\&quot;: \&quot;mozart@gmail.com&quot; + &quot;\&quot;,&quot; +
+                                        &quot;\&quot;name\&quot;: \&quot;Wolfgang A. Mozart\&quot;,&quot; +
+                                        &quot;\&quot;allSprache\&quot;: [\&quot;DE\&quot;],&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;false\&quot;&quot; +
+                                        &quot;}&quot;),
+<span class="fc" id="L138">                        Nutzer.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;mail\&quot;: \&quot;doyle@gmail.com&quot; + &quot;\&quot;,&quot; +
+                                        &quot;\&quot;name\&quot;: \&quot;Arthur Conan Doyle\&quot;,&quot; +
+                                        &quot;\&quot;allSprache\&quot;: [\&quot;EN\&quot;],&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;false\&quot;&quot; +
+                                        &quot;}&quot;))
+<span class="fc" id="L144">                .map(nutzerRepository::save)</span>
+<span class="fc" id="L145">                .collect(Collectors.toMap(Nutzer::getMail, identity()));</span>
+    }
+
+    @Transactional
+    private Map&lt;String, Projekt&gt; createAllProjekt(final Map&lt;String, Nutzer&gt; allNutzer) {
+<span class="fc" id="L150">        return Stream.of(</span>
+<span class="fc" id="L151">                        Projekt.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;name\&quot;: \&quot;Projekt Alpha\&quot;,&quot; +
+                                        &quot;\&quot;sprache\&quot;: \&quot;DE\&quot;,&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                                        &quot;}&quot;)
+<span class="fc" id="L156">                                .setBesitzer(allNutzer.get(&quot;max.mustermann@firma.de&quot;))</span>
+<span class="fc" id="L157">                                .addMitglied(allNutzer.get(&quot;max.mustermann@firma.de&quot;)),</span>
+<span class="fc" id="L158">                        Projekt.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;name\&quot;: \&quot;Projekt Beta\&quot;,&quot; +
+                                        &quot;\&quot;sprache\&quot;: \&quot;DE\&quot;,&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                                        &quot;}&quot;)
+<span class="fc" id="L163">                                .setBesitzer(allNutzer.get(&quot;mia.musterfrau@firma.de&quot;))</span>
+<span class="fc" id="L164">                                .addMitglied(allNutzer.get(&quot;mia.musterfrau@firma.de&quot;))</span>
+<span class="fc" id="L165">                                .addMitglied(allNutzer.get(&quot;max.mustermann@firma.de&quot;))</span>
+<span class="fc" id="L166">                                .addMitglied(allNutzer.get(&quot;szweig@gmail.com&quot;))</span>
+<span class="fc" id="L167">                                .addMitglied(allNutzer.get(&quot;mozart@gmail.com&quot;))</span>
+<span class="fc" id="L168">                                .addMitglied(allNutzer.get(&quot;doyle@gmail.com&quot;)),</span>
+<span class="fc" id="L169">                        Projekt.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;name\&quot;: \&quot;Projekt Gamma\&quot;,&quot; +
+                                        &quot;\&quot;sprache\&quot;: \&quot;EN\&quot;,&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                                        &quot;}&quot;)
+<span class="fc" id="L174">                                .setBesitzer(allNutzer.get(&quot;bruckbauer@gmx.at&quot;)))</span>
+<span class="fc" id="L175">                .map(projektRepository::save)</span>
+<span class="fc" id="L176">                .collect(Collectors.toMap(Projekt::getName, identity()));</span>
+    }
+
+    private Aufgabe createLoremIpsumAufgabe(final int index) {
+<span class="fc" id="L180">        final String text = allLoremIpsum.get(index);</span>
+<span class="fc" id="L181">        return Aufgabe.parseJson(&quot;{&quot; +</span>
+                        &quot;\&quot;text\&quot;: \&quot;&quot; + text + &quot;\&quot;,&quot; +
+                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                        &quot;}&quot;);
+    }
+
+    @Transactional
+    private List&lt;Aufgabe&gt; createAllAufgabe(final Map&lt;String, Projekt&gt; allProjekt) {
+<span class="fc" id="L189">        return Stream.of(</span>
+<span class="fc" id="L190">                        createLoremIpsumAufgabe(0)</span>
+<span class="fc" id="L191">                                .setProjekt(allProjekt.get(&quot;Projekt Alpha&quot;)),</span>
+<span class="fc" id="L192">                        createLoremIpsumAufgabe(1)</span>
+<span class="fc" id="L193">                                .setProjekt(allProjekt.get(&quot;Projekt Alpha&quot;)),</span>
+<span class="fc" id="L194">                        createLoremIpsumAufgabe(2)</span>
+<span class="fc" id="L195">                                .setProjekt(allProjekt.get(&quot;Projekt Alpha&quot;)),</span>
+<span class="fc" id="L196">                        createLoremIpsumAufgabe(3)</span>
+<span class="fc" id="L197">                                .setProjekt(allProjekt.get(&quot;Projekt Alpha&quot;)),</span>
+<span class="fc" id="L198">                        createLoremIpsumAufgabe(4)</span>
+<span class="fc" id="L199">                                .setProjekt(allProjekt.get(&quot;Projekt Alpha&quot;)),</span>
+<span class="fc" id="L200">                        createLoremIpsumAufgabe(5)</span>
+<span class="fc" id="L201">                                .setProjekt(allProjekt.get(&quot;Projekt Alpha&quot;)),</span>
+<span class="fc" id="L202">                        createLoremIpsumAufgabe(6)</span>
+<span class="fc" id="L203">                                .setProjekt(allProjekt.get(&quot;Projekt Alpha&quot;)),</span>
+<span class="fc" id="L204">                        Aufgabe.parseJson(&quot;{&quot; +</span>
+                                        &quot;\&quot;text\&quot;: \&quot;&quot; +
+                                        &quot;Bis 100:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n&quot; +
+                                        &quot;Bis 200:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n&quot; +
+                                        &quot;Bis 300:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n&quot; +
+                                        &quot;Bis 400:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n&quot; +
+                                        &quot;Bis 500:\\n123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789\\n&quot; +
+                                        &quot;Bis 512:\\n1234567\\n&quot; +
+                                        &quot;\&quot;,&quot; +
+                                        &quot;\&quot;aktiv\&quot;: \&quot;true\&quot;&quot; +
+                                        &quot;}&quot;)
+<span class="fc" id="L215">                                .setProjekt(allProjekt.get(&quot;Projekt Beta&quot;)))</span>
+<span class="fc" id="L216">                .map(aufgabeRepository::save)</span>
+<span class="fc" id="L217">                .collect(Collectors.toList());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

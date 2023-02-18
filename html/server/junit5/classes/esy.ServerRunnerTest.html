@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ServerRunnerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ServerRunnerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/esy.html">esy</a> &gt; ServerRunnerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">6</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">2.258s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">apiAufgabe()</td>
+<td class="success">0.171s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">apiEnumSprache()</td>
+<td class="success">0.110s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">apiNutzer()</td>
+<td class="success">0.381s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">apiProjekt()</td>
+<td class="success">0.292s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">health()</td>
+<td class="success">1.243s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">version()</td>
+<td class="success">0.061s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>11:14:29.859 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+11:14:29.913 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+11:14:30.050 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [esy.ServerRunnerTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+11:14:30.088 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [esy.ServerRunnerTest], using SpringBootContextLoader
+11:14:30.113 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [esy.ServerRunnerTest]: class path resource [esy/ServerRunnerTest-context.xml] does not exist
+11:14:30.114 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [esy.ServerRunnerTest]: class path resource [esy/ServerRunnerTestContext.groovy] does not exist
+11:14:30.115 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [esy.ServerRunnerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+11:14:30.116 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [esy.ServerRunnerTest]: ServerRunnerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:14:30.253 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [esy.ServerRunnerTest]
+11:14:30.469 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/home/runner/work/demoscs/demoscs/app/server/build/classes/java/main/esy/ServerRunner.class]
+11:14:30.476 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration esy.ServerRunner for test class esy.ServerRunnerTest
+11:14:30.828 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [esy.ServerRunnerTest]: using defaults.
+11:14:30.830 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+11:14:30.893 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4902c584, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7698a3d9, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@4b62f1ba, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@39dce2df, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@662d3e85, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5598dff2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@92b1bda, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@57bfca3a, org.springframework.test.context.event.EventPublishingTestExecutionListener@58690f5e, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4b9d2cee, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@1a390b8c, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@337eeceb, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@237d0625, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1a5a4f8, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@5392aa2b]
+11:14:30.909 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@1859b996 testClass = ServerRunnerTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71098fb3 testClass = ServerRunnerTest, locations = '{}', classes = '{class esy.ServerRunner}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@a9e8da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@602298b, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@44b9c7c4, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@5a39e554, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@300a38e7, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@4ee5b2d9], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; false]], class annotated with @DirtiesContext [false] with mode [null].
+11:14:30.940 [Test worker] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@1859b996 testClass = ServerRunnerTest, testInstance = esy.ServerRunnerTest@4b8cde43, testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71098fb3 testClass = ServerRunnerTest, locations = '{}', classes = '{class esy.ServerRunner}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@a9e8da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@602298b, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@44b9c7c4, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@5a39e554, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@300a38e7, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@4ee5b2d9], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; false, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.8)
+
+2023-02-18 11:14:32.166  INFO 2206 --- [    Test worker] esy.ServerRunnerTest                     : Starting ServerRunnerTest using Java 11.0.18 on fv-az440-551 with PID 2206 (started by runner in /home/runner/work/demoscs/demoscs/app/server)
+2023-02-18 11:14:32.168  INFO 2206 --- [    Test worker] esy.ServerRunnerTest                     : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2023-02-18 11:14:34.863  INFO 2206 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-18 11:14:35.040  INFO 2206 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 156 ms. Found 4 JPA repository interfaces.
+2023-02-18 11:14:38.378  INFO 2206 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2023-02-18 11:14:38.429  INFO 2206 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-18 11:14:38.431  INFO 2206 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-02-18 11:14:38.778  INFO 2206 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-18 11:14:38.778  INFO 2206 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6535 ms
+2023-02-18 11:14:40.438  INFO 2206 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-18 11:14:41.661  INFO 2206 --- [    Test worker] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (feature not supported)
+2023-02-18 11:14:41.678  INFO 2206 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-18 11:14:41.934  INFO 2206 --- [    Test worker] liquibase.database                       : Set default schema name to PUBLIC
+2023-02-18 11:14:42.672  INFO 2206 --- [    Test worker] liquibase.lockservice                    : Successfully acquired change log lock
+2023-02-18 11:14:44.158  INFO 2206 --- [    Test worker] liquibase.changelog                      : Creating database history table with name: PUBLIC.DATABASECHANGELOG
+2023-02-18 11:14:44.183  INFO 2206 --- [    Test worker] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+Running Changeset: liquibase/v1/nutzer.xml::1::robert
+2023-02-18 11:14:44.972  INFO 2206 --- [    Test worker] liquibase.changelog                      : Table nutzer created
+2023-02-18 11:14:44.986  INFO 2206 --- [    Test worker] liquibase.changelog                      : Unique constraint added to nutzer(mail)
+2023-02-18 11:14:44.987  INFO 2206 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/nutzer.xml::1::robert ran successfully in 117ms
+Running Changeset: liquibase/v1/nutzer_sprache.xml::1::robert
+2023-02-18 11:14:45.028  INFO 2206 --- [    Test worker] liquibase.changelog                      : Table nutzer_sprache created
+2023-02-18 11:14:45.033  INFO 2206 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to nutzer_sprache (id)
+2023-02-18 11:14:45.037  INFO 2206 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/nutzer_sprache.xml::1::robert ran successfully in 37ms
+Running Changeset: liquibase/v1/projekt.xml::1::robert
+2023-02-18 11:14:45.088  INFO 2206 --- [    Test worker] liquibase.changelog                      : Table projekt created
+2023-02-18 11:14:45.110  INFO 2206 --- [    Test worker] liquibase.changelog                      : Unique constraint added to projekt(name)
+2023-02-18 11:14:45.120  INFO 2206 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt (besitzer_id)
+2023-02-18 11:14:45.121  INFO 2206 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/projekt.xml::1::robert ran successfully in 61ms
+Running Changeset: liquibase/v1/projekt_mitglied.xml::1::robert
+2023-02-18 11:14:45.158  INFO 2206 --- [    Test worker] liquibase.changelog                      : Table projekt_mitglied created
+2023-02-18 11:14:45.170  INFO 2206 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt_mitglied (projekt_id)
+2023-02-18 11:14:45.173  INFO 2206 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt_mitglied (nutzer_id)
+2023-02-18 11:14:45.174  INFO 2206 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/projekt_mitglied.xml::1::robert ran successfully in 44ms
+Running Changeset: liquibase/v1/aufgabe.xml::1::robert
+2023-02-18 11:14:45.206  INFO 2206 --- [    Test worker] liquibase.changelog                      : Table aufgabe created
+2023-02-18 11:14:45.212  INFO 2206 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to aufgabe (projekt_id)
+2023-02-18 11:14:45.221  INFO 2206 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/aufgabe.xml::1::robert ran successfully in 40ms
+Running Changeset: liquibase/v1/enum.xml::1::robert
+2023-02-18 11:14:45.247  INFO 2206 --- [    Test worker] liquibase.changelog                      : Table enum created
+2023-02-18 11:14:45.260  INFO 2206 --- [    Test worker] liquibase.changelog                      : Unique constraint added to enum(art, name)
+2023-02-18 11:14:45.268  INFO 2206 --- [    Test worker] liquibase.changelog                      : Unique constraint added to enum(art, code)
+2023-02-18 11:14:45.276  INFO 2206 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/enum.xml::1::robert ran successfully in 50ms
+2023-02-18 11:14:45.296  INFO 2206 --- [    Test worker] liquibase.lockservice                    : Successfully released change log lock
+2023-02-18 11:14:45.618  INFO 2206 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-18 11:14:45.839  INFO 2206 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-18 11:14:46.483  INFO 2206 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-18 11:14:47.011  INFO 2206 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.HSQLDialect
+2023-02-18 11:14:48.965  INFO 2206 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-18 11:14:49.027  INFO 2206 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-18 11:14:54.925  INFO 2206 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-02-18 11:14:55.148  INFO 2206 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 40371 (http) with context path ''
+2023-02-18 11:14:55.169  INFO 2206 --- [    Test worker] esy.ServerRunnerTest                     : Started ServerRunnerTest in 24.144 seconds (JVM running for 28.515)
+Hibernate: select count(*) as col_0_0_ from nutzer nutzer0_
+Hibernate: select enum0_.id as id1_1_0_, enum0_.version as version2_1_0_, enum0_.art as art3_1_0_, enum0_.code as code4_1_0_, enum0_.name as name5_1_0_, enum0_.text as text6_1_0_ from enum enum0_ where enum0_.id=?
+Hibernate: select enum0_.id as id1_1_0_, enum0_.version as version2_1_0_, enum0_.art as art3_1_0_, enum0_.code as code4_1_0_, enum0_.name as name5_1_0_, enum0_.text as text6_1_0_ from enum enum0_ where enum0_.id=?
+Hibernate: select enum0_.id as id1_1_0_, enum0_.version as version2_1_0_, enum0_.art as art3_1_0_, enum0_.code as code4_1_0_, enum0_.name as name5_1_0_, enum0_.text as text6_1_0_ from enum enum0_ where enum0_.id=?
+Hibernate: select enum0_.id as id1_1_0_, enum0_.version as version2_1_0_, enum0_.art as art3_1_0_, enum0_.code as code4_1_0_, enum0_.name as name5_1_0_, enum0_.text as text6_1_0_ from enum enum0_ where enum0_.id=?
+2023-02-18 11:14:55.606  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:2f922bc1-76ce-4b87-954e-7aa10ecfde21,art='sprache',text='Deutsch']
+2023-02-18 11:14:55.623  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:a5436e0e-e725-4271-b728-a142980ab3de,art='sprache',text='Englisch']
+2023-02-18 11:14:55.624  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:a23d41fc-42d6-4877-b22a-b6f7acd2a146,art='sprache',text='Italienisch']
+2023-02-18 11:14:55.625  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:4ed38f28-94b2-4c4b-a3ab-8bccfc047282,art='sprache',text='Französisch']
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+2023-02-18 11:14:55.707  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:cbbdc721-2368-41f5-8267-5b8e6eff32f2,mail='max.mustermann@firma.de']
+2023-02-18 11:14:55.710  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:cd7a201f-0f0a-4ab2-adb8-82badd3439d8,mail='mozart@gmail.com']
+2023-02-18 11:14:55.711  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:451983c3-739e-460a-91f6-f06ea1f43293,mail='mia.musterfrau@firma.de']
+2023-02-18 11:14:55.712  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:d8774f76-ad38-4760-b394-b91a012cf84a,mail='doyle@gmail.com']
+2023-02-18 11:14:55.714  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:96395933-03f3-4368-bf66-173ca5472f8d,mail='bruckbauer@gmx.at']
+2023-02-18 11:14:55.714  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:f3f03d31-b3c7-4614-8899-d32d89b249cc,mail='brombertje@gmail.com']
+2023-02-18 11:14:55.714  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:76b175b4-a444-4cb1-a63b-0a5bc8dcf578,mail='szweig@gmail.com']
+Hibernate: select projekt0_.id as id1_4_1_, projekt0_.version as version2_4_1_, projekt0_.aktiv as aktiv3_4_1_, projekt0_.besitzer_id as besitzer6_4_1_, projekt0_.name as name4_4_1_, projekt0_.sprache as sprache5_4_1_, allaufgabe1_.projekt_id as projekt_5_0_3_, allaufgabe1_.id as id1_0_3_, allaufgabe1_.id as id1_0_0_, allaufgabe1_.version as version2_0_0_, allaufgabe1_.aktiv as aktiv3_0_0_, allaufgabe1_.projekt_id as projekt_5_0_0_, allaufgabe1_.text as text4_0_0_ from projekt projekt0_ left outer join aufgabe allaufgabe1_ on projekt0_.id=allaufgabe1_.projekt_id where projekt0_.id=?
+Hibernate: select projekt0_.id as id1_4_1_, projekt0_.version as version2_4_1_, projekt0_.aktiv as aktiv3_4_1_, projekt0_.besitzer_id as besitzer6_4_1_, projekt0_.name as name4_4_1_, projekt0_.sprache as sprache5_4_1_, allaufgabe1_.projekt_id as projekt_5_0_3_, allaufgabe1_.id as id1_0_3_, allaufgabe1_.id as id1_0_0_, allaufgabe1_.version as version2_0_0_, allaufgabe1_.aktiv as aktiv3_0_0_, allaufgabe1_.projekt_id as projekt_5_0_0_, allaufgabe1_.text as text4_0_0_ from projekt projekt0_ left outer join aufgabe allaufgabe1_ on projekt0_.id=allaufgabe1_.projekt_id where projekt0_.id=?
+Hibernate: select projekt0_.id as id1_4_1_, projekt0_.version as version2_4_1_, projekt0_.aktiv as aktiv3_4_1_, projekt0_.besitzer_id as besitzer6_4_1_, projekt0_.name as name4_4_1_, projekt0_.sprache as sprache5_4_1_, allaufgabe1_.projekt_id as projekt_5_0_3_, allaufgabe1_.id as id1_0_3_, allaufgabe1_.id as id1_0_0_, allaufgabe1_.version as version2_0_0_, allaufgabe1_.aktiv as aktiv3_0_0_, allaufgabe1_.projekt_id as projekt_5_0_0_, allaufgabe1_.text as text4_0_0_ from projekt projekt0_ left outer join aufgabe allaufgabe1_ on projekt0_.id=allaufgabe1_.projekt_id where projekt0_.id=?
+2023-02-18 11:14:55.793  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:c7a60b4a-a671-4697-9815-01135c742794,name='Projekt Beta]
+2023-02-18 11:14:55.795  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:c4012f38-c53d-455f-96a5-561e5eed9cf4,name='Projekt Gamma]
+2023-02-18 11:14:55.795  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:b98dde0a-14d8-472c-b35b-a4bad1f84900,name='Projekt Alpha]
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+2023-02-18 11:14:55.898  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:5395f840-d9c1-4e12-8a67-41de6f288771,text='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.']
+2023-02-18 11:14:55.900  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:befd2f7c-3b9f-4e46-8bf0-7294f4151df6,text='At vero eos et accusam et justo duo dolores et ea rebum.']
+2023-02-18 11:14:55.902  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:41be5d19-b2cc-44a5-8bc3-3451bea7d73f,text='Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.']
+2023-02-18 11:14:55.904  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:bee54587-3ffc-429c-b6cf-ade1e49c23b9,text='Magni accusantium labore et id quis provident.']
+2023-02-18 11:14:55.904  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:0a594bcb-30e0-4bae-93a7-1c732c8281e3,text='Consectetur impedit quisquam qui deserunt non rerum consequuntur eius.']
+2023-02-18 11:14:55.904  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:ee585d69-ffd6-4e14-9d7a-21b622aff459,text='Quia atque aliquam sunt impedit voluptatum rerum assumenda nisi.']
+2023-02-18 11:14:55.918  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:e46f4cc6-bff5-4202-ad13-19f78e9f7c92,text='Cupiditate quos possimus corporis quisquam exercitationem beatae.']
+2023-02-18 11:14:55.918  INFO 2206 --- [    Test worker] esy.ServerTestset                        : CREATED [version:0,id:13d3b6f6-e57a-4b17-996f-f4c52126cc36,text='Bis 100:
+123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
+Bis 200:
+123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
+Bis 300:
+123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
+Bis 400:
+123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
+Bis 500:
+123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
+Bis 512:
+1234567
+']
+Hibernate: insert into enum (version, art, code, name, text, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: insert into enum (version, art, code, name, text, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: insert into enum (version, art, code, name, text, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: insert into enum (version, art, code, name, text, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into projekt (version, aktiv, besitzer_id, name, sprache, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: insert into projekt (version, aktiv, besitzer_id, name, sprache, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: insert into projekt (version, aktiv, besitzer_id, name, sprache, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: update projekt set version=?, aktiv=?, besitzer_id=?, name=?, sprache=? where id=? and version=?
+Hibernate: update projekt set version=?, aktiv=?, besitzer_id=?, name=?, sprache=? where id=? and version=?
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+Hibernate: insert into projekt_mitglied (projekt_id, nutzer_id) values (?, ?)
+Hibernate: insert into projekt_mitglied (projekt_id, nutzer_id) values (?, ?)
+Hibernate: insert into projekt_mitglied (projekt_id, nutzer_id) values (?, ?)
+Hibernate: insert into projekt_mitglied (projekt_id, nutzer_id) values (?, ?)
+Hibernate: insert into projekt_mitglied (projekt_id, nutzer_id) values (?, ?)
+Hibernate: insert into projekt_mitglied (projekt_id, nutzer_id) values (?, ?)
+2023-02-18 11:14:57.103  INFO 2206 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-18 11:14:57.104  INFO 2206 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-18 11:14:57.108  INFO 2206 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+Hibernate: select enum0_.id as id1_1_, enum0_.version as version2_1_, enum0_.art as art3_1_, enum0_.code as code4_1_, enum0_.name as name5_1_, enum0_.text as text6_1_ from enum enum0_ where enum0_.art=? order by enum0_.art ASC, enum0_.code
+2023-02-18 11:14:57.519  INFO 2206 --- [o-auto-1-exec-5] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:0,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']; creating ...
+2023-02-18 11:14:57.520  INFO 2206 --- [o-auto-1-exec-5] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:0,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+2023-02-18 11:14:57.528  INFO 2206 --- [o-auto-1-exec-5] esy.rest.JsonJpaRestControllerBase       : CREATED [version:1,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']
+2023-02-18 11:14:57.607  INFO 2206 --- [o-auto-1-exec-6] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:0,id:dd738023-889f-4a08-88d8-91562b2ec60d,mail='alf.mustermann@firma.de']; creating ...
+2023-02-18 11:14:57.607  INFO 2206 --- [o-auto-1-exec-6] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:0,id:dd738023-889f-4a08-88d8-91562b2ec60d,mail='alf.mustermann@firma.de']
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_ from nutzer nutzer0_ where nutzer0_.id=?
+Hibernate: insert into nutzer (version, aktiv, mail, name, id) values (?, ?, ?, ?, ?)
+2023-02-18 11:14:57.612  WARN 2206 --- [o-auto-1-exec-6] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
+2023-02-18 11:14:57.613 ERROR 2206 --- [o-auto-1-exec-6] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation; UK_NUTZER table: NUTZER
+2023-02-18 11:14:57.615  INFO 2206 --- [o-auto-1-exec-6] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2023-02-18 11:14:57.628 ERROR 2206 --- [o-auto-1-exec-6] esy.app.EndpointControllerAdvice         : org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [UK_NUTZER]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+
+org.hsqldb.HsqlException: integrity constraint violation: unique constraint or index violation; UK_NUTZER table: NUTZER
+	at org.hsqldb.error.Error.error(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Constraint.getException(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.index.IndexAVL.insert(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.persist.RowStoreAVL.indexRow(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.TransactionManager2PL.addInsertAction(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Session.addInsertAction(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Table.insertSingleRow(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.StatementDML.insertSingleRow(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.StatementInsert.getResult(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.StatementDMQL.execute(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Session.executeCompiledStatement(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Session.execute(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.jdbc.JDBCPreparedStatement.fetchResult(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.jdbc.JDBCPreparedStatement.executeUpdate(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.jdbc.batch.internal.NonBatchingBatch.addToBatch(NonBatchingBatch.java:46) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3375) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3937) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.action.internal.EntityInsertAction.execute(EntityInsertAction.java:107) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:604) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.spi.ActionQueue.lambda$executeActions$1(ActionQueue.java:478) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:684) ~[na:na]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:475) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:344) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:40) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:107) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1407) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:489) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3303) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2438) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:449) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:183) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:40) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:281) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562) ~[spring-orm-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:743) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:711) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:654) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:407) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:174) ~[spring-data-jpa-2.7.7.jar:2.7.7]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215) ~[spring-aop-5.3.25.jar:5.3.25]
+	at com.sun.proxy.$Proxy169.save(Unknown Source) ~[na:na]
+	at org.springframework.data.repository.support.CrudRepositoryInvoker.invokeSave(CrudRepositoryInvoker.java:101) ~[spring-data-commons-2.7.7.jar:2.7.7]
+	at org.springframework.data.rest.core.support.UnwrappingRepositoryInvokerFactory$UnwrappingRepositoryInvoker.invokeSave(UnwrappingRepositoryInvokerFactory.java:181) ~[spring-data-rest-core-3.7.7.jar:3.7.7]
+	at org.springframework.data.rest.webmvc.RepositoryEntityController.createAndReturn(RepositoryEntityController.java:474) ~[spring-data-rest-webmvc-3.7.7.jar:3.7.7]
+	at org.springframework.data.rest.webmvc.RepositoryEntityController.postCollectionResource(RepositoryEntityController.java:266) ~[spring-data-rest-webmvc-3.7.7.jar:3.7.7]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696) ~[tomcat-embed-core-9.0.71.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779) ~[tomcat-embed-core-9.0.71.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.7.8.jar:2.7.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at java.base/java.lang.Thread.run(Thread.java:829) ~[na:na]
+
+2023-02-18 11:14:57.649 ERROR 2206 --- [o-auto-1-exec-6] esy.app.EndpointControllerAdvice         : /api/nutzer failed with code 409
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+2023-02-18 11:14:57.689  INFO 2206 --- [o-auto-1-exec-6] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:1,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']; updating ...
+2023-02-18 11:14:57.689  INFO 2206 --- [o-auto-1-exec-6] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:1,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']
+Hibernate: update nutzer set version=?, aktiv=?, mail=?, name=? where id=? and version=?
+Hibernate: insert into nutzer_sprache (id, sprache) values (?, ?)
+2023-02-18 11:14:57.695  INFO 2206 --- [o-auto-1-exec-6] esy.rest.JsonJpaRestControllerBase       : UPDATED [version:2,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+Hibernate: select nutzer0_.id as id1_2_, nutzer0_.version as version2_2_, nutzer0_.aktiv as aktiv3_2_, nutzer0_.mail as mail4_2_, nutzer0_.name as name5_2_ from nutzer nutzer0_ where nutzer0_.mail=?
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select nutzer0_.id as id1_2_, nutzer0_.version as version2_2_, nutzer0_.aktiv as aktiv3_2_, nutzer0_.mail as mail4_2_, nutzer0_.name as name5_2_ from nutzer nutzer0_ limit ?
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+2023-02-18 11:14:57.813  INFO 2206 --- [-auto-1-exec-10] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:2,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']; deleting ...
+2023-02-18 11:14:57.813  INFO 2206 --- [-auto-1-exec-10] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:2,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']
+Hibernate: delete from nutzer_sprache where id=?
+Hibernate: delete from nutzer where id=? and version=?
+2023-02-18 11:14:57.823  INFO 2206 --- [-auto-1-exec-10] esy.rest.JsonJpaRestControllerBase       : DELETED [version:2,id:472c14de-d8e7-4dd7-a9bc-abbe972b98a9,mail='alf.mustermann@firma.de']
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+Hibernate: select nutzer0_.id as id1_2_, nutzer0_.version as version2_2_, nutzer0_.aktiv as aktiv3_2_, nutzer0_.mail as mail4_2_, nutzer0_.name as name5_2_ from nutzer nutzer0_ where nutzer0_.mail=?
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+2023-02-18 11:14:57.861  INFO 2206 --- [o-auto-1-exec-1] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:0,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]; creating ...
+2023-02-18 11:14:57.861  INFO 2206 --- [o-auto-1-exec-1] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:0,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]
+Hibernate: select projekt0_.id as id1_4_1_, projekt0_.version as version2_4_1_, projekt0_.aktiv as aktiv3_4_1_, projekt0_.besitzer_id as besitzer6_4_1_, projekt0_.name as name4_4_1_, projekt0_.sprache as sprache5_4_1_, allaufgabe1_.projekt_id as projekt_5_0_3_, allaufgabe1_.id as id1_0_3_, allaufgabe1_.id as id1_0_0_, allaufgabe1_.version as version2_0_0_, allaufgabe1_.aktiv as aktiv3_0_0_, allaufgabe1_.projekt_id as projekt_5_0_0_, allaufgabe1_.text as text4_0_0_ from projekt projekt0_ left outer join aufgabe allaufgabe1_ on projekt0_.id=allaufgabe1_.projekt_id where projekt0_.id=?
+Hibernate: insert into projekt (version, aktiv, besitzer_id, name, sprache, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: update projekt set version=?, aktiv=?, besitzer_id=?, name=?, sprache=? where id=? and version=?
+Hibernate: insert into projekt_mitglied (projekt_id, nutzer_id) values (?, ?)
+2023-02-18 11:14:57.878  INFO 2206 --- [o-auto-1-exec-1] esy.rest.JsonJpaRestControllerBase       : CREATED [version:1,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]
+2023-02-18 11:14:57.918  INFO 2206 --- [o-auto-1-exec-2] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:0,id:2d652730-5c54-476c-b6e2-7f19d9f6744d,name='Projekt A]; creating ...
+2023-02-18 11:14:57.918  INFO 2206 --- [o-auto-1-exec-2] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:0,id:2d652730-5c54-476c-b6e2-7f19d9f6744d,name='Projekt A]
+Hibernate: select projekt0_.id as id1_4_1_, projekt0_.version as version2_4_1_, projekt0_.aktiv as aktiv3_4_1_, projekt0_.besitzer_id as besitzer6_4_1_, projekt0_.name as name4_4_1_, projekt0_.sprache as sprache5_4_1_, allaufgabe1_.projekt_id as projekt_5_0_3_, allaufgabe1_.id as id1_0_3_, allaufgabe1_.id as id1_0_0_, allaufgabe1_.version as version2_0_0_, allaufgabe1_.aktiv as aktiv3_0_0_, allaufgabe1_.projekt_id as projekt_5_0_0_, allaufgabe1_.text as text4_0_0_ from projekt projekt0_ left outer join aufgabe allaufgabe1_ on projekt0_.id=allaufgabe1_.projekt_id where projekt0_.id=?
+Hibernate: insert into projekt (version, aktiv, besitzer_id, name, sprache, id) values (?, ?, ?, ?, ?, ?)
+2023-02-18 11:14:57.927  WARN 2206 --- [o-auto-1-exec-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
+2023-02-18 11:14:57.927 ERROR 2206 --- [o-auto-1-exec-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation; UK_PROJEKT table: PROJEKT
+2023-02-18 11:14:57.928  INFO 2206 --- [o-auto-1-exec-2] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2023-02-18 11:14:57.932 ERROR 2206 --- [o-auto-1-exec-2] esy.app.EndpointControllerAdvice         : org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [UK_PROJEKT]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+
+org.hsqldb.HsqlException: integrity constraint violation: unique constraint or index violation; UK_PROJEKT table: PROJEKT
+	at org.hsqldb.error.Error.error(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Constraint.getException(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.index.IndexAVL.insert(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.persist.RowStoreAVL.indexRow(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.TransactionManager2PL.addInsertAction(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Session.addInsertAction(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Table.insertSingleRow(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.StatementDML.insertSingleRow(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.StatementInsert.getResult(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.StatementDMQL.execute(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Session.executeCompiledStatement(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.Session.execute(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.jdbc.JDBCPreparedStatement.fetchResult(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at org.hsqldb.jdbc.JDBCPreparedStatement.executeUpdate(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.jdbc.batch.internal.NonBatchingBatch.addToBatch(NonBatchingBatch.java:46) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3375) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3937) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.action.internal.EntityInsertAction.execute(EntityInsertAction.java:107) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:604) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.spi.ActionQueue.lambda$executeActions$1(ActionQueue.java:478) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:684) ~[na:na]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:475) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:344) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:40) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:107) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1407) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:489) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3303) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2438) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:449) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:183) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:40) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:281) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-5.6.14.Final.jar:5.6.14.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562) ~[spring-orm-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:743) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:711) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:654) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:407) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-5.3.25.jar:5.3.25]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:174) ~[spring-data-jpa-2.7.7.jar:2.7.7]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.25.jar:5.3.25]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215) ~[spring-aop-5.3.25.jar:5.3.25]
+	at com.sun.proxy.$Proxy170.save(Unknown Source) ~[na:na]
+	at org.springframework.data.repository.support.CrudRepositoryInvoker.invokeSave(CrudRepositoryInvoker.java:101) ~[spring-data-commons-2.7.7.jar:2.7.7]
+	at org.springframework.data.rest.core.support.UnwrappingRepositoryInvokerFactory$UnwrappingRepositoryInvoker.invokeSave(UnwrappingRepositoryInvokerFactory.java:181) ~[spring-data-rest-core-3.7.7.jar:3.7.7]
+	at org.springframework.data.rest.webmvc.RepositoryEntityController.createAndReturn(RepositoryEntityController.java:474) ~[spring-data-rest-webmvc-3.7.7.jar:3.7.7]
+	at org.springframework.data.rest.webmvc.RepositoryEntityController.postCollectionResource(RepositoryEntityController.java:266) ~[spring-data-rest-webmvc-3.7.7.jar:3.7.7]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696) ~[tomcat-embed-core-9.0.71.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779) ~[tomcat-embed-core-9.0.71.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.7.8.jar:2.7.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at java.base/java.lang.Thread.run(Thread.java:829) ~[na:na]
+
+2023-02-18 11:14:57.941 ERROR 2206 --- [o-auto-1-exec-2] esy.app.EndpointControllerAdvice         : /api/projekt failed with code 409
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+2023-02-18 11:14:57.957  INFO 2206 --- [o-auto-1-exec-2] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:1,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]; updating ...
+2023-02-18 11:14:57.957  INFO 2206 --- [o-auto-1-exec-2] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:1,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]
+Hibernate: update projekt set version=?, aktiv=?, besitzer_id=?, name=?, sprache=? where id=? and version=?
+2023-02-18 11:14:57.960  INFO 2206 --- [o-auto-1-exec-2] esy.rest.JsonJpaRestControllerBase       : UPDATED [version:2,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]
+Hibernate: select projekt0_.id as id1_4_, projekt0_.version as version2_4_, projekt0_.aktiv as aktiv3_4_, projekt0_.besitzer_id as besitzer6_4_, projekt0_.name as name4_4_, projekt0_.sprache as sprache5_4_ from projekt projekt0_ limit ?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+Hibernate: select allmitglie0_.projekt_id as projekt_1_5_0_, allmitglie0_.nutzer_id as nutzer_i2_5_0_, nutzer1_.id as id1_2_1_, nutzer1_.version as version2_2_1_, nutzer1_.aktiv as aktiv3_2_1_, nutzer1_.mail as mail4_2_1_, nutzer1_.name as name5_2_1_ from projekt_mitglied allmitglie0_ inner join nutzer nutzer1_ on allmitglie0_.nutzer_id=nutzer1_.id where allmitglie0_.projekt_id=?
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select allmitglie0_.projekt_id as projekt_1_5_0_, allmitglie0_.nutzer_id as nutzer_i2_5_0_, nutzer1_.id as id1_2_1_, nutzer1_.version as version2_2_1_, nutzer1_.aktiv as aktiv3_2_1_, nutzer1_.mail as mail4_2_1_, nutzer1_.name as name5_2_1_ from projekt_mitglied allmitglie0_ inner join nutzer nutzer1_ on allmitglie0_.nutzer_id=nutzer1_.id where allmitglie0_.projekt_id=?
+Hibernate: select allmitglie0_.projekt_id as projekt_1_5_0_, allmitglie0_.nutzer_id as nutzer_i2_5_0_, nutzer1_.id as id1_2_1_, nutzer1_.version as version2_2_1_, nutzer1_.aktiv as aktiv3_2_1_, nutzer1_.mail as mail4_2_1_, nutzer1_.name as name5_2_1_ from projekt_mitglied allmitglie0_ inner join nutzer nutzer1_ on allmitglie0_.nutzer_id=nutzer1_.id where allmitglie0_.projekt_id=?
+Hibernate: select allmitglie0_.projekt_id as projekt_1_5_0_, allmitglie0_.nutzer_id as nutzer_i2_5_0_, nutzer1_.id as id1_2_1_, nutzer1_.version as version2_2_1_, nutzer1_.aktiv as aktiv3_2_1_, nutzer1_.mail as mail4_2_1_, nutzer1_.name as name5_2_1_ from projekt_mitglied allmitglie0_ inner join nutzer nutzer1_ on allmitglie0_.nutzer_id=nutzer1_.id where allmitglie0_.projekt_id=?
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+Hibernate: select projekt0_.id as id1_4_, projekt0_.version as version2_4_, projekt0_.aktiv as aktiv3_4_, projekt0_.besitzer_id as besitzer6_4_, projekt0_.name as name4_4_, projekt0_.sprache as sprache5_4_ from projekt projekt0_ where projekt0_.name=?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+Hibernate: select allmitglie0_.projekt_id as projekt_1_5_0_, allmitglie0_.nutzer_id as nutzer_i2_5_0_, nutzer1_.id as id1_2_1_, nutzer1_.version as version2_2_1_, nutzer1_.aktiv as aktiv3_2_1_, nutzer1_.mail as mail4_2_1_, nutzer1_.name as name5_2_1_ from projekt_mitglied allmitglie0_ inner join nutzer nutzer1_ on allmitglie0_.nutzer_id=nutzer1_.id where allmitglie0_.projekt_id=?
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+2023-02-18 11:14:58.109  INFO 2206 --- [o-auto-1-exec-8] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:2,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]; deleting ...
+2023-02-18 11:14:58.109  INFO 2206 --- [o-auto-1-exec-8] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:2,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]
+Hibernate: select allaufgabe0_.projekt_id as projekt_5_0_0_, allaufgabe0_.id as id1_0_0_, allaufgabe0_.id as id1_0_1_, allaufgabe0_.version as version2_0_1_, allaufgabe0_.aktiv as aktiv3_0_1_, allaufgabe0_.projekt_id as projekt_5_0_1_, allaufgabe0_.text as text4_0_1_ from aufgabe allaufgabe0_ where allaufgabe0_.projekt_id=?
+Hibernate: delete from projekt_mitglied where projekt_id=?
+Hibernate: delete from projekt where id=? and version=?
+2023-02-18 11:14:58.114  INFO 2206 --- [o-auto-1-exec-8] esy.rest.JsonJpaRestControllerBase       : DELETED [version:2,id:1e8e46a1-e286-4e43-bc70-767509b3c4fe,name='Projekt A]
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+Hibernate: select projekt0_.id as id1_4_, projekt0_.version as version2_4_, projekt0_.aktiv as aktiv3_4_, projekt0_.besitzer_id as besitzer6_4_, projekt0_.name as name4_4_, projekt0_.sprache as sprache5_4_ from projekt projekt0_ where projekt0_.name=?
+Hibernate: select nutzer0_.id as id1_2_0_, nutzer0_.version as version2_2_0_, nutzer0_.aktiv as aktiv3_2_0_, nutzer0_.mail as mail4_2_0_, nutzer0_.name as name5_2_0_, allsprache1_.id as id1_3_1_, allsprache1_.sprache as sprache2_3_1_ from nutzer nutzer0_ left outer join nutzer_sprache allsprache1_ on nutzer0_.id=allsprache1_.id where nutzer0_.id=? order by allsprache1_.sprache asc
+Hibernate: select allmitglie0_.projekt_id as projekt_1_5_0_, allmitglie0_.nutzer_id as nutzer_i2_5_0_, nutzer1_.id as id1_2_1_, nutzer1_.version as version2_2_1_, nutzer1_.aktiv as aktiv3_2_1_, nutzer1_.mail as mail4_2_1_, nutzer1_.name as name5_2_1_ from projekt_mitglied allmitglie0_ inner join nutzer nutzer1_ on allmitglie0_.nutzer_id=nutzer1_.id where allmitglie0_.projekt_id=?
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+2023-02-18 11:14:58.157  INFO 2206 --- [-auto-1-exec-10] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:0,id:11959cd2-4a11-4a12-9491-675c45989c3e,text='Aufgabe A']; creating ...
+2023-02-18 11:14:58.157  INFO 2206 --- [-auto-1-exec-10] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:0,id:11959cd2-4a11-4a12-9491-675c45989c3e,text='Aufgabe A']
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+2023-02-18 11:14:58.160  INFO 2206 --- [-auto-1-exec-10] esy.rest.JsonJpaRestControllerBase       : CREATED [version:0,id:11959cd2-4a11-4a12-9491-675c45989c3e,text='Aufgabe A']
+Hibernate: select aufgabe0_.id as id1_0_, aufgabe0_.version as version2_0_, aufgabe0_.aktiv as aktiv3_0_, aufgabe0_.projekt_id as projekt_5_0_, aufgabe0_.text as text4_0_ from aufgabe aufgabe0_ where aufgabe0_.projekt_id=? order by lower(aufgabe0_.text) ASC
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+2023-02-18 11:14:58.203  INFO 2206 --- [o-auto-1-exec-2] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:0,id:7ed86f69-f528-403d-ae5c-7fc8ff2a4fc0,text='Aufgabe A']; creating ...
+2023-02-18 11:14:58.213  INFO 2206 --- [o-auto-1-exec-2] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:0,id:7ed86f69-f528-403d-ae5c-7fc8ff2a4fc0,text='Aufgabe A']
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_ from aufgabe aufgabe0_ where aufgabe0_.id=?
+Hibernate: insert into aufgabe (version, aktiv, projekt_id, text, id) values (?, ?, ?, ?, ?)
+2023-02-18 11:14:58.218  INFO 2206 --- [o-auto-1-exec-2] esy.rest.JsonJpaRestControllerBase       : CREATED [version:0,id:7ed86f69-f528-403d-ae5c-7fc8ff2a4fc0,text='Aufgabe A']
+Hibernate: select aufgabe0_.id as id1_0_, aufgabe0_.version as version2_0_, aufgabe0_.aktiv as aktiv3_0_, aufgabe0_.projekt_id as projekt_5_0_, aufgabe0_.text as text4_0_ from aufgabe aufgabe0_ where aufgabe0_.projekt_id=? order by lower(aufgabe0_.text) ASC
+Hibernate: select projekt0_.id as id1_4_0_, projekt0_.version as version2_4_0_, projekt0_.aktiv as aktiv3_4_0_, projekt0_.besitzer_id as besitzer6_4_0_, projekt0_.name as name4_4_0_, projekt0_.sprache as sprache5_4_0_, allmitglie1_.projekt_id as projekt_1_5_1_, nutzer2_.id as nutzer_i2_5_1_, nutzer2_.id as id1_2_2_, nutzer2_.version as version2_2_2_, nutzer2_.aktiv as aktiv3_2_2_, nutzer2_.mail as mail4_2_2_, nutzer2_.name as name5_2_2_, allsprache3_.id as id1_3_3_, allsprache3_.sprache as sprache2_3_3_, nutzer4_.id as id1_2_4_, nutzer4_.version as version2_2_4_, nutzer4_.aktiv as aktiv3_2_4_, nutzer4_.mail as mail4_2_4_, nutzer4_.name as name5_2_4_ from projekt projekt0_ left outer join projekt_mitglied allmitglie1_ on projekt0_.id=allmitglie1_.projekt_id left outer join nutzer nutzer2_ on allmitglie1_.nutzer_id=nutzer2_.id left outer join nutzer_sprache allsprache3_ on nutzer2_.id=allsprache3_.id left outer join nutzer nutzer4_ on projekt0_.besitzer_id=nutzer4_.id where projekt0_.id=? order by allsprache3_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_, projekt1_.id as id1_4_1_, projekt1_.version as version2_4_1_, projekt1_.aktiv as aktiv3_4_1_, projekt1_.besitzer_id as besitzer6_4_1_, projekt1_.name as name4_4_1_, projekt1_.sprache as sprache5_4_1_, allmitglie2_.projekt_id as projekt_1_5_2_, nutzer3_.id as nutzer_i2_5_2_, nutzer3_.id as id1_2_3_, nutzer3_.version as version2_2_3_, nutzer3_.aktiv as aktiv3_2_3_, nutzer3_.mail as mail4_2_3_, nutzer3_.name as name5_2_3_, allsprache4_.id as id1_3_4_, allsprache4_.sprache as sprache2_3_4_, nutzer5_.id as id1_2_5_, nutzer5_.version as version2_2_5_, nutzer5_.aktiv as aktiv3_2_5_, nutzer5_.mail as mail4_2_5_, nutzer5_.name as name5_2_5_ from aufgabe aufgabe0_ inner join projekt projekt1_ on aufgabe0_.projekt_id=projekt1_.id left outer join projekt_mitglied allmitglie2_ on projekt1_.id=allmitglie2_.projekt_id left outer join nutzer nutzer3_ on allmitglie2_.nutzer_id=nutzer3_.id left outer join nutzer_sprache allsprache4_ on nutzer3_.id=allsprache4_.id left outer join nutzer nutzer5_ on projekt1_.besitzer_id=nutzer5_.id where aufgabe0_.id=? order by allsprache4_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+2023-02-18 11:14:58.258  INFO 2206 --- [o-auto-1-exec-4] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:0,id:11959cd2-4a11-4a12-9491-675c45989c3e,text='Aufgabe A']; deleting ...
+2023-02-18 11:14:58.258  INFO 2206 --- [o-auto-1-exec-4] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:0,id:11959cd2-4a11-4a12-9491-675c45989c3e,text='Aufgabe A']
+Hibernate: delete from aufgabe where id=? and version=?
+2023-02-18 11:14:58.261  INFO 2206 --- [o-auto-1-exec-4] esy.rest.JsonJpaRestControllerBase       : DELETED [version:0,id:11959cd2-4a11-4a12-9491-675c45989c3e,text='Aufgabe A']
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_, projekt1_.id as id1_4_1_, projekt1_.version as version2_4_1_, projekt1_.aktiv as aktiv3_4_1_, projekt1_.besitzer_id as besitzer6_4_1_, projekt1_.name as name4_4_1_, projekt1_.sprache as sprache5_4_1_, allmitglie2_.projekt_id as projekt_1_5_2_, nutzer3_.id as nutzer_i2_5_2_, nutzer3_.id as id1_2_3_, nutzer3_.version as version2_2_3_, nutzer3_.aktiv as aktiv3_2_3_, nutzer3_.mail as mail4_2_3_, nutzer3_.name as name5_2_3_, allsprache4_.id as id1_3_4_, allsprache4_.sprache as sprache2_3_4_, nutzer5_.id as id1_2_5_, nutzer5_.version as version2_2_5_, nutzer5_.aktiv as aktiv3_2_5_, nutzer5_.mail as mail4_2_5_, nutzer5_.name as name5_2_5_ from aufgabe aufgabe0_ inner join projekt projekt1_ on aufgabe0_.projekt_id=projekt1_.id left outer join projekt_mitglied allmitglie2_ on projekt1_.id=allmitglie2_.projekt_id left outer join nutzer nutzer3_ on allmitglie2_.nutzer_id=nutzer3_.id left outer join nutzer_sprache allsprache4_ on nutzer3_.id=allsprache4_.id left outer join nutzer nutzer5_ on projekt1_.besitzer_id=nutzer5_.id where aufgabe0_.id=? order by allsprache4_.sprache asc
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_, projekt1_.id as id1_4_1_, projekt1_.version as version2_4_1_, projekt1_.aktiv as aktiv3_4_1_, projekt1_.besitzer_id as besitzer6_4_1_, projekt1_.name as name4_4_1_, projekt1_.sprache as sprache5_4_1_, allmitglie2_.projekt_id as projekt_1_5_2_, nutzer3_.id as nutzer_i2_5_2_, nutzer3_.id as id1_2_3_, nutzer3_.version as version2_2_3_, nutzer3_.aktiv as aktiv3_2_3_, nutzer3_.mail as mail4_2_3_, nutzer3_.name as name5_2_3_, allsprache4_.id as id1_3_4_, allsprache4_.sprache as sprache2_3_4_, nutzer5_.id as id1_2_5_, nutzer5_.version as version2_2_5_, nutzer5_.aktiv as aktiv3_2_5_, nutzer5_.mail as mail4_2_5_, nutzer5_.name as name5_2_5_ from aufgabe aufgabe0_ inner join projekt projekt1_ on aufgabe0_.projekt_id=projekt1_.id left outer join projekt_mitglied allmitglie2_ on projekt1_.id=allmitglie2_.projekt_id left outer join nutzer nutzer3_ on allmitglie2_.nutzer_id=nutzer3_.id left outer join nutzer_sprache allsprache4_ on nutzer3_.id=allsprache4_.id left outer join nutzer nutzer5_ on projekt1_.besitzer_id=nutzer5_.id where aufgabe0_.id=? order by allsprache4_.sprache asc
+Hibernate: select allsprache0_.id as id1_3_0_, allsprache0_.sprache as sprache2_3_0_ from nutzer_sprache allsprache0_ where allsprache0_.id=? order by allsprache0_.sprache asc
+2023-02-18 11:14:58.291  INFO 2206 --- [o-auto-1-exec-4] esy.rest.JsonJpaRestControllerBase       : RECEIVED [version:0,id:7ed86f69-f528-403d-ae5c-7fc8ff2a4fc0,text='Aufgabe A']; deleting ...
+2023-02-18 11:14:58.291  INFO 2206 --- [o-auto-1-exec-4] esy.rest.JsonJpaRestControllerBase       : ACCEPTED [version:0,id:7ed86f69-f528-403d-ae5c-7fc8ff2a4fc0,text='Aufgabe A']
+Hibernate: delete from aufgabe where id=? and version=?
+2023-02-18 11:14:58.293  INFO 2206 --- [o-auto-1-exec-4] esy.rest.JsonJpaRestControllerBase       : DELETED [version:0,id:7ed86f69-f528-403d-ae5c-7fc8ff2a4fc0,text='Aufgabe A']
+Hibernate: select aufgabe0_.id as id1_0_0_, aufgabe0_.version as version2_0_0_, aufgabe0_.aktiv as aktiv3_0_0_, aufgabe0_.projekt_id as projekt_5_0_0_, aufgabe0_.text as text4_0_0_, projekt1_.id as id1_4_1_, projekt1_.version as version2_4_1_, projekt1_.aktiv as aktiv3_4_1_, projekt1_.besitzer_id as besitzer6_4_1_, projekt1_.name as name4_4_1_, projekt1_.sprache as sprache5_4_1_, allmitglie2_.projekt_id as projekt_1_5_2_, nutzer3_.id as nutzer_i2_5_2_, nutzer3_.id as id1_2_3_, nutzer3_.version as version2_2_3_, nutzer3_.aktiv as aktiv3_2_3_, nutzer3_.mail as mail4_2_3_, nutzer3_.name as name5_2_3_, allsprache4_.id as id1_3_4_, allsprache4_.sprache as sprache2_3_4_, nutzer5_.id as id1_2_5_, nutzer5_.version as version2_2_5_, nutzer5_.aktiv as aktiv3_2_5_, nutzer5_.mail as mail4_2_5_, nutzer5_.name as name5_2_5_ from aufgabe aufgabe0_ inner join projekt projekt1_ on aufgabe0_.projekt_id=projekt1_.id left outer join projekt_mitglied allmitglie2_ on projekt1_.id=allmitglie2_.projekt_id left outer join nutzer nutzer3_ on allmitglie2_.nutzer_id=nutzer3_.id left outer join nutzer_sprache allsprache4_ on nutzer3_.id=allsprache4_.id left outer join nutzer nutzer5_ on projekt1_.besitzer_id=nutzer5_.id where aufgabe0_.id=? order by allsprache4_.sprache asc
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.6</a> at Feb 18, 2023, 11:14:58 AM</p>
+</div>
+</div>
+</body>
+</html>
