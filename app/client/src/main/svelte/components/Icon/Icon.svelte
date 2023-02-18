@@ -1,11 +1,6 @@
 <script>
   import filterProps from "../filterProps.js";
-  const props = filterProps([
-    'disabled',
-    'name',
-    'outlined',
-    'title'
-  ], $$props);
+  const props = filterProps(["disabled", "name", "outlined", "title"], $$props);
   export let disabled = false;
   export let name = "help";
   export let outlined = false;
@@ -16,9 +11,9 @@
   {...props}
   {title}
   {disabled}
-  class:disabled={disabled}
+  class:disabled
   class="text-xl text-white w-12 h-12 rounded-full p-2 disabled:opacity-50 hover:opacity-90 focus:ring bg-primary-500"
-  class:outlined={outlined}
+  class:outlined
   on:click
   on:mouseover
   on:focus

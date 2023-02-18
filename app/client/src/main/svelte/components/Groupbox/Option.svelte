@@ -15,15 +15,15 @@
     }
   }
 
-	function onChange({ target }) {
-		if (target.checked) {
-			groupProcessed = [...groupProcessed, valueProcessed];
-			group = [...group, value]
-		} else {
-			groupProcessed = groupProcessed.filter((e) => e !== valueProcessed);
-			group = group.filter((e) => e !== value);
-		}
-	}
+  function onChange({ target }) {
+    if (target.checked) {
+      groupProcessed = [...groupProcessed, valueProcessed];
+      group = [...group, value];
+    } else {
+      groupProcessed = groupProcessed.filter((e) => e !== valueProcessed);
+      group = group.filter((e) => e !== value);
+    }
+  }
 </script>
 
 <div class="relative w-auto h-auto">
@@ -31,15 +31,16 @@
     <input
       {title}
       class="disabled:opacity-50 border-2 border-primary-500 text-primary-500"
-      type=checkbox
-      {disabled} 
+      type="checkbox"
+      {disabled}
       checked={groupProcessed.includes(valueProcessed)}
       on:change={onChange}
-      on:change/>
+      on:change
+    />
     {#if label}
-    <div class="pl-2 cursor-pointer text-gray-700">
-      {label}
-    </div>
+      <div class="pl-2 cursor-pointer text-gray-700">
+        {label}
+      </div>
     {/if}
   </label>
 </div>

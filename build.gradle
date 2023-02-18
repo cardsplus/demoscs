@@ -6,7 +6,6 @@ plugins {
     id 'base'
     id 'eclipse'
     id 'idea'
-    id 'com.diffplug.spotless'
     id 'com.palantir.git-version'
     id 'org.asciidoctor.jvm.convert'
     id 'org.asciidoctor.jvm.pdf'
@@ -24,20 +23,6 @@ idea {
     module {
         downloadJavadoc = true
         downloadSources = true
-    }
-}
-
-spotless {
-    encoding 'UTF-8'
-    java {
-        target fileTree(projectDir) {
-            include '**/src/main/java/esy/**/*.java'
-            exclude '**/build/**'
-            exclude '.gradle'
-            exclude '.github'
-        }
-        indentWithSpaces(4)
-        removeUnusedImports()
     }
 }
 

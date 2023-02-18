@@ -2,7 +2,7 @@ pluginManagement {
     plugins {
         id 'io.spring.dependency-management' version '1.1.0'
         id 'org.springframework.boot' version '2.7.8'
-        id 'com.diffplug.spotless' version '6.12.0'
+        id 'com.diffplug.spotless' version '6.15.0'
         id 'com.palantir.git-version' version '0.15.0'
         id 'org.asciidoctor.jvm.convert' version '3.3.2'
         id 'org.asciidoctor.jvm.pdf' version '3.3.2'
@@ -16,6 +16,16 @@ pluginManagement {
         }
     }
 }
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        spotlessLibs {
+            // https://github.com/sveltejs/prettier-plugin-svelte
+            version('svelte', "2.9.0")
+        }
+    }
+}
+
 rootProject.name = 'demoscs'
 include 'app:backend-api'
 include 'app:backend'

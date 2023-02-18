@@ -20,40 +20,40 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class BackendConfigurationTest {
 
-	/**
-	 * {@see <a href="https://spring.io/guides/gs/multi-module/"/>}
-	 */
-	@SpringBootApplication
-	static class BackendConfigurationApp {
-	}
+    /**
+     * {@see <a href="https://spring.io/guides/gs/multi-module/"/>}
+     */
+    @SpringBootApplication
+    static class BackendConfigurationApp {
+    }
 
-	@Autowired
-	private ConfigurableApplicationContext context;
+    @Autowired
+    private ConfigurableApplicationContext context;
 
-	@Autowired
-	private ApplicationEventPublisher publisher;
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
-	@Autowired
-	private ResourceLoader resourceLoader;
+    @Autowired
+    private ResourceLoader resourceLoader;
 
-	@Test
-	void context() {
-		assertNotNull(context);
-		assertNotNull(publisher);
-		assertNotNull(resourceLoader);
-		assertNotNull(context.getBean(DatabaseConfiguration.class));
-		assertNotNull(context.getBean(EndpointConfiguration.class));
-		assertBeanExists(context.getBean(VersionRepository.class));
-		assertBeanExists(context.getBean(VersionRestController.class));
-	}
+    @Test
+    void context() {
+        assertNotNull(context);
+        assertNotNull(publisher);
+        assertNotNull(resourceLoader);
+        assertNotNull(context.getBean(DatabaseConfiguration.class));
+        assertNotNull(context.getBean(EndpointConfiguration.class));
+        assertBeanExists(context.getBean(VersionRepository.class));
+        assertBeanExists(context.getBean(VersionRestController.class));
+    }
 
-	private <T> void assertBeanExists(final T bean) {
-		assertNotNull(bean, bean.toString());
-		ReflectionUtils.doWithFields(bean.getClass(), field -> {
-			if (!Modifier.isStatic(field.getModifiers())) {
-				ReflectionUtils.makeAccessible(field);
-				assertNotNull(ReflectionUtils.getField(field, bean), field.toString());
-			}
-		});
-	}
+    private <T> void assertBeanExists(final T bean) {
+        assertNotNull(bean, bean.toString());
+        ReflectionUtils.doWithFields(bean.getClass(), field -> {
+            if (!Modifier.isStatic(field.getModifiers())) {
+                ReflectionUtils.makeAccessible(field);
+                assertNotNull(ReflectionUtils.getField(field, bean), field.toString());
+            }
+        });
+    }
 }

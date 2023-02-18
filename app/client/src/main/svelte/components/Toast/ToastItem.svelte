@@ -64,9 +64,7 @@
     {/if}
   </div>
   {#if item.dismissable}
-    <div class="_toastBtn" role="button" tabindex="-1" on:click={close}>
-      ✕
-    </div>
+    <div class="_toastBtn" role="button" tabindex="-1" on:click={close}>✕</div>
   {/if}
   <progress class="_toastBar bg-transparent" value={$progress} />
 </div>
@@ -117,9 +115,9 @@
     pointer-events: none;
   }
   ._toastBar::-webkit-progress-value {
-    background: rgba(33, 150, 243, 0.75)
+    background: rgba(33, 150, 243, 0.75);
   }
   ._toastBar::-moz-progress-bar {
-    background: rgba(33, 150, 243, 0.75)
+    background: rgba(33, 150, 243, 0.75);
   }
 </style>

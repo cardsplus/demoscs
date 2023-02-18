@@ -1,7 +1,20 @@
 plugins {
     id 'java'
+    id 'eclipse'
+    id 'jacoco'
     id 'io.spring.dependency-management'
     id 'org.springframework.boot'
+    id 'com.diffplug.spotless'
+}
+
+spotless {
+    encoding 'UTF-8'
+    java {
+        target '**/src/**/*.java'
+        target.exclude('**/build/**')
+        indentWithSpaces(4)
+        removeUnusedImports()
+    }
 }
 
 dependencies {
