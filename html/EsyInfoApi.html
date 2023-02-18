@@ -452,10 +452,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#modell">Modell</a></li>
 <li><a href="#anwendung">Anwendung</a></li>
-<li><a href="#konfiguration">Konfiguration</a>
+<li><a href="#health-api">Health-API</a>
 <ul class="sectlevel2">
-<li><a href="#endpoint-properties"><code>endpoint.properties</code></a></li>
-<li><a href="#database-properties"><code>database.properties</code></a></li>
+<li><a href="#get"><code>GET /</code></a></li>
+<li><a href="#get-healthz"><code>GET /healthz</code></a></li>
+<li><a href="#get-actuatorhealth"><code>GET /actuator/health</code></a></li>
+<li><a href="#get-actuatorhealthliveness"><code>GET /actuator/health/liveness</code></a></li>
+<li><a href="#get-actuatorhealthreadiness"><code>GET /actuator/health/readiness</code></a></li>
+</ul>
+</li>
+<li><a href="#version-api">Version-API</a>
+<ul class="sectlevel2">
+<li><a href="#get-version"><code>GET /version</code></a></li>
+</ul>
+</li>
+<li><a href="#enum-api">Enum-API</a>
+<ul class="sectlevel2">
+<li><a href="#post-apienumart"><code>POST /api/enum/{art}</code></a></li>
+<li><a href="#put-apienumartcode"><code>PUT /api/enum/{art}/{code}</code></a></li>
+<li><a href="#get-apienumart"><code>GET /api/enum/{art}</code></a></li>
 </ul>
 </li>
 </ul>
@@ -546,7 +561,7 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/EsyInfo.png" alt="EsyInfo" width="248" height="100">
+<img src="images/EsyInfo.png" alt="EsyInfo" width="260" height="103">
 </div>
 </div>
 <div class="paragraph">
@@ -626,42 +641,360 @@ für mehr Informationen.
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="health-api"><a class="anchor" href="#health-api"></a>Health-API</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Unresolved directive in EsyInfoApi.adoc - include::../app/backend/src/main/java/esy/app/info/HealthRestApi.adoc[leveloffset=+1]</p>
+<p>REST-API für die Abfrage der Gesundheit der Anwendung.</p>
+</div>
+<div class="sect2">
+<h3 id="get"><a class="anchor" href="#get"></a><code>GET /</code></h3>
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Unresolved directive in EsyInfoApi.adoc - include::../app/backend/src/main/java/esy/app/info/VersionRestApi.adoc[leveloffset=+1]</p>
+<p>Die Operation meldet <strong>immer</strong> <code>Not found</code> bzw. den Code 404.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-healthz"><a class="anchor" href="#get-healthz"></a><code>GET /healthz</code></h3>
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/healthz'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Unresolved directive in EsyInfoApi.adoc - include::../app/backend/src/main/java/esy/app/info/EnumRestApi.adoc[leveloffset=+1]</p>
+<p>Die Operation meldet <strong>immer</strong> <code>Ok</code> bzw. den Code 200.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-actuatorhealth"><a class="anchor" href="#get-actuatorhealth"></a><code>GET /actuator/health</code></h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/actuator/health'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/actuator/health</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "status" : "UP",
+  "groups" : [ "liveness", "readiness" ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-actuatorhealthliveness"><a class="anchor" href="#get-actuatorhealthliveness"></a><code>GET /actuator/health/liveness</code></h3>
+<div class="paragraph">
+<p>Die sogenannte <em>Liveness Probe</em> zeigt an, ob die Anwendung ausgeführt wird.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/actuator/health/liveness'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/actuator/health/liveness</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "status" : "UP"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-actuatorhealthreadiness"><a class="anchor" href="#get-actuatorhealthreadiness"></a><code>GET /actuator/health/readiness</code></h3>
+<div class="paragraph">
+<p>Die sogenannte <em>Readiness Probe</em> zeigt an, ob die Anwendung bereit ist, auf Anfragen zu antworten.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/actuator/health/readiness'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/actuator/health/readiness</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "status" : "UP"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="konfiguration"><a class="anchor" href="#konfiguration"></a>Konfiguration</h2>
+<h2 id="version-api"><a class="anchor" href="#version-api"></a>Version-API</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="endpoint-properties"><a class="anchor" href="#endpoint-properties"></a><code>endpoint.properties</code></h3>
 <div class="paragraph">
-<p>Der Dienst nutzt eine zentrale Konfigurationsdatei für Endpunkte.
-Sie wird nur beim Start der Anwendung gelesen.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="text">Unresolved directive in EsyInfoApi.adoc - include::../app/backend/src/main/resources/endpoint.properties[]</code></pre>
-</div>
-</div>
+<p>REST-API für die Abfrage des <em>Version</em>-Objektes.</p>
 </div>
 <div class="sect2">
-<h3 id="database-properties"><a class="anchor" href="#database-properties"></a><code>database.properties</code></h3>
+<h3 id="get-version"><a class="anchor" href="#get-version"></a><code>GET /version</code></h3>
 <div class="paragraph">
-<p>Der Dienst nutzt eine zentrale Konfigurationsdatei für die Datenbank.
-Sie wird nur beim Start der Anwendung gelesen.</p>
+<p>Die Operation lädt die aktuelle Version der Anwendung aus der <code>VERSION</code>-Datei im <em>Classpath</em>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/version'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
 </div>
 <div class="listingblock">
+<div class="title">Request</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="text">Unresolved directive in EsyInfoApi.adoc - include::../app/backend/src/main/resources/database.properties[]</code></pre>
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/version</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
 </div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "major" : 2,
+  "minor" : 1
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>No Content</code> bzw. den Code 204, wenn die Daten nicht zulässig sind.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enum-api"><a class="anchor" href="#enum-api"></a>Enum-API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>REST-API für die Verwaltung von konfigurierbaren Aufzählungen mit  <em>Enum</em>-Objekten.</p>
+</div>
+<div class="sect2">
+<h3 id="post-apienumart"><a class="anchor" href="#post-apienumart"></a><code>POST /api/enum/{art}</code></h3>
+<div class="paragraph">
+<p>Die Operation erstellt ein <em>Enum</em>-Objekt für eine Art von Aufzählung.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/enum/TEST'</span> <span class="nt">-i</span> <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "code" : "2",
+  "name" : "C",
+  "text" : "Gamma"
+}'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">POST</span> <span class="nn">/api/enum/TEST</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">54</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"C"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"text"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Gamma"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "name" : "C",
+  "text" : "Gamma",
+  "code" : 2,
+  "value" : "C"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Created</code> bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn das Objekt schon existiert.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="put-apienumartcode"><a class="anchor" href="#put-apienumartcode"></a><code>PUT /api/enum/{art}/{code}</code></h3>
+<div class="paragraph">
+<p>Die Operation aktualisiert ein <em>Enum</em>-Objekt für eine Art von Aufzählung.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/enum/TEST/0'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "code" : "0",
+  "name" : "A1",
+  "text" : "Alpha Eins"
+}'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/enum/TEST/0</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">60</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"A1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"text"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Alpha Eins"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "name" : "A1",
+  "text" : "Alpha Eins",
+  "code" : 0,
+  "value" : "A1"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn das Objekt erfolgreich aktualisiert wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn das Objekt bereit existiert.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-apienumart"><a class="anchor" href="#get-apienumart"></a><code>GET /api/enum/{art}</code></h3>
+<div class="paragraph">
+<p>Die Operation liefert alle gespeicherten <em>Enum</em>-Objekte einer Art von Aufzählung.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/enum/TEST'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/enum/TEST</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "links" : [ ],
+  "content" : [ {
+    "name" : "A1",
+    "text" : "Alpha Eins",
+    "code" : 0,
+    "value" : "A1"
+  }, {
+    "name" : "B",
+    "text" : "Beta",
+    "code" : 1,
+    "value" : "B"
+  }, {
+    "name" : "C",
+    "text" : "Gamma",
+    "code" : 2,
+    "value" : "C"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.
+Das Ergebnis kann auch leer sein.</p>
 </div>
 </div>
 </div>
@@ -670,7 +1003,7 @@ Sie wird nur beim Start der Anwendung gelesen.</p>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2023-02-18 11:12:52 UTC
+Last updated 2023-02-18 11:41:04 UTC
 </div>
 </div>
 <style>

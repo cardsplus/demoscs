@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.865s</div>
+<div class="counter">1.631s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,61 +81,61 @@
 <tr>
 <td class="success">cleanup()</td>
 <td class="success">cleanup()</td>
-<td class="success">0.069s</td>
+<td class="success">0.102s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getApiEnum()</td>
 <td class="success">getApiEnum()</td>
-<td class="success">0.066s</td>
+<td class="success">0.087s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getApiEnumNoElements()</td>
 <td class="success">getApiEnumNoElements()</td>
-<td class="success">0.911s</td>
+<td class="success">0.675s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[1] code=0, name=A, text=Alpha</td>
 <td class="success">postApiEnum(String, String, String)[1]</td>
-<td class="success">0.190s</td>
+<td class="success">0.164s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[2] code=1, name=B, text=Beta</td>
 <td class="success">postApiEnum(String, String, String)[2]</td>
-<td class="success">0.097s</td>
+<td class="success">0.113s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[3] code=2, name=C, text=Gamma</td>
 <td class="success">postApiEnum(String, String, String)[3]</td>
-<td class="success">0.096s</td>
+<td class="success">0.091s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">postApiEnumConflict()</td>
 <td class="success">postApiEnumConflict()</td>
-<td class="success">0.168s</td>
+<td class="success">0.099s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">putApiEnum()</td>
 <td class="success">putApiEnum()</td>
-<td class="success">0.076s</td>
+<td class="success">0.115s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">putApiEnumConflict()</td>
 <td class="success">putApiEnumConflict()</td>
-<td class="success">0.113s</td>
+<td class="success">0.101s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">putApiEnumNotFound()</td>
 <td class="success">putApiEnumNotFound()</td>
-<td class="success">0.079s</td>
+<td class="success">0.084s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -143,12 +143,12 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2023-02-18 11:14:25.711  INFO 2019 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [esy.app.info.EnumRestApiTest], using SpringBootContextLoader
-2023-02-18 11:14:25.712  INFO 2019 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [esy.app.info.EnumRestApiTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2023-02-18 11:14:25.712  INFO 2019 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [esy.app.info.EnumRestApiTest]: EnumRestApiTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-02-18 11:14:25.732  INFO 2019 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration esy.app.BackendConfigurationTest$BackendConfigurationApp for test class esy.app.info.EnumRestApiTest
-2023-02-18 11:14:25.750  INFO 2019 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2023-02-18 11:14:25.750  INFO 2019 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@19895d34, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@325e260, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@af8172e, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7dd0d635, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@2e635446, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2798508, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4872a30e, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3368b54b, org.springframework.test.context.event.EventPublishingTestExecutionListener@79d1604, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4902823a, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@14b522c7, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@62010ff7, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@dc31885, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@500d4855, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6d13fb89]
+<pre>2023-02-18 11:42:54.873  INFO 2185 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [esy.app.info.EnumRestApiTest], using SpringBootContextLoader
+2023-02-18 11:42:54.874  INFO 2185 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [esy.app.info.EnumRestApiTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2023-02-18 11:42:54.874  INFO 2185 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [esy.app.info.EnumRestApiTest]: EnumRestApiTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-02-18 11:42:54.898  INFO 2185 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration esy.app.BackendConfigurationTest$BackendConfigurationApp for test class esy.app.info.EnumRestApiTest
+2023-02-18 11:42:54.901  INFO 2185 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2023-02-18 11:42:54.902  INFO 2185 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2e635446, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2798508, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@4872a30e, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3368b54b, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@79d1604, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4902823a, org.springframework.test.context.transaction.TransactionalTestExecutionListener@14b522c7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@62010ff7, org.springframework.test.context.event.EventPublishingTestExecutionListener@dc31885, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@500d4855, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@6d13fb89, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@7072f6b, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1295083e, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@28e0a5d9, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@5a5ddcff]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -158,22 +158,22 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.7.8)
 
-2023-02-18 11:14:25.814  INFO 2019 --- [    Test worker] esy.app.info.EnumRestApiTest             : Starting EnumRestApiTest using Java 11.0.18 on fv-az440-551 with PID 2019 (started by runner in /home/runner/work/demoscs/demoscs/app/backend-data)
-2023-02-18 11:14:25.814  INFO 2019 --- [    Test worker] esy.app.info.EnumRestApiTest             : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2023-02-18 11:14:26.340  INFO 2019 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-02-18 11:14:26.357  INFO 2019 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 4 JPA repository interfaces.
-2023-02-18 11:14:27.457  INFO 2019 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2023-02-18 11:14:27.458  INFO 2019 --- [    Test worker] com.zaxxer.hikari.pool.PoolBase          : HikariPool-2 - Driver does not support get/set network timeout for connections. (feature not supported)
-2023-02-18 11:14:27.470  INFO 2019 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2023-02-18 11:14:27.474  INFO 2019 --- [    Test worker] liquibase.database                       : Set default schema name to PUBLIC
-2023-02-18 11:14:27.500  INFO 2019 --- [    Test worker] liquibase.lockservice                    : Successfully acquired change log lock
-2023-02-18 11:14:27.839  INFO 2019 --- [    Test worker] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
-2023-02-18 11:14:27.900  INFO 2019 --- [    Test worker] liquibase.lockservice                    : Successfully released change log lock
-2023-02-18 11:14:27.997  INFO 2019 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-02-18 11:14:28.002  INFO 2019 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.HSQLDialect
-2023-02-18 11:14:28.130  INFO 2019 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-02-18 11:14:28.131  INFO 2019 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-02-18 11:14:28.249  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:54.967  INFO 2185 --- [    Test worker] esy.app.info.EnumRestApiTest             : Starting EnumRestApiTest using Java 11.0.18 on fv-az586-245 with PID 2185 (started by runner in /home/runner/work/demoscs/demoscs/app/backend-data)
+2023-02-18 11:42:54.974  INFO 2185 --- [    Test worker] esy.app.info.EnumRestApiTest             : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2023-02-18 11:42:55.484  INFO 2185 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-18 11:42:55.506  INFO 2185 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 4 JPA repository interfaces.
+2023-02-18 11:42:56.375  INFO 2185 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-02-18 11:42:56.383  INFO 2185 --- [    Test worker] com.zaxxer.hikari.pool.PoolBase          : HikariPool-2 - Driver does not support get/set network timeout for connections. (feature not supported)
+2023-02-18 11:42:56.386  INFO 2185 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-02-18 11:42:56.388  INFO 2185 --- [    Test worker] liquibase.database                       : Set default schema name to PUBLIC
+2023-02-18 11:42:56.419  INFO 2185 --- [    Test worker] liquibase.lockservice                    : Successfully acquired change log lock
+2023-02-18 11:42:56.688  INFO 2185 --- [    Test worker] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2023-02-18 11:42:56.732  INFO 2185 --- [    Test worker] liquibase.lockservice                    : Successfully released change log lock
+2023-02-18 11:42:56.825  INFO 2185 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-18 11:42:56.850  INFO 2185 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.HSQLDialect
+2023-02-18 11:42:56.918  INFO 2185 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-18 11:42:56.918  INFO 2185 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-18 11:42:56.961  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -185,7 +185,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.281  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:56.974  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -197,7 +197,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.307  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:56.996  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -209,7 +209,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.308  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:56.997  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -221,7 +221,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.320  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.012  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -233,7 +233,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.322  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.013  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -245,7 +245,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.324  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.014  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -257,7 +257,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.341  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.016  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -269,7 +269,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.344  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.016  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -281,7 +281,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.346  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.018  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -293,7 +293,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.353  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.022  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -305,7 +305,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.358  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.024  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -317,7 +317,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.359  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.034  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -329,7 +329,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.375  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.036  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -341,7 +341,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.432  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.090  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -353,7 +353,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.467  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.109  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -365,7 +365,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.494  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.140  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -377,7 +377,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.496  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.150  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -389,7 +389,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.500  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.153  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -401,7 +401,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.503  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.153  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -413,7 +413,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.523  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.165  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -425,7 +425,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.529  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.166  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -437,7 +437,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.552  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.202  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -449,7 +449,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.558  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.206  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -461,7 +461,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.561  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.222  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -473,7 +473,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.562  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.223  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -485,7 +485,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.585  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.244  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -497,7 +497,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.588  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.247  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -509,7 +509,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.613  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.262  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -521,7 +521,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.615  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.268  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -533,7 +533,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.622  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.291  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -545,7 +545,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.629  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.294  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -557,7 +557,7 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:28.632  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-02-18 11:42:57.306  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -569,14 +569,14 @@
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:31.479  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:31.479  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:31.491  INFO 2019 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2023-02-18 11:14:31.535  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 56 ms
-2023-02-18 11:14:31.595  INFO 2019 --- [    Test worker] esy.app.info.EnumRestApiTest             : Started EnumRestApiTest in 5.829 seconds (JVM running for 29.073)
-2023-02-18 11:14:32.156  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:32.156  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:32.158  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-02-18 11:43:00.287  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:00.288  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:00.303  INFO 2185 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-02-18 11:43:00.344  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 56 ms
+2023-02-18 11:43:00.398  INFO 2185 --- [    Test worker] esy.app.info.EnumRestApiTest             : Started EnumRestApiTest in 5.478 seconds (JVM running for 28.555)
+2023-02-18 11:43:00.652  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:00.663  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:00.665  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
 Hibernate: 
     select
         enum0_.id as id1_1_,
@@ -592,11 +592,11 @@ Hibernate:
     order by
         enum0_.art ASC,
         enum0_.code
-2023-02-18 11:14:32.313  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    95601 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:00.789  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    77900 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    23038126 nanoseconds spent preparing 1 JDBC statements;
-    190503 nanoseconds spent executing 1 JDBC statements;
+    4324911 nanoseconds spent preparing 1 JDBC statements;
+    126901 nanoseconds spent executing 1 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
@@ -644,9 +644,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:33.014  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:33.018  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:33.020  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-02-18 11:43:01.271  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:01.275  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:01.283  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 8 ms
 Hibernate: 
     select
         enum0_.id as id1_1_0_,
@@ -666,16 +666,16 @@ Hibernate:
         (version, art, code, name, text, id) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-02-18 11:14:33.102  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    80501 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:01.368  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    51400 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    740310 nanoseconds spent preparing 2 JDBC statements;
-    249404 nanoseconds spent executing 2 JDBC statements;
+    1242903 nanoseconds spent preparing 2 JDBC statements;
+    166200 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    18336060 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    11817329 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 
@@ -720,9 +720,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:33.204  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:33.204  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:33.207  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2023-02-18 11:43:01.456  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:01.457  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:01.466  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 9 ms
 Hibernate: 
     select
         enum0_.id as id1_1_0_,
@@ -742,16 +742,16 @@ Hibernate:
         (version, art, code, name, text, id) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-02-18 11:14:33.236  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    54900 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:01.492  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    42200 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    691910 nanoseconds spent preparing 2 JDBC statements;
-    235303 nanoseconds spent executing 2 JDBC statements;
+    1423503 nanoseconds spent preparing 2 JDBC statements;
+    173300 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    2402834 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    12080930 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 
@@ -796,9 +796,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:33.400  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:33.400  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:33.406  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
+2023-02-18 11:43:01.567  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:01.568  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:01.583  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 15 ms
 Hibernate: 
     select
         enum0_.id as id1_1_0_,
@@ -818,16 +818,16 @@ Hibernate:
         (version, art, code, name, text, id) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-02-18 11:14:33.445  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    52701 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:01.611  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    423402 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    690409 nanoseconds spent preparing 2 JDBC statements;
-    199104 nanoseconds spent executing 2 JDBC statements;
+    759503 nanoseconds spent preparing 2 JDBC statements;
+    160300 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    5178973 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    1722204 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 
@@ -872,9 +872,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:33.499  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:33.499  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:33.500  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-02-18 11:43:01.669  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:01.669  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:01.678  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 9 ms
 Hibernate: 
     select
         enum0_.id as id1_1_0_,
@@ -894,22 +894,22 @@ Hibernate:
         (version, art, code, name, text, id) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-02-18 11:14:33.534  WARN 2019 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
-2023-02-18 11:14:33.534 ERROR 2019 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation; UK_ENUM_NAME table: ENUM
-2023-02-18 11:14:33.534  INFO 2019 --- [    Test worker] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
-2023-02-18 11:14:33.537  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    50701 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:01.700  WARN 2185 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
+2023-02-18 11:43:01.700 ERROR 2185 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation; UK_ENUM_NAME table: ENUM
+2023-02-18 11:43:01.700  INFO 2185 --- [    Test worker] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2023-02-18 11:43:01.701  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    43200 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    725410 nanoseconds spent preparing 2 JDBC statements;
-    1120915 nanoseconds spent executing 2 JDBC statements;
+    589902 nanoseconds spent preparing 2 JDBC statements;
+    753702 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    8809724 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    8969422 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:33.586 ERROR 2019 --- [    Test worker] esy.app.EndpointControllerAdvice         : org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [UK_ENUM_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2023-02-18 11:43:01.737 ERROR 2185 --- [    Test worker] esy.app.EndpointControllerAdvice         : org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [UK_ENUM_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 
 org.hsqldb.HsqlException: integrity constraint violation: unique constraint or index violation; UK_ENUM_NAME table: ENUM
 	at org.hsqldb.error.Error.error(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
@@ -1110,9 +1110,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:33.680  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:33.685  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:33.686  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-02-18 11:43:01.766  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:01.767  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:01.767  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 Hibernate: 
     select
         enum0_.id as id1_1_,
@@ -1129,11 +1129,11 @@ Hibernate:
     order by
         enum0_.art ASC,
         enum0_.code
-2023-02-18 11:14:33.697  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    52900 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:01.805  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    47300 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    590208 nanoseconds spent preparing 1 JDBC statements;
-    162202 nanoseconds spent executing 1 JDBC statements;
+    2537206 nanoseconds spent preparing 1 JDBC statements;
+    157700 nanoseconds spent executing 1 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
@@ -1165,16 +1165,16 @@ Hibernate:
     where
         id=? 
         and version=?
-2023-02-18 11:14:33.725  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    36300 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:01.834  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    36000 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    733110 nanoseconds spent preparing 2 JDBC statements;
-    286504 nanoseconds spent executing 2 JDBC statements;
+    672002 nanoseconds spent preparing 2 JDBC statements;
+    663901 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    13337189 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    17383843 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 
@@ -1219,9 +1219,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:33.763  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:33.764  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:33.765  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-02-18 11:43:01.884  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:01.885  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:01.885  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 Hibernate: 
     select
         enum0_.id as id1_1_,
@@ -1238,11 +1238,11 @@ Hibernate:
     order by
         enum0_.art ASC,
         enum0_.code
-2023-02-18 11:14:33.780  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    422606 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:01.908  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    362201 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    2965942 nanoseconds spent preparing 1 JDBC statements;
-    1336419 nanoseconds spent executing 1 JDBC statements;
+    1170103 nanoseconds spent preparing 1 JDBC statements;
+    121700 nanoseconds spent executing 1 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
@@ -1274,22 +1274,22 @@ Hibernate:
     where
         id=? 
         and version=?
-2023-02-18 11:14:33.806  WARN 2019 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
-2023-02-18 11:14:33.809 ERROR 2019 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation; UK_ENUM_NAME table: ENUM
-2023-02-18 11:14:33.811  INFO 2019 --- [    Test worker] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
-2023-02-18 11:14:33.815  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    30000 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:01.918  WARN 2185 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
+2023-02-18 11:43:01.918 ERROR 2185 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation; UK_ENUM_NAME table: ENUM
+2023-02-18 11:43:01.918  INFO 2185 --- [    Test worker] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2023-02-18 11:43:01.919  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    23400 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    8920227 nanoseconds spent preparing 2 JDBC statements;
-    5730381 nanoseconds spent executing 2 JDBC statements;
+    590402 nanoseconds spent preparing 2 JDBC statements;
+    795903 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    20579891 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    3119708 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:33.826 ERROR 2019 --- [    Test worker] esy.app.EndpointControllerAdvice         : org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [UK_ENUM_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2023-02-18 11:43:01.928 ERROR 2185 --- [    Test worker] esy.app.EndpointControllerAdvice         : org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [UK_ENUM_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 
 org.hsqldb.HsqlException: integrity constraint violation: unique constraint or index violation; UK_ENUM_NAME table: ENUM
 	at org.hsqldb.error.Error.error(Unknown Source) ~[hsqldb-2.5.2.jar:2.5.2]
@@ -1492,9 +1492,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:33.878  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:33.878  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:33.880  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-02-18 11:43:02.002  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:02.002  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:02.004  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
 Hibernate: 
     select
         enum0_.id as id1_1_,
@@ -1511,11 +1511,11 @@ Hibernate:
     order by
         enum0_.art ASC,
         enum0_.code
-2023-02-18 11:14:33.894  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    51800 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:02.020  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    43200 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    1172117 nanoseconds spent preparing 1 JDBC statements;
-    516207 nanoseconds spent executing 1 JDBC statements;
+    2190605 nanoseconds spent preparing 1 JDBC statements;
+    123901 nanoseconds spent executing 1 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
@@ -1523,7 +1523,7 @@ Hibernate:
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-02-18 11:14:33.905 ERROR 2019 --- [    Test worker] esy.app.EndpointControllerAdvice         : org.springframework.dao.DataRetrievalFailureException: Enum(TEST, 26) not found
+2023-02-18 11:43:02.032 ERROR 2185 --- [    Test worker] esy.app.EndpointControllerAdvice         : org.springframework.dao.DataRetrievalFailureException: Enum(TEST, 26) not found
 
 org.springframework.dao.DataRetrievalFailureException: Enum(TEST, 26) not found
 	at esy.app.info.EnumRestController.lambda$updateOf$0(EnumRestController.java:47) ~[main/:na]
@@ -1674,9 +1674,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:33.963  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:33.963  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:33.964  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-02-18 11:43:02.089  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:02.089  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:02.090  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
 Hibernate: 
     select
         enum0_.id as id1_1_,
@@ -1692,11 +1692,11 @@ Hibernate:
     order by
         enum0_.art ASC,
         enum0_.code
-2023-02-18 11:14:33.973  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    51301 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:02.112  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    520001 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    1448720 nanoseconds spent preparing 1 JDBC statements;
-    183402 nanoseconds spent executing 1 JDBC statements;
+    1037102 nanoseconds spent preparing 1 JDBC statements;
+    2397306 nanoseconds spent executing 1 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
@@ -1759,10 +1759,10 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-18 11:14:34.036  INFO 2019 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@31490386 testClass = EnumRestApiTest, testInstance = esy.app.info.EnumRestApiTest@5e69fc3c, testMethod = cleanup@EnumRestApiTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59ba9caa testClass = EnumRestApiTest, locations = '{}', classes = '{class esy.app.BackendConfigurationTest$BackendConfigurationApp}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@5855b0ed, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@45eacb70, [ImportsContextCustomizer@1d61b946 key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@720c8f80, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7be3abaa, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@2cdb5974, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@4e224df5], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@729b1633]; rollback [false]
-2023-02-18 11:14:34.043  INFO 2019 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-18 11:14:34.044  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-18 11:14:34.044  INFO 2019 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2023-02-18 11:43:02.190  INFO 2185 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@1d61b946 testClass = EnumRestApiTest, testInstance = esy.app.info.EnumRestApiTest@644dcc5f, testMethod = cleanup@EnumRestApiTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@75d444f6 testClass = EnumRestApiTest, locations = '{}', classes = '{class esy.app.BackendConfigurationTest$BackendConfigurationApp}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@35fb3209, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@77020328, [ImportsContextCustomizer@7806c92a key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@e6e5da4, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@3dded90a, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@3d718248, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5d3b58ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@163f2950]; rollback [false]
+2023-02-18 11:43:02.196  INFO 2185 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-02-18 11:43:02.196  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-02-18 11:43:02.197  INFO 2185 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
 Hibernate: 
     select
         count(enum0_.id) as col_0_0_ 
@@ -1816,19 +1816,19 @@ Hibernate:
         enum0_.text as text6_1_ 
     from
         enum enum0_
-2023-02-18 11:14:34.098  INFO 2019 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    59801 nanoseconds spent acquiring 1 JDBC connections;
+2023-02-18 11:43:02.268  INFO 2185 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    42700 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    7392205 nanoseconds spent preparing 6 JDBC statements;
-    878411 nanoseconds spent executing 6 JDBC statements;
+    7901818 nanoseconds spent preparing 6 JDBC statements;
+    4782011 nanoseconds spent executing 6 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
-    16673136 nanoseconds spent executing 3 partial-flushes (flushing a total of 3 entities and 3 collections)
+    14786537 nanoseconds spent executing 3 partial-flushes (flushing a total of 3 entities and 3 collections)
 }
-2023-02-18 11:14:34.102  INFO 2019 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Committed transaction for test: [DefaultTestContext@31490386 testClass = EnumRestApiTest, testInstance = esy.app.info.EnumRestApiTest@5e69fc3c, testMethod = cleanup@EnumRestApiTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59ba9caa testClass = EnumRestApiTest, locations = '{}', classes = '{class esy.app.BackendConfigurationTest$BackendConfigurationApp}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@5855b0ed, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@45eacb70, [ImportsContextCustomizer@1d61b946 key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@720c8f80, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7be3abaa, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@2cdb5974, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@4e224df5], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+2023-02-18 11:43:02.274  INFO 2185 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Committed transaction for test: [DefaultTestContext@1d61b946 testClass = EnumRestApiTest, testInstance = esy.app.info.EnumRestApiTest@644dcc5f, testMethod = cleanup@EnumRestApiTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@75d444f6 testClass = EnumRestApiTest, locations = '{}', classes = '{class esy.app.BackendConfigurationTest$BackendConfigurationApp}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@35fb3209, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@77020328, [ImportsContextCustomizer@7806c92a key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@e6e5da4, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@3dded90a, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@3d718248, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5d3b58ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
 </pre>
 </span>
 </div>
@@ -1840,7 +1840,7 @@ Hibernate:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6</a> at Feb 18, 2023, 11:14:55 AM</p>
+<a href="http://www.gradle.org">Gradle 7.6</a> at Feb 18, 2023, 11:43:20 AM</p>
 </div>
 </div>
 </body>

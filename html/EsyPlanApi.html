@@ -453,10 +453,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#überblick">Überblick</a></li>
 <li><a href="#modell">Modell</a></li>
 <li><a href="#anwendung">Anwendung</a></li>
-<li><a href="#konfiguration">Konfiguration</a>
+<li><a href="#projekt-api">Projekt-API</a>
 <ul class="sectlevel2">
-<li><a href="#endpoint-properties"><code>endpoint.properties</code></a></li>
-<li><a href="#database-properties"><code>database.properties</code></a></li>
+<li><a href="#post-apiprojekt"><code>POST /api/projekt</code></a></li>
+<li><a href="#put-apiprojektid"><code>PUT /api/projekt/{id}</code></a></li>
+<li><a href="#put-apiprojektidbesitzer"><code>PUT /api/projekt/{id}/besitzer</code></a></li>
+<li><a href="#put-apiprojektidallmitglied"><code>PUT /api/projekt/{id}/allMitglied</code></a></li>
+<li><a href="#get-apiprojekt"><code>GET /api/projekt</code></a></li>
+<li><a href="#get-apiprojektid"><code>GET /api/projekt/{id}</code></a></li>
+<li><a href="#get-apiprojektsearchfindbyname"><code>GET /api/projekt/search/findByName</code></a></li>
+<li><a href="#delete-apiprojektid"><code>DELETE /api/projekt/{id}</code></a></li>
+</ul>
+</li>
+<li><a href="#aufgabe-api">Aufgabe-API</a>
+<ul class="sectlevel2">
+<li><a href="#post-apiaufgabe"><code>POST /api/aufgabe</code></a></li>
+<li><a href="#put-apiaufgabeid"><code>PUT /api/aufgabe/{id}</code></a></li>
+<li><a href="#put-apiaufgabeidprojekt"><code>PUT /api/aufgabe/{id}/projekt</code></a></li>
+<li><a href="#get-apiaufgabe"><code>GET /api/aufgabe</code></a></li>
+<li><a href="#get-apiaufgabeid"><code>GET /api/aufgabe/{id}</code></a></li>
+<li><a href="#delete-apiaufgabeid"><code>DELETE /api/aufgabe/{id}</code></a></li>
 </ul>
 </li>
 </ul>
@@ -553,7 +569,7 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/EsyPlan.png" alt="EsyPlan" width="257" height="206">
+<img src="images/EsyPlan.png" alt="EsyPlan" width="266" height="229">
 </div>
 </div>
 <div class="paragraph">
@@ -633,39 +649,909 @@ für mehr Informationen.
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="projekt-api"><a class="anchor" href="#projekt-api"></a>Projekt-API</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Unresolved directive in EsyPlanApi.adoc - include::../app/backend/src/main/java/esy/app/plan/ProjektRestApi.adoc[leveloffset=+1]</p>
+<p>REST-API für die Verwaltung von <em>Projekt</em>-Objekten.</p>
+</div>
+<div class="sect2">
+<h3 id="post-apiprojekt"><a class="anchor" href="#post-apiprojekt"></a><code>POST /api/projekt</code></h3>
+<div class="paragraph">
+<p>Die Operation speichert ein neues <em>Projekt</em>-Objekt.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt'</span> <span class="nt">-i</span> <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "name" : "Projekt A",
+  "aktiv" : "true",
+  "sprache" : "EN"
+}'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">POST</span> <span class="nn">/api/projekt</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">66</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Projekt A"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"EN"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "id" : "24f4a07d-dea0-437d-b685-51ed56265967",
+  "name" : "Projekt A",
+  "aktiv" : true,
+  "sprache" : "EN",
+  "besitzerItem" : {
+    "text" : ""
+  },
+  "version" : 0,
+  "allMitgliedItem" : [ ],
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967/besitzer"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967/allAufgabe"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>Unresolved directive in EsyPlanApi.adoc - include::../app/backend/src/main/java/esy/app/plan/AufgabeRestApi.adoc[leveloffset=+1]</p>
+<p>Die Operation meldet <code>Created</code> bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn die Daten bereits existieren.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="put-apiprojektid"><a class="anchor" href="#put-apiprojektid"></a><code>PUT /api/projekt/{id}</code></h3>
+<div class="paragraph">
+<p>Die Operation aktualisiert ein existierendes <em>Projekt</em>-Objekt oder erzeugt ein Neues.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "name" : "Projekt C",
+  "aktiv" : "false",
+  "sprache" : "EN"
+}'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">67</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Projekt C"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sprache"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"EN"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "id" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "name" : "Projekt C",
+  "aktiv" : false,
+  "sprache" : "EN",
+  "besitzerItem" : {
+    "text" : ""
+  },
+  "version" : 0,
+  "allMitgliedItem" : [ ],
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn das Objekt erfolgreich aktualisiert wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Created</code> bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="put-apiprojektidbesitzer"><a class="anchor" href="#put-apiprojektidbesitzer"></a><code>PUT /api/projekt/{id}/besitzer</code></h3>
+<div class="paragraph">
+<p>Die Operation ändert den Besitzer im <em>Projekt</em>-Objekt.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: text/uri-list'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/uri-list</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">48</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>No content</code> bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="put-apiprojektidallmitglied"><a class="anchor" href="#put-apiprojektidallmitglied"></a><code>PUT /api/projekt/{id}/allMitglied</code></h3>
+<div class="paragraph">
+<p>Die Operation ändert die Mitglieder im <em>Projekt</em>-Objekt.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: text/uri-list'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/uri-list</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">48</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+/api/nutzer/a1111111-6ee8-4335-b12a-ef84794bd27a</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>No content</code> bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-apiprojekt"><a class="anchor" href="#get-apiprojekt"></a><code>GET /api/projekt</code></h3>
+<div class="paragraph">
+<p>Die Operation gibt alle gespeicherten <em>Projekt</em>-Objekte zurück.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/projekt</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt"
+  }, {
+    "rel" : "profile",
+    "href" : "http://localhost:8080/api/profile/projekt"
+  }, {
+    "rel" : "search",
+    "href" : "http://localhost:8080/api/projekt/search"
+  } ],
+  "content" : [ {
+    "id" : "24f4a07d-dea0-437d-b685-51ed56265967",
+    "name" : "Projekt A",
+    "aktiv" : true,
+    "sprache" : "EN",
+    "besitzerItem" : {
+      "text" : ""
+    },
+    "version" : 0,
+    "allMitgliedItem" : [ ],
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967/allMitglied"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967/besitzer"
+    }, {
+      "rel" : "allAufgabe",
+      "href" : "http://localhost:8080/api/projekt/24f4a07d-dea0-437d-b685-51ed56265967/allAufgabe"
+    } ]
+  }, {
+    "id" : "c7e8a7f9-5539-451e-b9b1-c470e1fc1dca",
+    "name" : "Projekt B",
+    "aktiv" : true,
+    "sprache" : "",
+    "besitzerItem" : {
+      "text" : ""
+    },
+    "version" : 0,
+    "allMitgliedItem" : [ ],
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/projekt/c7e8a7f9-5539-451e-b9b1-c470e1fc1dca"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/projekt/c7e8a7f9-5539-451e-b9b1-c470e1fc1dca"
+    }, {
+      "rel" : "allMitglied",
+      "href" : "http://localhost:8080/api/projekt/c7e8a7f9-5539-451e-b9b1-c470e1fc1dca/allMitglied"
+    }, {
+      "rel" : "besitzer",
+      "href" : "http://localhost:8080/api/projekt/c7e8a7f9-5539-451e-b9b1-c470e1fc1dca/besitzer"
+    }, {
+      "rel" : "allAufgabe",
+      "href" : "http://localhost:8080/api/projekt/c7e8a7f9-5539-451e-b9b1-c470e1fc1dca/allAufgabe"
+    } ]
+  } ],
+  "page" : {
+    "size" : 20,
+    "totalElements" : 2,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-apiprojektid"><a class="anchor" href="#get-apiprojektid"></a><code>GET /api/projekt/{id}</code></h3>
+<div class="paragraph">
+<p>Die Operation zeigt ein gespeichertes <em>Projekt</em>-Objekt an.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "id" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "name" : "Projekt C",
+  "aktiv" : true,
+  "sprache" : "DE",
+  "besitzerItem" : {
+    "value" : "a1111111-6ee8-4335-b12a-ef84794bd27a",
+    "text" : "Max Mustermann &lt;Max.Mustermann@a.de&gt;"
+  },
+  "version" : 6,
+  "allMitgliedItem" : [ ],
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-apiprojektsearchfindbyname"><a class="anchor" href="#get-apiprojektsearchfindbyname"></a><code>GET /api/projekt/search/findByName</code></h3>
+<div class="paragraph">
+<p>Die Operation sucht ein gespeichertes <em>Projekt</em>-Objekt mit dem angegebenen endeutigen Namen.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/search/findByName?name=Projekt+C'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/projekt/search/findByName?name=Projekt+C</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "id" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "name" : "Projekt C",
+  "aktiv" : true,
+  "sprache" : "DE",
+  "besitzerItem" : {
+    "value" : "a1111111-6ee8-4335-b12a-ef84794bd27a",
+    "text" : "Max Mustermann &lt;Max.Mustermann@a.de&gt;"
+  },
+  "version" : 6,
+  "allMitgliedItem" : [ ],
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "allMitglied",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allMitglied"
+  }, {
+    "rel" : "besitzer",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/besitzer"
+  }, {
+    "rel" : "allAufgabe",
+    "href" : "http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140/allAufgabe"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-apiprojektid"><a class="anchor" href="#delete-apiprojektid"></a><code>DELETE /api/projekt/{id}</code></h3>
+<div class="paragraph">
+<p>Die Operation löscht ein gespeichertes <em>Projekt</em>-Objekt.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> DELETE <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">DELETE</span> <span class="nn">/api/projekt/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>No Content</code> bzw. den Code 204, wenn die Daten gelöscht wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="konfiguration"><a class="anchor" href="#konfiguration"></a>Konfiguration</h2>
+<h2 id="aufgabe-api"><a class="anchor" href="#aufgabe-api"></a>Aufgabe-API</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="endpoint-properties"><a class="anchor" href="#endpoint-properties"></a><code>endpoint.properties</code></h3>
 <div class="paragraph">
-<p>Der Dienst nutzt eine zentrale Konfigurationsdatei für Endpunkte.
-Sie wird nur beim Start der Anwendung gelesen.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="text">Unresolved directive in EsyPlanApi.adoc - include::../app/backend/src/main/resources/endpoint.properties[]</code></pre>
-</div>
-</div>
+<p>REST-API für die Verwaltung von <em>Aufgabe</em>-Objekten.</p>
 </div>
 <div class="sect2">
-<h3 id="database-properties"><a class="anchor" href="#database-properties"></a><code>database.properties</code></h3>
+<h3 id="post-apiaufgabe"><a class="anchor" href="#post-apiaufgabe"></a><code>POST /api/aufgabe</code></h3>
 <div class="paragraph">
-<p>Der Dienst nutzt eine zentrale Konfigurationsdatei für die Datenbank.
-Sie wird nur beim Start der Anwendung gelesen.</p>
+<p>Die Operation speichert ein neues <em>Aufgabe</em>-Objekt.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe'</span> <span class="nt">-i</span> <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "text" : "Aufgabe A",
+  "aktiv" : "true",
+  "projekt" : "/api/projekt/a1111111-5cc7-3115-a010-de73703ac17f"
+}'</span></code></pre>
+</div>
 </div>
 <div class="listingblock">
+<div class="title">Request</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="text">Unresolved directive in EsyPlanApi.adoc - include::../app/backend/src/main/resources/database.properties[]</code></pre>
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">POST</span> <span class="nn">/api/aufgabe</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">113</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"text"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Aufgabe A"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"projekt"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/projekt/a1111111-5cc7-3115-a010-de73703ac17f"</span><span class="w">
+</span><span class="p">}</span></code></pre>
 </div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "id" : "039e924b-159f-4bfc-85fe-9548d6317a55",
+  "text" : "Aufgabe A",
+  "aktiv" : true,
+  "projektItem" : {
+    "value" : "a1111111-5cc7-3115-a010-de73703ac17f",
+    "text" : "Projekt A"
+  },
+  "version" : 0,
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/aufgabe/039e924b-159f-4bfc-85fe-9548d6317a55"
+  }, {
+    "rel" : "aufgabe",
+    "href" : "http://localhost:8080/api/aufgabe/039e924b-159f-4bfc-85fe-9548d6317a55"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/aufgabe/039e924b-159f-4bfc-85fe-9548d6317a55/projekt"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Created</code> bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Conflict</code> bzw. den Code 409, wenn die Daten bereits existieren.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="put-apiaufgabeid"><a class="anchor" href="#put-apiaufgabeid"></a><code>PUT /api/aufgabe/{id}</code></h3>
+<div class="paragraph">
+<p>Die Operation aktualisiert ein existierendes <em>Aufgabe</em>-Objekt oder erzeugt ein Neues.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+  "text" : "Aufgabe C",
+  "aktiv" : "true",
+  "projekt" : "/api/projekt/a1111111-5cc7-3115-a010-de73703ac17f"
+}'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">113</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nl">"text"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Aufgabe C"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"aktiv"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"projekt"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/projekt/a1111111-5cc7-3115-a010-de73703ac17f"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "id" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "text" : "Aufgabe C",
+  "aktiv" : true,
+  "projektItem" : {
+    "value" : "a1111111-5cc7-3115-a010-de73703ac17f",
+    "text" : "Projekt A"
+  },
+  "version" : 0,
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "aufgabe",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140/projekt"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn das Objekt erfolgreich aktualisiert wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Created</code> bzw. den Code 201, wenn das Objekt erfolgreich angelegt wurde.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Bad Request</code> bzw. den Code 400, wenn die Daten nicht verarbeitet wurden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="put-apiaufgabeidprojekt"><a class="anchor" href="#put-apiaufgabeidprojekt"></a><code>PUT /api/aufgabe/{id}/projekt</code></h3>
+<div class="paragraph">
+<p>Die Operation ändert das Projekt im <em>Aufgabe</em>-Objekt.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140/projekt'</span> <span class="nt">-i</span> <span class="nt">-X</span> PUT <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: text/uri-list'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'/api/projekt/b2222222-5cc7-3115-a010-de73703ac17f'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">PUT</span> <span class="nn">/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140/projekt</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/uri-list</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">49</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span>
+
+/api/projekt/b2222222-5cc7-3115-a010-de73703ac17f</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Response</div>
+<div class="content">
+<pre>Keine</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>No content</code> bzw. den Code 204, wenn das Objekt erfolgreich aktualisiert wurde.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-apiaufgabe"><a class="anchor" href="#get-apiaufgabe"></a><code>GET /api/aufgabe</code></h3>
+<div class="paragraph">
+<p>Die Operation gibt alle gespeicherten <em>Aufgabe</em>-Objekte zurück.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/aufgabe</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/aufgabe"
+  }, {
+    "rel" : "profile",
+    "href" : "http://localhost:8080/api/profile/aufgabe"
+  }, {
+    "rel" : "search",
+    "href" : "http://localhost:8080/api/aufgabe/search"
+  } ],
+  "content" : [ {
+    "id" : "039e924b-159f-4bfc-85fe-9548d6317a55",
+    "text" : "Aufgabe A",
+    "aktiv" : true,
+    "projektItem" : {
+      "value" : "a1111111-5cc7-3115-a010-de73703ac17f",
+      "text" : "Projekt A"
+    },
+    "version" : 0,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/039e924b-159f-4bfc-85fe-9548d6317a55"
+    }, {
+      "rel" : "aufgabe",
+      "href" : "http://localhost:8080/api/aufgabe/039e924b-159f-4bfc-85fe-9548d6317a55"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/039e924b-159f-4bfc-85fe-9548d6317a55/projekt"
+    } ]
+  }, {
+    "id" : "21b07230-1484-4f91-a891-2e0b2b2c029b",
+    "text" : "Aufgabe A",
+    "aktiv" : true,
+    "projektItem" : {
+      "value" : "a1111111-5cc7-3115-a010-de73703ac17f",
+      "text" : "Projekt A"
+    },
+    "version" : 0,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/21b07230-1484-4f91-a891-2e0b2b2c029b"
+    }, {
+      "rel" : "aufgabe",
+      "href" : "http://localhost:8080/api/aufgabe/21b07230-1484-4f91-a891-2e0b2b2c029b"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/21b07230-1484-4f91-a891-2e0b2b2c029b/projekt"
+    } ]
+  }, {
+    "id" : "f18da251-0a0f-433c-91a4-653b44360de2",
+    "text" : "Aufgabe B",
+    "aktiv" : true,
+    "projektItem" : {
+      "value" : "a1111111-5cc7-3115-a010-de73703ac17f",
+      "text" : "Projekt A"
+    },
+    "version" : 0,
+    "content" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/api/aufgabe/f18da251-0a0f-433c-91a4-653b44360de2"
+    }, {
+      "rel" : "aufgabe",
+      "href" : "http://localhost:8080/api/aufgabe/f18da251-0a0f-433c-91a4-653b44360de2"
+    }, {
+      "rel" : "projekt",
+      "href" : "http://localhost:8080/api/aufgabe/f18da251-0a0f-433c-91a4-653b44360de2/projekt"
+    } ]
+  } ],
+  "page" : {
+    "size" : 20,
+    "totalElements" : 3,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-apiaufgabeid"><a class="anchor" href="#get-apiaufgabeid"></a><code>GET /api/aufgabe/{id}</code></h3>
+<div class="paragraph">
+<p>Die Operation zeigt ein gespeichertes <em>Aufgabe</em>-Objekt an.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">GET</span> <span class="nn">/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code>{
+  "id" : "c3333333-3bb4-2113-a010-cd42452ab140",
+  "text" : "Aufgabe C",
+  "aktiv" : false,
+  "projektItem" : {
+    "value" : "b2222222-5cc7-3115-a010-de73703ac17f",
+    "text" : "Projekt B"
+  },
+  "version" : 2,
+  "content" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "aufgabe",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140"
+  }, {
+    "rel" : "projekt",
+    "href" : "http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140/projekt"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Ok</code> bzw. den Code 200, wenn die Daten geladen wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-apiaufgabeid"><a class="anchor" href="#delete-apiaufgabeid"></a><code>DELETE /api/aufgabe/{id}</code></h3>
+<div class="paragraph">
+<p>Die Operation löscht ein gespeichertes <em>Aufgabe</em>-Objekt.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="listingblock">
+<div class="title">CURL</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nv">$ </span>curl <span class="s1">'http://localhost:8080/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140'</span> <span class="nt">-i</span> <span class="nt">-X</span> DELETE</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="http"><span class="nf">DELETE</span> <span class="nn">/api/aufgabe/c3333333-3bb4-2113-a010-cd42452ab140</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:8080</span></code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Response</div>
+<div class="content">
+<pre>Keine</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>No Content</code> bzw. den Code 204, wenn die Daten gelöscht wurden.</p>
+</div>
+<div class="paragraph">
+<p>Die Operation meldet <code>Not found</code> bzw. den Code 404, wenn die Daten nicht existieren.</p>
 </div>
 </div>
 </div>
@@ -674,7 +1560,7 @@ Sie wird nur beim Start der Anwendung gelesen.</p>
 <div id="footer">
 <div id="footer-text">
 Version 2.4.1<br>
-Last updated 2023-02-18 11:12:52 UTC
+Last updated 2023-02-18 11:41:04 UTC
 </div>
 </div>
 <style>
