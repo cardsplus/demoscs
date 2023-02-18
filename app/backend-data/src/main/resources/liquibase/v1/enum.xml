@@ -2,40 +2,40 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
     <changeSet id="1" author="robert">
-        <comment>Projekt</comment>
-        <createTable tableName="projekt">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="enum" /></not>
+        </preConditions>
+        <createTable tableName="enum">
             <column name="version" type="BIGINT" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="name" type="VARCHAR(512)">
+            <column name="art" type="VARCHAR(16)">
                 <constraints nullable="false"/>
             </column>
-            <column name="aktiv" type="BOOLEAN" defaultValue="true">
+            <column name="code" type="BIGINT" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
-            <column name="sprache" type="VARCHAR(16)">
+            <column name="name" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
-            <column name="besitzer_id" type="UUID">
-                <constraints nullable="true"/>
+            <column name="text" type="VARCHAR(512)">
+                <constraints nullable="false"/>
             </column>
         </createTable>
         <addUniqueConstraint
-                constraintName="uk_projekt"
-                tableName="projekt"
-                columnNames="name"
+                constraintName="uk_enum_name"
+                tableName="enum"
+                columnNames="art, name"
         />
-        <addForeignKeyConstraint
-                constraintName="fk_projekt_besitzer_id"
-                baseTableName="projekt"
-                baseColumnNames="besitzer_id"
-                referencedTableName="nutzer"
-                referencedColumnNames="id"
+        <addUniqueConstraint
+                constraintName="uk_enum_code"
+                tableName="enum"
+                columnNames="art, code"
         />
     </changeSet>
 </databaseChangeLog>
