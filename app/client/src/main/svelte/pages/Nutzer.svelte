@@ -111,7 +111,7 @@
             <Icon
               on:click={() => nutzerEditorCreateClicked()}
               disabled={nutzerEditorDisabled}
-              name="edit"
+              name="add"
               outlined
             />
           </th>
@@ -126,8 +126,8 @@
                 on:create={(e) => reloadAllNutzer()}
                 {allSpracheItem}
               />
-            </td><td /></tr
-          >
+            </td>
+          </tr>
         {/if}
         {#each allNutzerFiltered as nutzer, i}
           <tr
@@ -177,12 +177,12 @@
                   {nutzer}
                   {allSpracheItem}
                 />
-              </td><td /></tr
-            >
+              </td>
+            </tr>
           {/if}
         {:else}
           <tr>
-            <td class="px-2 py-3" colspan="5"> Keine Nutzer </td>
+            <td class="px-2 py-3" colspan="5">Keine Nutzer</td>
           </tr>
         {/each}
       </tbody>

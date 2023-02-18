@@ -111,7 +111,7 @@
             <Icon
               on:click={() => projektEditorCreateClicked()}
               disabled={projektEditorDisabled}
-              name="edit"
+              name="add"
               outlined
             />
           </th>
@@ -127,8 +127,8 @@
                 {allSpracheItem}
                 {allNutzerItem}
               />
-            </td><td /></tr
-          >
+            </td>
+          </tr>
         {/if}
         {#each allProjektFiltered as projekt, i}
           <tr
@@ -179,8 +179,8 @@
                   {allSpracheItem}
                   {allNutzerItem}
                 />
-              </td><td /></tr
-            >
+              </td>
+            </tr>
           {/if}
         {:else}
           <tr>

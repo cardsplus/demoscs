@@ -107,7 +107,7 @@
         <TextField
           bind:value={aufgabeText}
           required
-          label="Text"
+          label="Aufgabe"
           placeholder="Bitte eine neue Aufgabe eingeben"
           disabled={!aufgabeProjektId}
         />
