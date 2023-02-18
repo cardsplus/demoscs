@@ -143,6 +143,8 @@ Siehe https://www.docker.com/products/docker-desktop/
 
 Siehe https://rancherdesktop.io/
 
+Siehe https://k3s.io/
+
 === Kubernetes-Ingress installieren
 
 [source, gradle]
