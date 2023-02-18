@@ -37,6 +37,23 @@ dependencies {
     testImplementation('org.mockito:mockito-junit-jupiter')
 }
 
+test {
+    reports {
+        html.enabled true
+        html.destination = file("${rootDir}/pages/html/" + project.name + "/junit5")
+    }
+}
+
+jacocoTestReport {
+    mustRunAfter test
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+        html.destination file("${rootDir}/pages/html/" + project.name + "/jacoco")
+    }
+}
+
 processResources {
     with copySpec {
         from("${rootDir}")

@@ -60,7 +60,7 @@ test {
 }
 
 jacocoTestReport {
-    dependsOn test
+    mustRunAfter test
     reports {
         xml.enabled false
         csv.enabled false
