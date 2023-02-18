@@ -1,4 +1,3 @@
-:projectDir: ..
 :icons: font
 = EsyPlanApi
 
@@ -44,7 +43,10 @@ Aufgrund der Entscheidung, Deutsch als Domänensprache festzulegen, werden konse
 !pragma layout smetana
 hide members
 show attributes
-class Nutzer<JPA> {
+package "team" {
+  class Nutzer<JPA> {
+    mail
+  }
 }
 package "plan" {
   class Aufgabe<JPA> {
@@ -89,28 +91,6 @@ TIP: Siehe
 https://spring.io/projects/spring-hateoas
 für mehr Informationen.
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/ProjektRestApi.adoc[leveloffset=+1]
+include::../app/backend-data/src/main/java/esy/app/plan/ProjektRestApi.adoc[leveloffset=+1]
 
-include::{projectDir}/app/backend/src/main/java/esy/app/plan/AufgabeRestApi.adoc[leveloffset=+1]
-
-== Konfiguration
-
-=== `endpoint.properties`
-
-Der Dienst nutzt eine zentrale Konfigurationsdatei für Endpunkte.
-Sie wird nur beim Start der Anwendung gelesen.
-
-[source,text]
-----
-include::{projectDir}/app/backend/src/main/resources/endpoint.properties[]
-----
-
-=== `database.properties`
-
-Der Dienst nutzt eine zentrale Konfigurationsdatei für die Datenbank.
-Sie wird nur beim Start der Anwendung gelesen.
-
-[source,text]
-----
-include::{projectDir}/app/backend/src/main/resources/database.properties[]
-----
+include::../app/backend-data/src/main/java/esy/app/plan/AufgabeRestApi.adoc[leveloffset=+1]

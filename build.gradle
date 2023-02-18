@@ -79,10 +79,10 @@ asciidoctorj {
   requires 'rouge'
   modules {
     diagram { 
-      version '2.2.1'
+      version '2.2.3'
     }
     pdf { 
-      version '2.1.6'
+      version '2.3.3'
     }
   }
   logLevel 'INFO'
