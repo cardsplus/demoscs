@@ -12,7 +12,7 @@ https://projectlombok.org/
 
 https://github.com/FasterXML/jackson-docs
 
-=== app/backend
+=== app/backend-data
 
 REST-API für das Backend.
 
@@ -24,7 +24,11 @@ https://spring.io/projects/spring-data-jpa
 
 https://spring.io/projects/spring-data-rest
 
-https://docs.liquibase.com/home.html
+https://docs.liquibase.com
+
+=== app/backend-test
+
+Test-Support für das Backend.
 
 === app/server
 
