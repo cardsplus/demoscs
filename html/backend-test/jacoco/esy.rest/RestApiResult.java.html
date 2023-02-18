@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RestApiResult.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">backend-test</a> &gt; <a href="index.source.html" class="el_package">esy.rest</a> &gt; <span class="el_source">RestApiResult.java</span></div><h1>RestApiResult.java</h1><pre class="source lang-java linenums">package esy.rest;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import esy.json.JsonMapper;
+import lombok.Getter;
+import lombok.NonNull;
+import org.springframework.util.ReflectionUtils;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class RestApiResult {
+
+<span class="fc" id="L20">    @Getter</span>
+    private final int code;
+
+<span class="fc" id="L23">    @Getter</span>
+    private final byte[] body;
+
+<span class="fc" id="L26">    @Getter</span>
+    private final String etag;
+
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">    public RestApiResult(@NonNull final HttpURLConnection connection) {</span>
+<span class="fc" id="L30">        this.code = code(connection);</span>
+<span class="fc" id="L31">        this.body = body(connection);</span>
+<span class="fc" id="L32">        this.etag = etag(connection);</span>
+<span class="fc" id="L33">    }</span>
+
+    private int code(final HttpURLConnection connection) {
+        try {
+<span class="fc" id="L37">            return connection.getResponseCode();</span>
+<span class="nc" id="L38">        } catch (final IOException e) {</span>
+<span class="nc" id="L39">            return 500;</span>
+        }
+    }
+
+    private byte[] body(final HttpURLConnection connection) {
+        try {
+<span class="fc" id="L45">            return connection.getInputStream().readAllBytes();</span>
+<span class="nc" id="L46">        } catch (final IOException e) {</span>
+<span class="nc" id="L47">            return new byte[0];</span>
+        }
+    }
+
+    private String etag(final HttpURLConnection connection) {
+<span class="fc" id="L52">        final String etag = connection.getHeaderField(&quot;ETag&quot;);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        return etag == null ? &quot;&quot; : etag.replace(&quot;\&quot;&quot;, &quot;&quot;);</span>
+    }
+
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">    public &lt;T&gt; T toObject(@NonNull final Class&lt;T&gt; expectedClass) throws IOException {</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (body.length &lt; &quot;{}&quot;.length()) {</span>
+<span class="fc" id="L58">            return null;</span>
+        }
+<span class="fc" id="L60">        final ObjectMapper mapper = JsonMapper.configure(new ObjectMapper());</span>
+<span class="fc" id="L61">        final T value = mapper.readValue(body, expectedClass);</span>
+        // Version comes with the ETag header
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">        if (!etag.isBlank()) {</span>
+<span class="fc" id="L64">            final Field versionField = ReflectionUtils.findField(expectedClass, &quot;version&quot;, Long.class);</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">            if (versionField != null) {</span>
+<span class="fc" id="L66">                ReflectionUtils.makeAccessible(versionField);</span>
+<span class="fc" id="L67">                ReflectionUtils.setField(versionField, value, Long.valueOf(etag));</span>
+            }
+        }
+<span class="fc" id="L70">        return value;</span>
+    }
+
+    static final class CollectionModel&lt;V&gt; {
+
+        @JsonProperty(&quot;content&quot;)
+<span class="fc" id="L76">        @Getter</span>
+        private final List&lt;V&gt; content;
+
+<span class="fc" id="L79">        CollectionModel() {</span>
+<span class="fc" id="L80">            this.content = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L81">        }</span>
+
+<span class="nc" id="L83">        CollectionModel(final Iterable&lt;V&gt; content) {</span>
+<span class="nc" id="L84">            this.content = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            for (final V element : content) {</span>
+<span class="nc" id="L86">                this.content.add(element);</span>
+<span class="nc" id="L87">            }</span>
+<span class="nc" id="L88">       }</span>
+    }
+
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">    public &lt;T&gt; List&lt;T&gt; toCollection(@NonNull final Class&lt;T&gt; expectedClass) throws IOException {</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (body.length &lt; &quot;{}&quot;.length()) {</span>
+<span class="fc" id="L93">            return Collections.emptyList();</span>
+        }
+<span class="fc" id="L95">        final ObjectMapper mapper = JsonMapper.configure(new ObjectMapper());</span>
+<span class="fc" id="L96">        final JavaType type = mapper.getTypeFactory().constructParametricType(CollectionModel.class, expectedClass);</span>
+<span class="fc" id="L97">        return ((CollectionModel&lt;T&gt;)mapper.readValue(body, type)).getContent();</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L102">        return new String(body);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
