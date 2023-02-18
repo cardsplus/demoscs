@@ -18,7 +18,7 @@ spotless {
 }
 
 dependencies {
-    implementation project(':app:backend')
+    implementation project(':app:backend-data')
     // https://spring.io/projects/spring-data
     runtimeOnly('org.hsqldb:hsqldb')
 }
