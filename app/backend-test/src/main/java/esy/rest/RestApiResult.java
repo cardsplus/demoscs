@@ -1,4 +1,4 @@
-package esy.http;
+package esy.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JavaType;
@@ -54,6 +54,9 @@ public class RestApiResult {
     }
 
     public <T> T toObject(@NonNull final Class<T> expectedClass) throws IOException {
+        if (body.length < "{}".length()) {
+            return null;
+        }
         final ObjectMapper mapper = JsonMapper.configure(new ObjectMapper());
         final T value = mapper.readValue(body, expectedClass);
         // Version comes with the ETag header

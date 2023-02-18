@@ -1,4 +1,4 @@
-package esy.http;
+package esy.rest;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
