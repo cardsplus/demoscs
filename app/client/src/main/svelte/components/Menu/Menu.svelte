@@ -6,7 +6,7 @@
 
 {#if show}
   <aside
-    class="fixed top-0 left-0 w-48 h-screen mt-12 overflow-hidden pointer-events-none z-10"
+    class="w-72 h-full pointer-events-none"
     transition:fly={{
       duration: 200,
       x: -300,
@@ -14,9 +14,7 @@
       opacity: 1,
     }}
   >
-    <nav
-      class="absolute flex h-full w-full bg-white pointer-events-auto overflow-y-auto"
-    >
+    <nav class="absolute flex w-full h-full pointer-events-auto z-10 bg-white">
       <div class="w-full">
         <slot />
       </div>

@@ -1,7 +1,7 @@
 <script>
   import filterProps from "../filterProps.js";
-  const props = filterProps(["disabled", "title"], $$props);
-  export let allItem = [];
+  const props = filterProps(["allItem", "disabled", "group", "title"], $$props);
+  export let allItem;
   export let disabled = false;
   export let group;
   export let title = undefined;
@@ -24,7 +24,7 @@
 
 <div class="relative w-auto h-auto flex flex-col">
   {#each allItemProcessed as item}
-    <label {title} class="inline-flex items-center p-2 cursor-pointer">
+    <label {title} class="inline-flex items-center px-2 cursor-pointer">
       <input
         {...props}
         {title}
@@ -35,7 +35,7 @@
         value={item.value}
         on:change
       />
-      <div class="pl-2 cursor-pointer text-gray-700">
+      <div class="pl-2 cursor-pointer text-label-700">
         {item.text}
       </div>
     </label>

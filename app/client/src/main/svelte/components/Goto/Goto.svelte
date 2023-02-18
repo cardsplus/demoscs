@@ -1,46 +1,43 @@
 <script>
+  import pageRouter from "page";
   import filterProps from "../filterProps.js";
   const props = filterProps(
     ["disabled", "icon", "outlined", "page", "title"],
     $$props
   );
   export let disabled = false;
-  export let icon = "forward";
+  export let icon;
   export let outlined = false;
   export let page;
-  export let target = "_self";
   export let title = undefined;
 </script>
 
-<a class:disabled href={page} {target} tabindex="-1">
-  <button
-    {...props}
-    {title}
-    {disabled}
-    class:disabled
-    class="w-full h-full text-sm text-white rounded uppercase py-2 px-4 disabled:opacity-50 hover:opacity-90 focus:ring bg-primary-500 overflow-hidden"
-    class:outlined
-    on:click
-    on:mouseover
-    on:focus
-    on:blur
-  >
-    <div class="flex flex-row content-center justify-center items-center gap-1">
-      <i
-        {title}
-        aria-hidden="true"
-        class="material-icons icon text-xl select-none duration-200 ease-in"
-        disabled
-      >
-        {icon}
-      </i>
-      <slot />
-    </div>
-  </button>
-</a>
+<button
+  {...props}
+  {title}
+  {disabled}
+  class:disabled
+  class="w-full h-full text-sm text-white rounded uppercase py-2 px-4 disabled:opacity-50 hover:opacity-90 focus:ring bg-primary-500 overflow-hidden"
+  class:outlined
+  on:click={pageRouter(page)}
+  on:mouseover
+  on:focus
+  on:blur
+>
+  <div class="flex flex-row content-center justify-center items-center gap-1">
+    <i
+      {title}
+      aria-hidden="true"
+      class="material-icons icon text-xl select-none duration-200 ease-in"
+      disabled
+    >
+      {icon}
+    </i>
+    <slot />
+  </div>
+</button>
 
 <style lang="postcss">
-  a.disabled,
   button.disabled {
     user-select: none;
     pointer-events: none;

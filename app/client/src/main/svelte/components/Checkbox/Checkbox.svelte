@@ -7,8 +7,8 @@
   export let title = undefined;
 </script>
 
-<div class="relative w-auto h-auto">
-  <label {title} class="inline-flex items-center p-2 cursor-pointer">
+<div class="relative w-auto h-auto flex flex-col pt-1">
+  <label {title} class="inline-flex items-center px-2 cursor-pointer">
     <input
       {...props}
       {title}
@@ -19,7 +19,7 @@
       on:change
     />
     {#if label}
-      <div class="pl-2 cursor-pointer text-gray-700">
+      <div class="pl-2 cursor-pointer text-label-700">
         {label}
       </div>
     {/if}

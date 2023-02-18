@@ -1,7 +1,7 @@
 <script>
   export let disabled;
   export let group;
-  export let label;
+  export let label = undefined;
   export let value;
   export let title;
 
@@ -26,8 +26,8 @@
   }
 </script>
 
-<div class="relative w-auto h-auto">
-  <label {title} class="inline-flex items-center p-2 cursor-pointer">
+<div class="relative w-auto h-auto flex flex-col">
+  <label {title} class="inline-flex items-center px-2 cursor-pointer">
     <input
       {title}
       class="disabled:opacity-50 border-2 border-primary-500 text-primary-500"
@@ -38,7 +38,7 @@
       on:change
     />
     {#if label}
-      <div class="pl-2 cursor-pointer text-gray-700">
+      <div class="pl-2 cursor-pointer text-label-700">
         {label}
       </div>
     {/if}

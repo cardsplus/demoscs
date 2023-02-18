@@ -55,11 +55,13 @@
           delay: 150,
         }}
       >
-        <div class="text-lg font-bold pb-4">
+        <div class="flex w-full justify-start text-lg font-bold">
           <slot name="title" />
         </div>
-        <slot />
-        <div class="flex w-full justify-end pt-4">
+        <div class="flex w-full justify-start py-2 text-base font-normal">
+          <slot />
+        </div>
+        <div class="flex w-full justify-center pt-4">
           <slot name="actions" />
         </div>
       </dialog>

@@ -1,8 +1,8 @@
 <script>
   import filterProps from "../filterProps.js";
-  const props = filterProps(["disabled", "icon", "title"], $$props);
+  const props = filterProps(["disabled", "icon", "outlined", "title"], $$props);
   export let disabled = false;
-  export let icon = "forward";
+  export let icon;
   export let outlined = false;
   export let title = undefined;
 </script>
@@ -12,7 +12,7 @@
   {title}
   {disabled}
   class:disabled
-  class="text-sm text-white pr-4 rounded-full py-2 px-2 disabled:opacity-50 hover:opacity-90 focus:ring bg-primary-500 overflow-hidden"
+  class="text-sm text-white rounded-full py-2 px-4 disabled:opacity-50 hover:opacity-90 focus:ring bg-primary-500 overflow-hidden"
   class:outlined
   on:click
   on:mouseover

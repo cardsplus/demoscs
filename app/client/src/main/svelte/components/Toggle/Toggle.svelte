@@ -1,12 +1,21 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
   import filterProps from "../filterProps.js";
-  const props = filterProps(["disabled", "label", "value", "title"], $$props);
-  export let allItem = [];
+  const props = filterProps(
+    ["allItem", "allValue", "disabled", "label", "title"],
+    $$props
+  );
+  export let allItem;
   export let allValue;
   export let disabled = false;
-  export let label;
+  export let label = undefined;
   export let title = undefined;
   let focused;
+  let element;
+  export function focus() {
+    element.focus();
+  }
 
   $: allValueProcessed = allValue.map(processValue);
   function processValue(value) {
@@ -51,12 +60,19 @@
     }
     // Assign for reactivity
     allValue = allValue;
+    dispatch("change", allValue);
   }
 
   function onKey(e) {
     // Avoid on:change event
-    if (e.key === "ArrowLeft") e.preventDefault();
-    if (e.key === "ArrowRight") e.preventDefault();
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      return;
+    }
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      return;
+    }
   }
 </script>
 
@@ -68,7 +84,7 @@
       <span
         {title}
         class="text-xs"
-        class:text-gray-600={!focused}
+        class:text-label-600={!focused}
         class:text-primary-500={focused}
       >
         {label}
@@ -85,6 +101,7 @@
     </div>
   </div>
   <select
+    bind:this={element}
     {...props}
     {title}
     {disabled}
@@ -94,13 +111,10 @@
     aria-label={label}
     value="null"
     on:change={onChange}
-    on:change
     on:input
     on:keydown={onKey}
-    on:keydown
-    on:keypress={onKey}
     on:keypress
-    on:keyup={onKey}
+    on:keyup
     on:keyup
     on:click
     on:focus={() => (focused = true)}
@@ -115,7 +129,7 @@
     {/each}
   </select>
   {#if label}
-    <div class="w-full bg-gray-600 absolute left-0 bottom-0">
+    <div class="w-full bg-label-600 absolute left-0 bottom-0">
       <div
         class="mx-auto w-0"
         style="height: 1px; transition: width 0.2s ease 0s;"

@@ -1,8 +1,8 @@
 <script>
   import Option from "./Option.svelte";
   import filterProps from "../filterProps.js";
-  const props = filterProps(["checked", "disabled", "title"], $$props);
-  export let allItem = [];
+  const props = filterProps(["allItem", "disabled", "group", "title"], $$props);
+  export let allItem;
   export let disabled = false;
   export let group;
   export let title = undefined;
