@@ -19,15 +19,14 @@ spotless {
 
 dependencies {
     implementation project(':app:backend-data')
+    // https://projectlombok.org
+    compileOnly('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
     // https://spring.io/projects/spring-data
     runtimeOnly('org.hsqldb:hsqldb')
 }
 dependencies {
-    // https://projectlombok.org
-    compileOnly('org.projectlombok:lombok')
-    annotationProcessor('org.projectlombok:lombok')
-}
-dependencies {
+    testImplementation project(':app:backend-test')
     // https://projectlombok.org
     testImplementation('org.projectlombok:lombok')
     // https://spring.io/projects/spring-boot

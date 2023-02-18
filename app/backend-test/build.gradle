@@ -22,29 +22,14 @@ dependencies {
     // https://projectlombok.org
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
-    // https://spring.io/projects/spring-boot
-    api('org.springframework.boot:spring-boot-starter')
-    api('org.springframework.boot:spring-boot-starter-web')
-    api('org.springframework.boot:spring-boot-starter-actuator')
-    api('org.springframework.boot:spring-boot-starter-validation')
-    api('io.micrometer:micrometer-registry-prometheus')
-    // https://spring.io/projects/spring-data
-    api('org.springframework.boot:spring-boot-starter-data-rest')
-    api('org.springframework.boot:spring-boot-starter-data-jpa')
-    api('org.springframework.data:spring-data-rest-hal-explorer')
-    // https://liquibase.org/
-    api('org.liquibase:liquibase-core')
-    // http://hsqldb.org/
-    runtimeOnly('org.hsqldb:hsqldb')
 }
 dependencies {
-    testImplementation project(':app:backend-test')
     // https://projectlombok.org
     testImplementation('org.projectlombok:lombok')
-    // https://spring.io/projects/spring-boot
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-    // https://spring.io/projects/spring-restdocs
-    testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
+    // https://spring.io/projects/spring-framework
+    testImplementation('org.springframework:spring-test')
+    // https://hibernate.org/validator
+    testImplementation('org.glassfish:jakarta.el')
     // https://junit.org/junit5
     testImplementation('org.junit.jupiter:junit-jupiter')
     // https://site.mockito.org/

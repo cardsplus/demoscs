@@ -29,6 +29,7 @@ dependencyResolutionManagement {
 rootProject.name = 'demoscs'
 include 'app:backend-api'
 include 'app:backend-data'
+include 'app:backend-test'
 include 'app:server'
 include 'app:client'
 include 'app:deploy'
