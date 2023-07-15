@@ -8,56 +8,63 @@ import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DataRetrievalFailureException;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Objects;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.OptimisticLockException;
+import jakarta.persistence.PessimisticLockException;
+import java.util.MissingResourceException;
+import java.util.NoSuchElementException;
 
+@Slf4j
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
 @RestController
-@Slf4j
 public class EndpointControllerAdvice extends ResponseEntityExceptionHandler implements ErrorController {
 
     @ExceptionHandler({
+            MissingResourceException.class,
+            NoSuchElementException.class,
             DataRetrievalFailureException.class,
-            ResourceAccessException.class
+            ResourceAccessException.class,
+            EntityNotFoundException.class
     })
-    public void handleNotFound(final Exception cause, final HttpServletResponse response) throws IOException {
-        log.error(cause.toString(), getRootCause(cause));
-        log.trace(cause.toString(), cause);
-        response.sendError(HttpStatus.NOT_FOUND.value(), cause.getMessage());
+    public ResponseEntity<Object> handleNotFound(final WebRequest request, final Exception cause) {
+        final var error = new ResponseStatusException(HttpStatus.NOT_FOUND, cause.getMessage(), cause);
+        return handleErrorResponseException(error, error.getHeaders(), error.getStatusCode(), request);
     }
 
     @ExceptionHandler({
             DataIntegrityViolationException.class,
-            ConcurrencyFailureException.class
+            ConcurrencyFailureException.class,
+            EntityExistsException.class,
+            OptimisticLockException.class,
+            PessimisticLockException.class
     })
-    public void handleConflict(final Exception cause, final HttpServletResponse response) throws IOException {
-        log.error(cause.toString(), getRootCause(cause));
-        log.trace(cause.toString(), cause);
-        response.sendError(HttpStatus.CONFLICT.value(), cause.getMessage());
+    public ResponseEntity<Object> handleConflict(final WebRequest request, final Exception cause) {
+        final var error = new ResponseStatusException(HttpStatus.CONFLICT, cause.getMessage(), cause);
+        return handleErrorResponseException(error, error.getHeaders(), error.getStatusCode(), request);
     }
 
     @ExceptionHandler({
+            NumberFormatException.class,
             DataAccessException.class,
             IllegalArgumentException.class,
             IllegalStateException.class
     })
-    public void handleBadRequest(final Exception cause, final HttpServletResponse response) throws IOException {
-        log.error(cause.toString(), getRootCause(cause));
-        log.trace(cause.toString(), cause);
-        response.sendError(HttpStatus.BAD_REQUEST.value(), cause.getMessage());
+    public ResponseEntity<Object> handleBadRequest(final WebRequest request, final Exception cause) {
+        final var error = new ResponseStatusException(HttpStatus.BAD_REQUEST, cause.getMessage(), cause);
+        return handleErrorResponseException(error, error.getHeaders(), error.getStatusCode(), request);
     }
 
     @ExceptionHandler({
@@ -65,36 +72,24 @@ public class EndpointControllerAdvice extends ResponseEntityExceptionHandler imp
             UnsupportedOperationException.class,
             BadSqlGrammarException.class
     })
-    public void handleError(final Exception cause, final HttpServletResponse response) throws IOException {
-        log.error(cause.toString(), getRootCause(cause));
-        log.trace(cause.toString(), cause);
-        response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), cause.getMessage());
+    public ResponseEntity<Object> handleInternalServerError(final WebRequest request, final Exception cause) {
+        final var error = new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, cause.getMessage(), cause);
+        return handleErrorResponseException(error, error.getHeaders(), error.getStatusCode(), request);
     }
 
     @RequestMapping("${server.error.path:/error}")
-    public void error(final HttpServletRequest request, final HttpServletResponse response) throws Exception {
-        final Object cause = request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
-        if (cause instanceof Exception) {
-            throw (Exception) cause;
-        }
-        final Object uri = request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
-        final int status = getStatus(request);
-        final String error = uri + " failed with code " + status;
-        log.error(error);
-        response.sendError(status, error);
+    public ResponseEntity<Object> error(final WebRequest request) {
+        final var error = new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        return handleErrorResponseException(error, error.getHeaders(), error.getStatusCode(), request);
     }
 
-    private int getStatus(final HttpServletRequest request) {
-        final Integer status = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-        return status != null ? status : HttpStatus.INTERNAL_SERVER_ERROR.value();
-    }
-
-    private Throwable getRootCause(final Throwable cause) {
-        Objects.requireNonNull(cause);
-        Throwable rootCause = cause;
-        while (rootCause.getCause() != null && rootCause.getCause() != rootCause) {
-            rootCause = rootCause.getCause();
-        }
-        return rootCause;
+    @Override
+    protected ResponseEntity<Object> createResponseEntity(Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
+        return ResponseEntity
+                .status(statusCode)
+                .headers(headers)
+                .cacheControl(CacheControl.noStore())
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(body);
     }
 }

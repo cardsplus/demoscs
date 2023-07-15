@@ -1,12 +1,13 @@
 pluginManagement {
     plugins {
         id 'io.spring.dependency-management' version '1.1.0'
-        id 'org.springframework.boot' version '2.7.8'
-        id 'com.diffplug.spotless' version '6.15.0'
-        id 'com.palantir.git-version' version '0.15.0'
+        id 'org.springframework.boot' version '3.1.1'
+        id 'com.diffplug.spotless' version '6.19.0'
+        id 'com.palantir.git-version' version '3.0.0'
         id 'org.asciidoctor.jvm.convert' version '3.3.2'
         id 'org.asciidoctor.jvm.pdf' version '3.3.2'
         id 'org.asciidoctor.jvm.gems' version '3.3.2'
+        id 'com.github.node-gradle.node' version '3.6.0'
     }
     repositories {
         gradlePluginPortal()
@@ -26,7 +27,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = 'demoscs'
 include 'app:backend-api'
 include 'app:backend-data'
 include 'app:backend-test'

@@ -1,5 +1,4 @@
 <script>
-  import { onDestroy } from "svelte";
   import { tweened } from "svelte/motion";
   import { linear } from "svelte/easing";
   import { toast } from "./stores.js";
@@ -8,10 +7,17 @@
     duration: item.duration,
     easing: linear,
   });
-  const close = () => toast.pop(item.id);
+  const onKey = (e) => {
+    if (e.key === "Escape") {
+      toast.pop(item.id);
+    }
+  };
+  const onClose = () => {
+    toast.pop(item.id);
+  };
   const autoclose = () => {
     if ($progress === 1 || $progress === 0) {
-      close();
+      toast.pop(item.id);
     }
   };
   let next = item.initial;
@@ -44,11 +50,6 @@
     }
     return props;
   };
-  onDestroy(() => {
-    if (typeof item.onpop === "function") {
-      item.onpop(item.id);
-    }
-  });
 </script>
 
 <div
@@ -64,7 +65,15 @@
     {/if}
   </div>
   {#if item.dismissable}
-    <div class="_toastBtn" role="button" tabindex="-1" on:click={close}>✕</div>
+    <div
+      class="_toastBtn"
+      role="button"
+      tabindex="-1"
+      on:click={onClose}
+      on:keydown={onKey}
+    >
+      <span>✕</span>
+    </div>
   {/if}
   <progress class="_toastBar bg-transparent" value={$progress} />
 </div>

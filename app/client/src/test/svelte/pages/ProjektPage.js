@@ -1,7 +1,9 @@
-const { expect } = require("@playwright/test");
-const chance = require("chance").Chance();
+import { expect } from "@playwright/test";
 
-exports.ProjektPage = class ProjektPage {
+import Chance from "chance";
+const chance = new Chance();
+
+export class ProjektPage {
   constructor(page) {
     this.page = page;
   }
@@ -105,4 +107,4 @@ exports.ProjektPage = class ProjektPage {
     await this.page.locator(SELECT_FILTER).fill("");
     await this.page.locator(SELECT_FILTER).press("Enter");
   }
-};
+}

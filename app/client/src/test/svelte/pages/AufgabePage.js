@@ -1,7 +1,9 @@
-const { expect } = require("@playwright/test");
-const chance = require("chance").Chance();
+import { expect } from "@playwright/test";
 
-exports.AufgabePage = class AufgabePage {
+import Chance from "chance";
+const chance = new Chance();
+
+export class AufgabePage {
   constructor(page) {
     this.page = page;
   }
@@ -26,4 +28,4 @@ exports.AufgabePage = class AufgabePage {
     await this.page.locator(SELECT_AUFGABE).press("Enter");
     await expect(this.page.getByText("Keine Aufgaben")).not.toBeVisible();
   }
-};
+}

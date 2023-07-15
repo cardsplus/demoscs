@@ -1,3 +1,8 @@
+# Version 0.6.0
+
+* Upgrade auf `spring boot` Version 3.1.1.
+* Upgrade auf `svelte` Version 3.59.1.
+
 # Version 0.5.0
 
 * Upgrade auf `spring boot` Version 2.6.2.

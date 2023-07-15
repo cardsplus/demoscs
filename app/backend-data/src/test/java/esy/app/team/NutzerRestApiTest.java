@@ -109,14 +109,14 @@ public class NutzerRestApiTest {
     @Test
     @Order(20)
     void postApiNutzer() throws Exception {
-        final String nutzerName = "Mia Musterfrau";
+        final String name = "Mia Musterfrau";
         final String profilName = "Mia";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertFalse(nutzerRepository.findByMail(nutzerMail).isPresent());
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertFalse(nutzerRepository.findByMail(mail).isPresent());
         mockMvc.perform(post("/api/nutzer")
                 .content("{" +
-                        "\"mail\":\"" + nutzerMail + "\"," +
-                        "\"name\":\"" + nutzerName + "\"," +
+                        "\"mail\":\"" + mail + "\"," +
+                        "\"name\":\"" + name + "\"," +
                         "\"aktiv\": \"true\"," +
                         "\"allSprache\": [\"EN\"]" +
                         "}")
@@ -134,9 +134,9 @@ public class NutzerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.mail")
-                        .value(nutzerMail))
+                        .value(mail))
                 .andExpect(jsonPath("$.name")
-                        .value(nutzerName))
+                        .value(name))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
                 .andExpect(jsonPath("$.allSprache")
@@ -145,20 +145,20 @@ public class NutzerRestApiTest {
                         .value("EN"))
                 .andExpect(jsonPath("$.allSprache[1]")
                         .doesNotExist());
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
     }
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     @Order(21)
     void postApiNutzerConflict(final boolean aktiv) throws Exception {
-        final String nutzerName = "Mia Musterfrau";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
+        final String name = "Mia Musterfrau";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
         mockMvc.perform(post("/api/nutzer")
                 .content("{" +
-                        "\"mail\":\"" + nutzerMail + "\"," +
-                        "\"name\":\"" + nutzerName + "\"," +
+                        "\"mail\":\"" + mail + "\"," +
+                        "\"name\":\"" + name + "\"," +
                         "\"aktiv\": \"" + aktiv + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -171,13 +171,13 @@ public class NutzerRestApiTest {
     @Test
     @Order(22)
     void postApiNutzerDefault() throws Exception {
-        final String nutzerName = "Bea Musterfrau";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertFalse(nutzerRepository.findByMail(nutzerMail).isPresent());
+        final String name = "Bea Musterfrau";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertFalse(nutzerRepository.findByMail(mail).isPresent());
         mockMvc.perform(post("/api/nutzer")
                 .content("{" +
-                        "\"mail\":\"" + nutzerMail + "\"," +
-                        "\"name\":\"" + nutzerName + "\"" +
+                        "\"mail\":\"" + mail + "\"," +
+                        "\"name\":\"" + name + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -193,31 +193,30 @@ public class NutzerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.mail")
-                        .value(nutzerMail))
+                        .value(mail))
                 .andExpect(jsonPath("$.name")
-                        .value(nutzerName))
+                        .value(name))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
                 .andExpect(jsonPath("$.allSprache")
                         .isArray())
                 .andExpect(jsonPath("$.allSprache[0]")
                         .doesNotExist());
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
     }
 
     @Test
     @Order(30)
     void putApiNutzer() throws Exception {
-        final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
-        final String profilName = "Max";
-        final String nutzerName = "Max Mustermann";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertFalse(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertFalse(nutzerRepository.findByMail(nutzerMail).isPresent());
-        mockMvc.perform(put("/api/nutzer/" + nutzerUuid)
+        final String uuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
+        final String name = "Max Mustermann";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertFalse(nutzerRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertFalse(nutzerRepository.findByMail(mail).isPresent());
+        mockMvc.perform(put("/api/nutzer/" + uuid)
                 .content("{" +
-                        "\"mail\":\"" + nutzerMail + "\"," +
-                        "\"name\":\"" + nutzerName + "\"," +
+                        "\"mail\":\"" + mail + "\"," +
+                        "\"name\":\"" + name + "\"," +
                         "\"aktiv\": \"true\"," +
                         "\"allSprache\": [\"DE\", \"EN\"]" +
                         "}")
@@ -235,9 +234,9 @@ public class NutzerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.mail")
-                        .value(nutzerMail))
+                        .value(mail))
                 .andExpect(jsonPath("$.name")
-                        .value(nutzerName))
+                        .value(name))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
                 .andExpect(jsonPath("$.allSprache")
@@ -248,21 +247,21 @@ public class NutzerRestApiTest {
                         .value("EN"))
                 .andExpect(jsonPath("$.allSprache[2]")
                         .doesNotExist());
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
     }
 
     @RepeatedTest(5)
     @Order(31)
     void putApiNutzerAgain(final RepetitionInfo info) throws Exception {
-        final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
-        final String nutzerName = "Max Mustermann";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
-        mockMvc.perform(put("/api/nutzer/" + nutzerUuid)
+        final String uuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
+        final String name = "Max Mustermann";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertTrue(nutzerRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
+        mockMvc.perform(put("/api/nutzer/" + uuid)
                 .content("{" +
-                        "\"mail\":\"" + nutzerMail + "\"," +
-                        "\"name\":\"" + nutzerName + "\"," +
+                        "\"mail\":\"" + mail + "\"," +
+                        "\"name\":\"" + name + "\"," +
                         "\"aktiv\": \"true\"," +
                         "\"allSprache\": [\"DE\", \"EN\"]" +
                         "}")
@@ -280,9 +279,9 @@ public class NutzerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.mail")
-                        .value(nutzerMail))
+                        .value(mail))
                 .andExpect(jsonPath("$.name")
-                        .value(nutzerName))
+                        .value(name))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
                 .andExpect(jsonPath("$.allSprache")
@@ -298,15 +297,15 @@ public class NutzerRestApiTest {
     @Test
     @Order(32)
     void putApiNutzerDefault() throws Exception {
-        final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
-        final String nutzerName = "Max Mustermann";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
-        mockMvc.perform(put("/api/nutzer/" + nutzerUuid)
+        final String uuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
+        final String name = "Max Mustermann";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertTrue(nutzerRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
+        mockMvc.perform(put("/api/nutzer/" + uuid)
                 .content("{" +
-                        "\"mail\":\"" + nutzerMail + "\"," +
-                        "\"name\":\"" + nutzerName + "\"" +
+                        "\"mail\":\"" + mail + "\"," +
+                        "\"name\":\"" + name + "\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -322,9 +321,9 @@ public class NutzerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.mail")
-                        .value(nutzerMail))
+                        .value(mail))
                 .andExpect(jsonPath("$.name")
-                        .value(nutzerName))
+                        .value(name))
                 .andExpect(jsonPath("$.aktiv")
                         .value("true"))
                 .andExpect(jsonPath("$.allSprache")
@@ -336,15 +335,15 @@ public class NutzerRestApiTest {
     @Test
     @Order(34)
     void putApiNutzerAktiv() throws Exception {
-        final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
-        final String nutzerName = "Max Mustermann";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
-        mockMvc.perform(put("/api/nutzer/" + nutzerUuid)
+        final String uuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
+        final String name = "Max Mustermann";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertTrue(nutzerRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
+        mockMvc.perform(put("/api/nutzer/" + uuid)
                 .content("{" +
-                        "\"mail\":\"" + nutzerMail + "\"," +
-                        "\"name\":\"" + nutzerName + "\"," +
+                        "\"mail\":\"" + mail + "\"," +
+                        "\"name\":\"" + name + "\"," +
                         "\"aktiv\": \"false\"" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -361,9 +360,9 @@ public class NutzerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.mail")
-                        .value(nutzerMail))
+                        .value(mail))
                 .andExpect(jsonPath("$.name")
-                        .value(nutzerName))
+                        .value(name))
                 .andExpect(jsonPath("$.aktiv")
                         .value("false"))
                 .andExpect(jsonPath("$.allSprache")
@@ -375,12 +374,12 @@ public class NutzerRestApiTest {
     @Test
     @Order(40)
     void getApiNutzerById() throws Exception {
-        final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
-        final String nutzerName = "Max Mustermann";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
-        mockMvc.perform(get("/api/nutzer/" + nutzerUuid)
+        final String uuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
+        final String name = "Max Mustermann";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertTrue(nutzerRepository.findById(UUID.fromString(uuid)).isPresent());
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
+        mockMvc.perform(get("/api/nutzer/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
@@ -392,11 +391,11 @@ public class NutzerRestApiTest {
                 .andExpect(header()
                         .string("ETag", "\"8\""))
                 .andExpect(jsonPath("$.id")
-                        .isNotEmpty())
+                        .value(uuid))
                 .andExpect(jsonPath("$.mail")
-                        .value(nutzerMail))
+                        .value(mail))
                 .andExpect(jsonPath("$.name")
-                        .value(nutzerName))
+                        .value(name))
                 .andExpect(jsonPath("$.aktiv")
                         .value("false"))
                 .andExpect(jsonPath("$.allSprache")
@@ -408,9 +407,9 @@ public class NutzerRestApiTest {
     @Test
     @Order(41)
     void getApiNutzerByIdNotFound() throws Exception {
-        final String nutzerUuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
-        assertFalse(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        mockMvc.perform(get("/api/nutzer/" + nutzerUuid)
+        final String uuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
+        assertFalse(nutzerRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(get("/api/nutzer/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
@@ -420,11 +419,11 @@ public class NutzerRestApiTest {
     @Test
     @Order(42)
     void getApiNutzerByMail() throws Exception {
-        final String nutzerName = "Max Mustermann";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertTrue(nutzerRepository.findByMail(nutzerMail).isPresent());
+        final String name = "Max Mustermann";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertTrue(nutzerRepository.findByMail(mail).isPresent());
         mockMvc.perform(get("/api/nutzer/search/findByMail")
-                .param("mail", nutzerMail)
+                .param("mail", mail)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
@@ -438,9 +437,9 @@ public class NutzerRestApiTest {
                 .andExpect(jsonPath("$.id")
                         .isNotEmpty())
                 .andExpect(jsonPath("$.mail")
-                        .value(nutzerMail))
+                        .value(mail))
                 .andExpect(jsonPath("$.name")
-                        .value(nutzerName))
+                        .value(name))
                 .andExpect(jsonPath("$.aktiv")
                         .value("false"))
                 .andExpect(jsonPath("$.allSprache")
@@ -452,11 +451,11 @@ public class NutzerRestApiTest {
     @Test
     @Order(43)
     void getApiNutzerByMailNotFound() throws Exception {
-        final String nutzerName = "Unbekannt";
-        final String nutzerMail = nutzerName.replace(' ', '.') + "@a.de";
-        assertFalse(nutzerRepository.findByMail(nutzerMail).isPresent());
+        final String name = "Unbekannt";
+        final String mail = name.replace(' ', '.') + "@a.de";
+        assertFalse(nutzerRepository.findByMail(mail).isPresent());
         mockMvc.perform(get("/api/nutzer/search/findByMail")
-                .param("mail", nutzerMail)
+                .param("mail", mail)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
@@ -491,21 +490,29 @@ public class NutzerRestApiTest {
     @Test
     @Order(50)
     void deleteApiNutzer() throws Exception {
-        final String nutzerUuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
-        assertTrue(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        mockMvc.perform(delete("/api/nutzer/" + nutzerUuid)
+        final String uuid = "a1111111-6ee8-4335-b12a-ef84794bd27a";
+        assertTrue(nutzerRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(delete("/api/nutzer/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
-                        .isNoContent());
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(header()
+                        .doesNotExist("\"ETag\""))
+                .andExpect(jsonPath("$.id")
+                        .value(uuid));
     }
 
     @Test
     @Order(51)
     void deleteApiNutzerNotFound() throws Exception {
-        final String nutzerUuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
-        assertFalse(nutzerRepository.findById(UUID.fromString(nutzerUuid)).isPresent());
-        mockMvc.perform(delete("/api/nutzer/" + nutzerUuid)
+        final String uuid = "00000000-6ee8-4335-b12a-ef84794bd27a";
+        assertFalse(nutzerRepository.findById(UUID.fromString(uuid)).isPresent());
+        mockMvc.perform(delete("/api/nutzer/" + uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()

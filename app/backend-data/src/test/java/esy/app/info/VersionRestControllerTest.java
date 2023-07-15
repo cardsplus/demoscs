@@ -108,7 +108,7 @@ class VersionRestControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
-                        .isNoContent());
+                        .isNotFound());
     }
 
     @Test
@@ -119,7 +119,7 @@ class VersionRestControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
-                        .isBadRequest());
+                        .isNotFound());
     }
 
     @Test
@@ -130,6 +130,6 @@ class VersionRestControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
-                        .isBadRequest());
+                        .isNotFound());
     }
 }

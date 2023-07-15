@@ -1,8 +1,8 @@
-FROM adoptopenjdk/openjdk11
+FROM openjdk:17-jdk-slim
 COPY build/libs/*.jar ./server.jar
 RUN java -Djarmode=layertools -jar ./server.jar extract
 
-FROM adoptopenjdk/openjdk11
+FROM openjdk:17-jdk-slim
 EXPOSE 8080
 WORKDIR /app
 COPY --from=0 dependencies/ ./

@@ -28,8 +28,6 @@ dependencies {
     testImplementation('org.projectlombok:lombok')
     // https://spring.io/projects/spring-framework
     testImplementation('org.springframework:spring-test')
-    // https://hibernate.org/validator
-    testImplementation('org.glassfish:jakarta.el')
     // https://junit.org/junit5
     testImplementation('org.junit.jupiter:junit-jupiter')
     // https://site.mockito.org/

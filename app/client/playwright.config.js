@@ -1,19 +1,18 @@
-const { devices } = require('@playwright/test');
-// require('dotenv').config();
+import { devices } from "@playwright/test";
 
 const config = {
   /* See https://playwright.dev/docs/api/class-testconfig#test-config-test-dir */
-  testDir: './src/test',
+  testDir: "./src/test",
   /* See https://playwright.dev/docs/api/class-testconfig#test-config-test-match */
   testMatch: /.+\.e2e\.js/,
   /* See https://playwright.dev/docs/api/class-testconfig#test-config-test-ignore */
-  testIgnore: '**/*Page.js',
+  testIgnore: "**/*Page.js",
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   /* See https://playwright.dev/docs/api/class-testconfig#test-config-expect */
   expect: {
     /* Maximum time expect() should wait for the condition to be met. */
-    timeout: 5000
+    timeout: 5000,
   },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
@@ -22,55 +21,57 @@ const config = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* See https://playwright.dev/docs/api/class-testconfig#test-config-output-dir */
-  outputDir: 'build/test-results/',
+  outputDir: "build/test-results/",
   /* See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html', { outputFolder: 'build/test-reports/html' }],
-    ['junit', { outputFile: 'build/test-results/test/TEST-playwright.xml' }],
+    ["html", { outputFolder: "build/test-reports/html" }],
+    ["junit", { outputFile: "build/test-results/test/TEST-playwright.xml" }],
   ],
   /* See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* See https://playwright.dev/docs/api/class-testoptions#test-options-action-timeout */
     actionTimeout: 0,
     /* See https://playwright.dev/docs/api/class-testoptions#test-options-base-url */
-    baseURL: process.env.CI ? process.env.CI_ENVIRONMENT_URL : 'http://localhost:5000',
+    baseURL: process.env.CI
+      ? process.env.CI_ENVIRONMENT_URL
+      : "http://localhost:5000",
     /* See https://playwright.dev/docs/api/class-testoptions#test-options-trace */
-    trace: 'on',
+    trace: "on",
     /* See https://playwright.dev/docs/api/class-testoptions#test-options-screenshot */
-    screenshot: 'on',
+    screenshot: "on",
   },
   /* See https://playwright.dev/docs/api/class-testconfig#test-config-projects */
   projects: [
     {
-      name: 'chromium',
+      name: "chromium",
       use: {
-        ...devices['Desktop Chrome'],
+        ...devices["Desktop Chrome"],
         viewport: {
-          "width": 1280,
-          "height": 1080
+          width: 1280,
+          height: 1080,
         },
       },
     },
     /*
     {
-      name: 'firefox',
+      name: "firefox",
       use: {
-        ...devices['Desktop Firefox'],
+        ...devices["Desktop Firefox"],
         viewport: {
-          "width": 1280,
-          "height": 1080
+          width: 1280,
+          height: 1080,
         },
       },
     },
     */
     /*
     {
-      name: 'webkit',
+      name: "webkit",
       use: {
-        ...devices['Desktop Safari'],
+        ...devices["Desktop Safari"],
         viewport: {
-          "width": 1280,
-          "height": 1080
+          width: 1280,
+          height: 1080,
         },
       },
     },
@@ -78,4 +79,4 @@ const config = {
   ],
 };
 
-module.exports = config;
+export default config;

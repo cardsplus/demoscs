@@ -2,4 +2,4 @@ apiVersion: v2
 name: demoscs
 description: A self contained system with spring boot and svelte
 type: application
-version: 0.5.0
+version: 0.6.0

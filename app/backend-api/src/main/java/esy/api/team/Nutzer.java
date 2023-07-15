@@ -8,7 +8,7 @@ import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.*;
 
 /**
@@ -55,7 +55,6 @@ public final class Nutzer extends JsonJpaEntity<Nutzer> {
             name = "nutzer_sprache",
             joinColumns = @JoinColumn(name = "id"))
     @Column(name = "sprache")
-    @OrderBy
     @Getter
     @JsonProperty
     private SortedSet<String> allSprache;

@@ -568,7 +568,15 @@ public class ProjektRestApiTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status()
-                        .isNoContent());
+                        .isOk())
+                .andExpect(content()
+                        .contentType("application/json"))
+                .andExpect(header()
+                        .exists("Vary"))
+                .andExpect(header()
+                        .doesNotExist("\"ETag\""))
+                .andExpect(jsonPath("$.id")
+                        .value(uuid));
     }
 
     @Test

@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    asciidoctorGems 'rubygems:rouge:3.30.0'
+    asciidoctorGems 'rubygems:rouge:4.1.2'
 }
 
 allprojects {
@@ -42,13 +42,15 @@ allprojects {
 }
 
 subprojects {
-    new File("${rootDir}/README.adoc").withReader('utf-8') { description = it.readLine().minus('= ') }
+    new File("${rootDir}/README.adoc").withReader('utf-8') {
+      description = it.readLine().minus('= ')
+    }
     group = 'esy.app'
     version = gitVersion()
     plugins.withType(JavaPlugin) {
         compileJava.options.encoding = 'UTF-8'
         sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_17
     }
     tasks.withType(Test) {
         useJUnitPlatform {
@@ -77,12 +79,13 @@ task versionCheck() {
 
 asciidoctorj {
   requires 'rouge'
+  version = '2.5.10'
   modules {
     diagram { 
-      version '2.2.3'
+      version '2.2.8'
     }
     pdf { 
-      version '2.3.3'
+      version '2.3.7'
     }
   }
   logLevel 'INFO'

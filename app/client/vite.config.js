@@ -13,13 +13,10 @@ export default defineConfig({
   ],
   rollupDedupe: ['svelte'],
   build: {
-    outDir: path.join(__dirname, "build"),
+    outDir: path.join(__dirname, "build/generated"),
     emptyOutDir: true
   },
   cacheDir: path.join(__dirname, ".vite"),
   publicDir: path.join(__dirname, "public"),
   root: path.join(__dirname, "src/main/svelte"),
-  server: {
-    port: 5000
-  }
 });

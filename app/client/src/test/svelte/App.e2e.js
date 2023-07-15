@@ -1,7 +1,7 @@
-const { test } = require("@playwright/test");
-const { AufgabePage } = require("./pages/AufgabePage");
-const { NutzerPage } = require("./pages/NutzerPage");
-const { ProjektPage } = require("./pages/ProjektPage");
+import { test } from "@playwright/test";
+import { AufgabePage } from "./pages/AufgabePage.js";
+import { NutzerPage } from "./pages/NutzerPage.js";
+import { ProjektPage } from "./pages/ProjektPage.js";
 
 test.describe("Regression", () => {
   test.beforeEach(async ({ page }) => {
