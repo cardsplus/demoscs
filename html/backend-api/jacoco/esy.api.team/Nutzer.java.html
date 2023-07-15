@@ -8,7 +8,7 @@ import esy.json.JsonMapper;
 import lombok.Getter;
 import lombok.NonNull;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.*;
 
 /**
@@ -55,84 +55,83 @@ public final class Nutzer extends JsonJpaEntity&lt;Nutzer&gt; {
             name = &quot;nutzer_sprache&quot;,
             joinColumns = @JoinColumn(name = &quot;id&quot;))
     @Column(name = &quot;sprache&quot;)
-    @OrderBy
-<span class="fc" id="L59">    @Getter</span>
+<span class="fc" id="L58">    @Getter</span>
     @JsonProperty
     private SortedSet&lt;String&gt; allSprache;
 
     Nutzer() {
-<span class="fc" id="L64">        super();</span>
-<span class="fc" id="L65">        this.mail = &quot;&quot;;</span>
-<span class="fc" id="L66">        this.name = &quot;&quot;;</span>
-<span class="fc" id="L67">        this.aktiv = true;</span>
-<span class="fc" id="L68">        this.allSprache = new TreeSet&lt;&gt;();</span>
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L63">        super();</span>
+<span class="fc" id="L64">        this.mail = &quot;&quot;;</span>
+<span class="fc" id="L65">        this.name = &quot;&quot;;</span>
+<span class="fc" id="L66">        this.aktiv = true;</span>
+<span class="fc" id="L67">        this.allSprache = new TreeSet&lt;&gt;();</span>
+<span class="fc" id="L68">    }</span>
 
-<span class="pc bpc" id="L71" title="2 of 4 branches missed.">    Nutzer(@NonNull final Long version, @NonNull final UUID id) {</span>
-<span class="fc" id="L72">        super(version, id);</span>
-<span class="fc" id="L73">        this.mail = &quot;&quot;;</span>
-<span class="fc" id="L74">        this.name = &quot;&quot;;</span>
-<span class="fc" id="L75">        this.aktiv = true;</span>
-<span class="fc" id="L76">        this.allSprache = new TreeSet&lt;&gt;();</span>
-<span class="fc" id="L77">    }</span>
+<span class="pc bpc" id="L70" title="2 of 4 branches missed.">    Nutzer(@NonNull final Long version, @NonNull final UUID id) {</span>
+<span class="fc" id="L71">        super(version, id);</span>
+<span class="fc" id="L72">        this.mail = &quot;&quot;;</span>
+<span class="fc" id="L73">        this.name = &quot;&quot;;</span>
+<span class="fc" id="L74">        this.aktiv = true;</span>
+<span class="fc" id="L75">        this.allSprache = new TreeSet&lt;&gt;();</span>
+<span class="fc" id="L76">    }</span>
 
     @Override
     public String toString() {
-<span class="fc" id="L81">        return super.toString() + &quot;,mail='&quot; + mail + &quot;'&quot;;</span>
+<span class="fc" id="L80">        return super.toString() + &quot;,mail='&quot; + mail + &quot;'&quot;;</span>
     }
 
     @Override
     public boolean isEqual(final Nutzer that) {
-<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (this == that) {</span>
-<span class="fc" id="L87">            return true;</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        if (this == that) {</span>
+<span class="fc" id="L86">            return true;</span>
         }
-<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (that == null) {</span>
-<span class="fc" id="L90">            return false;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (that == null) {</span>
+<span class="fc" id="L89">            return false;</span>
         }
-<span class="fc bfc" id="L92" title="All 2 branches covered.">        return this.mail.equals(that.mail) &amp;&amp;</span>
-<span class="pc bpc" id="L93" title="2 of 4 branches missed.">                this.name.equals(that.name) &amp;&amp;</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        return this.mail.equals(that.mail) &amp;&amp;</span>
+<span class="pc bpc" id="L92" title="2 of 4 branches missed.">                this.name.equals(that.name) &amp;&amp;</span>
                 this.aktiv == that.aktiv &amp;&amp;
-<span class="pc bpc" id="L95" title="1 of 2 branches missed.">                this.allSprache.equals(that.allSprache);</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">                this.allSprache.equals(that.allSprache);</span>
     }
 
     @Override
     public Nutzer verify() {
-<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (mail.isBlank()) {</span>
-<span class="fc" id="L101">            throw new IllegalArgumentException(&quot;mail is blank&quot;);</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (mail.isBlank()) {</span>
+<span class="fc" id="L100">            throw new IllegalArgumentException(&quot;mail is blank&quot;);</span>
         }
-<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (name.isBlank()) {</span>
-<span class="fc" id="L104">            throw new IllegalArgumentException(&quot;name is blank&quot;);</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (name.isBlank()) {</span>
+<span class="fc" id="L103">            throw new IllegalArgumentException(&quot;name is blank&quot;);</span>
         }
-<span class="fc" id="L106">        return this;</span>
+<span class="fc" id="L105">        return this;</span>
     }
 
     @Override
-<span class="pc bpc" id="L110" title="1 of 2 branches missed.">    public Nutzer withId(@NonNull final UUID id) {</span>
-<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (Objects.equals(getId(), id)) {</span>
-<span class="fc" id="L112">            return this;</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">    public Nutzer withId(@NonNull final UUID id) {</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if (Objects.equals(getId(), id)) {</span>
+<span class="fc" id="L111">            return this;</span>
         }
-<span class="fc" id="L114">        final Nutzer value = new Nutzer(getVersion(), id);</span>
-<span class="fc" id="L115">        value.mail = this.mail;</span>
-<span class="fc" id="L116">        value.name = this.name;</span>
-<span class="fc" id="L117">        value.aktiv = this.aktiv;</span>
-<span class="fc" id="L118">        value.allSprache = this.allSprache;</span>
-<span class="fc" id="L119">        return value;</span>
+<span class="fc" id="L113">        final Nutzer value = new Nutzer(getVersion(), id);</span>
+<span class="fc" id="L114">        value.mail = this.mail;</span>
+<span class="fc" id="L115">        value.name = this.name;</span>
+<span class="fc" id="L116">        value.aktiv = this.aktiv;</span>
+<span class="fc" id="L117">        value.allSprache = this.allSprache;</span>
+<span class="fc" id="L118">        return value;</span>
     }
 
     @JsonAnyGetter
     private Map&lt;String, Object&gt; extraJson() {
-<span class="nc" id="L124">        final Map&lt;String, Object&gt; allExtra = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L125">        allExtra.put(&quot;version&quot;, getVersion());</span>
-<span class="nc" id="L126">        return allExtra;</span>
+<span class="nc" id="L123">        final Map&lt;String, Object&gt; allExtra = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L124">        allExtra.put(&quot;version&quot;, getVersion());</span>
+<span class="nc" id="L125">        return allExtra;</span>
     }
 
     @Override
     public String writeJson() {
-<span class="nc" id="L131">        return new JsonMapper().writeJson(this);</span>
+<span class="nc" id="L130">        return new JsonMapper().writeJson(this);</span>
     }
 
-<span class="pc bpc" id="L134" title="1 of 2 branches missed.">    public static Nutzer parseJson(@NonNull final String json) {</span>
-<span class="fc" id="L135">        return new JsonMapper().parseJson(json, Nutzer.class);</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">    public static Nutzer parseJson(@NonNull final String json) {</span>
+<span class="fc" id="L134">        return new JsonMapper().parseJson(json, Nutzer.class);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
