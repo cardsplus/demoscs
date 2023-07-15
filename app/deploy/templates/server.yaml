@@ -17,7 +17,7 @@ spec:
       imagePullSecrets:
         - name: {{.Values.image.secret}}
       containers:
-        - name: server
+        - name: server-container
           image: "{{.Values.image.registry}}/{{.Values.image.serverImageName}}:{{.Values.image.tag}}"
           imagePullPolicy: IfNotPresent
           # tag::env[]
@@ -34,16 +34,16 @@ spec:
           # tag::ports[]
           ports:
             - containerPort: {{.Values.image.serverPort}}
-              name: http-port
+              name: server-port
           # end::ports[]
           # tag::resources[]
           resources:
             requests:
-              cpu: "100m"
-              memory: "655Mi"
+              cpu: {{.Values.image.serverCpu}}
+              memory: {{.Values.image.serverMemory}}
             limits:
-              cpu: "500m"
-              memory: "1Gi"
+              cpu: {{.Values.image.serverCpu}}
+              memory: {{.Values.image.serverMemory}}
           # end::resources[]
           # tag::readiness[]
           readinessProbe:
@@ -51,14 +51,14 @@ spec:
             periodSeconds: 3
             failureThreshold: 60
             httpGet:
-              port: http-port
+              port: server-port
               path: /actuator/health/readiness
           # end::readiness[]
           # tag::liveness[]
           livenessProbe:
             initialDelaySeconds: 300
             httpGet:
-              port: http-port
+              port: server-port
               path: /actuator/health/liveness
           # tag::liveness[]
 ---
@@ -73,5 +73,5 @@ spec:
     component: server
   ports:
     - port: {{.Values.image.serverPort}}
-      name: http-port
-      targetPort: http-port
+      name: server-port
+      targetPort: server-port

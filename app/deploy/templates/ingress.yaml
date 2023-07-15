@@ -4,14 +4,15 @@ metadata:
   namespace: {{.Release.Namespace}}
   name: ingress-service
 spec:
-  ingressClassName: {{.Values.ingress}}
+  ingressClassName: {{.Values.ingress.class}}
   defaultBackend:
     service:
       name: server-cluster-ip
       port:
-        name: http-port
+        name: server-port
   rules:
-    - http:
+    - host: {{.Values.ingress.host}}
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -19,25 +20,25 @@ spec:
               service:
                 name: client-cluster-ip
                 port:
-                  name: http-port
+                  name: client-port
           - path: /actuator
             pathType: Prefix
             backend:
               service:
                 name: server-cluster-ip
                 port:
-                  name: http-port
+                  name: server-port
           - path: /api
             pathType: Prefix
             backend:
               service:
                 name: server-cluster-ip
                 port:
-                  name: http-port
+                  name: server-port
           - path: /version
             pathType: Prefix
             backend:
               service:
                 name: server-cluster-ip
                 port:
-                  name: http-port
+                  name: server-port

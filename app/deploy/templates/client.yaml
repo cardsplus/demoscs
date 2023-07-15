@@ -17,7 +17,7 @@ spec:
       imagePullSecrets:
         - name: {{.Values.image.secret}}
       containers:
-        - name: client
+        - name: client-container
           image: {{.Values.image.registry}}/{{.Values.image.clientImageName}}:{{.Values.image.tag}}
           imagePullPolicy: IfNotPresent
           # tag::env[]
@@ -26,15 +26,16 @@ spec:
           # tag::ports[]
           ports:
             - containerPort: {{.Values.image.clientPort}}
-              name: http-port
+              name: client-port
           # end::ports[]
           # tag::resources[]
           resources:
             requests:
-              cpu: "100m"
+              cpu: {{.Values.image.clientCpu}}
+              memory: {{.Values.image.clientMemory}}
             limits:
-              cpu: "1"
-              memory: "128Mi"
+              cpu: {{.Values.image.clientCpu}}
+              memory: {{.Values.image.clientMemory}}
           # tag::resources[]
           # tag::readiness[]
           readinessProbe:
@@ -42,7 +43,7 @@ spec:
             periodSeconds: 2
             failureThreshold: 10
             httpGet:
-              port: http-port
+              port: client-port
               path: /home
           # end::readiness[]
           # tag::liveness[]
@@ -60,5 +61,5 @@ spec:
     component: client
   ports:
     - port: {{.Values.image.clientPort}}
-      name: http-port
-      targetPort: http-port
+      name: client-port
+      targetPort: client-port

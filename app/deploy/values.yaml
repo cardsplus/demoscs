@@ -1,9 +1,11 @@
 application:
   name: demoscs
 
-# https://kubernetes.github.io/ingress-nginx
-# https://doc.traefik.io/traefik/providers/kubernetes-ingress/
-ingress: nginx
+# https://github.com/kubernetes/ingress-nginx/
+# https://github.com/traefik/traefik/
+ingress:
+  class: traefik
+  host: ""
 
 image:
   # Die URL für den Abruf der Docker-Images.
@@ -17,6 +19,10 @@ image:
   # Der Name des Docker-Images für den Client.
   clientImageName: client
   clientPort: 5000
+  clientCpu: "500m"
+  clientMemory: "128Mi"
   # Der Name des Docker-Images für den Server.
   serverImageName: server
-  serverPort: 8080  
+  serverPort: 8080
+  serverCpu: "500m"
+  serverMemory: "512Mi"

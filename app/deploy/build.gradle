@@ -27,16 +27,20 @@ task composeDown(type: Exec) {
 }
 
 task install {
-    dependsOn ':app:client:dockerBuild'
-    dependsOn ':app:server:dockerBuild'
     onlyIf {
         // No helm in CI-Job
         System.env['CI'] == null
     }
+    dependsOn ':app:client:dockerBuild'
+    dependsOn ':app:server:dockerBuild'
     doLast {
         exec {
             executable 'helm'
-            args 'upgrade', '--install', '--wait', rootProject.name, '.', '--set', 'image.tag=' + VERSION
+            args 'upgrade', rootProject.name, '.', \
+                '--install', \
+                '--debug', \
+                '--wait', \
+                '--set', 'image.tag=' + VERSION
         }
         kubectlGet('pods')
     }
@@ -51,7 +55,9 @@ task uninstall {
         exec {
             ignoreExitValue true
             executable 'helm'
-            args 'uninstall', '--wait', rootProject.name
+            args 'uninstall', rootProject.name, \
+                '--debug', \
+                '--wait'
         }
         kubectlGet('pods')
     }
