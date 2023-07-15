@@ -26,13 +26,9 @@ task composeDown(type: Exec) {
     commandLine 'docker', 'compose', '-p', rootProject.name, '-f', 'compose.yml', 'down'
 }
 
-task deploy {
+task install {
     dependsOn ':app:client:dockerBuild'
     dependsOn ':app:server:dockerBuild'
-    finalizedBy 'install'
-}
-
-task install {
     onlyIf {
         // No helm in CI-Job
         System.env['CI'] == null

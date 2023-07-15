@@ -171,20 +171,11 @@ Der Ingress-Service wird mit `helm` gestoppt und entfernt.
 
 [source, gradle]
 ----
-./gradlew deploy
+./gradlew install
 ----
 
 Docker-Images für die Anwendung werden aktualisiert.
 Die Anwendung wird mit `helm` installiert und im Hintergrund gestartet.
-Sie ist im Browser unter `localhost` erreichbar.
-
-[source, gradle]
-----
-./gradlew install
-----
-
-Docker-Images für die Anwendung werden *nicht* aktualisiert.
-Die Anwendung wird mit `helm` installiert und gestartet.
 Sie ist im Browser unter `localhost` erreichbar.
 
 === Kubernetes-Deployment entfernen
