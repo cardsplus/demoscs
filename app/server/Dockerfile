@@ -3,6 +3,7 @@ COPY build/libs/*.jar ./server.jar
 RUN java -Djarmode=layertools -jar ./server.jar extract
 
 FROM openjdk:17-jdk-slim
+ENV TZ=Europe/Vienna
 EXPOSE 8080
 WORKDIR /app
 COPY --from=0 dependencies/ ./
