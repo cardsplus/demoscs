@@ -1478,8 +1478,8 @@ Nutzer können Daten, für die das SCS die Hoheit besitzt, bearbeiten und speich
         <span class="s">docker push $API/$SERVER:$TAG</span>
 
     <span class="c1"># https://github.com/peaceiris/actions-gh-pages</span>
-    <span class="pi">-</span> <span class="na">if</span><span class="pi">:</span> <span class="s">${{ github.ref == 'refs/heads/master' }}</span>
-      <span class="na">name</span><span class="pi">:</span> <span class="s">Update Pages (nur master)</span>
+    <span class="pi">-</span> <span class="na">if</span><span class="pi">:</span> <span class="s">startsWith(github.ref, 'refs/tags')</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Update Pages (tag)</span>
       <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v3</span>
       <span class="na">with</span><span class="pi">:</span>
         <span class="na">github_token</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
@@ -1501,7 +1501,7 @@ Nutzer können Daten, für die das SCS die Hoheit besitzt, bearbeiten und speich
 <div id="footer">
 <div id="footer-text">
 Version 2.5.10<br>
-Last updated 2023-07-17 16:26:01 UTC
+Last updated 2023-07-17 16:36:03 UTC
 </div>
 </div>
 </body>

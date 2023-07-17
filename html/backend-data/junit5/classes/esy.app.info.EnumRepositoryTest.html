@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.846s</div>
+<div class="counter">1.098s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,79 +81,79 @@
 <tr>
 <td class="success">context()</td>
 <td class="success">context()</td>
-<td class="success">0.082s</td>
+<td class="success">0.022s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">deleteAll()</td>
 <td class="success">deleteAll()</td>
-<td class="success">0.091s</td>
+<td class="success">0.050s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">findAll()</td>
 <td class="success">findAll()</td>
-<td class="success">0.069s</td>
+<td class="success">0.027s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">findEnum()</td>
 <td class="success">findEnum()</td>
-<td class="success">0.155s</td>
+<td class="success">0.096s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">findEnumNoElement()</td>
 <td class="success">findEnumNoElement()</td>
-<td class="success">0.087s</td>
+<td class="success">0.013s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[1] name=JIRA</td>
 <td class="success">saveEnum(String)[1]</td>
-<td class="success">0.839s</td>
+<td class="success">0.633s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[2] name=JIRA Cloud</td>
 <td class="success">saveEnum(String)[2]</td>
-<td class="success">0.070s</td>
+<td class="success">0.024s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[3] name=TEST</td>
 <td class="success">saveEnum(String)[3]</td>
-<td class="success">0.057s</td>
+<td class="success">0.027s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[4] name=Äpfel</td>
 <td class="success">saveEnum(String)[4]</td>
-<td class="success">0.055s</td>
+<td class="success">0.030s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[5] name=Öl</td>
 <td class="success">saveEnum(String)[5]</td>
-<td class="success">0.048s</td>
+<td class="success">0.019s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[6] name=Übel</td>
 <td class="success">saveEnum(String)[6]</td>
-<td class="success">0.059s</td>
+<td class="success">0.020s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">[7] name=Spaß</td>
 <td class="success">saveEnum(String)[7]</td>
-<td class="success">0.051s</td>
+<td class="success">0.027s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">saveEnumUniqueKeyConstraint()</td>
 <td class="success">saveEnumUniqueKeyConstraint()</td>
-<td class="success">0.183s</td>
+<td class="success">0.110s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -170,68 +170,68 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.1)
 
-2023-07-17T16:28:03.902Z  INFO 2145 --- [    Test worker] esy.app.info.EnumRepositoryTest          : Starting EnumRepositoryTest using Java 17.0.7 with PID 2145 (started by runner in /home/runner/work/demoscs/demoscs/app/backend-data)
-2023-07-17T16:28:03.902Z  INFO 2145 --- [    Test worker] esy.app.info.EnumRepositoryTest          : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2023-07-17T16:28:04.087Z  INFO 2145 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-07-17T16:28:04.131Z  INFO 2145 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 4 JPA repository interfaces.
-2023-07-17T16:28:04.220Z  INFO 2145 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2023-07-17T16:28:04.317Z  INFO 2145 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:49f06d26-b2be-44eb-abfc-984835c1d7aa', username='sa'
-2023-07-17T16:28:04.406Z  INFO 2145 --- [    Test worker] liquibase.database                       : Set default schema name to PUBLIC
-2023-07-17T16:28:04.747Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:04.761Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:04.764Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:04.766Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:04.768Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:04.768Z  INFO 2145 --- [    Test worker] liquibase.lockservice                    : Successfully acquired change log lock
-2023-07-17T16:28:04.776Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2023-07-17T16:28:04.780Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:04.781Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
-2023-07-17T16:28:04.782Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:04.786Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.271Z  INFO 2080 --- [    Test worker] esy.app.info.EnumRepositoryTest          : Starting EnumRepositoryTest using Java 17.0.7 with PID 2080 (started by runner in /home/runner/work/demoscs/demoscs/app/backend-data)
+2023-07-17T16:36:57.271Z  INFO 2080 --- [    Test worker] esy.app.info.EnumRepositoryTest          : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2023-07-17T16:36:57.386Z  INFO 2080 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-17T16:36:57.418Z  INFO 2080 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 4 JPA repository interfaces.
+2023-07-17T16:36:57.459Z  INFO 2080 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2023-07-17T16:36:57.511Z  INFO 2080 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:bfc5523a-9431-4172-98b9-87a4acca3ade', username='sa'
+2023-07-17T16:36:57.571Z  INFO 2080 --- [    Test worker] liquibase.database                       : Set default schema name to PUBLIC
+2023-07-17T16:36:57.793Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.794Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.799Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.800Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.805Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.806Z  INFO 2080 --- [    Test worker] liquibase.lockservice                    : Successfully acquired change log lock
+2023-07-17T16:36:57.813Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Creating database history table with name: PUBLIC.DATABASECHANGELOG
+2023-07-17T16:36:57.821Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.822Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2023-07-17T16:36:57.824Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.826Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
 Running Changeset: liquibase/v1/nutzer.xml::1::robert
-2023-07-17T16:28:04.869Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Table nutzer created
-2023-07-17T16:28:04.883Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Unique constraint added to nutzer(mail)
-2023-07-17T16:28:04.885Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/nutzer.xml::1::robert ran successfully in 45ms
-2023-07-17T16:28:04.886Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:04.888Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.883Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Table nutzer created
+2023-07-17T16:36:57.885Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Unique constraint added to nutzer(mail)
+2023-07-17T16:36:57.886Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/nutzer.xml::1::robert ran successfully in 21ms
+2023-07-17T16:36:57.887Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.889Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
 Running Changeset: liquibase/v1/nutzer_sprache.xml::1::robert
-2023-07-17T16:28:04.916Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Table nutzer_sprache created
-2023-07-17T16:28:04.918Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to nutzer_sprache (id)
-2023-07-17T16:28:04.919Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/nutzer_sprache.xml::1::robert ran successfully in 29ms
-2023-07-17T16:28:04.920Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.912Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Table nutzer_sprache created
+2023-07-17T16:36:57.913Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to nutzer_sprache (id)
+2023-07-17T16:36:57.914Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/nutzer_sprache.xml::1::robert ran successfully in 22ms
+2023-07-17T16:36:57.917Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
 Running Changeset: liquibase/v1/projekt.xml::1::robert
-2023-07-17T16:28:04.948Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Table projekt created
-2023-07-17T16:28:04.964Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Unique constraint added to projekt(name)
-2023-07-17T16:28:04.966Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt (besitzer_id)
-2023-07-17T16:28:04.967Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/projekt.xml::1::robert ran successfully in 42ms
-2023-07-17T16:28:04.969Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.939Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Table projekt created
+2023-07-17T16:36:57.941Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Unique constraint added to projekt(name)
+2023-07-17T16:36:57.943Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt (besitzer_id)
+2023-07-17T16:36:57.943Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/projekt.xml::1::robert ran successfully in 22ms
+2023-07-17T16:36:57.944Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
 Running Changeset: liquibase/v1/projekt_mitglied.xml::1::robert
-2023-07-17T16:28:04.995Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Table projekt_mitglied created
-2023-07-17T16:28:04.997Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt_mitglied (projekt_id)
-2023-07-17T16:28:04.998Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt_mitglied (nutzer_id)
-2023-07-17T16:28:05.002Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/projekt_mitglied.xml::1::robert ran successfully in 29ms
-2023-07-17T16:28:05.004Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.964Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Table projekt_mitglied created
+2023-07-17T16:36:57.966Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt_mitglied (projekt_id)
+2023-07-17T16:36:57.967Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to projekt_mitglied (nutzer_id)
+2023-07-17T16:36:57.967Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/projekt_mitglied.xml::1::robert ran successfully in 22ms
+2023-07-17T16:36:57.968Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
 Running Changeset: liquibase/v1/aufgabe.xml::1::robert
-2023-07-17T16:28:05.054Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Table aufgabe created
-2023-07-17T16:28:05.058Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to aufgabe (projekt_id)
-2023-07-17T16:28:05.058Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/aufgabe.xml::1::robert ran successfully in 52ms
-2023-07-17T16:28:05.060Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:57.987Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Table aufgabe created
+2023-07-17T16:36:57.992Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Foreign key constraint added to aufgabe (projekt_id)
+2023-07-17T16:36:57.995Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/aufgabe.xml::1::robert ran successfully in 23ms
+2023-07-17T16:36:57.996Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
 Running Changeset: liquibase/v1/enum.xml::1::robert
-2023-07-17T16:28:05.118Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Table enum created
-2023-07-17T16:28:05.125Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Unique constraint added to enum(art, name)
-2023-07-17T16:28:05.139Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : Unique constraint added to enum(art, code)
-2023-07-17T16:28:05.140Z  INFO 2145 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/enum.xml::1::robert ran successfully in 79ms
-2023-07-17T16:28:05.146Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:05.151Z  INFO 2145 --- [    Test worker] liquibase                                : Update command completed successfully.
-2023-07-17T16:28:05.156Z  INFO 2145 --- [    Test worker] liquibase.executor                       : Changelog query completed.
-2023-07-17T16:28:05.157Z  INFO 2145 --- [    Test worker] liquibase.lockservice                    : Successfully released change log lock
-2023-07-17T16:28:05.227Z  INFO 2145 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-17T16:28:05.246Z  INFO 2145 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-07-17T16:28:05.247Z  INFO 2145 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-07-17T16:28:05.327Z  INFO 2145 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-07-17T16:28:05.500Z  INFO 2145 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-17T16:28:05.500Z  INFO 2145 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-07-17T16:28:05.533Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.016Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Table enum created
+2023-07-17T16:36:58.018Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Unique constraint added to enum(art, name)
+2023-07-17T16:36:58.022Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : Unique constraint added to enum(art, code)
+2023-07-17T16:36:58.023Z  INFO 2080 --- [    Test worker] liquibase.changelog                      : ChangeSet liquibase/v1/enum.xml::1::robert ran successfully in 26ms
+2023-07-17T16:36:58.024Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:58.025Z  INFO 2080 --- [    Test worker] liquibase                                : Update command completed successfully.
+2023-07-17T16:36:58.026Z  INFO 2080 --- [    Test worker] liquibase.executor                       : Changelog query completed.
+2023-07-17T16:36:58.026Z  INFO 2080 --- [    Test worker] liquibase.lockservice                    : Successfully released change log lock
+2023-07-17T16:36:58.062Z  INFO 2080 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-17T16:36:58.068Z  INFO 2080 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-17T16:36:58.069Z  INFO 2080 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-17T16:36:58.122Z  INFO 2080 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-17T16:36:58.234Z  INFO 2080 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-17T16:36:58.234Z  INFO 2080 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-17T16:36:58.257Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -243,7 +243,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.541Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.265Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -255,7 +255,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.613Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.319Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -267,7 +267,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.614Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.320Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -279,7 +279,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.622Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.329Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -291,7 +291,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.628Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.335Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -303,7 +303,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.629Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.336Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -315,7 +315,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.635Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.348Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -327,7 +327,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.641Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.353Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -339,7 +339,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.641Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.354Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -351,7 +351,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.649Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.367Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -363,7 +363,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.651Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.370Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -375,7 +375,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.652Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.370Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -387,7 +387,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.655Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.373Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -399,7 +399,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.677Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.386Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -411,7 +411,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.706Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.425Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -423,7 +423,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.834Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.466Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -435,7 +435,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.835Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.476Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -447,7 +447,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.837Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.480Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -459,7 +459,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.840Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.490Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -471,7 +471,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.849Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.492Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -483,7 +483,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.851Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.497Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -495,7 +495,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.892Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.499Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -507,7 +507,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.893Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.599Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -519,7 +519,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.896Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.604Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -531,7 +531,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.897Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.607Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -543,7 +543,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.898Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.610Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -555,7 +555,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.906Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.619Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -567,7 +567,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.911Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.626Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -579,7 +579,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.982Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.675Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -591,7 +591,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.985Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.685Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -603,7 +603,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.993Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.694Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -615,7 +615,7 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:05.996Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+2023-07-17T16:36:58.696Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
     0 nanoseconds spent acquiring 0 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
@@ -627,9 +627,9 @@ Running Changeset: liquibase/v1/enum.xml::1::robert
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
-2023-07-17T16:28:06.045Z  INFO 2145 --- [    Test worker] esy.app.info.EnumRepositoryTest          : Started EnumRepositoryTest in 2.184 seconds (process running for 31.054)
-2023-07-17T16:28:06.165Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    259601 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:58.718Z  INFO 2080 --- [    Test worker] esy.app.info.EnumRepositoryTest          : Started EnumRepositoryTest in 1.478 seconds (process running for 22.66)
+2023-07-17T16:36:58.741Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    209305 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
     0 nanoseconds spent preparing 0 JDBC statements;
     0 nanoseconds spent executing 0 JDBC statements;
@@ -666,17 +666,17 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.068Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    320502 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.422Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    191605 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    21180538 nanoseconds spent preparing 3 JDBC statements;
-    419503 nanoseconds spent executing 3 JDBC statements;
+    6695962 nanoseconds spent preparing 3 JDBC statements;
+    367309 nanoseconds spent executing 3 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    73481481 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
-    24400 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+    40786582 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    8060794 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
     select
@@ -704,17 +704,17 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.139Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    705605 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.448Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    191505 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    3095720 nanoseconds spent preparing 3 JDBC statements;
-    2204914 nanoseconds spent executing 3 JDBC statements;
+    890220 nanoseconds spent preparing 3 JDBC statements;
+    1547038 nanoseconds spent executing 3 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    2954719 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
-    8300 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+    1634040 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    6400 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
     select
@@ -742,17 +742,17 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.213Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    234401 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.477Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    169504 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    2598616 nanoseconds spent preparing 3 JDBC statements;
-    410201 nanoseconds spent executing 3 JDBC statements;
+    770618 nanoseconds spent preparing 3 JDBC statements;
+    221205 nanoseconds spent executing 3 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    3377822 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
-    7700 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+    2187452 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    5900 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
     select
@@ -780,17 +780,17 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.269Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    516403 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.509Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    174704 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    2467815 nanoseconds spent preparing 3 JDBC statements;
-    508602 nanoseconds spent executing 3 JDBC statements;
+    785520 nanoseconds spent preparing 3 JDBC statements;
+    209904 nanoseconds spent executing 3 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    3283521 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
-    7700 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+    11094467 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    6101 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
     select
@@ -818,17 +818,17 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.320Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    296302 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.530Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    175704 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    1100907 nanoseconds spent preparing 3 JDBC statements;
-    550004 nanoseconds spent executing 3 JDBC statements;
+    720317 nanoseconds spent preparing 3 JDBC statements;
+    213405 nanoseconds spent executing 3 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    2609117 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
-    8401 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+    1479936 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    6200 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
     select
@@ -856,17 +856,17 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.387Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    253602 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.561Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    169204 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    1968313 nanoseconds spent preparing 3 JDBC statements;
-    647705 nanoseconds spent executing 3 JDBC statements;
+    776319 nanoseconds spent preparing 3 JDBC statements;
+    263607 nanoseconds spent executing 3 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    2822918 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
-    52600 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+    9936039 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    6600 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
     select
@@ -894,17 +894,17 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.448Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    247601 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.589Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    163704 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    7189846 nanoseconds spent preparing 3 JDBC statements;
-    377302 nanoseconds spent executing 3 JDBC statements;
+    776519 nanoseconds spent preparing 3 JDBC statements;
+    235104 nanoseconds spent executing 3 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    8466155 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
-    7500 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+    11355574 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    6000 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
     select
@@ -913,11 +913,11 @@ Hibernate:
         enum e1_0 
     where
         e1_0.art=?
-2023-07-17T16:28:07.538Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    2041913 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.648Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    238405 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    2577817 nanoseconds spent preparing 1 JDBC statements;
-    171601 nanoseconds spent executing 1 JDBC statements;
+    2857869 nanoseconds spent preparing 1 JDBC statements;
+    143004 nanoseconds spent executing 1 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
@@ -944,18 +944,18 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.578Z  WARN 2145 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
-2023-07-17T16:28:07.578Z ERROR 2145 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation ; UK_ENUM_NAME table: ENUM
-2023-07-17T16:28:07.597Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    5724438 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.673Z  WARN 2080 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
+2023-07-17T16:36:59.673Z ERROR 2080 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation ; UK_ENUM_NAME table: ENUM
+2023-07-17T16:36:59.682Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    172804 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    1949014 nanoseconds spent preparing 2 JDBC statements;
-    11760177 nanoseconds spent executing 2 JDBC statements;
+    526713 nanoseconds spent preparing 2 JDBC statements;
+    9794635 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    13961491 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    11097468 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
@@ -977,18 +977,18 @@ Hibernate:
         (art,code,name,text,version,id) 
     values
         (?,?,?,?,?,?)
-2023-07-17T16:28:07.623Z  WARN 2145 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
-2023-07-17T16:28:07.629Z ERROR 2145 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation ; UK_ENUM_CODE table: ENUM
-2023-07-17T16:28:07.630Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    291902 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.701Z  WARN 2080 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -104, SQLState: 23505
+2023-07-17T16:36:59.701Z ERROR 2080 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : integrity constraint violation: unique constraint or index violation ; UK_ENUM_CODE table: ENUM
+2023-07-17T16:36:59.701Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    380110 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    1788111 nanoseconds spent preparing 2 JDBC statements;
-    6742944 nanoseconds spent executing 2 JDBC statements;
+    4882018 nanoseconds spent preparing 2 JDBC statements;
+    565314 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    9765364 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    1333332 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
     0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
@@ -1052,17 +1052,17 @@ Hibernate:
         enum e1_0 
     where
         e1_0.id=?
-2023-07-17T16:28:07.793Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    208401 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.799Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    141903 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    5119935 nanoseconds spent preparing 5 JDBC statements;
-    1118708 nanoseconds spent executing 5 JDBC statements;
+    1913346 nanoseconds spent preparing 5 JDBC statements;
+    810421 nanoseconds spent executing 5 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    8034853 nanoseconds spent executing 1 flushes (flushing a total of 7 entities and 0 collections);
-    2819718 nanoseconds spent executing 5 partial-flushes (flushing a total of 21 entities and 21 collections)
+    7423579 nanoseconds spent executing 1 flushes (flushing a total of 7 entities and 0 collections);
+    13106015 nanoseconds spent executing 5 partial-flushes (flushing a total of 21 entities and 21 collections)
 }
 Hibernate: 
     select
@@ -1083,17 +1083,17 @@ Hibernate:
         enum e1_0 
     where
         e1_0.id=?
-2023-07-17T16:28:07.877Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    282102 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.813Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    179805 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    766704 nanoseconds spent preparing 2 JDBC statements;
-    251802 nanoseconds spent executing 2 JDBC statements;
+    599314 nanoseconds spent preparing 2 JDBC statements;
+    4406606 nanoseconds spent executing 2 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
-    7200 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+    5700 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
 }
 Hibernate: 
     select
@@ -1127,17 +1127,17 @@ Hibernate:
         e1_0.version 
     from
         enum e1_0
-2023-07-17T16:28:07.950Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    292302 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.842Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    154403 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    3932525 nanoseconds spent preparing 3 JDBC statements;
-    4256128 nanoseconds spent executing 3 JDBC statements;
+    2060750 nanoseconds spent preparing 3 JDBC statements;
+    1002625 nanoseconds spent executing 3 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
-    368202 nanoseconds spent executing 1 flushes (flushing a total of 7 entities and 0 collections);
-    937806 nanoseconds spent executing 3 partial-flushes (flushing a total of 7 entities and 7 collections)
+    692717 nanoseconds spent executing 1 flushes (flushing a total of 7 entities and 0 collections);
+    1102328 nanoseconds spent executing 3 partial-flushes (flushing a total of 7 entities and 7 collections)
 }
 Hibernate: 
     select
@@ -1217,17 +1217,17 @@ Hibernate:
         enum e1_0 
     where
         e1_0.art=?
-2023-07-17T16:28:08.046Z  INFO 2145 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
-    263402 nanoseconds spent acquiring 1 JDBC connections;
+2023-07-17T16:36:59.895Z  INFO 2080 --- [    Test worker] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    151904 nanoseconds spent acquiring 1 JDBC connections;
     0 nanoseconds spent releasing 0 JDBC connections;
-    14256393 nanoseconds spent preparing 10 JDBC statements;
-    2090313 nanoseconds spent executing 10 JDBC statements;
+    5026721 nanoseconds spent preparing 10 JDBC statements;
+    1717740 nanoseconds spent executing 10 JDBC statements;
     0 nanoseconds spent executing 0 JDBC batches;
     0 nanoseconds spent performing 0 L2C puts;
     0 nanoseconds spent performing 0 L2C hits;
     0 nanoseconds spent performing 0 L2C misses;
     0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
-    24634461 nanoseconds spent executing 3 partial-flushes (flushing a total of 7 entities and 7 collections)
+    23842774 nanoseconds spent executing 3 partial-flushes (flushing a total of 7 entities and 7 collections)
 }
 </pre>
 </span>
@@ -1240,7 +1240,7 @@ Hibernate:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6.1</a> at Jul 17, 2023, 4:28:42 PM</p>
+<a href="http://www.gradle.org">Gradle 7.6.1</a> at Jul 17, 2023, 4:37:25 PM</p>
 </div>
 </div>
 </body>
