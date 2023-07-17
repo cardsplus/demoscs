@@ -556,7 +556,7 @@ pre.rouge .gs {
 <span id="author" class="author">Robert Bruckbauer</span><br>
 <span id="email" class="email"><a href="mailto:bruckbauer@gmx.at">bruckbauer@gmx.at</a></span><br>
 <span id="revnumber">version 2.5.10,</span>
-<span id="revdate">2023/07/15</span>
+<span id="revdate">2023/07/17</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1464,11 +1464,11 @@ Nutzer können Daten, für die das SCS die Hoheit besitzt, bearbeiten und speich
     <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">./gradlew dockerBuild</span>
 
     <span class="c1"># https://github.com/features/packages</span>
-    <span class="pi">-</span> <span class="na">if</span><span class="pi">:</span> <span class="s">${{ github.ref == 'refs/heads/master' }}</span>
-      <span class="na">name</span><span class="pi">:</span> <span class="s">Update Packages (nur master)</span>
+    <span class="pi">-</span> <span class="na">if</span><span class="pi">:</span> <span class="s">startsWith(github.ref, 'refs/tags')</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Update Packages (tag)</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
         <span class="s">echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin</span>
-        <span class="s">API=ghcr.io/${{ github.repository_owner }}</span>
+        <span class="s">API=`echo "ghcr.io/${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]'`</span>
         <span class="s">TAG=`cat VERSION`</span>
         <span class="s">CLIENT=demoscs/client</span>
         <span class="s">docker tag $CLIENT:$TAG $API/$CLIENT:$TAG</span>
@@ -1501,7 +1501,7 @@ Nutzer können Daten, für die das SCS die Hoheit besitzt, bearbeiten und speich
 <div id="footer">
 <div id="footer-text">
 Version 2.5.10<br>
-Last updated 2023-07-15 16:10:33 UTC
+Last updated 2023-07-17 16:26:01 UTC
 </div>
 </div>
 </body>
