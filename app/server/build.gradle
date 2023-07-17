@@ -13,7 +13,9 @@ spotless {
         target '**/src/**/*.java'
         target.exclude('**/build/**')
         indentWithSpaces(4)
+        importOrder('', 'jakarta|javax|java', '\\#')
         removeUnusedImports()
+        endWithNewline()
     }
 }
 

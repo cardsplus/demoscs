@@ -30,11 +30,11 @@ jobs:
     - run: ./gradlew dockerBuild
 
     # https://github.com/features/packages
-    - if: ${{ github.ref == 'refs/heads/master' }}
-      name: Update Packages (nur master)
+    - if: startsWith(github.ref, 'refs/tags')
+      name: Update Packages (tag)
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-        API=ghcr.io/${{ github.repository_owner }}
+        API=`echo "ghcr.io/${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]'`
         TAG=`cat VERSION`
         CLIENT=demoscs/client
         docker tag $CLIENT:$TAG $API/$CLIENT:$TAG
